@@ -1,11 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://cwt6su2g80arf"]
+[gd_scene load_steps=7 format=3 uid="uid://cwt6su2g80arf"]
 
 [ext_resource type="Script" uid="uid://xp7msyi7v6h2" path="res://main_scene.gd" id="1_yw54g"]
-[ext_resource type="Texture2D" uid="uid://c3gowovnen6i0" path="res://assets/pixel-bg.png" id="2_b6nsa"]
 [ext_resource type="PackedScene" uid="uid://cx1txo3cxj3yi" path="res://scenes/control.tscn" id="2_nd0im"]
-[ext_resource type="PackedScene" uid="uid://c16u27d0op4n4" path="res://scenes/alternate_main.tscn" id="4_4vn1h"]
 [ext_resource type="PackedScene" uid="uid://uj5dstsb7niu" path="res://scenes/ui/table.tscn" id="5_bfqim"]
 [ext_resource type="PackedScene" uid="uid://du71fhytq8a53" path="res://scenes/map/Map.tscn" id="6_qdh5n"]
+[ext_resource type="AudioStream" uid="uid://rkxyqgqxk5kp" path="res://assets/audio/env/light-rain.wav" id="7_nfk4m"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_2lwdt"]
 font_size = 100
@@ -15,46 +14,41 @@ outline_color = Color(0.443137, 0.556863, 0.262745, 1)
 [node name="Game" type="Node2D"]
 script = ExtResource("1_yw54g")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-self_modulate = Color(1, 1, 1, 0.796078)
-position = Vector2(656.229, 1437.46)
-scale = Vector2(2.36586, 2.44923)
-texture = ExtResource("2_b6nsa")
+[node name="Map" parent="." instance=ExtResource("6_qdh5n")]
+position = Vector2(217, 996)
+scale = Vector2(2.7, 2.7)
 metadata/_edit_lock_ = true
 
 [node name="Label" type="Label" parent="."]
 visible = false
 offset_left = 40.0
 offset_top = 29.0
-offset_right = 324.0
+offset_right = 398.0
 offset_bottom = 166.0
 text = "Raygun"
 label_settings = SubResource("LabelSettings_2lwdt")
 
-[node name="Control" parent="." instance=ExtResource("2_nd0im")]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_nfk4m")
+autoplay = true
+playback_type = 1
+
+[node name="Interface" type="Node2D" parent="."]
+visible = false
+
+[node name="Control" parent="Interface" instance=ExtResource("2_nd0im")]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 79.0
-offset_top = 379.0
-offset_right = 1126.0
-offset_bottom = 657.0
+offset_left = 71.0
+offset_top = 255.0
+offset_right = 1118.0
+offset_bottom = 533.0
 
-[node name="AlternateMain" parent="." instance=ExtResource("4_4vn1h")]
-visible = false
-offset_left = 201.0
-offset_top = 972.0
-offset_right = 201.0
-offset_bottom = 972.0
-
-[node name="Control2" parent="." instance=ExtResource("5_bfqim")]
-offset_left = 70.0
-offset_top = 684.0
-offset_right = 1131.0
-offset_bottom = 955.0
-
-[node name="Map" parent="." instance=ExtResource("6_qdh5n")]
-position = Vector2(64, 1007)
-scale = Vector2(2.7, 2.7)
+[node name="Control2" parent="Interface" instance=ExtResource("5_bfqim")]
+offset_left = 64.0
+offset_top = 569.0
+offset_right = 1125.0
+offset_bottom = 840.0
