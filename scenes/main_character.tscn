@@ -7,7 +7,7 @@
 
 [sub_resource type="Resource" id="Resource_e6tc2"]
 script = ExtResource("2_tqm6u")
-name = "Llewelyn"
+name = "Ellliette"
 metadata/_custom_type_script = "uid://wk26rdasqab8"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tqm6u"]

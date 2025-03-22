@@ -12,8 +12,10 @@ var CELL_SIZE = 16
 func _ready():
 	if not Engine.is_editor_hint():
 		name_label.text = stats.name
-	DetectTouch.moved.connect(_on_swipe)	
-	DetectKeyboard.moved.connect(_on_move)
+		# Ensure DetectTouch and DetectKeyboard are initialized
+		if DetectTouch and DetectKeyboard:
+			DetectTouch.moved.connect(_on_swipe)
+			DetectKeyboard.moved.connect(_on_move)
 
 
 func _on_move(direction):
