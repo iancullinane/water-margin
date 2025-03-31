@@ -1,0 +1,83 @@
+[gd_resource type="SpriteFrames" load_steps=10 format=3 uid="uid://dlxdjfwwsmta6"]
+
+[ext_resource type="Texture2D" uid="uid://cealt0a6egtbe" path="res://assets/16x16/Characters/Soldiers/Ranged/BowmanTemplate.png" id="1_vuqts"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bd7jc"]
+atlas = ExtResource("1_vuqts")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g5p0a"]
+atlas = ExtResource("1_vuqts")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2l8sj"]
+atlas = ExtResource("1_vuqts")
+region = Rect2(0, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j3s0e"]
+atlas = ExtResource("1_vuqts")
+region = Rect2(16, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_py7im"]
+atlas = ExtResource("1_vuqts")
+region = Rect2(0, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q74yq"]
+atlas = ExtResource("1_vuqts")
+region = Rect2(16, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5sgdd"]
+atlas = ExtResource("1_vuqts")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_80n43"]
+atlas = ExtResource("1_vuqts")
+region = Rect2(16, 16, 16, 16)
+
+[resource]
+resource_name = "bowman_anim"
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bd7jc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g5p0a")
+}],
+"loop": true,
+"name": &"down_idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2l8sj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j3s0e")
+}],
+"loop": true,
+"name": &"left_idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_py7im")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q74yq")
+}],
+"loop": true,
+"name": &"right_idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5sgdd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_80n43")
+}],
+"loop": true,
+"name": &"up_idle",
+"speed": 5.0
+}]

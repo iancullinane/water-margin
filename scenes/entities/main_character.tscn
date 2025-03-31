@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://b06a6eh8oyhrs"]
+
+[ext_resource type="Script" uid="uid://2n64b6x7eyvs" path="res://scenes/entities/main_character.gd" id="1_ig48j"]
+[ext_resource type="FontFile" uid="uid://bdhd2oo2h2dl2" path="res://assets/fonts/RedAlert.ttf" id="4_e6tc2"]
+[ext_resource type="SpriteFrames" uid="uid://dyxa0fbg0s5eo" path="res://assets/resources/chick_anim.tres" id="4_k0aba"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_k0aba"]
+font = ExtResource("4_e6tc2")
+font_size = 14
+outline_size = 4
+outline_color = Color(0.0943044, 0.0943044, 0.0943044, 1)
+
+[node name="MainCharacter" type="Node2D"]
+script = ExtResource("1_ig48j")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = ExtResource("4_k0aba")
+animation = &"down_idle"
+autoplay = "down_idle"
+
+[node name="NameLabel" type="Label" parent="."]
+offset_left = -31.0
+offset_top = 6.0
+offset_right = 31.0
+offset_bottom = 18.0
+text = "Test"
+label_settings = SubResource("LabelSettings_k0aba")
+horizontal_alignment = 1
+vertical_alignment = 1

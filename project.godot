@@ -10,8 +10,8 @@ config_version=5
 
 [application]
 
-config/name="Mobile Game Template"
-run/main_scene="res://main_scene.tscn"
+config/name="Map Based Game"
+run/main_scene="uid://dwnb8wx0kn5cq"
 config/features=PackedStringArray("4.4", "Mobile")
 boot_splash/bg_color=Color(0.497474, 0.497474, 0.497474, 1)
 boot_splash/image="res://assets/jon_snow.png"
@@ -23,6 +23,7 @@ StaticData="*res://globals/static_data.gd"
 GameData="*res://globals/database.gd"
 DetectTouch="*res://globals/detect_touch.gd"
 DetectKeyboard="*res://globals/detect_keyboard.gd"
+GameConstants="*res://globals/constants.gd"
 
 [display]
 

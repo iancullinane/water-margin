@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://c16u27d0op4n4"]
 
 [ext_resource type="Texture2D" uid="uid://dtkmy6xmxrjqi" path="res://assets/9-box-tile.png" id="1_foir6"]
-[ext_resource type="Script" uid="uid://dlxa1x4uygq4f" path="res://scenes/alternate_main_color_panel.gd" id="2_54tif"]
+[ext_resource type="Script" uid="uid://dlxa1x4uygq4f" path="res://scenes/pallette/alternate_main_color_panel.gd" id="2_54tif"]
 [ext_resource type="Script" uid="uid://beojqb0c3v1dr" path="res://scenes/ui/color_options.gd" id="2_cf5ri"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_sbbpf"]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cx1txo3cxj3yi"]
 
-[ext_resource type="Script" uid="uid://btnw70rdr7u3r" path="res://scenes/data_ctl.gd" id="1_50oms"]
-[ext_resource type="Theme" uid="uid://bk7x7vskffp0" path="res://scenes/main_theme.tres" id="3_8hom7"]
+[ext_resource type="Script" uid="uid://btnw70rdr7u3r" path="res://scenes/pallette/data_ctl.gd" id="1_50oms"]
+[ext_resource type="Theme" uid="uid://bk7x7vskffp0" path="res://scenes/ui/main_theme.tres" id="3_8hom7"]
 
 [node name="MainControls" type="Control"]
 custom_minimum_size = Vector2(500, 100)

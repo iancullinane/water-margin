@@ -1,21 +1,16 @@
 @tool
-extends Node2D
+extends Entity
 
-var CELL_SIZE = 16
-
-@export var stats:Entity
-
-
-@onready var sprite = $AnimatedSprite2D
-@onready var name_label = $NameLabel
+var CELL_SIZE = GameConstants.CELL_SIZE
 
 func _ready():
-	if not Engine.is_editor_hint():
-		name_label.text = stats.name
+	super._ready()
 		# Ensure DetectTouch and DetectKeyboard are initialized
-		if DetectTouch and DetectKeyboard:
-			DetectTouch.moved.connect(_on_swipe)
-			DetectKeyboard.moved.connect(_on_move)
+	if DetectTouch and DetectKeyboard:
+		DetectTouch.moved.connect(_on_swipe)
+		DetectKeyboard.moved.connect(_on_move)
+
+
 
 
 func _on_move(direction):
@@ -35,7 +30,6 @@ func _on_move(direction):
 
 	
 func _on_swipe(direction):
-	print(direction)
 	# Move by modifying the position
 	if direction == "up":
 		sprite.animation = "up_idle"

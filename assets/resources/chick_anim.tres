@@ -1,0 +1,83 @@
+[gd_resource type="SpriteFrames" load_steps=10 format=3 uid="uid://dyxa0fbg0s5eo"]
+
+[ext_resource type="Texture2D" uid="uid://jbsyakmxrno" path="res://assets/16x16/Animals/Chick.png" id="1_jig80"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tn60v"]
+atlas = ExtResource("1_jig80")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o7fbr"]
+atlas = ExtResource("1_jig80")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fgy3d"]
+atlas = ExtResource("1_jig80")
+region = Rect2(0, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ol8t1"]
+atlas = ExtResource("1_jig80")
+region = Rect2(16, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hly66"]
+atlas = ExtResource("1_jig80")
+region = Rect2(0, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lbjvd"]
+atlas = ExtResource("1_jig80")
+region = Rect2(16, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m33si"]
+atlas = ExtResource("1_jig80")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_01kiv"]
+atlas = ExtResource("1_jig80")
+region = Rect2(16, 16, 16, 16)
+
+[resource]
+resource_name = "chick_anim"
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tn60v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o7fbr")
+}],
+"loop": true,
+"name": &"down_idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fgy3d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ol8t1")
+}],
+"loop": true,
+"name": &"left_idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hly66")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lbjvd")
+}],
+"loop": true,
+"name": &"right_idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m33si")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_01kiv")
+}],
+"loop": true,
+"name": &"up_idle",
+"speed": 5.0
+}]

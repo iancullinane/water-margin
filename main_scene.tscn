@@ -1,54 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://cwt6su2g80arf"]
+[gd_scene load_steps=4 format=3 uid="uid://dwnb8wx0kn5cq"]
 
-[ext_resource type="Script" uid="uid://xp7msyi7v6h2" path="res://main_scene.gd" id="1_yw54g"]
-[ext_resource type="PackedScene" uid="uid://cx1txo3cxj3yi" path="res://scenes/control.tscn" id="2_nd0im"]
-[ext_resource type="PackedScene" uid="uid://uj5dstsb7niu" path="res://scenes/ui/table.tscn" id="5_bfqim"]
-[ext_resource type="PackedScene" uid="uid://du71fhytq8a53" path="res://scenes/map/Map.tscn" id="6_qdh5n"]
-[ext_resource type="AudioStream" uid="uid://rkxyqgqxk5kp" path="res://assets/audio/env/light-rain.wav" id="7_nfk4m"]
+[ext_resource type="PackedScene" uid="uid://cwt6su2g80arf" path="res://scenes/game.tscn" id="1_2c62f"]
+[ext_resource type="Script" uid="uid://tulnqoqmx7r5" path="res://main_scene.gd" id="1_gyfs4"]
+[ext_resource type="PackedScene" uid="uid://bu1ltp5hlagc2" path="res://scenes/ui/main_ui.tscn" id="2_2c62f"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_2lwdt"]
-font_size = 100
-outline_size = 30
-outline_color = Color(0.443137, 0.556863, 0.262745, 1)
+[node name="MainScene" type="Node2D"]
+script = ExtResource("1_gyfs4")
 
-[node name="Game" type="Node2D"]
-script = ExtResource("1_yw54g")
+[node name="Game" parent="." instance=ExtResource("1_2c62f")]
 
-[node name="Map" parent="." instance=ExtResource("6_qdh5n")]
-position = Vector2(217, 996)
-scale = Vector2(2.7, 2.7)
-metadata/_edit_lock_ = true
-
-[node name="Label" type="Label" parent="."]
-visible = false
-offset_left = 40.0
-offset_top = 29.0
-offset_right = 398.0
-offset_bottom = 166.0
-text = "Raygun"
-label_settings = SubResource("LabelSettings_2lwdt")
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("7_nfk4m")
-autoplay = true
-playback_type = 1
-
-[node name="Interface" type="Node2D" parent="."]
-visible = false
-
-[node name="Control" parent="Interface" instance=ExtResource("2_nd0im")]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 71.0
-offset_top = 255.0
-offset_right = 1118.0
-offset_bottom = 533.0
-
-[node name="Control2" parent="Interface" instance=ExtResource("5_bfqim")]
-offset_left = 64.0
-offset_top = 569.0
-offset_right = 1125.0
-offset_bottom = 840.0
+[node name="MainUi" parent="." instance=ExtResource("2_2c62f")]

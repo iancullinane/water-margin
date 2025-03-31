@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="EntityData" load_steps=3 format=3 uid="uid://kklrq4hkgan8"]
+
+[ext_resource type="SpriteFrames" uid="uid://dyxa0fbg0s5eo" path="res://assets/resources/chick_anim.tres" id="1_b5mir"]
+[ext_resource type="Script" uid="uid://wk26rdasqab8" path="res://data/resources/entity_res.gd" id="2_kcspx"]
+
+[resource]
+script = ExtResource("2_kcspx")
+name = "Elliette"
+animation_resource = ExtResource("1_b5mir")
+metadata/_custom_type_script = "uid://wk26rdasqab8"

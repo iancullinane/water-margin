@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://cwt6su2g80arf"]
+
+[ext_resource type="Script" uid="uid://xp7msyi7v6h2" path="res://scenes/game.gd" id="1_p57ef"]
+[ext_resource type="PackedScene" uid="uid://du71fhytq8a53" path="res://scenes/map/Map.tscn" id="2_u5sy4"]
+[ext_resource type="AudioStream" uid="uid://rkxyqgqxk5kp" path="res://assets/audio/env/light-rain.wav" id="3_gee14"]
+[ext_resource type="PackedScene" uid="uid://cx1txo3cxj3yi" path="res://scenes/pallette/control.tscn" id="4_0tnpc"]
+[ext_resource type="PackedScene" uid="uid://uj5dstsb7niu" path="res://scenes/ui/table.tscn" id="5_vtaks"]
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_p57ef")
+
+[node name="Map" parent="." instance=ExtResource("2_u5sy4")]
+position = Vector2(217, 996)
+scale = Vector2(2.7, 2.7)
+metadata/_edit_lock_ = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_gee14")
+autoplay = true
+playback_type = 1
+
+[node name="DataInputController" type="Node2D" parent="."]
+
+[node name="Control" parent="DataInputController" instance=ExtResource("4_0tnpc")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 445.0
+offset_top = -656.0
+offset_right = 1492.0
+offset_bottom = -378.0
+
+[node name="Control2" parent="DataInputController" instance=ExtResource("5_vtaks")]
+offset_left = 544.0
+offset_top = -337.0
+offset_right = 1605.0
+offset_bottom = -66.0

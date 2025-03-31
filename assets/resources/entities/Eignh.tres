@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="EntityData" load_steps=3 format=3 uid="uid://bohgkkxmikmmp"]
+
+[ext_resource type="Script" uid="uid://wk26rdasqab8" path="res://data/resources/entity_res.gd" id="1_mh5vm"]
+[ext_resource type="SpriteFrames" uid="uid://dlxdjfwwsmta6" path="res://assets/resources/bowman_anim.tres" id="1_sobob"]
+
+[resource]
+script = ExtResource("1_mh5vm")
+name = "Eignh"
+animation_resource = ExtResource("1_sobob")
+metadata/_custom_type_script = "uid://wk26rdasqab8"
