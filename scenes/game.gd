@@ -1,10 +1,7 @@
 extends Node2D
 
-func get_map():
-	return $Map
+#var main_game := get_parent()
+#@onready var map = $Map
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass
-#	# This label was removed but this is a historcial example covering using the static data json object
-	#$Label.text = StaticData.item_data["apple"]["Item"]
+func get_map() -> GameMap:
+	return $Map

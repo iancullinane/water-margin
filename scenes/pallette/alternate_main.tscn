@@ -107,7 +107,7 @@ theme_override_constants/margin_bottom = 3
 
 [node name="ColorRect" type="ColorRect" parent="Menu/ColorMenu/Panel1/MarginContainer"]
 layout_mode = 2
-color = Color(0.872462, 0.457497, 0.8356, 1)
+color = Color(0.816385, 0.43243, 0.196075, 1)
 
 [node name="Panel2" type="Panel" parent="Menu/ColorMenu"]
 layout_mode = 2
@@ -128,7 +128,7 @@ theme_override_constants/margin_bottom = 3
 
 [node name="ColorRect" type="ColorRect" parent="Menu/ColorMenu/Panel2/MarginContainer"]
 layout_mode = 2
-color = Color(0.669996, 0.414336, 0.594976, 1)
+color = Color(0.904724, 0.519409, 0.388038, 1)
 
 [node name="Panel3" type="Panel" parent="Menu/ColorMenu"]
 layout_mode = 2
@@ -149,7 +149,7 @@ theme_override_constants/margin_bottom = 3
 
 [node name="ColorRect" type="ColorRect" parent="Menu/ColorMenu/Panel3/MarginContainer"]
 layout_mode = 2
-color = Color(0.150295, 0.771315, 0.354925, 1)
+color = Color(0.19656, 0.990383, 0.568529, 1)
 
 [node name="Panel4" type="Panel" parent="Menu/ColorMenu"]
 layout_mode = 2
@@ -170,7 +170,7 @@ theme_override_constants/margin_bottom = 3
 
 [node name="ColorRect" type="ColorRect" parent="Menu/ColorMenu/Panel4/MarginContainer"]
 layout_mode = 2
-color = Color(0.232034, 0.0627797, 0.0852542, 1)
+color = Color(0.535272, 0.510596, 0.0384633, 1)
 
 [node name="Panel5" type="Panel" parent="Menu/ColorMenu"]
 layout_mode = 2
@@ -191,7 +191,7 @@ theme_override_constants/margin_bottom = 3
 
 [node name="ColorRect" type="ColorRect" parent="Menu/ColorMenu/Panel5/MarginContainer"]
 layout_mode = 2
-color = Color(0.714248, 0.00531339, 0.753779, 1)
+color = Color(0.152881, 0.621635, 0.18402, 1)
 
 [node name="Panel6" type="Panel" parent="Menu/ColorMenu"]
 layout_mode = 2
@@ -212,7 +212,7 @@ theme_override_constants/margin_bottom = 3
 
 [node name="ColorRect" type="ColorRect" parent="Menu/ColorMenu/Panel6/MarginContainer"]
 layout_mode = 2
-color = Color(0.389654, 0.253212, 0.190988, 1)
+color = Color(0.799788, 0.92659, 0.573466, 1)
 
 [node name="Panel7" type="Panel" parent="Menu/ColorMenu"]
 layout_mode = 2
@@ -233,7 +233,7 @@ theme_override_constants/margin_bottom = 3
 
 [node name="ColorRect" type="ColorRect" parent="Menu/ColorMenu/Panel7/MarginContainer"]
 layout_mode = 2
-color = Color(0.176354, 0.496067, 0.991251, 1)
+color = Color(0.568038, 0.0901975, 0.641151, 1)
 
 [node name="Panel8" type="Panel" parent="Menu/ColorMenu"]
 layout_mode = 2
@@ -254,7 +254,7 @@ theme_override_constants/margin_bottom = 3
 
 [node name="ColorRect" type="ColorRect" parent="Menu/ColorMenu/Panel8/MarginContainer"]
 layout_mode = 2
-color = Color(0.978376, 0.129692, 0.754165, 1)
+color = Color(0.106764, 0.339852, 0.521631, 1)
 
 [node name="Panel9" type="Panel" parent="Menu/ColorMenu"]
 layout_mode = 2
@@ -275,4 +275,4 @@ theme_override_constants/margin_bottom = 3
 
 [node name="ColorRect" type="ColorRect" parent="Menu/ColorMenu/Panel9/MarginContainer"]
 layout_mode = 2
-color = Color(0.427862, 0.833518, 0.436453, 1)
+color = Color(0.636417, 0.667698, 0.263121, 1)
