@@ -1,3 +1,4 @@
+# TODO: This can probably be broken out nicer
 extends VBoxContainer
 
 var self_opened = true
