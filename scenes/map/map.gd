@@ -27,6 +27,7 @@ func get_terrain_layer()->TileMapLayer:
 	#draw_rect(Rect2(top_left, tile_size), Color.RED, false)
 
 # TODO the entities are too tightly coupled to the map
+# TODO: Come up with a more imaginative greeting
 func update_ui_from_pos(map: GameMap, ui):
 	var ground_layer: TileMapLayer = map.get_ground_layer()
 	var terrain_layer: TileMapLayer = map.get_terrain_layer()
