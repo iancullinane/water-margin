@@ -12,6 +12,10 @@ func _process(_delta):
 	#update_tile_hover_info()
 	handle_hover_data(map)
 
+# The real issue here isn't so much that that it lives here, it is that
+# the coords are built directly in 
+
+
 func handle_hover_data(map: GameMap):
 	var ground_layer: TileMapLayer = map.get_ground_layer()
 	var terrain_layer: TileMapLayer = map.get_terrain_layer()
@@ -34,3 +38,4 @@ func handle_hover_data(map: GameMap):
 			main_ui.get_terrain_display().text = tile_name
 		else:
 			main_ui.get_terrain_display().text = "No data"
+
