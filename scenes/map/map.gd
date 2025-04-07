@@ -5,6 +5,7 @@ var last_hovered_coords: Vector2i = Vector2i(-999, -999)
 
 # Realistically, the entities should not even be related to the map
 # shit is fucked up
+# TODO: the entities are too tightly coupled to the map
 
 
 
