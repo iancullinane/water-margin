@@ -6,6 +6,10 @@ on:
       - main
   workflow_dispatch:
 
+permissions:
+  issues: write
+  contents: read
+
 jobs:
   todo:
     runs-on: ubuntu-latest
