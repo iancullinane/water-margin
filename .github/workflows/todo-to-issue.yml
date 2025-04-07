@@ -1,0 +1,19 @@
+name: Create Issues from TODOs
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  todo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Convert TODOs to issues
+        uses: alstr/todo-to-issue-action@v5.1.11
+        with:
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}
