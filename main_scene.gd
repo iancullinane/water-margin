@@ -1,20 +1,14 @@
 extends Node2D
 
 @onready var game = $Game 
-@onready var map = game.get_map()
-
+@onready var map_from_game = game.get_map()
 @onready var main_ui := $MainUi
-@onready var info_box := main_ui.get_node("PanelContainer/NinePatchRect/HeaderText")
 
 var last_hovered_coords: Vector2i = Vector2i(-999, -999)
 
 func _process(_delta):
-	#update_tile_hover_info()
-	handle_hover_data(map)
-
-# The real issue here isn't so much that that it lives here, it is that
-# the coords are built directly in 
-
+	handle_hover_data(map_from_game)
+	# if tile_coords != last_hovered_coords:
 
 func handle_hover_data(map: GameMap):
 	var ground_layer: TileMapLayer = map.get_ground_layer()
@@ -26,16 +20,7 @@ func handle_hover_data(map: GameMap):
 		last_hovered_coords = tile_coords
 		var ground_data = ground_layer.get_cell_tile_data(tile_coords)
 		var terrain_data = terrain_layer.get_cell_tile_data(tile_coords)
-
-		if ground_data and ground_data.has_custom_data("name"):
-			var tile_name: String = ground_data.get_custom_data("name")
-			main_ui.get_ground_display().text = tile_name
-		else:
-			main_ui.get_ground_display().text = "No data"
- 
-		if terrain_data and terrain_data.has_custom_data("name"):
-			var tile_name: String = terrain_data.get_custom_data("name")
-			main_ui.get_terrain_display().text = tile_name
-		else:
-			main_ui.get_terrain_display().text = "No data"
-
+		
+		var ui_data = UiEventData.new()
+		ui_data.set_from_tile_data(ground_data, terrain_data)
+		SignalBus.hovered.emit(ui_data)

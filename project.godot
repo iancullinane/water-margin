@@ -24,10 +24,11 @@ GameData="*res://globals/database.gd"
 DetectTouch="*res://globals/detect_touch.gd"
 DetectKeyboard="*res://globals/detect_keyboard.gd"
 GameConstants="*res://globals/constants.gd"
+SignalBus="*res://globals/signal_bus.gd"
 
 [display]
 
-window/size/viewport_width=1200
+window/size/viewport_width=1150
 window/size/viewport_height=2200
 window/stretch/mode="viewport"
 window/stretch/aspect="expand"
