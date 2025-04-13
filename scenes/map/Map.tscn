@@ -1,10 +1,8 @@
-[gd_scene load_steps=9 format=4 uid="uid://du71fhytq8a53"]
+[gd_scene load_steps=7 format=4 uid="uid://du71fhytq8a53"]
 
 [ext_resource type="Script" uid="uid://d2iim0f2od1dc" path="res://scenes/map/map.gd" id="1_e5avy"]
 [ext_resource type="TileSet" uid="uid://bguacdt7p6x11" path="res://assets/maps/base_map.tres" id="2_nuen2"]
-[ext_resource type="Resource" uid="uid://bohgkkxmikmmp" path="res://assets/resources/entities/Eignh.tres" id="4_4yt6b"]
 [ext_resource type="PackedScene" uid="uid://bjsafd7yyep46" path="res://scenes/entities/npc.tscn" id="4_hgphw"]
-[ext_resource type="PackedScene" uid="uid://b06a6eh8oyhrs" path="res://scenes/entities/main_character.tscn" id="5_4yt6b"]
 [ext_resource type="Resource" uid="uid://dsndb6n4h8u2r" path="res://assets/resources/entities/Cerah.tres" id="6_qfku7"]
 [ext_resource type="Resource" uid="uid://b40b17tf7khk8" path="res://assets/resources/entities/Llewelyn.tres" id="7_48h8m"]
 [ext_resource type="Resource" uid="uid://kklrq4hkgan8" path="res://assets/resources/entities/Elliette.tres" id="8_0e3jb"]
@@ -26,22 +24,17 @@ tile_set = ExtResource("2_nuen2")
 tile_map_data = PackedByteArray("AAD///v/CgADAAYAAAAAAPv/CgACAAYAAAD9//v/CgAGAAkAAAABAPn/CgAHAAcAAAACAPn/CgAFAAcAAAADAPn/CgAHAAkAAAA=")
 tile_set = ExtResource("2_nuen2")
 
-[node name="Ian" parent="." instance=ExtResource("5_4yt6b")]
-position = Vector2(-136, 40)
-stats = ExtResource("4_4yt6b")
-
-[node name="Camera2D" type="Camera2D" parent="Ian"]
-position_smoothing_enabled = true
-position_smoothing_speed = 2.0
-
 [node name="Cerah" parent="." instance=ExtResource("4_hgphw")]
-position = Vector2(-72, -57)
+visible = false
+position = Vector2(-72, -40)
 stats = ExtResource("6_qfku7")
 
 [node name="Llewelyn" parent="." instance=ExtResource("4_hgphw")]
+visible = false
 position = Vector2(-119, -24)
 stats = ExtResource("7_48h8m")
 
 [node name="Elliette" parent="." instance=ExtResource("4_hgphw")]
+visible = false
 position = Vector2(8, -57)
 stats = ExtResource("8_0e3jb")
