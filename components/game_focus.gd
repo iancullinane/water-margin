@@ -4,18 +4,22 @@ extends Node2D
 @export var attach_to_player: bool = false
 
 @export var map_from_game: GameMap
+@export var player: Entity
 
 var last_hovered_coords: Vector2i = Vector2i(-999, -999)
 
 func _process(_delta:float) -> void:
 	if use_mouse_focus:
-		handle_hover_data(map_from_game)
+		handle_hover_data(get_global_mouse_position(), map_from_game)
+	
+	if attach_to_player:
+		handle_hover_data(player.position, map_from_game)
 	# if tile_coords != last_hovered_coords:
 
-func handle_hover_data(map: GameMap):
+func handle_hover_data(focus: Vector2, map: GameMap):
 	var ground_layer: TileMapLayer = map.get_ground_layer()
 	var terrain_layer: TileMapLayer = map.get_terrain_layer()
-	var local_pos = ground_layer.to_local(get_global_mouse_position())
+	var local_pos = ground_layer.to_local(focus)
 	var tile_coords = ground_layer.local_to_map(local_pos)
 	
 	if tile_coords != last_hovered_coords:

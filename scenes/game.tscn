@@ -37,15 +37,18 @@ offset_top = -337.0
 offset_right = 1605.0
 offset_bottom = -66.0
 
-[node name="GameFocus" type="Node2D" parent="." node_paths=PackedStringArray("map_from_game")]
-script = ExtResource("5_iywne")
-map_from_game = NodePath("../Map")
-
-[node name="Ian" parent="." instance=ExtResource("6_u5sy4")]
+[node name="Eignh" parent="." instance=ExtResource("6_u5sy4")]
 stats = ExtResource("7_gee14")
 metadata/_edit_group_ = true
 
-[node name="Camera2D" type="Camera2D" parent="Ian"]
+[node name="Camera2D" type="Camera2D" parent="Eignh"]
 zoom = Vector2(2, 2)
 position_smoothing_enabled = true
 position_smoothing_speed = 2.0
+
+[node name="GameFocus" type="Node2D" parent="." node_paths=PackedStringArray("map_from_game", "player")]
+script = ExtResource("5_iywne")
+use_mouse_focus = false
+attach_to_player = true
+map_from_game = NodePath("../Map")
+player = NodePath("../Eignh")
