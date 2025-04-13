@@ -3,6 +3,7 @@
 extends Node2D
 
 signal moved
+signal zoomed
 
 func _input(event):
 	if event.is_pressed() and not event.is_echo():
@@ -17,3 +18,9 @@ func _input(event):
 
 		if event.is_action("world_right"):
 			emit_signal("moved", "right")
+
+		if event.is_action("zoom_in"):
+			emit_signal("zoomed", "in")
+
+		if event.is_action("zoom_out"):
+			emit_signal("zoomed", "out")
