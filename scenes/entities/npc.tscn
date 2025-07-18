@@ -14,15 +14,17 @@ outline_color = Color(0.0943044, 0.0943044, 0.0943044, 1)
 script = ExtResource("2_rv78h")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(8, 8)
 sprite_frames = ExtResource("2_7n8xq")
 animation = &"down_idle"
 autoplay = "down_idle"
+frame_progress = 0.0786817
 
 [node name="NameLabel" type="Label" parent="."]
-offset_left = -31.0
-offset_top = 6.0
-offset_right = 31.0
-offset_bottom = 18.0
+offset_left = -23.0
+offset_top = 20.0
+offset_right = 39.0
+offset_bottom = 35.0
 text = "Test"
 label_settings = SubResource("LabelSettings_k0aba")
 horizontal_alignment = 1

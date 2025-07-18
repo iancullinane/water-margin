@@ -1,4 +1,3 @@
-@tool
 extends Entity
 
 var CELL_SIZE = GameConstants.CELL_SIZE

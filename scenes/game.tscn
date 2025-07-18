@@ -1,14 +1,20 @@
-[gd_scene load_steps=8 format=3 uid="uid://cwt6su2g80arf"]
+[gd_scene load_steps=13 format=3 uid="uid://cwt6su2g80arf"]
 
+[ext_resource type="Script" uid="uid://xp7msyi7v6h2" path="res://scenes/game.gd" id="1_dinhu"]
 [ext_resource type="PackedScene" uid="uid://du71fhytq8a53" path="res://scenes/map/Map.tscn" id="2_u5sy4"]
 [ext_resource type="AudioStream" uid="uid://rkxyqgqxk5kp" path="res://assets/audio/env/light-rain.wav" id="3_gee14"]
 [ext_resource type="PackedScene" uid="uid://cx1txo3cxj3yi" path="res://scenes/pallette/control.tscn" id="4_0tnpc"]
 [ext_resource type="Script" uid="uid://caojuxly3lla5" path="res://components/game_focus.gd" id="5_iywne"]
 [ext_resource type="PackedScene" uid="uid://uj5dstsb7niu" path="res://scenes/ui/table.tscn" id="5_vtaks"]
 [ext_resource type="PackedScene" uid="uid://b06a6eh8oyhrs" path="res://scenes/entities/main_character.tscn" id="6_u5sy4"]
+[ext_resource type="PackedScene" uid="uid://bjsafd7yyep46" path="res://scenes/entities/npc.tscn" id="7_0tnpc"]
 [ext_resource type="Resource" uid="uid://bohgkkxmikmmp" path="res://assets/resources/entities/Eignh.tres" id="7_gee14"]
+[ext_resource type="Resource" uid="uid://b40b17tf7khk8" path="res://assets/resources/entities/Llewelyn.tres" id="7_kvpfn"]
+[ext_resource type="Resource" uid="uid://kklrq4hkgan8" path="res://assets/resources/entities/Elliette.tres" id="8_dinhu"]
+[ext_resource type="Resource" uid="uid://dsndb6n4h8u2r" path="res://assets/resources/entities/Cerah.tres" id="8_vtaks"]
 
 [node name="Game" type="Node2D"]
+script = ExtResource("1_dinhu")
 
 [node name="Map" parent="." instance=ExtResource("2_u5sy4")]
 metadata/_edit_lock_ = true
@@ -37,18 +43,31 @@ offset_top = -337.0
 offset_right = 1605.0
 offset_bottom = -66.0
 
-[node name="Eignh" parent="." instance=ExtResource("6_u5sy4")]
+[node name="GameFocus" type="Node2D" parent="." node_paths=PackedStringArray("map_from_game", "player")]
+script = ExtResource("5_iywne")
+map_from_game = NodePath("../Map")
+player = NodePath("../CharacterHolder/Eignh")
+
+[node name="CharacterHolder" type="Node2D" parent="."]
+
+[node name="Llewelyn" parent="CharacterHolder" instance=ExtResource("7_0tnpc")]
+position = Vector2(288, 144)
+stats = ExtResource("7_kvpfn")
+
+[node name="Elliette" parent="CharacterHolder" instance=ExtResource("7_0tnpc")]
+position = Vector2(224, 112)
+stats = ExtResource("8_dinhu")
+
+[node name="Eignh" parent="CharacterHolder" instance=ExtResource("6_u5sy4")]
+position = Vector2(192, 128)
 stats = ExtResource("7_gee14")
 metadata/_edit_group_ = true
 
-[node name="Camera2D" type="Camera2D" parent="Eignh"]
-zoom = Vector2(2, 2)
+[node name="Camera2D" type="Camera2D" parent="CharacterHolder/Eignh"]
+zoom = Vector2(4, 4)
 position_smoothing_enabled = true
 position_smoothing_speed = 2.0
 
-[node name="GameFocus" type="Node2D" parent="." node_paths=PackedStringArray("map_from_game", "player")]
-script = ExtResource("5_iywne")
-use_mouse_focus = false
-attach_to_player = true
-map_from_game = NodePath("../Map")
-player = NodePath("../Eignh")
+[node name="Cerah" parent="CharacterHolder" instance=ExtResource("7_0tnpc")]
+position = Vector2(112, 128)
+stats = ExtResource("8_vtaks")

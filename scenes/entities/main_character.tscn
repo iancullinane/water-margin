@@ -16,7 +16,7 @@ script = ExtResource("1_ig48j")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(8, 8)
 sprite_frames = ExtResource("4_k0aba")
-animation = &"down_idle"
+animation = &"left_idle"
 autoplay = "down_idle"
 
 [node name="NameLabel" type="Label" parent="."]
