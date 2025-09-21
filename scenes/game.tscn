@@ -52,6 +52,11 @@ player = NodePath("../EntityCtl/Eignh")
 [node name="EntityCtl" type="Node2D" parent="."]
 script = ExtResource("7_kvuet")
 
+[node name="Eignh" parent="EntityCtl" instance=ExtResource("6_u5sy4")]
+position = Vector2(64, 48)
+stats = ExtResource("7_gee14")
+metadata/_edit_group_ = true
+
 [node name="Llewelyn" parent="EntityCtl" instance=ExtResource("7_0tnpc")]
 position = Vector2(288, 144)
 stats = ExtResource("7_kvpfn")
@@ -59,11 +64,6 @@ stats = ExtResource("7_kvpfn")
 [node name="Elliette" parent="EntityCtl" instance=ExtResource("7_0tnpc")]
 position = Vector2(224, 112)
 stats = ExtResource("8_dinhu")
-
-[node name="Eignh" parent="EntityCtl" instance=ExtResource("6_u5sy4")]
-position = Vector2(192, 128)
-stats = ExtResource("7_gee14")
-metadata/_edit_group_ = true
 
 [node name="Cerah" parent="EntityCtl" instance=ExtResource("7_0tnpc")]
 position = Vector2(112, 128)

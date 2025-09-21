@@ -17,7 +17,14 @@ func _ready():
 	SignalBus.current_player_changed.connect(_on_current_player_changed)
 	SignalBus.current_player_moved.connect(_on_current_player_moved)
 	
+	# Set initial player and snap camera to position
 	entity_ctl.set_current_player_by_index(0)
+	var current: Entity = entity_ctl.get_current_player()
+	if current:
+		camera_ctl.position_smoothing_enabled = false
+		camera_ctl.position = current.position
+		camera_ctl.reset_smoothing()
+		camera_ctl.position_smoothing_enabled = true
 # 	# Initialize the 2D array based on height and width
 # 	grid = []
 # 	for y in range(height):
@@ -29,10 +36,11 @@ func _ready():
 func _unhandled_input(_event):
 	if entity_ctl.get_entity_count() == 0:
 		return
-	if Input.is_action_just_pressed("next_character"):
-		_select_player(_current_party_index + 1)
-	elif Input.is_action_just_pressed("previous_character"):
+	# Prioritize previous when both fire (e.g., Shift+Tab)
+	if Input.is_action_just_pressed("previous_character"):
 		_select_player(_current_party_index - 1)
+	elif Input.is_action_just_pressed("next_character"):
+		_select_player(_current_party_index + 1)
 
 func _select_player(new_index: int) -> void:
 	if entity_ctl.get_entity_count() == 0:

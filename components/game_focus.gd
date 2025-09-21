@@ -10,6 +10,7 @@ extends Node2D
 var ground_layer: TileMapLayer
 var terrain_layer: TileMapLayer
 var building_layer: TileMapLayer
+# var highlight_layer: TileMapLayer
 
 var last_hovered_coords: Vector2i = Vector2i(-999, -999)
 
@@ -17,6 +18,7 @@ func _ready() -> void:
 	ground_layer = map_from_game.get_ground_layer()
 	terrain_layer = map_from_game.get_terrain_layer()
 	building_layer = map_from_game.get_building_layer()
+	# highlight_layer = map_from_game.get_highlight_layer()
 
 func _process(_delta:float) -> void:
 	if Engine.is_editor_hint():

@@ -126,3 +126,4 @@ func _on_swipe(direction):
 	# Emit signal if this is the current player
 	if current_player:
 		SignalBus.current_player_moved.emit(self)
+

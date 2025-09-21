@@ -26,6 +26,10 @@ DetectKeyboard="*res://globals/detect_keyboard.gd"
 GameConstants="*res://globals/constants.gd"
 SignalBus="*res://globals/signal_bus.gd"
 
+[debug]
+
+gdscript/warnings/unused_signal=0
+
 [display]
 
 window/size/viewport_width=1150
