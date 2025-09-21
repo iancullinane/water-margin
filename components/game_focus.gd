@@ -9,12 +9,14 @@ extends Node2D
 
 var ground_layer: TileMapLayer
 var terrain_layer: TileMapLayer
+var building_layer: TileMapLayer
 
 var last_hovered_coords: Vector2i = Vector2i(-999, -999)
 
 func _ready() -> void:
 	ground_layer = map_from_game.get_ground_layer()
 	terrain_layer = map_from_game.get_terrain_layer()
+	building_layer = map_from_game.get_building_layer()
 
 func _process(_delta:float) -> void:
 	if Engine.is_editor_hint():
@@ -36,6 +38,7 @@ func handle_hover_data(focus: Vector2):
 		last_hovered_coords = tile_coords
 		var ground_data = ground_layer.get_cell_tile_data(tile_coords)
 		var terrain_data = terrain_layer.get_cell_tile_data(tile_coords)
+		# var building_data = building_layer.get_cell_tile_data(tile_coords)
 		
 		# var ui_data = UiEventData.from_tile_data(ground_data, terrain_data)
 		SignalBus.hovered.emit(

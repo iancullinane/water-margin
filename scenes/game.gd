@@ -6,11 +6,11 @@ extends Node2D
 
 var grid: Array
 
-func _ready():
-	# Initialize the 2D array based on height and width
-	grid = []
-	for y in range(height):
-		var row = []
-		for x in range(width):
-			row.append(null)
-		grid.append(row)
+# func _ready():
+# 	# Initialize the 2D array based on height and width
+# 	grid = []
+# 	for y in range(height):
+# 		var row = []
+# 		for x in range(width):
+# 			row.append(null)
+# 		grid.append(row)

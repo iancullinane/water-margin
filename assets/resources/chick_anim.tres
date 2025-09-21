@@ -2,13 +2,13 @@
 
 [ext_resource type="Texture2D" uid="uid://jbsyakmxrno" path="res://assets/16x16/Animals/Chick.png" id="1_jig80"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_tn60v"]
-atlas = ExtResource("1_jig80")
-region = Rect2(0, 0, 16, 16)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_o7fbr"]
 atlas = ExtResource("1_jig80")
 region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tn60v"]
+atlas = ExtResource("1_jig80")
+region = Rect2(0, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fgy3d"]
 atlas = ExtResource("1_jig80")
@@ -39,10 +39,10 @@ resource_name = "chick_anim"
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_tn60v")
+"texture": SubResource("AtlasTexture_o7fbr")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_o7fbr")
+"texture": SubResource("AtlasTexture_tn60v")
 }],
 "loop": true,
 "name": &"down_idle",

@@ -13,3 +13,6 @@ func get_ground_layer()->TileMapLayer:
 
 func get_terrain_layer()->TileMapLayer:
 	return $Terrain
+
+func get_building_layer()->TileMapLayer:
+	return $Buildings
