@@ -74,7 +74,7 @@ func _draw() -> void:
 	var top_right := rect.position + Vector2(rect.size.x, 0.0)
 	var bottom_left := rect.position + Vector2(0.0, rect.size.y)
 	var bottom_right := rect.position + rect.size
-	print("DRAW")
+	
 	draw_line(top_left, top_right, color, line_width)
 	draw_line(top_right, bottom_right, color, line_width)
 	draw_line(bottom_right, bottom_left, color, line_width)

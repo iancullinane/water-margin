@@ -34,7 +34,7 @@ func handle_hover_data(focus: Vector2):
 	var local_pos = ground_layer.to_local(focus)
 	var tile_coords = ground_layer.local_to_map(local_pos)
 	if tile_coords != last_hovered_coords:
-		print(tile_coords)
+		# print(tile_coords)
 		last_hovered_coords = tile_coords
 		var ground_data = ground_layer.get_cell_tile_data(tile_coords)
 		var terrain_data = terrain_layer.get_cell_tile_data(tile_coords)

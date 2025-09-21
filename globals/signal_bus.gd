@@ -3,3 +3,7 @@
 extends Node
 
 signal hovered(event_data: UiEventData)
+
+
+signal current_player_changed(entity: Entity)
+signal current_player_moved(entity: Entity)
