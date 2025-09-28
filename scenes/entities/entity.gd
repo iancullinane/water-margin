@@ -14,10 +14,7 @@ var current_player: bool = false:
 		if current_player == value:
 			return
 		current_player = value
-		if current_player:
-			_connect_control_signals()
-		else:
-			_disconnect_control_signals()
+
 
 func _ready():
 	print("Entity ready:", name, stats)
@@ -28,11 +25,77 @@ func _ready():
 			name_label.text = stats.name
 			if stats.animation_resource:
 				sprite.sprite_frames = stats.animation_resource
-		# Ensure DetectTouch and DetectKeyboard are initialized
-	if not Engine.is_editor_hint() and current_player:
-		_connect_control_signals()
 	sprite.animation = "down_idle"  # Or whatever your default animation is
 	sprite.play()
+
+# Repeat configuration for held movement
+var repeat_initial_delay: float = 0.20
+var repeat_interval: float = 0.12
+
+# Internal held-state tracking
+var _held := {"up": false, "down": false, "left": false, "right": false}
+var _held_time := {"up": -1.0, "down": -1.0, "left": -1.0, "right": -1.0}
+var _next_emit_at := {"up": 0.0, "down": 0.0, "left": 0.0, "right": 0.0}
+
+func _physics_process(delta: float) -> void:
+	if !current_player:
+		return
+
+	# Manage press/release transitions
+	if Input.is_action_just_pressed("world_up"):
+		_on_press_dir("up")
+	if Input.is_action_just_released("world_up"):
+		_on_release_dir("up")
+
+	if Input.is_action_just_pressed("world_down"):
+		_on_press_dir("down")
+	if Input.is_action_just_released("world_down"):
+		_on_release_dir("down")
+
+	if Input.is_action_just_pressed("world_left"):
+		_on_press_dir("left")
+	if Input.is_action_just_released("world_left"):
+		_on_release_dir("left")
+
+	if Input.is_action_just_pressed("world_right"):
+		_on_press_dir("right")
+	if Input.is_action_just_released("world_right"):
+		_on_release_dir("right")
+
+	# Repeat while held with controlled interval
+	for dir in _held.keys():
+		if _held[dir]:
+			_held_time[dir] += delta
+			if _held_time[dir] >= _next_emit_at[dir]:
+				_step_dir(dir)
+				_next_emit_at[dir] += repeat_interval
+
+func _step_dir(dir: String) -> void:
+	if dir == "up":
+		sprite.animation = "up_idle"
+		position.y -= CELL_SIZE
+	elif dir == "down":
+		sprite.animation = "down_idle"
+		position.y += CELL_SIZE
+	elif dir == "left":
+		sprite.animation = "left_idle"
+		position.x -= CELL_SIZE
+	elif dir == "right":
+		sprite.animation = "right_idle"
+		position.x += CELL_SIZE
+	if current_player:
+		SignalBus.current_player_moved.emit(self)
+
+func _on_press_dir(dir: String) -> void:
+	_held[dir] = true
+	_held_time[dir] = 0.0
+	_step_dir(dir) # immediate first step
+	_next_emit_at[dir] = repeat_initial_delay
+
+func _on_release_dir(dir: String) -> void:
+	_held[dir] = false
+	_held_time[dir] = -1.0
+	_next_emit_at[dir] = 0.0
 
 func _process(_delta):
 	if Engine.is_editor_hint():
@@ -43,37 +106,10 @@ func _process(_delta):
 				sprite.animation = "down_idle"
 				sprite.play()
 
-func _exit_tree():
-	_disconnect_control_signals()
-
 func set_controllable(value: bool) -> void:
 	if current_player == value:
 		return
 	current_player = value
-	if Engine.is_editor_hint():
-		return
-	if current_player:
-		_connect_control_signals()
-	else:
-		_disconnect_control_signals()
-
-func _connect_control_signals() -> void:
-	if DetectTouch and not DetectTouch.moved.is_connected(_on_swipe):
-		DetectTouch.moved.connect(_on_swipe)
-	if DetectKeyboard:
-		if not DetectKeyboard.zoomed.is_connected(_on_zoom):
-			DetectKeyboard.zoomed.connect(_on_zoom)
-		if not DetectKeyboard.moved.is_connected(_on_move):
-			DetectKeyboard.moved.connect(_on_move)
-
-func _disconnect_control_signals() -> void:
-	if DetectTouch and DetectTouch.moved.is_connected(_on_swipe):
-		DetectTouch.moved.disconnect(_on_swipe)
-	if DetectKeyboard:
-		if DetectKeyboard.zoomed.is_connected(_on_zoom):
-			DetectKeyboard.zoomed.disconnect(_on_zoom)
-		if DetectKeyboard.moved.is_connected(_on_move):
-			DetectKeyboard.moved.disconnect(_on_move)
 
 func zoom_in():
 	var cam = get_node_or_null("Camera2D")
@@ -127,3 +163,21 @@ func _on_swipe(direction):
 	if current_player:
 		SignalBus.current_player_moved.emit(self)
 
+
+
+# signal moved
+# signal zoomed
+
+# var last_move_time = 0
+# var move_buffer = 0.2  # Minimum seconds between moves 
+
+func _input(event):
+	
+
+		
+
+	if event.is_action("zoom_in"):
+		emit_signal("zoomed", "in")
+
+	if event.is_action("zoom_out"):
+		emit_signal("zoomed", "out")

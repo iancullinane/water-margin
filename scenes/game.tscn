@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cwt6su2g80arf"]
+[gd_scene load_steps=13 format=3 uid="uid://cwt6su2g80arf"]
 
 [ext_resource type="Script" uid="uid://xp7msyi7v6h2" path="res://scenes/game.gd" id="1_dinhu"]
 [ext_resource type="PackedScene" uid="uid://du71fhytq8a53" path="res://scenes/map/Map.tscn" id="2_u5sy4"]
@@ -6,8 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cx1txo3cxj3yi" path="res://scenes/pallette/control.tscn" id="4_0tnpc"]
 [ext_resource type="Script" uid="uid://caojuxly3lla5" path="res://components/game_focus.gd" id="5_iywne"]
 [ext_resource type="PackedScene" uid="uid://uj5dstsb7niu" path="res://scenes/ui/table.tscn" id="5_vtaks"]
-[ext_resource type="PackedScene" uid="uid://b06a6eh8oyhrs" path="res://scenes/entities/main_character.tscn" id="6_u5sy4"]
-[ext_resource type="PackedScene" uid="uid://bjsafd7yyep46" path="res://scenes/entities/npc.tscn" id="7_0tnpc"]
+[ext_resource type="PackedScene" uid="uid://b06a6eh8oyhrs" path="res://scenes/entities/entity.tscn" id="6_u5sy4"]
 [ext_resource type="Resource" uid="uid://bohgkkxmikmmp" path="res://assets/resources/entities/Eignh.tres" id="7_gee14"]
 [ext_resource type="Resource" uid="uid://b40b17tf7khk8" path="res://assets/resources/entities/Llewelyn.tres" id="7_kvpfn"]
 [ext_resource type="Script" uid="uid://bv0d5tqp24dt1" path="res://components/entity_ctl.gd" id="7_kvuet"]
@@ -55,19 +54,18 @@ script = ExtResource("7_kvuet")
 [node name="Eignh" parent="EntityCtl" instance=ExtResource("6_u5sy4")]
 position = Vector2(64, 48)
 stats = ExtResource("7_gee14")
-metadata/_edit_group_ = true
 
-[node name="Llewelyn" parent="EntityCtl" instance=ExtResource("7_0tnpc")]
-position = Vector2(288, 144)
-stats = ExtResource("7_kvpfn")
+[node name="Cerah" parent="EntityCtl" instance=ExtResource("6_u5sy4")]
+position = Vector2(160, 32)
+stats = ExtResource("8_vtaks")
 
-[node name="Elliette" parent="EntityCtl" instance=ExtResource("7_0tnpc")]
-position = Vector2(224, 112)
+[node name="Elliette" parent="EntityCtl" instance=ExtResource("6_u5sy4")]
+position = Vector2(176, 112)
 stats = ExtResource("8_dinhu")
 
-[node name="Cerah" parent="EntityCtl" instance=ExtResource("7_0tnpc")]
-position = Vector2(112, 128)
-stats = ExtResource("8_vtaks")
+[node name="Llewelyn" parent="EntityCtl" instance=ExtResource("6_u5sy4")]
+position = Vector2(224, 64)
+stats = ExtResource("7_kvpfn")
 
 [node name="CameraCtl" type="Camera2D" parent="."]
 position = Vector2(192, 128)

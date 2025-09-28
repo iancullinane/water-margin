@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://b06a6eh8oyhrs"]
 
-[ext_resource type="Script" uid="uid://2n64b6x7eyvs" path="res://scenes/entities/main_character.gd" id="1_ig48j"]
+[ext_resource type="Script" uid="uid://b7tyfikkp0003" path="res://scenes/entities/entity.gd" id="1_aa4sr"]
 [ext_resource type="FontFile" uid="uid://bdhd2oo2h2dl2" path="res://assets/fonts/RedAlert.ttf" id="4_e6tc2"]
 [ext_resource type="SpriteFrames" uid="uid://dyxa0fbg0s5eo" path="res://assets/resources/chick_anim.tres" id="4_k0aba"]
 
@@ -10,8 +10,8 @@ font_size = 14
 outline_size = 4
 outline_color = Color(0.0943044, 0.0943044, 0.0943044, 1)
 
-[node name="MainCharacter" type="Node2D"]
-script = ExtResource("1_ig48j")
+[node name="Entity" type="Node2D"]
+script = ExtResource("1_aa4sr")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(8, 8)

@@ -1,0 +1,45 @@
+---
+description:
+globs:
+alwaysApply: true
+---
+
+# Project Name: Water Margin (ID:WATER_MARGIN)
+
+This is a game project in the style of a classic top-down 2d tile based JRPG with mixed elements. Player controls a party of players as they move between maps and battle enemies in a semi-turn based combat.
+
+## Current Stage 
+
+This project is still in early development and as such should stay loose and maintainable. Some bits have a bit more structure and we will try and break that down.
+
+# Project Structure (ID:PROJECT_STRUCTURE)
+
+- `addons/`: Godot plugins (e.g., `godot-sqlite`, `script-tabs`).
+  - `godot-sqlite` provides helpers in accessing a local database
+  - `script-tabs` is a convenience for editor styling
+- `assets/`: Game art and media.
+- `components/`: Reusable gameplay/utility scripts (e.g., focus, highlighting, entity control), these can be applied to basic nodes and extend other capability
+	- `debug_square.gd` for drawing the map boundaries in both modes
+	- `entity_ctl` attached to a holder of entities to allow manipulations
+	- `game_focus` dictates how events are sent based on focus (eg the mouse hover)
+	- `outline_highligter` provides an under the mouse tile outline
+- `data/`: Still in development, holds various kinds of data and their definitions
+- `globals/`: Autoloads/singletons and global utilities (constants, database, input detectors, signal bus
+  - `constants`: things like `CELL_SIZE` we may want anywhere
+  - `database`: Initialize and connect to a local sqlite database
+  - `detect_touch`: Add similar to a component to look for swipe events and replaced keyboard input
+  - `signal_bus`: A global signal system, great for its versatility in managing signals
+  - `static_data`: Loads a json file, doesn't do anything else yet
+- `scenes/`: This does hold some of the core scenes, but it is also holding things like themes that don't belong here, this section will need cleanup
+  - `entities/`: Loading and working with an entity like the player or something else
+  - `map/`: The map scene, this is a major scene component in the game
+  - `pallette/`: This is directly related to the experimental database interface
+  - `ui/`: This almost certainly should live somewhere else
+- `scripts/`: Miscellaneous scripts (e.g., errors).
+- `main_scene.tscn` / `main_scene.gd`: Main entry scene and script.
+- `project.godot`: Godot project configuration.
+- `export_presets.cfg`: Export configuration.
+- `data.db`: SQLite database file.
+- Root images and assets (e.g., `carboardbox-stack-80x80.svg`, `tileset-template.aseprite`).
+
+

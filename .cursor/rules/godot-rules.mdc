@@ -1,0 +1,9 @@
+---
+description:
+globs:
+alwaysApply: true
+---
+
+# Restrictions(ID:GODOT_RESTRICTIONS)
+- NEVER EDIT `.tscn` files
+- ALWAYS ASSUME Godot 4.0+ 

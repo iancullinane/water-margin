@@ -4,11 +4,12 @@ extends Node2D
 @onready var entity_ctl = $EntityCtl
 @onready var camera_ctl: Camera2D = $CameraCtl
 
+@export_group("Debug flags")
 @export var height: int;
 @export var width: int;
 
 
-var grid: Array
+# var grid: Array
 var _current_party_index: int = 0
 
 
