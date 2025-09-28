@@ -19,7 +19,7 @@ var current_player: bool = false:
 func _ready():
 	print("Entity ready:", name, stats)
 	if stats and stats.animation_resource == null:
-		stats.animation_resource = preload("res://assets/resources/kanji_anim.tres")
+		stats.animation_resource = preload("res://assets/animations/chick_anim.tres")
 	if not Engine.is_editor_hint():
 		if stats:
 			name_label.text = stats.name
@@ -29,8 +29,8 @@ func _ready():
 	sprite.play()
 
 # Repeat configuration for held movement
-var repeat_initial_delay: float = 0.20
-var repeat_interval: float = 0.12
+var repeat_initial_delay: float = 0.20 # this is how long to wait before repeating a direction
+var repeat_interval: float = 0.33 # this adjusts speed when holding down a direction
 
 # Internal held-state tracking
 var _held := {"up": false, "down": false, "left": false, "right": false}

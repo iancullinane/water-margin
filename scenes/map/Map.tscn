@@ -23,6 +23,7 @@ tile_map_data = PackedByteArray("AAAHAAQAGgAGAAIAAAAYABkAGgAGAAQAAAAYABoAGgAGAAU
 tile_set = ExtResource("2_nuen2")
 
 [node name="Highlight" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAAhAP3/AAAAAAAAAAA=")
 tile_set = ExtResource("2_nuen2")
 
 [node name="OutlineHighlighter" type="Node" parent="." node_paths=PackedStringArray("base_layer", "highlight_layer")]

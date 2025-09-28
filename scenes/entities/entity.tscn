@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b7tyfikkp0003" path="res://scenes/entities/entity.gd" id="1_aa4sr"]
 [ext_resource type="FontFile" uid="uid://bdhd2oo2h2dl2" path="res://assets/fonts/RedAlert.ttf" id="4_e6tc2"]
-[ext_resource type="SpriteFrames" uid="uid://dyxa0fbg0s5eo" path="res://assets/resources/chick_anim.tres" id="4_k0aba"]
+[ext_resource type="SpriteFrames" uid="uid://dyxa0fbg0s5eo" path="res://assets/animations/chick_anim.tres" id="4_k0aba"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_k0aba"]
 font = ExtResource("4_e6tc2")

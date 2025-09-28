@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="EntityData" load_steps=3 format=3 uid="uid://dsndb6n4h8u2r"]
 
-[ext_resource type="SpriteFrames" uid="uid://ccbua3q0nwkgg" path="res://assets/resources/kanji_anim.tres" id="1_ox5oi"]
-[ext_resource type="Script" uid="uid://wk26rdasqab8" path="res://data/resources/entity_res.gd" id="2_gb0cl"]
+[ext_resource type="SpriteFrames" uid="uid://ccbua3q0nwkgg" path="res://assets/animations/kanji_anim.tres" id="1_ox5oi"]
+[ext_resource type="Script" uid="uid://bj6cvisr2alqv" path="res://data/entities/entity_res.gd" id="2_gb0cl"]
 
 [resource]
 script = ExtResource("2_gb0cl")

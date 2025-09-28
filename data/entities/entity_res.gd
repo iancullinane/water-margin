@@ -1,4 +1,5 @@
-class_name EntityData extends Resource
+extends Resource
+class_name EntityData
 
 
 @export var name := ""

@@ -26,13 +26,6 @@ func _ready():
 		camera_ctl.position = current.position
 		camera_ctl.reset_smoothing()
 		camera_ctl.position_smoothing_enabled = true
-# 	# Initialize the 2D array based on height and width
-# 	grid = []
-# 	for y in range(height):
-# 		var row = []
-# 		for x in range(width):
-# 			row.append(null)
-# 		grid.append(row)
 
 func _unhandled_input(_event):
 	if entity_ctl.get_entity_count() == 0:
