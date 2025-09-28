@@ -1,8 +1,15 @@
 extends Node2D
 
 
+
+
+
+
 @onready var entity_ctl = $EntityCtl
 @onready var camera_ctl: Camera2D = $CameraCtl
+
+@export var map_data: GameMapData
+
 
 @export_group("Debug flags")
 @export var height: int;
@@ -17,6 +24,7 @@ func _ready():
 	# Connect signals for camera movement
 	SignalBus.current_player_changed.connect(_on_current_player_changed)
 	SignalBus.current_player_moved.connect(_on_current_player_moved)
+	
 	
 	# Set initial player and snap camera to position
 	entity_ctl.set_current_player_by_index(0)
@@ -57,6 +65,11 @@ func _select_player(new_index: int) -> void:
 		
 		print("Current player is %s" % new_player.name)
 
+
+func get_map_data() -> GameMapData:
+	return map_data
+
+
 # Signal handlers for camera movement
 func _on_current_player_changed(entity: Entity):
 	if entity:
@@ -65,3 +78,7 @@ func _on_current_player_changed(entity: Entity):
 func _on_current_player_moved(entity: Entity):
 	if entity:
 		camera_ctl.position = entity.position
+
+# func _on_hovered(event_data: UiEventData):
+# 	if event_data:
+# 		camera_ctl.position = event_data.coordinates

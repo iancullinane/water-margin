@@ -1,8 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://cwt6su2g80arf"]
+[gd_scene load_steps=20 format=3 uid="uid://cwt6su2g80arf"]
 
 [ext_resource type="Script" uid="uid://xp7msyi7v6h2" path="res://scenes/game.gd" id="1_dinhu"]
+[ext_resource type="Script" uid="uid://dr1va401g07an" path="res://data/map/map_data.gd" id="2_trtic"]
 [ext_resource type="PackedScene" uid="uid://du71fhytq8a53" path="res://scenes/map/Map.tscn" id="2_u5sy4"]
 [ext_resource type="AudioStream" uid="uid://rkxyqgqxk5kp" path="res://assets/audio/env/light-rain.wav" id="3_gee14"]
+[ext_resource type="Script" uid="uid://cxmdi8r88sywi" path="res://data/map/game_tile_data.gd" id="3_ir15t"]
 [ext_resource type="PackedScene" uid="uid://cx1txo3cxj3yi" path="res://scenes/pallette/control.tscn" id="4_0tnpc"]
 [ext_resource type="Script" uid="uid://caojuxly3lla5" path="res://components/game_focus.gd" id="5_iywne"]
 [ext_resource type="PackedScene" uid="uid://uj5dstsb7niu" path="res://scenes/ui/table.tscn" id="5_vtaks"]
@@ -12,11 +14,29 @@
 [ext_resource type="Resource" uid="uid://dsndb6n4h8u2r" path="res://data/entities/Cerah.tres" id="10_dinhu"]
 [ext_resource type="Resource" uid="uid://kklrq4hkgan8" path="res://data/entities/Elliette.tres" id="11_dinhu"]
 [ext_resource type="Resource" uid="uid://b40b17tf7khk8" path="res://data/entities/Llewelyn.tres" id="12_kvuet"]
+[ext_resource type="Script" uid="uid://bw6xpo1rcmkxl" path="res://scenes/tile_info_ui.gd" id="15_ir15t"]
+
+[sub_resource type="Resource" id="Resource_rysoc"]
+
+metadata/_custom_type_script = "uid://is8s8jbjo2ng"
+
+[sub_resource type="Resource" id="Resource_ssvqc"]
+script = ExtResource("3_ir15t")
+metadata/_custom_type_script = "uid://cxmdi8r88sywi"
+
+[sub_resource type="Resource" id="Resource_ca42v"]
+script = ExtResource("2_trtic")
+tile_data = Dictionary[Vector2i, ExtResource("3_ir15t")]({
+Vector2i(7, 4): SubResource("Resource_ssvqc")
+})
+metadata/_custom_type_script = "uid://dr1va401g07an"
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_dinhu")
+map_data = SubResource("Resource_ca42v")
 
 [node name="Map" parent="." instance=ExtResource("2_u5sy4")]
+metadata/_edit_lock_ = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_gee14")
@@ -52,7 +72,7 @@ player = NodePath("../EntityCtl/Eignh")
 script = ExtResource("7_kvuet")
 
 [node name="Eignh" parent="EntityCtl" instance=ExtResource("6_u5sy4")]
-position = Vector2(64, 48)
+position = Vector2(144, 144)
 stats = ExtResource("9_0tnpc")
 
 [node name="Cerah" parent="EntityCtl" instance=ExtResource("6_u5sy4")]
@@ -74,6 +94,7 @@ position_smoothing_enabled = true
 position_smoothing_speed = 2.0
 
 [node name="TileInfoUi" type="CanvasLayer" parent="."]
+script = ExtResource("15_ir15t")
 
 [node name="Panel" type="Panel" parent="TileInfoUi"]
 offset_left = 960.0
@@ -95,3 +116,4 @@ theme_override_constants/margin_bottom = 10
 
 [node name="XYLabel" type="Label" parent="TileInfoUi/Panel/PanelContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 24

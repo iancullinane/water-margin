@@ -10,3 +10,4 @@ script = ExtResource("1_gyfs4")
 [node name="Game" parent="." instance=ExtResource("1_2c62f")]
 
 [node name="MainUi" parent="." instance=ExtResource("2_2c62f")]
+visible = false
