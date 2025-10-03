@@ -14,7 +14,7 @@ var building_layer: TileMapLayer
 
 
 var game_node: Node2D
-var game_map_data: GameMapData
+
 
 
 var last_hovered_coords: Vector2i = Vector2i(-999, -999)
@@ -26,7 +26,7 @@ func _ready() -> void:
 	building_layer = map_from_game.get_building_layer()
 	# highlight_layer = map_from_game.get_highlight_layer()
 	game_node = get_parent()
-	game_map_data = game_node.get_map_data()
+
 
 
 func _process(_delta:float) -> void:
