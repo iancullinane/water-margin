@@ -1,1 +1,10 @@
-{"apple":{"Item":"Not Apple","description":"It is delicious"},"orange":{"Item":"Orange","description":"A tasty citrus"}}
+{
+	"apple": {
+		"Item": "Not Apple",
+		"description": "It is delicious"
+	},
+	"orange": {
+		"Item": "Orange",
+		"description": "A tasty citrus"
+	}
+}

@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://cwt6su2g80arf"]
+[gd_scene load_steps=18 format=3 uid="uid://cwt6su2g80arf"]
 
 [ext_resource type="Script" uid="uid://xp7msyi7v6h2" path="res://scenes/game.gd" id="1_dinhu"]
 [ext_resource type="Script" uid="uid://dr1va401g07an" path="res://data/map/map_data.gd" id="2_trtic"]
@@ -15,10 +15,6 @@
 [ext_resource type="Resource" uid="uid://kklrq4hkgan8" path="res://data/entities/Elliette.tres" id="11_dinhu"]
 [ext_resource type="Resource" uid="uid://b40b17tf7khk8" path="res://data/entities/Llewelyn.tres" id="12_kvuet"]
 [ext_resource type="Script" uid="uid://bw6xpo1rcmkxl" path="res://scenes/tile_info_ui.gd" id="15_ir15t"]
-
-[sub_resource type="Resource" id="Resource_rysoc"]
-
-metadata/_custom_type_script = "uid://is8s8jbjo2ng"
 
 [sub_resource type="Resource" id="Resource_ssvqc"]
 script = ExtResource("3_ir15t")

@@ -1,20 +1,15 @@
 extends Node2D
 
 
-
-
-
-
 @onready var entity_ctl = $EntityCtl
 @onready var camera_ctl: Camera2D = $CameraCtl
 
-@export var map_data: GameMapData
 
 
 @export_group("Debug flags")
 @export var height: int;
 @export var width: int;
-
+@export var dictionary_example: Dictionary[String, Resource] = {}
 
 # var grid: Array
 var _current_party_index: int = 0
@@ -66,8 +61,6 @@ func _select_player(new_index: int) -> void:
 		print("Current player is %s" % new_player.name)
 
 
-func get_map_data() -> GameMapData:
-	return map_data
 
 
 # Signal handlers for camera movement
