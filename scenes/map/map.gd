@@ -1,6 +1,8 @@
 extends TileMapLayer
 class_name GameMap
 
+@export var game_map_data: GameMapData
+
 func get_tilemap_layers() -> Array[TileMapLayer]:
 	var layers: Array[TileMapLayer] = []
 	for child in get_children():
@@ -29,3 +31,11 @@ func get_global_from_tile(tile: Vector2i) -> Vector2:
 
 func get_hovered_tile() -> Vector2i:
 	return local_to_map(get_local_mouse_position())
+
+func get_game_map_data() -> GameMapData:
+	return game_map_data
+
+func get_tile_data_at(tile_coords: Vector2i) -> GameTileData:
+	if game_map_data == null:
+		return null
+	return game_map_data.get_tile(tile_coords)

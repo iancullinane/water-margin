@@ -9,7 +9,7 @@ extends Node2D
 @export_group("Debug flags")
 @export var height: int;
 @export var width: int;
-
+@export var dictionary_example: Dictionary[String, Resource] = {}
 
 # var grid: Array
 var _current_party_index: int = 0
