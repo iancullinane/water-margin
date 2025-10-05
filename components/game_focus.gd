@@ -18,6 +18,7 @@ var game_node: Node2D
 
 
 var last_hovered_coords: Vector2i = Vector2i(-999, -999)
+var last_hovered_data: GameTileData = null
 
 func _ready() -> void:
 	
@@ -47,10 +48,16 @@ func handle_hover_data(focus: Vector2):
 	if tile_coords != last_hovered_coords:
 		# print(tile_coords)
 		last_hovered_coords = tile_coords
+		last_hovered_data = map_from_game.get_tile_data_at(tile_coords)
 		# var ground_data = ground_layer.get_cell_tile_data(tile_coords)
 		# var terrain_data = terrain_layer.get_cell_tile_data(tile_coords)
 		# var building_data = building_layer.get_cell_tile_data(tile_coords)
-		
+		print(last_hovered_data)
+		var ui_event = UiEventData.from_coordinates(tile_coords)
+
+		if map_from_game.get_tile_data_at(tile_coords):
+			ui_event.add_game_tile_data(map_from_game.get_tile_data_at(tile_coords))
+
 		# var ui_data = UiEventData.from_tile_data(ground_data, terrain_data)
 		SignalBus.hovered.emit(
 			 UiEventData.from_coordinates(tile_coords)
