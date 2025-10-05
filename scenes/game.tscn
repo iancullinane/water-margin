@@ -18,11 +18,11 @@
 [node name="Game" type="Node2D"]
 script = ExtResource("1_dinhu")
 
+[node name="Map" type="Node2D" parent="."]
+
 [node name="LevelLoader" type="Node2D" parent="."]
 script = ExtResource("2_trtic")
 map_scene = ExtResource("3_ir15t")
-
-[node name="Map" type="Node2D" parent="."]
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_gee14")
@@ -49,9 +49,8 @@ offset_top = -337.0
 offset_right = 1605.0
 offset_bottom = -66.0
 
-[node name="GameFocus" type="Node2D" parent="." node_paths=PackedStringArray("map_from_game", "player")]
+[node name="GameFocus" type="Node2D" parent="." node_paths=PackedStringArray("player")]
 script = ExtResource("5_iywne")
-map_from_game = NodePath("")
 player = NodePath("../EntityCtl/Eignh")
 
 [node name="EntityCtl" type="Node2D" parent="."]

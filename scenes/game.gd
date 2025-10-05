@@ -3,14 +3,8 @@ extends Node2D
 
 @onready var level_loader = $LevelLoader
 
-
-	
-
-
 @onready var entity_ctl = $EntityCtl
 @onready var camera_ctl: Camera2D = $CameraCtl
-
-
 
 @export_group("Debug flags")
 @export var height: int;
