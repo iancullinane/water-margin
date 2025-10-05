@@ -18,7 +18,7 @@ var game_node: Node2D
 
 
 var last_hovered_coords: Vector2i = Vector2i(-999, -999)
-var last_hovered_data: GameTileData = null
+var last_hovered_data: GameTile = null
 
 func _ready() -> void:
 	

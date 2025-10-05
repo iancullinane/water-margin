@@ -35,7 +35,7 @@ func get_hovered_tile() -> Vector2i:
 func get_game_map_data() -> GameMapData:
 	return game_map_data
 
-func get_tile_data_at(tile_coords: Vector2i) -> GameTileData:
+func get_tile_data_at(tile_coords: Vector2i) -> GameTile:
 	if game_map_data == null:
 		return null
 	return game_map_data.get_tile(tile_coords)

@@ -1,5 +1,5 @@
 extends Resource
-class_name GameTileData
+class_name GameTile
 
 
 @export var description: String

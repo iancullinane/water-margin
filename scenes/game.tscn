@@ -1,21 +1,25 @@
-[gd_scene load_steps=14 format=3 uid="uid://cwt6su2g80arf"]
+[gd_scene load_steps=15 format=3 uid="uid://cwt6su2g80arf"]
 
 [ext_resource type="Script" uid="uid://xp7msyi7v6h2" path="res://scenes/game.gd" id="1_dinhu"]
+[ext_resource type="Script" uid="uid://dgybabpokdv3q" path="res://scripts/utils/level_loader.gd" id="2_trtic"]
 [ext_resource type="PackedScene" uid="uid://du71fhytq8a53" path="res://scenes/map/Map.tscn" id="2_u5sy4"]
 [ext_resource type="AudioStream" uid="uid://rkxyqgqxk5kp" path="res://assets/audio/env/light-rain.wav" id="3_gee14"]
 [ext_resource type="PackedScene" uid="uid://cx1txo3cxj3yi" path="res://scenes/pallette/control.tscn" id="4_0tnpc"]
-[ext_resource type="Script" uid="uid://caojuxly3lla5" path="res://components/game_focus.gd" id="5_iywne"]
+[ext_resource type="Script" uid="uid://caojuxly3lla5" path="res://scripts/components/game_focus.gd" id="5_iywne"]
 [ext_resource type="PackedScene" uid="uid://uj5dstsb7niu" path="res://scenes/ui/table.tscn" id="5_vtaks"]
-[ext_resource type="PackedScene" uid="uid://b06a6eh8oyhrs" path="res://scenes/entities/entity.tscn" id="6_u5sy4"]
-[ext_resource type="Script" uid="uid://bv0d5tqp24dt1" path="res://components/entity_ctl.gd" id="7_kvuet"]
+[ext_resource type="PackedScene" uid="uid://b06a6eh8oyhrs" path="res://scripts/entities/entity.tscn" id="6_u5sy4"]
+[ext_resource type="Script" uid="uid://bv0d5tqp24dt1" path="res://scripts/components/entity_ctl.gd" id="7_kvuet"]
 [ext_resource type="Resource" uid="uid://bohgkkxmikmmp" path="res://data/entities/Eignh.tres" id="9_0tnpc"]
 [ext_resource type="Resource" uid="uid://dsndb6n4h8u2r" path="res://data/entities/Cerah.tres" id="10_dinhu"]
 [ext_resource type="Resource" uid="uid://kklrq4hkgan8" path="res://data/entities/Elliette.tres" id="11_dinhu"]
 [ext_resource type="Resource" uid="uid://b40b17tf7khk8" path="res://data/entities/Llewelyn.tres" id="12_kvuet"]
-[ext_resource type="Script" uid="uid://bw6xpo1rcmkxl" path="res://scenes/tile_info_ui.gd" id="15_ir15t"]
+[ext_resource type="Script" uid="uid://bw6xpo1rcmkxl" path="res://scenes/ui/tile_info_ui.gd" id="15_ir15t"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_dinhu")
+
+[node name="LevelLoader" type="Node2D" parent="."]
+script = ExtResource("2_trtic")
 
 [node name="Map" parent="." instance=ExtResource("2_u5sy4")]
 metadata/_edit_lock_ = true
