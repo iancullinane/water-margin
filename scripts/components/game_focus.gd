@@ -1,15 +1,18 @@
 #@tool
 extends Node2D
 
+
+
+
 @export var use_mouse_focus: bool = true
 @export var attach_to_player: bool = false
 
-@export var map_from_game: GameMap
+# @export var map_from_game: GameMap
 @export var player: Entity
 
-var ground_layer: TileMapLayer
-var terrain_layer: TileMapLayer
-var building_layer: TileMapLayer
+# var ground_layer: TileMapLayer
+# var terrain_layer: TileMapLayer
+# var building_layer: TileMapLayer
 # var highlight_layer: TileMapLayer
 
 
@@ -18,15 +21,14 @@ var game_node: Node2D
 
 
 var last_hovered_coords: Vector2i = Vector2i(-999, -999)
-var last_hovered_data: GameTile = null
 
-func _ready() -> void:
+# func _ready() -> void:
 	
-	ground_layer = map_from_game.get_ground_layer()
-	terrain_layer = map_from_game.get_terrain_layer()
-	building_layer = map_from_game.get_building_layer()
-	# highlight_layer = map_from_game.get_highlight_layer()
-	game_node = get_parent()
+# 	ground_layer = map_from_game.get_ground_layer()
+# 	terrain_layer = map_from_game.get_terrain_layer()
+# 	building_layer = map_from_game.get_building_layer()
+# 	# highlight_layer = map_from_game.get_highlight_layer()
+# 	game_node = get_parent()
 
 
 
@@ -43,22 +45,13 @@ func _process(_delta:float) -> void:
 			handle_hover_data(player.position)
 
 func handle_hover_data(focus: Vector2):
-	var local_pos = ground_layer.to_local(focus)
-	var tile_coords = ground_layer.local_to_map(local_pos)
+	var cell_size := GameConstants.CELL_SIZE
+	var local_pos := to_local(focus)
+	var tile_coords := Vector2i(
+		int(floor(local_pos.x / cell_size)),
+		int(floor(local_pos.y / cell_size))
+	)
 	if tile_coords != last_hovered_coords:
-		# print(tile_coords)
 		last_hovered_coords = tile_coords
-		last_hovered_data = map_from_game.get_tile_data_at(tile_coords)
-		# var ground_data = ground_layer.get_cell_tile_data(tile_coords)
-		# var terrain_data = terrain_layer.get_cell_tile_data(tile_coords)
-		# var building_data = building_layer.get_cell_tile_data(tile_coords)
-		print(last_hovered_data)
 		var ui_event = UiEventData.from_coordinates(tile_coords)
-
-		if map_from_game.get_tile_data_at(tile_coords):
-			ui_event.add_game_tile_data(map_from_game.get_tile_data_at(tile_coords))
-
-		# var ui_data = UiEventData.from_tile_data(ground_data, terrain_data)
-		SignalBus.hovered.emit(
-			 UiEventData.from_coordinates(tile_coords)
-		)
+		SignalBus.hovered.emit(ui_event)

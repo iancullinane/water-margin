@@ -1,6 +1,12 @@
 extends Node2D
 
 
+@onready var level_loader = $LevelLoader
+
+
+	
+
+
 @onready var entity_ctl = $EntityCtl
 @onready var camera_ctl: Camera2D = $CameraCtl
 
@@ -29,6 +35,8 @@ func _ready():
 		camera_ctl.position = current.position
 		camera_ctl.reset_smoothing()
 		camera_ctl.position_smoothing_enabled = true
+
+	level_loader.ensure_map_loaded()
 
 func _unhandled_input(_event):
 	if entity_ctl.get_entity_count() == 0:
