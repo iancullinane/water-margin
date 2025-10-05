@@ -5,22 +5,31 @@ signal map_loaded(map: GameMap)
 
 const DEFAULT_MAP_SCENE_PATH := "res://scenes/map/Map.tscn"
 
-@export var map_scene: PackedScene
+@export var map_scene: PackedScene : set = set_map_scene
 @export var map_node_name: String = "Map"
+@export var auto_load_in_editor: bool = true
+@export var reload_on_change_in_editor: bool = true
+@export var clear_previous_on_load: bool = true
 
-# func _ready():
-# 	_ensure_map_loaded()
+var _current_map_instance: Node
+
+func _ready():
+	if Engine.is_editor_hint() and auto_load_in_editor:
+		ensure_map_loaded()
 
 func ensure_map_loaded() -> GameMap:
-	var target_map_node: Node = get_parent().get_node("Map")
+	var target_map_node := _get_map_mount_node()
 	if target_map_node == null:
 		print("LevelLoader: No node to attach map to")
 		return null
 
-	# var existing_map: Node = parent_node.get_node_or_null(map_node_name)
-	# if existing_map != null and existing_map is GameMap:
-	# 	print("LevelLoader: Map already loaded")
-	# 	return existing_map
+	# If a map instance already exists, return it
+	var preexisting := target_map_node.get_node_or_null(map_node_name)
+	if preexisting != null and preexisting is GameMap:
+		_current_map_instance = preexisting
+		return preexisting
+	elif preexisting != null and clear_previous_on_load:
+		preexisting.queue_free()
 
 	var scene_to_use: PackedScene = map_scene
 	if scene_to_use == null:
@@ -36,6 +45,7 @@ func ensure_map_loaded() -> GameMap:
 	var map_instance: Node = scene_to_use.instantiate()
 	map_instance.name = map_node_name
 	target_map_node.add_child(map_instance)
+	_current_map_instance = map_instance
 
 	if map_instance is GameMap:
 		map_loaded.emit(map_instance)
@@ -58,3 +68,28 @@ func load_map_by_path(scene_path: String) -> GameMap:
 			map_loaded.emit(instance)
 			return instance
 	return null
+
+func reload_map() -> GameMap:
+	var target_map_node := _get_map_mount_node()
+	if target_map_node == null:
+		return null
+	var existing := target_map_node.get_node_or_null(map_node_name)
+	if existing != null:
+		existing.queue_free()
+	_current_map_instance = null
+	return ensure_map_loaded()
+
+func set_map_scene(value: PackedScene) -> void:
+	map_scene = value
+	if Engine.is_editor_hint() and reload_on_change_in_editor:
+		reload_map()
+
+func _get_map_mount_node() -> Node:
+	var parent_node := get_parent()
+	if parent_node == null:
+		return null
+	var target_map_node := parent_node.get_node_or_null("Map")
+	if target_map_node == null:
+		# Fallback to mounting directly under parent when no holder exists
+		return parent_node
+	return target_map_node

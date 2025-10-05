@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cwt6su2g80arf"]
+[gd_scene load_steps=14 format=3 uid="uid://cwt6su2g80arf"]
 
 [ext_resource type="Script" uid="uid://xp7msyi7v6h2" path="res://scenes/game.gd" id="1_dinhu"]
 [ext_resource type="Script" uid="uid://dgybabpokdv3q" path="res://scripts/utils/level_loader.gd" id="2_trtic"]
@@ -10,7 +10,6 @@
 [ext_resource type="PackedScene" uid="uid://b06a6eh8oyhrs" path="res://scripts/entities/entity.tscn" id="6_u5sy4"]
 [ext_resource type="Script" uid="uid://bv0d5tqp24dt1" path="res://scripts/components/entity_ctl.gd" id="7_kvuet"]
 [ext_resource type="Resource" uid="uid://bohgkkxmikmmp" path="res://data/entities/Eignh.tres" id="9_0tnpc"]
-[ext_resource type="Resource" uid="uid://dsndb6n4h8u2r" path="res://data/entities/Cerah.tres" id="10_dinhu"]
 [ext_resource type="Resource" uid="uid://kklrq4hkgan8" path="res://data/entities/Elliette.tres" id="11_dinhu"]
 [ext_resource type="Resource" uid="uid://b40b17tf7khk8" path="res://data/entities/Llewelyn.tres" id="12_kvuet"]
 [ext_resource type="Script" uid="uid://bw6xpo1rcmkxl" path="res://scenes/ui/tile_info_ui.gd" id="15_ir15t"]
@@ -57,12 +56,11 @@ player = NodePath("../EntityCtl/Eignh")
 script = ExtResource("7_kvuet")
 
 [node name="Eignh" parent="EntityCtl" instance=ExtResource("6_u5sy4")]
-position = Vector2(144, 144)
+position = Vector2(64, 48)
 stats = ExtResource("9_0tnpc")
 
 [node name="Cerah" parent="EntityCtl" instance=ExtResource("6_u5sy4")]
 position = Vector2(160, 32)
-stats = ExtResource("10_dinhu")
 
 [node name="Elliette" parent="EntityCtl" instance=ExtResource("6_u5sy4")]
 position = Vector2(176, 112)
