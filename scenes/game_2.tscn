@@ -1,0 +1,84 @@
+[gd_scene load_steps=10 format=3 uid="uid://cxckng8abu3t4"]
+
+[ext_resource type="Script" uid="uid://cs6me101x37oa" path="res://scenes/game_2.gd" id="1_wjphx"]
+[ext_resource type="Script" uid="uid://dgybabpokdv3q" path="res://scripts/utils/level_loader.gd" id="2_so0bb"]
+[ext_resource type="PackedScene" uid="uid://dxqxk444weoq4" path="res://scenes/map/map_001.tscn" id="3_c45dc"]
+[ext_resource type="AudioStream" uid="uid://rkxyqgqxk5kp" path="res://assets/audio/env/light-rain.wav" id="4_p3qcy"]
+[ext_resource type="PackedScene" uid="uid://cx1txo3cxj3yi" path="res://scenes/pallette/control.tscn" id="5_dglt5"]
+[ext_resource type="PackedScene" uid="uid://uj5dstsb7niu" path="res://scenes/ui/table.tscn" id="6_r35vq"]
+[ext_resource type="Script" uid="uid://caojuxly3lla5" path="res://scripts/components/game_focus.gd" id="7_ylwj1"]
+[ext_resource type="Script" uid="uid://bv0d5tqp24dt1" path="res://scripts/components/entity_ctl.gd" id="8_7vf1r"]
+[ext_resource type="Script" uid="uid://bw6xpo1rcmkxl" path="res://scenes/ui/tile_info_ui.gd" id="14_1ppb2"]
+
+[node name="Game_2" type="Node2D"]
+script = ExtResource("1_wjphx")
+
+[node name="LevelLoader" type="Node2D" parent="."]
+script = ExtResource("2_so0bb")
+selected_map_scene = ExtResource("3_c45dc")
+
+[node name="Map" type="Node2D" parent="."]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_p3qcy")
+autoplay = true
+playback_type = 1
+
+[node name="DataInputController" type="Node2D" parent="."]
+visible = false
+
+[node name="Control" parent="DataInputController" instance=ExtResource("5_dglt5")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 445.0
+offset_top = -656.0
+offset_right = 1492.0
+offset_bottom = -378.0
+
+[node name="Control2" parent="DataInputController" instance=ExtResource("6_r35vq")]
+offset_left = 544.0
+offset_top = -337.0
+offset_right = 1605.0
+offset_bottom = -66.0
+
+[node name="GameFocus" type="Node2D" parent="."]
+script = ExtResource("7_ylwj1")
+
+[node name="EntityCtl" type="Node2D" parent="."]
+script = ExtResource("8_7vf1r")
+
+[node name="Party" type="Node2D" parent="EntityCtl"]
+
+[node name="CameraCtl" type="Camera2D" parent="."]
+position = Vector2(192, 128)
+zoom = Vector2(4, 4)
+position_smoothing_enabled = true
+position_smoothing_speed = 2.0
+
+[node name="TileInfoUi" type="CanvasLayer" parent="."]
+script = ExtResource("14_1ppb2")
+
+[node name="Panel" type="Panel" parent="TileInfoUi"]
+offset_left = 960.0
+offset_top = 32.0
+offset_right = 1120.0
+offset_bottom = 96.0
+
+[node name="PanelContainer" type="MarginContainer" parent="TileInfoUi/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="XYLabel" type="Label" parent="TileInfoUi/Panel/PanelContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24

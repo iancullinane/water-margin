@@ -1,12 +1,7 @@
 extends Node
 
 
-@onready var party_ctl = $Party
-var entity_scene = preload("res://scripts/entities/entity.tscn")
-
 var entities: Array[Entity] = []
-
-@export var player_party: Array[Entity] = []
 
 func _ready():
 	load_entity_children()
@@ -17,11 +12,6 @@ func load_entity_children():
 		if child is Entity:
 			entities.append(child)
 	print("Loaded %d entities" % [entities.size()])
-
-	for entity in player_party:
-		var new_entity = entity_scene.instantiate()
-		new_entity.stats = entity.stats
-		party_ctl.add_child(new_entity)
 
 func get_entities() -> Array[Entity]:
 	return entities

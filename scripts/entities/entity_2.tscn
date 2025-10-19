@@ -1,24 +1,24 @@
-[gd_scene load_steps=5 format=3 uid="uid://b06a6eh8oyhrs"]
+[gd_scene load_steps=5 format=3 uid="uid://d2ji1ajl8umij"]
 
-[ext_resource type="Script" uid="uid://b7tyfikkp0003" path="res://scripts/entities/entity.gd" id="1_aa4sr"]
-[ext_resource type="SpriteFrames" uid="uid://ccbua3q0nwkgg" path="res://assets/animations/kanji_anim.tres" id="3_o2q07"]
-[ext_resource type="FontFile" uid="uid://bdhd2oo2h2dl2" path="res://assets/fonts/RedAlert.ttf" id="4_e6tc2"]
+[ext_resource type="Script" uid="uid://b5a3l1dhsho00" path="res://scripts/entities/entity_2.gd" id="1_nss4h"]
+[ext_resource type="SpriteFrames" uid="uid://ccbua3q0nwkgg" path="res://assets/animations/kanji_anim.tres" id="2_wnvlg"]
+[ext_resource type="FontFile" uid="uid://bdhd2oo2h2dl2" path="res://assets/fonts/RedAlert.ttf" id="3_tqvqn"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_k0aba"]
-font = ExtResource("4_e6tc2")
+font = ExtResource("3_tqvqn")
 font_size = 14
 outline_size = 4
 outline_color = Color(0.0943044, 0.0943044, 0.0943044, 1)
 
 [node name="Entity" type="Node2D"]
-script = ExtResource("1_aa4sr")
+script = ExtResource("1_nss4h")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(8, 8)
-sprite_frames = ExtResource("3_o2q07")
+sprite_frames = ExtResource("2_wnvlg")
 animation = &"down_idle"
 autoplay = "down_idle"
-frame_progress = 0.39539814
+frame_progress = 0.8496349
 
 [node name="NameLabel" type="Label" parent="."]
 offset_left = -23.0

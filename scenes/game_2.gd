@@ -2,19 +2,21 @@
 extends Node2D
 
 
-@onready var level_loader = $LevelLoader
+const map001 = preload("res://scenes/map/map_001.tscn")
+
 
 @onready var entity_ctl = $EntityCtl
 @onready var camera_ctl: Camera2D = $CameraCtl
+@onready var level_loader = $LevelLoader
+# @onready var map_node: Node = $Map
 
 @export_group("Debug flags")
 @export var height: int;
 @export var width: int;
-@export var game_map: PackedScene
+# @export var game_map: PackedScene
 
 # var grid: Array
 var _current_party_index: int = 0
-
 
 func _ready():
 	# Connect signals for camera movement
@@ -22,16 +24,27 @@ func _ready():
 	SignalBus.current_player_moved.connect(_on_current_player_moved)
 	
 	
-	# Set initial player and snap camera to position
-	entity_ctl.set_current_player_by_index(0)
-	var current: Entity = entity_ctl.get_current_player()
-	if current:
-		camera_ctl.position_smoothing_enabled = false
-		camera_ctl.position = current.position
-		camera_ctl.reset_smoothing()
-		camera_ctl.position_smoothing_enabled = true
+	# # Set initial player and snap camera to position
+	# entity_ctl.set_current_player_by_index(0)
+	# var current: Entity = entity_ctl.get_current_player()
+	# if current:
+	# 	camera_ctl.position_smoothing_enabled = false
+	# 	camera_ctl.position = current.position
+	# 	camera_ctl.reset_smoothing()
+	# 	camera_ctl.position_smoothing_enabled = true
 
 	level_loader.ensure_map_loaded()
+
+
+# =======================================================
+# =======================================================
+# =======================================================
+# =======================================================
+# =======================================================
+# =======================================================
+# =======================================================
+# =======================================================
+
 
 func _unhandled_input(_event):
 	if entity_ctl.get_entity_count() == 0:
@@ -78,3 +91,12 @@ func _on_current_player_moved(entity: Entity):
 # func _on_hovered(event_data: UiEventData):
 # 	if event_data:
 # 		camera_ctl.position = event_data.coordinates
+
+
+
+
+
+
+# =======================================================
+# Map loading
+# =======================================================

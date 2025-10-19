@@ -16,12 +16,10 @@
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_dinhu")
-
-[node name="Map" type="Node2D" parent="."]
+game_map = ExtResource("3_ir15t")
 
 [node name="LevelLoader" type="Node2D" parent="."]
 script = ExtResource("2_trtic")
-map_scene = ExtResource("3_ir15t")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_gee14")
@@ -52,9 +50,8 @@ offset_bottom = -66.0
 script = ExtResource("5_iywne")
 player = NodePath("../EntityCtl/Eignh")
 
-[node name="EntityCtl" type="Node2D" parent="." node_paths=PackedStringArray("player_party")]
+[node name="EntityCtl" type="Node2D" parent="."]
 script = ExtResource("7_kvuet")
-player_party = [NodePath("Eignh"), NodePath("Cerah")]
 
 [node name="Party" type="Node2D" parent="EntityCtl"]
 
@@ -62,17 +59,11 @@ player_party = [NodePath("Eignh"), NodePath("Cerah")]
 position = Vector2(64, 48)
 stats = ExtResource("9_0tnpc")
 
-[node name="Cerah" parent="EntityCtl" instance=ExtResource("6_u5sy4")]
-visible = false
-position = Vector2(160, 32)
-
 [node name="Elliette" parent="EntityCtl" instance=ExtResource("6_u5sy4")]
-visible = false
 position = Vector2(176, 112)
 stats = ExtResource("11_dinhu")
 
 [node name="Llewelyn" parent="EntityCtl" instance=ExtResource("6_u5sy4")]
-visible = false
 position = Vector2(224, 64)
 stats = ExtResource("12_kvuet")
 
