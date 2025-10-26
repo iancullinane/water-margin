@@ -27,12 +27,29 @@ func ensure_map_loaded() -> void:
 	var target := _get_map_mount_node()
 	if target == null:
 		return
+	# Handle existing map instances before adding a new one
+	var existing_found: GameMap = null
+	for child in target.get_children():
+		if child is GameMap:
+			existing_found = child
+			break
+	if existing_found != null:
+		if clear_previous_on_load:
+			# Remove all existing GameMap instances to prevent duplicates
+			for child in target.get_children():
+				if child is GameMap:
+					child.queue_free()
+		else:
+			_current_map_instance = existing_found
+			return
+
 	var inst := selected_map_scene.instantiate()
 	if not (inst is GameMap):
 		push_error("Selected scene root is not GameMap")
 		return
-	inst.owner = self
 	target.add_child(inst)
+	inst.owner = target
+	_current_map_instance = inst
 
 func _load_map() -> void:
 	print("Load map")
