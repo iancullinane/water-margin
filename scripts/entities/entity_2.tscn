@@ -1,8 +1,26 @@
-[gd_scene load_steps=5 format=3 uid="uid://d2ji1ajl8umij"]
+[gd_scene load_steps=5 format=3 uid="uid://dhgpwfrgakd3g"]
 
-[ext_resource type="Script" uid="uid://b5a3l1dhsho00" path="res://scripts/entities/entity_2.gd" id="1_nss4h"]
 [ext_resource type="SpriteFrames" uid="uid://ccbua3q0nwkgg" path="res://assets/animations/kanji_anim.tres" id="2_wnvlg"]
 [ext_resource type="FontFile" uid="uid://bdhd2oo2h2dl2" path="res://assets/fonts/RedAlert.ttf" id="3_tqvqn"]
+
+[sub_resource type="GDScript" id="GDScript_1ct5s"]
+script/source = "@tool
+extends Node2D
+class_name Entity_V2
+
+
+@export var stats:EntityData
+
+var CELL_SIZE = GameConstants.CELL_SIZE
+
+@onready var sprite = $AnimatedSprite2D
+@onready var name_label = $NameLabel
+
+
+
+
+
+"
 
 [sub_resource type="LabelSettings" id="LabelSettings_k0aba"]
 font = ExtResource("3_tqvqn")
@@ -11,7 +29,7 @@ outline_size = 4
 outline_color = Color(0.0943044, 0.0943044, 0.0943044, 1)
 
 [node name="Entity" type="Node2D"]
-script = ExtResource("1_nss4h")
+script = SubResource("GDScript_1ct5s")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(8, 8)

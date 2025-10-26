@@ -5,58 +5,39 @@ extends Node2D
 const map001 = preload("res://scenes/map/map_001.tscn")
 const CERAH_SCENE := preload("res://scenes/entities/cerah.tscn")
 const EIGNH_SCENE := preload("res://scenes/entities/eignh.tscn")
-const PartyState = preload("res://data/saves/PartyState.gd")
-const PartyMemberState = preload("res://data/saves/PartyMemberState.gd")
+const PartyStateRsc = preload("res://data/saves/PartyState.gd")
+const PartyMemberStateRsc = preload("res://data/saves/PartyMemberState.gd")
 const STATE_PATH := "user://party_state.tres"
 
 
 @onready var entity_ctl = $EntityCtl
 @onready var camera_ctl: Camera2D = $CameraCtl
 @onready var level_loader = $LevelLoader
-# @onready var map_node: Node = $Map
+
 
 @export_group("Debug flags")
 @export var height: int;
 @export var width: int;
-# @export var game_map: PackedScene
 
-# var grid: Array
 var _current_party_index: int = 0
 
+
+# This is V2 of the _ready function, most notably we are using
+# lebvel_loader which "knows" how to find the map holder
 func _ready():
 	# Connect signals for camera movement
 	SignalBus.current_player_changed.connect(_on_current_player_changed)
 	SignalBus.current_player_moved.connect(_on_current_player_moved)
 	
-	
-	# # Set initial player and snap camera to position
-	# entity_ctl.set_current_player_by_index(0)
-	# var current: Entity = entity_ctl.get_current_player()
-	# if current:
-	# 	camera_ctl.position_smoothing_enabled = false
-	# 	camera_ctl.position = current.position
-	# 	camera_ctl.reset_smoothing()
-	# 	camera_ctl.position_smoothing_enabled = true
-
 	level_loader.ensure_map_loaded()
 	_spawn_party_if_missing()
 	_load_party_state()
 	_snap_camera_to_current()
+
 func _exit_tree():
 	if Engine.is_editor_hint():
 		return
 	_save_party_state()
-
-
-# =======================================================
-# =======================================================
-# =======================================================
-# =======================================================
-# =======================================================
-# =======================================================
-# =======================================================
-# =======================================================
-
 
 func _unhandled_input(_event):
 	if entity_ctl.get_entity_count() == 0:
@@ -99,11 +80,6 @@ func _on_current_player_changed(entity: Entity):
 func _on_current_player_moved(entity: Entity):
 	if entity:
 		camera_ctl.position = entity.position
-
-# func _on_hovered(event_data: UiEventData):
-# 	if event_data:
-# 		camera_ctl.position = event_data.coordinates
-
 
 
 func _spawn_party_if_missing() -> void:

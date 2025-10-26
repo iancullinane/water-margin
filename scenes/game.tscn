@@ -10,14 +10,14 @@
 [ext_resource type="Script" uid="uid://bv0d5tqp24dt1" path="res://scripts/components/entity_ctl.gd" id="8_7vf1r"]
 [ext_resource type="Script" uid="uid://bw6xpo1rcmkxl" path="res://scenes/ui/tile_info_ui.gd" id="14_1ppb2"]
 
-[node name="Game_2" type="Node2D"]
+[node name="Game" type="Node2D"]
 script = ExtResource("1_dinhu")
 
 [node name="LevelLoader" type="Node2D" parent="."]
 script = ExtResource("2_so0bb")
 selected_map_scene = ExtResource("3_c45dc")
 
-[node name="Map" type="Node2D" parent="."]
+[node name="MapCtl" type="Node2D" parent="."]
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_p3qcy")

@@ -1,36 +1,12 @@
 #@tool
 extends Node2D
 
-
-
-
 @export var use_mouse_focus: bool = true
 @export var attach_to_player: bool = false
-
-# @export var map_from_game: GameMap
 @export var player: Entity
 
-# var ground_layer: TileMapLayer
-# var terrain_layer: TileMapLayer
-# var building_layer: TileMapLayer
-# var highlight_layer: TileMapLayer
-
-
 var game_node: Node2D
-
-
-
 var last_hovered_coords: Vector2i = Vector2i(-999, -999)
-
-# func _ready() -> void:
-	
-# 	ground_layer = map_from_game.get_ground_layer()
-# 	terrain_layer = map_from_game.get_terrain_layer()
-# 	building_layer = map_from_game.get_building_layer()
-# 	# highlight_layer = map_from_game.get_highlight_layer()
-# 	game_node = get_parent()
-
-
 
 func _process(_delta:float) -> void:
 	if Engine.is_editor_hint():

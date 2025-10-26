@@ -50,6 +50,6 @@ func _get_map_mount_node() -> Node:
 	if parent_node == null:
 		return null
 
-	var target_node = parent_node.get_node_or_null("Map")
+	var target_node = parent_node.get_node_or_null("MapCtl")
 		
 	return target_node
