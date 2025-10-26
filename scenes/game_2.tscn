@@ -62,10 +62,10 @@ position_smoothing_speed = 2.0
 script = ExtResource("14_1ppb2")
 
 [node name="Panel" type="Panel" parent="TileInfoUi"]
-offset_left = 960.0
-offset_top = 32.0
-offset_right = 1120.0
-offset_bottom = 96.0
+offset_left = 1602.0
+offset_top = 33.0
+offset_right = 1762.0
+offset_bottom = 97.0
 
 [node name="PanelContainer" type="MarginContainer" parent="TileInfoUi/Panel"]
 layout_mode = 1

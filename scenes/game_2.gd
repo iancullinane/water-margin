@@ -3,6 +3,11 @@ extends Node2D
 
 
 const map001 = preload("res://scenes/map/map_001.tscn")
+const CERAH_SCENE := preload("res://scenes/entities/cerah.tscn")
+const EIGNH_SCENE := preload("res://scenes/entities/eignh.tscn")
+const PartyState = preload("res://data/saves/PartyState.gd")
+const PartyMemberState = preload("res://data/saves/PartyMemberState.gd")
+const STATE_PATH := "user://party_state.tres"
 
 
 @onready var entity_ctl = $EntityCtl
@@ -34,6 +39,13 @@ func _ready():
 	# 	camera_ctl.position_smoothing_enabled = true
 
 	level_loader.ensure_map_loaded()
+	_spawn_party_if_missing()
+	_load_party_state()
+	_snap_camera_to_current()
+func _exit_tree():
+	if Engine.is_editor_hint():
+		return
+	_save_party_state()
 
 
 # =======================================================
@@ -94,9 +106,52 @@ func _on_current_player_moved(entity: Entity):
 
 
 
+func _spawn_party_if_missing() -> void:
+	if entity_ctl == null:
+		return
 
+	# Avoid duplicates across editor/runtime reloads
+	if entity_ctl.get_entity_by_name("Cerah") == null:
+		var cerah_instance = CERAH_SCENE.instantiate()
+		cerah_instance.name = "Cerah"
+		entity_ctl.add_child(cerah_instance)
 
+	if entity_ctl.get_entity_by_name("Eignh") == null:
+		var eignh_instance = EIGNH_SCENE.instantiate()
+		eignh_instance.name = "Eignh"
+		entity_ctl.add_child(eignh_instance)
 
-# =======================================================
-# Map loading
-# =======================================================
+	# Refresh entity list and set initial player
+	entity_ctl.load_entity_children()
+	if entity_ctl.get_entity_count() > 0:
+		entity_ctl.set_current_player_by_index(0)
+
+func _snap_camera_to_current() -> void:
+	if camera_ctl == null:
+		return
+	var current: Entity = entity_ctl.get_current_player()
+	if current:
+		camera_ctl.position_smoothing_enabled = false
+		camera_ctl.position = current.position
+		camera_ctl.reset_smoothing()
+		camera_ctl.position_smoothing_enabled = true
+
+func _load_party_state() -> void:
+	if not ResourceLoader.exists(STATE_PATH):
+		return
+	var state := ResourceLoader.load(STATE_PATH) as PartyState
+	if state == null:
+		return
+	for m in state.members:
+		var e: Entity = entity_ctl.get_entity_by_name(m.name)
+		if e:
+			e.position = m.position
+
+func _save_party_state() -> void:
+	var state := PartyState.new()
+	for e in entity_ctl.get_entities():
+		var m := PartyMemberState.new()
+		m.name = e.name
+		m.position = e.position
+		state.members.append(m)
+	ResourceSaver.save(state, STATE_PATH)
