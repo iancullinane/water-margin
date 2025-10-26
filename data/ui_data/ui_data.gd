@@ -8,6 +8,7 @@ const DEFAULT_NO_DATA: String = "No data"
 
 
 var coordinates: Vector2i = Vector2i(0, 0)
+var tile_data: GameTile = null
 
 var ground_layer_data: String = DEFAULT_NO_DATA
 var terrain_layer_data: String = DEFAULT_NO_DATA
@@ -16,5 +17,9 @@ var terrain_layer_data: String = DEFAULT_NO_DATA
 func _init(tile_coords: Vector2i) -> void:
 	coordinates = tile_coords
 
+func add_game_tile_data(game_tile_data: GameTile) -> void:
+	self.tile_data = game_tile_data
+
 static func from_coordinates(tile_coords: Vector2i) -> UiEventData:
 	return UiEventData.new(tile_coords)
+

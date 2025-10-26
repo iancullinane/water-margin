@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://b06a6eh8oyhrs"]
 
-[ext_resource type="Script" uid="uid://b7tyfikkp0003" path="res://scenes/entities/entity.gd" id="1_aa4sr"]
+[ext_resource type="Script" uid="uid://b7tyfikkp0003" path="res://scripts/entities/entity.gd" id="1_aa4sr"]
+[ext_resource type="SpriteFrames" uid="uid://ccbua3q0nwkgg" path="res://assets/animations/kanji_anim.tres" id="3_o2q07"]
 [ext_resource type="FontFile" uid="uid://bdhd2oo2h2dl2" path="res://assets/fonts/RedAlert.ttf" id="4_e6tc2"]
-[ext_resource type="SpriteFrames" uid="uid://dyxa0fbg0s5eo" path="res://assets/animations/chick_anim.tres" id="4_k0aba"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_k0aba"]
 font = ExtResource("4_e6tc2")
@@ -15,16 +15,17 @@ script = ExtResource("1_aa4sr")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(8, 8)
-sprite_frames = ExtResource("4_k0aba")
-animation = &"left_idle"
+sprite_frames = ExtResource("3_o2q07")
+animation = &"down_idle"
 autoplay = "down_idle"
+frame_progress = 0.39539814
 
 [node name="NameLabel" type="Label" parent="."]
 offset_left = -23.0
 offset_top = 14.0
 offset_right = 39.0
 offset_bottom = 29.0
-text = "Test"
+text = "Cerah"
 label_settings = SubResource("LabelSettings_k0aba")
 horizontal_alignment = 1
 vertical_alignment = 1

@@ -1,48 +1,33 @@
-[gd_scene load_steps=18 format=3 uid="uid://cwt6su2g80arf"]
+[gd_scene load_steps=10 format=3 uid="uid://cxckng8abu3t4"]
 
-[ext_resource type="Script" uid="uid://xp7msyi7v6h2" path="res://scenes/game.gd" id="1_dinhu"]
-[ext_resource type="Script" uid="uid://dr1va401g07an" path="res://data/map/map_data.gd" id="2_trtic"]
-[ext_resource type="PackedScene" uid="uid://du71fhytq8a53" path="res://scenes/map/Map.tscn" id="2_u5sy4"]
-[ext_resource type="AudioStream" uid="uid://rkxyqgqxk5kp" path="res://assets/audio/env/light-rain.wav" id="3_gee14"]
-[ext_resource type="Script" uid="uid://cxmdi8r88sywi" path="res://data/map/game_tile_data.gd" id="3_ir15t"]
-[ext_resource type="PackedScene" uid="uid://cx1txo3cxj3yi" path="res://scenes/pallette/control.tscn" id="4_0tnpc"]
-[ext_resource type="Script" uid="uid://caojuxly3lla5" path="res://components/game_focus.gd" id="5_iywne"]
-[ext_resource type="PackedScene" uid="uid://uj5dstsb7niu" path="res://scenes/ui/table.tscn" id="5_vtaks"]
-[ext_resource type="PackedScene" uid="uid://b06a6eh8oyhrs" path="res://scenes/entities/entity.tscn" id="6_u5sy4"]
-[ext_resource type="Script" uid="uid://bv0d5tqp24dt1" path="res://components/entity_ctl.gd" id="7_kvuet"]
-[ext_resource type="Resource" uid="uid://bohgkkxmikmmp" path="res://data/entities/Eignh.tres" id="9_0tnpc"]
-[ext_resource type="Resource" uid="uid://dsndb6n4h8u2r" path="res://data/entities/Cerah.tres" id="10_dinhu"]
-[ext_resource type="Resource" uid="uid://kklrq4hkgan8" path="res://data/entities/Elliette.tres" id="11_dinhu"]
-[ext_resource type="Resource" uid="uid://b40b17tf7khk8" path="res://data/entities/Llewelyn.tres" id="12_kvuet"]
-[ext_resource type="Script" uid="uid://bw6xpo1rcmkxl" path="res://scenes/tile_info_ui.gd" id="15_ir15t"]
-
-[sub_resource type="Resource" id="Resource_ssvqc"]
-script = ExtResource("3_ir15t")
-metadata/_custom_type_script = "uid://cxmdi8r88sywi"
-
-[sub_resource type="Resource" id="Resource_ca42v"]
-script = ExtResource("2_trtic")
-tile_data = Dictionary[Vector2i, ExtResource("3_ir15t")]({
-Vector2i(7, 4): SubResource("Resource_ssvqc")
-})
-metadata/_custom_type_script = "uid://dr1va401g07an"
+[ext_resource type="Script" uid="uid://cs6me101x37oa" path="res://scenes/game.gd" id="1_dinhu"]
+[ext_resource type="Script" uid="uid://dgybabpokdv3q" path="res://scripts/utils/level_loader.gd" id="2_so0bb"]
+[ext_resource type="PackedScene" uid="uid://dxqxk444weoq4" path="res://scenes/map/map_001.tscn" id="3_c45dc"]
+[ext_resource type="AudioStream" uid="uid://rkxyqgqxk5kp" path="res://assets/audio/env/light-rain.wav" id="4_p3qcy"]
+[ext_resource type="PackedScene" uid="uid://cx1txo3cxj3yi" path="res://scenes/pallette/control.tscn" id="5_dglt5"]
+[ext_resource type="PackedScene" uid="uid://uj5dstsb7niu" path="res://scenes/ui/table.tscn" id="6_r35vq"]
+[ext_resource type="Script" uid="uid://caojuxly3lla5" path="res://scripts/components/game_focus.gd" id="7_ylwj1"]
+[ext_resource type="Script" uid="uid://bv0d5tqp24dt1" path="res://scripts/components/entity_ctl.gd" id="8_7vf1r"]
+[ext_resource type="Script" uid="uid://bw6xpo1rcmkxl" path="res://scenes/ui/tile_info_ui.gd" id="14_1ppb2"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_dinhu")
-map_data = SubResource("Resource_ca42v")
 
-[node name="Map" parent="." instance=ExtResource("2_u5sy4")]
-metadata/_edit_lock_ = true
+[node name="LevelLoader" type="Node2D" parent="."]
+script = ExtResource("2_so0bb")
+selected_map_scene = ExtResource("3_c45dc")
+
+[node name="MapCtl" type="Node2D" parent="."]
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("3_gee14")
+stream = ExtResource("4_p3qcy")
 autoplay = true
 playback_type = 1
 
 [node name="DataInputController" type="Node2D" parent="."]
 visible = false
 
-[node name="Control" parent="DataInputController" instance=ExtResource("4_0tnpc")]
+[node name="Control" parent="DataInputController" instance=ExtResource("5_dglt5")]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -53,35 +38,19 @@ offset_top = -656.0
 offset_right = 1492.0
 offset_bottom = -378.0
 
-[node name="Control2" parent="DataInputController" instance=ExtResource("5_vtaks")]
+[node name="Control2" parent="DataInputController" instance=ExtResource("6_r35vq")]
 offset_left = 544.0
 offset_top = -337.0
 offset_right = 1605.0
 offset_bottom = -66.0
 
-[node name="GameFocus" type="Node2D" parent="." node_paths=PackedStringArray("map_from_game", "player")]
-script = ExtResource("5_iywne")
-map_from_game = NodePath("../Map")
-player = NodePath("../EntityCtl/Eignh")
+[node name="GameFocus" type="Node2D" parent="."]
+script = ExtResource("7_ylwj1")
 
 [node name="EntityCtl" type="Node2D" parent="."]
-script = ExtResource("7_kvuet")
+script = ExtResource("8_7vf1r")
 
-[node name="Eignh" parent="EntityCtl" instance=ExtResource("6_u5sy4")]
-position = Vector2(144, 144)
-stats = ExtResource("9_0tnpc")
-
-[node name="Cerah" parent="EntityCtl" instance=ExtResource("6_u5sy4")]
-position = Vector2(160, 32)
-stats = ExtResource("10_dinhu")
-
-[node name="Elliette" parent="EntityCtl" instance=ExtResource("6_u5sy4")]
-position = Vector2(176, 112)
-stats = ExtResource("11_dinhu")
-
-[node name="Llewelyn" parent="EntityCtl" instance=ExtResource("6_u5sy4")]
-position = Vector2(224, 64)
-stats = ExtResource("12_kvuet")
+[node name="Party" type="Node2D" parent="EntityCtl"]
 
 [node name="CameraCtl" type="Camera2D" parent="."]
 position = Vector2(192, 128)
@@ -90,13 +59,13 @@ position_smoothing_enabled = true
 position_smoothing_speed = 2.0
 
 [node name="TileInfoUi" type="CanvasLayer" parent="."]
-script = ExtResource("15_ir15t")
+script = ExtResource("14_1ppb2")
 
 [node name="Panel" type="Panel" parent="TileInfoUi"]
-offset_left = 960.0
-offset_top = 32.0
-offset_right = 1120.0
-offset_bottom = 96.0
+offset_left = 1602.0
+offset_top = 33.0
+offset_right = 1762.0
+offset_bottom = 97.0
 
 [node name="PanelContainer" type="MarginContainer" parent="TileInfoUi/Panel"]
 layout_mode = 1

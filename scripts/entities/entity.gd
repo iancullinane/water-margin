@@ -1,3 +1,4 @@
+@tool
 extends Node2D
 class_name Entity
 
@@ -164,17 +165,7 @@ func _on_swipe(direction):
 		SignalBus.current_player_moved.emit(self)
 
 
-
-# signal moved
-# signal zoomed
-
-# var last_move_time = 0
-# var move_buffer = 0.2  # Minimum seconds between moves 
-
 func _input(event):
-	
-
-		
 
 	if event.is_action("zoom_in"):
 		emit_signal("zoomed", "in")

@@ -1,6 +1,7 @@
 extends TileMapLayer
 class_name GameMap
 
+@export var map_name: String = "DEFAULT_MAP"
 @export var game_map_data: GameMapData
 
 func get_tilemap_layers() -> Array[TileMapLayer]:
@@ -20,7 +21,8 @@ func get_building_layer()->TileMapLayer:
 	return $Buildings
 
 
-
+func get_map_name() -> String:
+	return map_name
 
 # getting the hovered tile
 func get_tile_from_global(global: Vector2) -> Vector2i:
@@ -35,7 +37,7 @@ func get_hovered_tile() -> Vector2i:
 func get_game_map_data() -> GameMapData:
 	return game_map_data
 
-func get_tile_data_at(tile_coords: Vector2i) -> GameTileData:
+func get_tile_data_at(tile_coords: Vector2i) -> GameTile:
 	if game_map_data == null:
 		return null
 	return game_map_data.get_tile(tile_coords)

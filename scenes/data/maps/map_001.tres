@@ -1,3 +1,8 @@
-[gd_resource type="Resource" load_steps=1 format=3]
+[gd_resource type="Resource" script_class="GameMapData" load_steps=3 format=3 uid="uid://jhodqs1t5g07"]
+
+[ext_resource type="Script" uid="uid://dr1va401g07an" path="res://data/map/map_data.gd" id="1_surdv"]
+[ext_resource type="Script" uid="uid://cxmdi8r88sywi" path="res://scripts/objects/game_tile.gd" id="2_21hhc"]
 
 [resource]
+script = ExtResource("1_surdv")
+metadata/_custom_type_script = "uid://dr1va401g07an"

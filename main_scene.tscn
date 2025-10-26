@@ -1,13 +1,13 @@
 [gd_scene load_steps=4 format=3 uid="uid://dwnb8wx0kn5cq"]
 
-[ext_resource type="PackedScene" uid="uid://cwt6su2g80arf" path="res://scenes/game.tscn" id="1_2c62f"]
 [ext_resource type="Script" uid="uid://tulnqoqmx7r5" path="res://main_scene.gd" id="1_gyfs4"]
 [ext_resource type="PackedScene" uid="uid://bu1ltp5hlagc2" path="res://scenes/ui/main_ui.tscn" id="2_2c62f"]
+[ext_resource type="PackedScene" uid="uid://cxckng8abu3t4" path="res://scenes/game.tscn" id="4_d5x1h"]
 
 [node name="MainScene" type="Node2D"]
 script = ExtResource("1_gyfs4")
 
-[node name="Game" parent="." instance=ExtResource("1_2c62f")]
-
 [node name="MainUi" parent="." instance=ExtResource("2_2c62f")]
 visible = false
+
+[node name="Game" parent="." instance=ExtResource("4_d5x1h")]
