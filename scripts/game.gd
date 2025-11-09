@@ -25,14 +25,26 @@ var _current_party_index: int = 0
 # This is V2 of the _ready function, most notably we are using
 # lebvel_loader which "knows" how to find the map holder
 func _ready():
-	# Connect signals for camera movement
-	SignalBus.current_player_changed.connect(_on_current_player_changed)
-	SignalBus.current_player_moved.connect(_on_current_player_moved)
-	
-	level_loader.ensure_map_loaded()
+	# In editor, only ensure the map is visible; skip runtime wiring
+	if Engine.is_editor_hint():
+		level_loader.ensure_map_loaded()
+		return
+	# Runtime: connect signals and initialize systems
+	call_deferred("_connect_signal_bus")
+	# level_loader.ensure_map_loaded()
 	_spawn_party_if_missing()
 	_load_party_state()
 	_snap_camera_to_current()
+
+func _connect_signal_bus() -> void:
+	if Engine.is_editor_hint():
+		return
+	if not is_instance_valid(SignalBus):
+		return
+	if SignalBus.has_signal("current_player_changed"):
+		SignalBus.current_player_changed.connect(_on_current_player_changed)
+	if SignalBus.has_signal("current_player_moved"):
+		SignalBus.current_player_moved.connect(_on_current_player_moved)
 
 func _exit_tree():
 	if Engine.is_editor_hint():

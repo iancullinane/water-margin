@@ -19,6 +19,10 @@ var _selected_map_scene: PackedScene
 @export var reload_on_change_in_editor: bool = true
 @export var clear_previous_on_load: bool = true
 
+func _ready():
+	if Engine.is_editor_hint():
+		ensure_map_loaded()
+	ensure_map_loaded()
 
 func ensure_map_loaded() -> void:
 	print("ensure_map_loaded")
@@ -70,3 +74,6 @@ func _get_map_mount_node() -> Node:
 	var target_node = parent_node.get_node_or_null("MapCtl")
 		
 	return target_node
+
+func get_current_map() -> GameMap:
+	return _current_map_instance

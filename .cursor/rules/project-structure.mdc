@@ -43,3 +43,35 @@ This project is still in early development and as such should stay loose and mai
 - Root images and assets (e.g., `carboardbox-stack-80x80.svg`, `tileset-template.aseprite`).
 
 
+# Game Logic Flow
+
+**Available Globals**
+
+Globals are found in `globals/`. Names here are of the format `filename:GlobalName`:
+- `constants:GameConstants` values any package may want
+- `database:GameData` an local `sqlite` database manager
+- `detect_keyboard:detect_keyboard` manage keyboard input
+- `detect_rouch:detect_rouch` manage touch input for mobile devices
+- `static_data:StaticData` manage the `data/static_data.json` file
+- `signal_bus:SignalBus` manage the universal signal controller
+
+
+**Flow from entry**
+- The entry point scene is `game.tscn` and its logic lives in `scripts/game.gd`
+- Key processes of `game`
+  - Connect the signals of player units on `call_deferred("_connect_signal_bus")`
+  - Spawn the player party if it is missing
+  - Load the party state from local resource
+  - Snap the camera to the current player
+- Handles the following `_unhandled_input`
+  - Next player
+  - Previous player
+**Scripted Children of the Main Scene**
+- `LevelLoader` provides a map scene export for loading levels, called on `_ready`
+- `EntityCtl` loads objects of the class `Entity` into the scene
+- `GameFocus` watches under the cursor, behaves different for keyboard and touch
+- `TileInfoUI` watches under the cursor and updates a UI scene
+
+# Movement
+
+Movement is handled on `scripts/entity.gd` and then individual entity types. In this way we can generically move NPC's and also allow a user to control any entity. There is a simple `_move(direction)` function that uses the `CELL_SIZE` variable from `GameConstants`

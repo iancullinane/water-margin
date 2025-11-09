@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://cxckng8abu3t4"]
 
-[ext_resource type="Script" uid="uid://cs6me101x37oa" path="res://scenes/game.gd" id="1_dinhu"]
+[ext_resource type="Script" uid="uid://csb7w3cilijva" path="res://scripts/game.gd" id="1_dinhu"]
 [ext_resource type="Script" uid="uid://dgybabpokdv3q" path="res://scripts/utils/level_loader.gd" id="2_so0bb"]
 [ext_resource type="PackedScene" uid="uid://dxqxk444weoq4" path="res://scenes/map/map_001.tscn" id="3_c45dc"]
 [ext_resource type="AudioStream" uid="uid://rkxyqgqxk5kp" path="res://assets/audio/env/light-rain.wav" id="4_p3qcy"]
