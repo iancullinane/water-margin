@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cxckng8abu3t4"]
+[gd_scene load_steps=15 format=3 uid="uid://cxckng8abu3t4"]
 
 [ext_resource type="Script" uid="uid://csb7w3cilijva" path="res://scripts/game.gd" id="1_dinhu"]
 [ext_resource type="Script" uid="uid://dgybabpokdv3q" path="res://scripts/utils/level_loader.gd" id="2_so0bb"]
@@ -10,18 +10,51 @@
 [ext_resource type="Script" uid="uid://caojuxly3lla5" path="res://scripts/components/game_focus.gd" id="7_ylwj1"]
 [ext_resource type="Script" uid="uid://bv0d5tqp24dt1" path="res://scripts/components/entity_ctl.gd" id="8_7vf1r"]
 [ext_resource type="Theme" uid="uid://bk7x7vskffp0" path="res://scenes/ui/main_theme.tres" id="11_kvpfn"]
+[ext_resource type="Script" uid="uid://cef3mierxqp5m" path="res://scenes/color_rect.gd" id="11_kvuet"]
+[ext_resource type="Shader" uid="uid://bnaxm6m8jt2fw" path="res://scenes/shader.gdshader" id="12_dinhu"]
 [ext_resource type="Script" uid="uid://bw6xpo1rcmkxl" path="res://scenes/ui/tile_info_ui.gd" id="14_1ppb2"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kvuet"]
+shader = ExtResource("12_dinhu")
+shader_parameter/rain_amount = 200.0
+shader_parameter/near_rain_length = 0.13500000571398
+shader_parameter/far_rain_length = 0.05000000167648
+shader_parameter/near_rain_width = 0.50000002049012
+shader_parameter/far_rain_width = 0.5
+shader_parameter/near_rain_transparency = 0.15500000410262
+shader_parameter/far_rain_transparency = 0.44200001773512
+shader_parameter/rain_color = Color(0.6419339, 0.64193404, 0.64193374, 0.65882355)
+shader_parameter/base_rain_speed = 0.60000002524012
+shader_parameter/additional_rain_speed = 0.31800001184512
+shader_parameter/slant = -0.006999952832499989
+shader_parameter/ripple_scale = 55.0990024272025
+shader_parameter/ripple_brightness = 0.22000001045
+shader_parameter/ripple_speed = 0.28600001032512
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_dinhu")
 
 [node name="LevelLoader" type="Node2D" parent="."]
-visible = false
 script = ExtResource("2_so0bb")
 selected_map_scene = ExtResource("3_c45dc")
 map_data = ExtResource("4_vtaks")
 
 [node name="MapCtl" type="Node2D" parent="."]
+
+[node name="CameraCtl" type="Camera2D" parent="."]
+position = Vector2(192, 128)
+zoom = Vector2(4, 4)
+position_smoothing_enabled = true
+position_smoothing_speed = 2.0
+
+[node name="ColorRect" type="ColorRect" parent="CameraCtl"]
+modulate = Color(0.031565506, 0.12029398, 0.29539987, 0.47058824)
+material = SubResource("ShaderMaterial_kvuet")
+offset_left = -290.0
+offset_top = -200.0
+offset_right = 278.0
+offset_bottom = 204.0
+script = ExtResource("11_kvuet")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_p3qcy")
@@ -55,12 +88,6 @@ script = ExtResource("7_ylwj1")
 script = ExtResource("8_7vf1r")
 
 [node name="Party" type="Node2D" parent="EntityCtl"]
-
-[node name="CameraCtl" type="Camera2D" parent="."]
-position = Vector2(192, 128)
-zoom = Vector2(4, 4)
-position_smoothing_enabled = true
-position_smoothing_speed = 2.0
 
 [node name="TileInfoUi" type="CanvasLayer" parent="."]
 script = ExtResource("14_1ppb2")
@@ -130,8 +157,7 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="Description" type="Label" parent="TileInfoUi/TileFlavor/Margin"]
+[node name="Description" type="RichTextLabel" parent="TileInfoUi/TileFlavor/Margin"]
 layout_mode = 2
-size_flags_vertical = 1
-theme_override_font_sizes/font_size = 30
+theme_override_font_sizes/normal_font_size = 32
 text = "This is a description"

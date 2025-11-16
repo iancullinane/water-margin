@@ -12,7 +12,7 @@ config_version=5
 
 config/name="Map Based Game"
 config/tags=PackedStringArray("2d", "main_game", "tilemap", "topdown", "turnbased")
-run/main_scene="uid://dwnb8wx0kn5cq"
+run/main_scene="uid://citi0d1sjiav2"
 config/features=PackedStringArray("4.5", "Mobile")
 boot_splash/bg_color=Color(0.497474, 0.497474, 0.497474, 1)
 boot_splash/image="res://assets/jon_snow.png"
