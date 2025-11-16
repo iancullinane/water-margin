@@ -14,6 +14,7 @@
 script = ExtResource("1_dinhu")
 
 [node name="LevelLoader" type="Node2D" parent="."]
+visible = false
 script = ExtResource("2_so0bb")
 selected_map_scene = ExtResource("3_c45dc")
 
@@ -62,10 +63,14 @@ position_smoothing_speed = 2.0
 script = ExtResource("14_1ppb2")
 
 [node name="Panel" type="Panel" parent="TileInfoUi"]
-offset_left = 1602.0
-offset_top = 33.0
-offset_right = 1762.0
-offset_bottom = 97.0
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -250.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = 150.0
+grow_horizontal = 0
 
 [node name="PanelContainer" type="MarginContainer" parent="TileInfoUi/Panel"]
 layout_mode = 1
@@ -79,6 +84,15 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="XYLabel" type="Label" parent="TileInfoUi/Panel/PanelContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="TileInfoUi/Panel/PanelContainer"]
+layout_mode = 2
+
+[node name="HoveredPos" type="Label" parent="TileInfoUi/Panel/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+
+[node name="SelectedPlayerPos" type="Label" parent="TileInfoUi/Panel/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 24

@@ -176,10 +176,10 @@ func zoom_out():
 	if cam:
 		cam.zoom = cam.zoom * 0.9
 
+# Actual movement
+
 func _on_move(direction):
 	_move(direction)
-
-
 
 func _on_swipe(direction):
 	_move(direction)

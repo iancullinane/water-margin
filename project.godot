@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="Map Based Game"
+config/tags=PackedStringArray("2d", "main_game", "tilemap", "topdown", "turnbased")
 run/main_scene="uid://dwnb8wx0kn5cq"
 config/features=PackedStringArray("4.5", "Mobile")
 boot_splash/bg_color=Color(0.497474, 0.497474, 0.497474, 1)

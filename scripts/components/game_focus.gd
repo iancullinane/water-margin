@@ -1,4 +1,4 @@
-#@tool
+# @tool
 extends Node2D
 
 @export var use_mouse_focus: bool = true
@@ -23,6 +23,11 @@ func _process(_delta:float) -> void:
 func handle_hover_data(focus: Vector2):
 	var parent_node := get_parent()
 	var tile_coords: Vector2i
+
+	if parent_node != null and parent_node.has_method("local_to_map") and parent_node.has_method("to_local"):
+		print("using local_to_map")
+
+	# Here we are using the base Node2D methods 
 	if parent_node != null and parent_node.has_method("local_to_map") and parent_node.has_method("to_local"):
 		var local_pos: Vector2 = parent_node.to_local(focus)
 		tile_coords = parent_node.local_to_map(local_pos)
@@ -37,4 +42,7 @@ func handle_hover_data(focus: Vector2):
 	if tile_coords != last_hovered_coords:
 		last_hovered_coords = tile_coords
 		var ui_event = UiEventData.from_coordinates(tile_coords)
+
+		# This doesn't work in editor because they signal bus isn't available
+		# ERROR: res://scripts/components/game_focus.gd:40 - Invalid access to property or key 'hovered' on a base object of type 'Node (signal_bus.gd)'.
 		SignalBus.hovered.emit(ui_event)

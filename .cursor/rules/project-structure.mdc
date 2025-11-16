@@ -75,3 +75,4 @@ Globals are found in `globals/`. Names here are of the format `filename:GlobalNa
 # Movement
 
 Movement is handled on `scripts/entity.gd` and then individual entity types. In this way we can generically move NPC's and also allow a user to control any entity. There is a simple `_move(direction)` function that uses the `CELL_SIZE` variable from `GameConstants`
+

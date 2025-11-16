@@ -31,7 +31,7 @@ func _ready():
 		return
 	# Runtime: connect signals and initialize systems
 	call_deferred("_connect_signal_bus")
-	# level_loader.ensure_map_loaded()
+	level_loader.ensure_map_loaded()
 	_spawn_party_if_missing()
 	_load_party_state()
 	_snap_camera_to_current()
