@@ -8,7 +8,13 @@ class_name TileInfoUi
 var current_player_position: Vector2 = Vector2.ZERO
 
 
+@onready var tile_flavor: Panel = $TileFlavor
+@onready var tile_description: Label = $TileFlavor/Margin/Description
+
+
 func _ready() -> void:
+	if not Engine.is_editor_hint():
+		tile_flavor.visible = false
 	SignalBus.connect("hovered", processUI)
 	SignalBus.connect("current_player_moved", _on_current_player_moved)
 
@@ -27,6 +33,17 @@ func _update_player_position_display() -> void:
 	if selected_player_pos:
 		var tile_coords := _convert_global_to_tile_coords(current_player_position)
 		selected_player_pos.text = "Player: (%d, %d)" % [tile_coords.x, tile_coords.y]
+		
+		var game_map := _get_current_map()
+		if game_map:
+			var tile_data := game_map.get_tile_data_at(tile_coords)
+			if tile_data:
+				tile_flavor.visible = true
+				var description_label := tile_description.find_child("*", true, false) as Label
+				if description_label:
+					description_label.text = tile_data.description
+			else:
+				tile_flavor.visible = false
 
 func _convert_global_to_tile_coords(global_pos: Vector2) -> Vector2i:
 	var game_map := _get_current_map()

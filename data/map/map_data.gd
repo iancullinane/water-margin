@@ -1,10 +1,11 @@
 extends Resource
 class_name GameMapData
 
-@export var tile_data: Dictionary[Vector2i, GameTile]
+@export var tile_data: Array[GameTile]
 
 
 func get_tile(position: Vector2i) -> GameTile:
-	if not tile_data.has(position):
-		return null
-	return tile_data[position]
+	for tile in tile_data:
+		if tile.position == position:
+			return tile
+	return null

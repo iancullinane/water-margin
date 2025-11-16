@@ -1,0 +1,54 @@
+[gd_scene load_steps=4 format=3 uid="uid://citi0d1sjiav2"]
+
+[ext_resource type="Theme" uid="uid://bk7x7vskffp0" path="res://scenes/ui/main_theme.tres" id="1_m7t1o"]
+[ext_resource type="Texture2D" uid="uid://dd1q5t5vvfdr0" path="res://assets/images/menu-splash.png" id="2_ihgl4"]
+[ext_resource type="Script" uid="uid://bp6uggvnjk4ct" path="res://scenes/ui/start_screen.gd" id="2_kolwf"]
+
+[node name="StartScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_m7t1o")
+script = ExtResource("2_kolwf")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("2_ihgl4")
+expand_mode = 4
+stretch_mode = 3
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="StartMenu" type="Panel" parent="CenterContainer"]
+custom_minimum_size = Vector2(600, 400)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/StartMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 2
+
+[node name="Button" type="Button" parent="CenterContainer/StartMenu/VBoxContainer"]
+layout_mode = 2
+text = "Start Game"

@@ -1,8 +1,15 @@
-[gd_resource type="Resource" script_class="GameMapData" load_steps=3 format=3 uid="uid://jhodqs1t5g07"]
+[gd_resource type="Resource" script_class="GameMapData" load_steps=4 format=3 uid="uid://jhodqs1t5g07"]
 
 [ext_resource type="Script" uid="uid://dr1va401g07an" path="res://data/map/map_data.gd" id="1_surdv"]
 [ext_resource type="Script" uid="uid://cxmdi8r88sywi" path="res://scripts/objects/game_tile.gd" id="2_21hhc"]
 
+[sub_resource type="Resource" id="Resource_kvuet"]
+script = ExtResource("2_21hhc")
+position = Vector2i(6, 6)
+description = "This is the test tile"
+metadata/_custom_type_script = "uid://cxmdi8r88sywi"
+
 [resource]
 script = ExtResource("1_surdv")
+tile_data = Array[ExtResource("2_21hhc")]([SubResource("Resource_kvuet")])
 metadata/_custom_type_script = "uid://dr1va401g07an"
