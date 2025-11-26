@@ -1,0 +1,18 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://bk7x7vskffp0"]
+
+[ext_resource type="FontFile" uid="uid://3rosl1kdqqlb" path="res://assets/fonts/AmericanTypewriter.ttc" id="1_bhey1"]
+[ext_resource type="FontFile" uid="uid://bdhd2oo2h2dl2" path="res://assets/fonts/RedAlert.ttf" id="2_ktsff"]
+
+[resource]
+default_base_scale = 1.0
+default_font = ExtResource("2_ktsff")
+Button/font_sizes/font_size = 50
+Label/colors/font_color = Color(1, 1, 1, 1)
+Label/font_sizes/font_size = 50
+Label/fonts/font = ExtResource("1_bhey1")
+MarginContainer/constants/margin_bottom = 10
+MarginContainer/constants/margin_left = 10
+MarginContainer/constants/margin_right = 10
+MarginContainer/constants/margin_top = 10
+TextEdit/font_sizes/font_size = 30
+TextEdit/fonts/font = ExtResource("1_bhey1")

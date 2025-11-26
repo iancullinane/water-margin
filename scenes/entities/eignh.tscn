@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://deb3kgajhyjbx"]
 
-[ext_resource type="PackedScene" uid="uid://b06a6eh8oyhrs" path="res://scripts/entities/entity.tscn" id="1_msgmp"]
+[ext_resource type="PackedScene" uid="uid://b06a6eh8oyhrs" path="res://scenes/entities/entity.tscn" id="1_msgmp"]
 [ext_resource type="Resource" uid="uid://bohgkkxmikmmp" path="res://data/entities/Eignh.tres" id="2_o701b"]
 [ext_resource type="SpriteFrames" uid="uid://dlxdjfwwsmta6" path="res://assets/animations/bowman_anim.tres" id="3_2xmnv"]
 

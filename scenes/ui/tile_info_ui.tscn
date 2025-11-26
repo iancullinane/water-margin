@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bx4kow47vnuau"]
 
-[ext_resource type="Script" uid="uid://bw6xpo1rcmkxl" path="res://scenes/ui/tile_info_ui.gd" id="1_4iu65"]
+[ext_resource type="Script" uid="uid://bw6xpo1rcmkxl" path="res://scripts/ui/tile_info_ui.gd" id="1_4iu65"]
 
 [node name="TileInfoUi" type="CanvasLayer"]
 script = ExtResource("1_4iu65")
