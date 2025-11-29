@@ -47,6 +47,17 @@ project/assembly_name="Mobile Game Template"
 
 enabled=PackedStringArray("res://addons/godot-sqlite/plugin.cfg", "res://addons/json_editor/plugin.cfg", "res://addons/script-tabs/plugin.cfg")
 
+[file_customization]
+
+folder_colors={
+"res://addons/": "gray",
+"res://assets/": "yellow",
+"res://data/": "blue",
+"res://globals/": "purple",
+"res://scenes/": "green",
+"res://scripts/": "teal"
+}
+
 [input]
 
 click={

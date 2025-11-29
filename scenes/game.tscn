@@ -86,7 +86,6 @@ offset_bottom = -66.0
 
 [node name="GameFocus" type="Node2D" parent="."]
 script = ExtResource("7_ylwj1")
-use_mouse_focus = false
 
 [node name="EntityCtl" type="Node2D" parent="."]
 script = ExtResource("8_7vf1r")

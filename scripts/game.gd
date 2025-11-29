@@ -5,6 +5,7 @@ extends Node2D
 const map001 = preload("res://scenes/map/map_001.tscn")
 const CERAH_SCENE := preload("res://scenes/entities/cerah.tscn")
 const EIGNH_SCENE := preload("res://scenes/entities/eignh.tscn")
+const LLEWELYN_SCENE := preload("res://scenes/entities/llewelyn.tscn")
 const PartyStateRsc = preload("res://data/saves/PartyState.gd")
 const PartyMemberStateRsc = preload("res://data/saves/PartyMemberState.gd")
 const STATE_PATH := "user://party_state.tres"
@@ -25,6 +26,7 @@ var _current_party_index: int = 0
 # This is V2 of the _ready function, most notably we are using
 # lebvel_loader which "knows" how to find the map holder
 func _ready():
+	
 	# In editor, only ensure the map is visible; skip runtime wiring
 	if Engine.is_editor_hint():
 		level_loader.ensure_map_loaded()
@@ -108,6 +110,11 @@ func _spawn_party_if_missing() -> void:
 		var eignh_instance = EIGNH_SCENE.instantiate()
 		eignh_instance.name = "Eignh"
 		entity_ctl.add_child(eignh_instance)
+
+	if entity_ctl.get_entity_by_name("Llewelyn") == null:
+		var llewelyn_instance = LLEWELYN_SCENE.instantiate()
+		llewelyn_instance.name = "Llewelyn"
+		entity_ctl.add_child(llewelyn_instance)
 
 	# Refresh entity list and set initial player
 	entity_ctl.load_entity_children()

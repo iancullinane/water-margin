@@ -1,6 +1,7 @@
 extends Control
 
 func _ready():
+	print(OS.get_data_dir())
 	var button = $CenterContainer/StartMenu/VBoxContainer/Button
 	button.pressed.connect(_on_start_button_pressed)
 
