@@ -12,10 +12,10 @@ func _unhandled_input(event):
 
 	if event.is_action_released("click"):
 		_calculate_swipe(get_viewport().get_mouse_position())
-		
+
 ## Calculates the distance from where a player touched to where they released touch
 func _calculate_swipe(swipe_end):
-	if swipe_start == null: 
+	if swipe_start == null:
 		return
 
 	var swipe = swipe_end - swipe_start

@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="Map Based Game"
+config/name="Water Margin"
 config/tags=PackedStringArray("2d", "main_game", "tilemap", "topdown", "turnbased")
 run/main_scene="uid://citi0d1sjiav2"
 config/features=PackedStringArray("4.5", "Mobile")
@@ -33,8 +33,8 @@ gdscript/warnings/unused_signal=0
 
 [display]
 
-window/size/viewport_width=1800
-window/size/viewport_height=1200
+window/size/viewport_width=3000
+window/size/viewport_height=2500
 window/stretch/mode="viewport"
 window/stretch/aspect="expand"
 window/handheld/orientation=1

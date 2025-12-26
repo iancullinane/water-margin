@@ -1,32 +1,42 @@
 @tool
 extends Node2D
 
+@export var height: int;
+@export var width: int;
+
+@export var _current_party_member_idx: int = 0
+
+@export_group("Debug flags")
+# -------------------------------
 
 const map001 = preload("res://scenes/map/map_001.tscn")
+
+# These manage the state file itself
+const PartyStateRsc = preload("res://data/saves/PartyState.gd")
+const PartyMemberStateRsc = preload("res://data/saves/PartyMemberState.gd")
+# This is the file that keeps track of where the
+# player is persistently from game to game
+const STATE_PATH := "user://party_state.tres"
+
+# These are raw character scenes, this is annoying to hardcode
+# but it means they can be edited in the editor which is ideal
 const CERAH_SCENE := preload("res://scenes/entities/cerah.tscn")
 const EIGNH_SCENE := preload("res://scenes/entities/eignh.tscn")
 const LLEWELYN_SCENE := preload("res://scenes/entities/llewelyn.tscn")
-const PartyStateRsc = preload("res://data/saves/PartyState.gd")
-const PartyMemberStateRsc = preload("res://data/saves/PartyMemberState.gd")
-const STATE_PATH := "user://party_state.tres"
 
-
+# controllers
 @onready var entity_ctl = $EntityCtl
 @onready var camera_ctl: Camera2D = $CameraCtl
 @onready var level_loader = $LevelLoader
 
 
-@export_group("Debug flags")
-@export var height: int;
-@export var width: int;
 
-var _current_party_index: int = 0
 
 
 # This is V2 of the _ready function, most notably we are using
 # lebvel_loader which "knows" how to find the map holder
 func _ready():
-	
+
 	# In editor, only ensure the map is visible; skip runtime wiring
 	if Engine.is_editor_hint():
 		level_loader.ensure_map_loaded()
@@ -38,6 +48,8 @@ func _ready():
 	_load_party_state()
 	_snap_camera_to_current()
 
+
+#
 func _connect_signal_bus() -> void:
 	if Engine.is_editor_hint():
 		return
@@ -58,29 +70,29 @@ func _unhandled_input(_event):
 		return
 	# Prioritize previous when both fire (e.g., Shift+Tab)
 	if Input.is_action_just_pressed("previous_character"):
-		_select_player(_current_party_index - 1)
+		_select_player(_current_party_member_idx - 1)
 	elif Input.is_action_just_pressed("next_character"):
-		_select_player(_current_party_index + 1)
+		_select_player(_current_party_member_idx + 1)
 
 func _select_player(new_index: int) -> void:
 	if entity_ctl.get_entity_count() == 0:
 		return
 	var wrapped_index := posmod(new_index, entity_ctl.get_entity_count())
 	# Turn off previous only if changing index
-	if wrapped_index != _current_party_index:
-		var previous_player: Entity = entity_ctl.get_entity_by_index(_current_party_index)
+	if wrapped_index != _current_party_member_idx:
+		var previous_player: Entity = entity_ctl.get_entity_by_index(_current_party_member_idx)
 		if previous_player:
 			previous_player.current_player = false
 	# Turn on new
-	_current_party_index = wrapped_index
-	var new_player: Entity = entity_ctl.get_entity_by_index(_current_party_index)
+	_current_party_member_idx = wrapped_index
+	var new_player: Entity = entity_ctl.get_entity_by_index(_current_party_member_idx)
 	if new_player:
 		entity_ctl.set_current_player(new_player)
 		# Update focus follower, if present
 		var focus_node = get_node_or_null("GameFocus")
 		if focus_node:
 			focus_node.player = new_player
-		
+
 		print("Current player is %s" % new_player.name)
 
 

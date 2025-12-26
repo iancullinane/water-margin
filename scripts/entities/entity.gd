@@ -14,7 +14,18 @@ var current_player: bool = false:
 	set(value):
 		if current_player == value:
 			return
+
+		if value == true:
+			# Connect touch signals when becoming the current player
+			if !DetectTouch.moved.is_connected(_on_swipe):
+				DetectTouch.moved.connect(_on_swipe)
+		else:
+			# Disconnect touch signals when no longer the current player
+			if DetectTouch.moved.is_connected(_on_swipe):
+				DetectTouch.moved.disconnect(_on_swipe)
+
 		current_player = value
+
 
 
 func _ready():
@@ -74,7 +85,7 @@ func _physics_process(delta: float) -> void:
 
 func _move(dir: String) -> void:
 	var target_pos := position
-	
+
 	if dir == "up":
 		target_pos.y -= CELL_SIZE
 	elif dir == "down":
@@ -83,10 +94,10 @@ func _move(dir: String) -> void:
 		target_pos.x -= CELL_SIZE
 	elif dir == "right":
 		target_pos.x += CELL_SIZE
-	
+
 	if not _can_move_to(target_pos):
 		return
-	
+
 	if dir == "up":
 		sprite.animation = "up_idle"
 	elif dir == "down":
@@ -95,9 +106,9 @@ func _move(dir: String) -> void:
 		sprite.animation = "left_idle"
 	elif dir == "right":
 		sprite.animation = "right_idle"
-	
+
 	position = target_pos
-	
+
 	if current_player:
 		SignalBus.current_player_moved.emit(self)
 
@@ -116,15 +127,15 @@ func _can_move_to(target_pos: Vector2) -> bool:
 	var game_map := _get_current_map()
 	if game_map == null:
 		return true
-	
+
 	var tile_coords := game_map.get_tile_from_global(target_pos)
-	
+
 	if _is_tile_blocked(game_map, tile_coords):
 		return false
-	
+
 	if _is_entity_at_position(target_pos):
 		return false
-	
+
 	return true
 
 func _get_current_map() -> GameMap:
@@ -137,11 +148,11 @@ func _is_tile_blocked(game_map: GameMap, tile_coords: Vector2i) -> bool:
 	var terrain_layer := game_map.get_terrain_layer()
 	if terrain_layer == null:
 		return false
-	
+
 	var tile_data := terrain_layer.get_cell_tile_data(tile_coords)
 	if tile_data == null:
 		return false
-	
+
 	var movement_value = tile_data.get_custom_data("movement")
 	return movement_value == 1
 
@@ -165,6 +176,10 @@ func set_controllable(value: bool) -> void:
 	if current_player == value:
 		return
 	current_player = value
+
+	# Connect touch controls when setting controllable
+	if current_player and !DetectTouch.moved.is_connected(_on_swipe):
+		DetectTouch.moved.connect(_on_swipe)
 
 func zoom_in():
 	var cam = get_node_or_null("Camera2D")
