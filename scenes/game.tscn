@@ -36,7 +36,6 @@ shader_parameter/ripple_spawn_chance_max = 0.7
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_dinhu")
-_current_party_member_idx = null
 
 [node name="LevelLoader" type="Node2D" parent="."]
 script = ExtResource("2_so0bb")
@@ -46,7 +45,6 @@ map_data = ExtResource("4_trtic")
 [node name="MapCtl" type="Node2D" parent="."]
 
 [node name="Rain" type="ColorRect" parent="."]
-visible = false
 modulate = Color(0.031565506, 0.12029398, 0.29539987, 0.47058824)
 material = SubResource("ShaderMaterial_kvuet")
 offset_left = -222.0
