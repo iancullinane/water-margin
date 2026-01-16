@@ -1,4 +1,14 @@
 extends Node
+class_name EntityCtl
+
+
+#
+# Map helpers
+
+
+
+# -------
+
 
 
 var entities: Array[Entity] = []

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://cxckng8abu3t4"]
+[gd_scene load_steps=17 format=3 uid="uid://cxckng8abu3t4"]
 
 [ext_resource type="Script" uid="uid://csb7w3cilijva" path="res://scripts/game.gd" id="1_dinhu"]
 [ext_resource type="Script" uid="uid://dgybabpokdv3q" path="res://scripts/utils/level_loader.gd" id="2_so0bb"]
@@ -6,6 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://rkxyqgqxk5kp" path="res://assets/audio/env/light-rain.wav" id="4_p3qcy"]
 [ext_resource type="Resource" uid="uid://cvnmtg0xnmfl3" path="res://scenes/data/maps/map_default.tres" id="4_trtic"]
 [ext_resource type="PackedScene" uid="uid://cx1txo3cxj3yi" path="res://scenes/pallette/control.tscn" id="5_dglt5"]
+[ext_resource type="Script" uid="uid://d32hlclfr5hjr" path="res://scripts/objects/map_ctl.gd" id="5_ir15t"]
 [ext_resource type="Shader" uid="uid://86ous1s4fi33" path="res://assets/textures/shaders/rain.gdshader" id="5_kvuet"]
 [ext_resource type="PackedScene" uid="uid://uj5dstsb7niu" path="res://scenes/ui/table.tscn" id="6_r35vq"]
 [ext_resource type="Script" uid="uid://caojuxly3lla5" path="res://scripts/components/game_focus.gd" id="7_ylwj1"]
@@ -44,6 +45,7 @@ selected_map_scene = ExtResource("3_kvuet")
 map_data = ExtResource("4_trtic")
 
 [node name="MapCtl" type="Node2D" parent="."]
+script = ExtResource("5_ir15t")
 
 [node name="Rain" type="ColorRect" parent="."]
 modulate = Color(0.031565506, 0.12029398, 0.29539987, 0.47058824)
@@ -93,8 +95,9 @@ script = ExtResource("8_7vf1r")
 
 [node name="Party" type="Node2D" parent="EntityCtl"]
 
-[node name="Entity" parent="EntityCtl" instance=ExtResource("12_trtic")]
+[node name="Entity" parent="EntityCtl" node_paths=PackedStringArray("entity_ctl") instance=ExtResource("12_trtic")]
 position = Vector2(66, 38)
+entity_ctl = NodePath("..")
 
 [node name="TileInfoUi" type="CanvasLayer" parent="."]
 script = ExtResource("14_1ppb2")

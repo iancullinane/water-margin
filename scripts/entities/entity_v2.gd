@@ -4,6 +4,7 @@ class_name Entity_V2
 
 
 @export var stats:EntityData
+@export var entity_ctl:EntityCtl
 
 var CELL_SIZE = GameConstants.CELL_SIZE
 
@@ -13,6 +14,8 @@ var CELL_SIZE = GameConstants.CELL_SIZE
 
 
 func _ready() -> void:
+	if entity_ctl == null:
+		entity_ctl = get_parent()
 	animation_player.play("idle_down")
 
 
@@ -58,6 +61,27 @@ func _move(dir: String) -> void:
 
 	# if current_player:
 	# 	SignalBus.current_player_moved.emit(self)
+
+
+#
+# Map
+# This would work, but it depends on a node structure that
+# needs to exist independently of itself. In the very least
+# it should depend on the `EntityCtl` above it
+#
+#
+
+func _get_current_map() -> GameMap:
+	var level_loader = get_tree().root.find_child("LevelLoader", true, false)
+	if level_loader and level_loader.has_method("get_current_map"):
+		return level_loader.get_current_map()
+	return null
+
+
+
+
+
+
 
 # func _can_move_to(target_pos: Vector2) -> bool:
 # 	var game_map := _get_current_map()

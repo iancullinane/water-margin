@@ -25,13 +25,24 @@ const EIGNH_SCENE := preload("res://scenes/entities/eignh.tscn")
 const LLEWELYN_SCENE := preload("res://scenes/entities/llewelyn.tscn")
 
 # controllers
-@onready var entity_ctl = $EntityCtl
+# -----------
+@onready var entity_ctl: EntityCtl = $EntityCtl
+@onready var map_ctl: MapCtl = $MapCtl
 @onready var camera_ctl: Camera2D = $CameraCtl
 @onready var level_loader = $LevelLoader
 
+func get_entity_ctl() -> EntityCtl:
+	return entity_ctl
 
+func get_map_ctl() -> MapCtl:
+	return map_ctl
 
+func get_camera_ctl() -> Camera2D:
+	return camera_ctl
 
+func get_level_loader():
+	return level_loader
+# ------------------------------------------------------------
 
 # This is V2 of the _ready function, most notably we are using
 # lebvel_loader which "knows" how to find the map holder

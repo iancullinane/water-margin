@@ -54,11 +54,11 @@ func ensure_map_loaded() -> void:
 	if not (inst is GameMap):
 		push_error("Selected scene root is not GameMap")
 		return
-	
+
 	# Add the map data resource to the scene
 	if map_data != null:
 		inst.game_map_data = map_data
-	
+
 	target.add_child(inst)
 	inst.owner = target
 	_current_map_instance = inst
@@ -80,7 +80,7 @@ func _get_map_mount_node() -> Node:
 		return null
 
 	var target_node = parent_node.get_node_or_null("MapCtl")
-		
+
 	return target_node
 
 func get_current_map() -> GameMap:
