@@ -1,9 +1,203 @@
-[gd_scene load_steps=9 format=3 uid="uid://dhgpwfrgakd3g"]
+[gd_scene load_steps=18 format=3 uid="uid://dhgpwfrgakd3g"]
 
 [ext_resource type="Script" uid="uid://bhxcbwl21g0jh" path="res://scripts/entities/entity_v2.gd" id="1_gpy3h"]
-[ext_resource type="SpriteFrames" uid="uid://ccbua3q0nwkgg" path="res://assets/animations/kanji_anim.tres" id="1_ygl84"]
 [ext_resource type="FontFile" uid="uid://bdhd2oo2h2dl2" path="res://assets/fonts/RedAlert.ttf" id="2_b11w7"]
 [ext_resource type="Resource" uid="uid://c1m7jrkgxy1t5" path="res://data/entities/BaseEntity.tres" id="2_uhh82"]
+[ext_resource type="Texture2D" uid="uid://d3xb1rouqdqrr" path="res://assets/cute_fantasy/Swordman.png" id="4_gpy3h"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uhh82"]
+atlas = ExtResource("4_gpy3h")
+
+[sub_resource type="Animation" id="Animation_uhh82"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("KnightArmor:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_pbi8u"]
+resource_name = "attack_down"
+length = 1.2
+loop_mode = 1
+step = 24.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("KnightArmor:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.20000005, 0.39999998, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [36, 37, 38, 39, 40, 41]
+}
+
+[sub_resource type="Animation" id="Animation_o2056"]
+resource_name = "attack_side"
+length = 1.2
+loop_mode = 1
+step = 15.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("KnightArmor:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.20000005, 0.39999998, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [42, 43, 44, 45, 46, 47]
+}
+
+[sub_resource type="Animation" id="Animation_4jkqd"]
+resource_name = "attack_up"
+length = 1.2
+loop_mode = 1
+step = 24.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("KnightArmor:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.20000005, 0.39999998, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [48, 49, 50, 51, 52, 53]
+}
+
+[sub_resource type="Animation" id="Animation_gpy3h"]
+resource_name = "new_animation"
+length = 1.2
+loop_mode = 1
+step = 24.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("KnightArmor:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.20000005, 0.39999998, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+
+[sub_resource type="Animation" id="Animation_21wfu"]
+resource_name = "side_idle_knight"
+length = 1.2
+loop_mode = 1
+step = 24.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("KnightArmor:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.20000005, 0.39999998, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [6, 7, 8, 9, 10, 11]
+}
+
+[sub_resource type="Animation" id="Animation_1e50j"]
+resource_name = "up_idle_knight"
+length = 1.2
+loop_mode = 1
+step = 24.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("KnightArmor:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.20000005, 0.39999998, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [12, 13, 14, 15, 16, 17]
+}
+
+[sub_resource type="Animation" id="Animation_skupm"]
+resource_name = "walk_down"
+length = 1.2
+loop_mode = 1
+step = 24.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("KnightArmor:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.20000005, 0.39999998, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [18, 19, 20, 21, 22, 23]
+}
+
+[sub_resource type="Animation" id="Animation_fefel"]
+resource_name = "walk_side"
+length = 1.2
+loop_mode = 1
+step = 24.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("KnightArmor:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.20000005, 0.39999998, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [24, 25, 26, 27, 28, 29]
+}
+
+[sub_resource type="Animation" id="Animation_to0pd"]
+resource_name = "walk_up"
+length = 1.2
+loop_mode = 1
+step = 24.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("KnightArmor:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.20000005, 0.39999998, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [30, 31, 32, 33, 34, 35]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_uhh82"]
+_data = {
+&"RESET": SubResource("Animation_uhh82"),
+&"attack_down": SubResource("Animation_pbi8u"),
+&"attack_side": SubResource("Animation_o2056"),
+&"attack_up": SubResource("Animation_4jkqd"),
+&"idle_down": SubResource("Animation_gpy3h"),
+&"idle_side": SubResource("Animation_21wfu"),
+&"idle_up": SubResource("Animation_1e50j"),
+&"walk_down": SubResource("Animation_skupm"),
+&"walk_side": SubResource("Animation_fefel"),
+&"walk_up": SubResource("Animation_to0pd")
+}
 
 [sub_resource type="LabelSettings" id="LabelSettings_k0aba"]
 font = ExtResource("2_b11w7")
@@ -11,43 +205,33 @@ font_size = 14
 outline_size = 4
 outline_color = Color(0.0943044, 0.0943044, 0.0943044, 1)
 
-[sub_resource type="Animation" id="Animation_gpy3h"]
-resource_name = "base_a"
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_uhh82"]
-_data = {
-&"base_a": SubResource("Animation_gpy3h")
-}
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_gpy3h"]
-
 [node name="Entity" type="Node2D"]
 script = ExtResource("1_gpy3h")
 stats = ExtResource("2_uhh82")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 visible = false
-position = Vector2(8, 8)
-sprite_frames = ExtResource("1_ygl84")
-animation = &"down_idle"
+position = Vector2(7, 8)
+animation = &""
 autoplay = "down_idle"
-frame_progress = 0.8496349
 
-[node name="NameLabel" type="Label" parent="."]
-offset_left = -23.0
-offset_top = 14.0
-offset_right = 39.0
-offset_bottom = 29.0
-text = "Cerah"
-label_settings = SubResource("LabelSettings_k0aba")
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="KnightArmor" type="Sprite2D" parent="."]
+position = Vector2(8, 8)
+texture = SubResource("AtlasTexture_uhh82")
+hframes = 6
+vframes = 13
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_uhh82")
 }
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(8, 8)
-texture = SubResource("AtlasTexture_gpy3h")
+[node name="NameLabel" type="Label" parent="."]
+offset_left = -23.0
+offset_top = 28.0
+offset_right = 39.0
+offset_bottom = 43.0
+text = "Cerah"
+label_settings = SubResource("LabelSettings_k0aba")
+horizontal_alignment = 1
+vertical_alignment = 1

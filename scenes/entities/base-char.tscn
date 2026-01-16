@@ -9,7 +9,7 @@ stats = ExtResource("2_k7554")
 
 [node name="AnimatedSprite2D" parent="." index="0"]
 sprite_frames = ExtResource("3_7l8v7")
-frame_progress = 0.44305646
+frame_progress = 0.68886113
 
 [node name="NameLabel" parent="." index="1"]
 text = "Eignh"
