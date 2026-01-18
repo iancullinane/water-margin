@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cxckng8abu3t4"]
+[gd_scene load_steps=16 format=3 uid="uid://cxckng8abu3t4"]
 
 [ext_resource type="Script" uid="uid://csb7w3cilijva" path="res://scripts/game.gd" id="1_dinhu"]
 [ext_resource type="Script" uid="uid://dgybabpokdv3q" path="res://scripts/utils/level_loader.gd" id="2_so0bb"]
@@ -13,7 +13,6 @@
 [ext_resource type="Script" uid="uid://bv0d5tqp24dt1" path="res://scripts/components/entity_ctl.gd" id="8_7vf1r"]
 [ext_resource type="Theme" uid="uid://bk7x7vskffp0" path="res://resources/ui/main_theme.tres" id="11_kvpfn"]
 [ext_resource type="Script" uid="uid://cef3mierxqp5m" path="res://scenes/color_rect.gd" id="11_kvuet"]
-[ext_resource type="PackedScene" uid="uid://dhgpwfrgakd3g" path="res://scenes/entities/entity_2.tscn" id="12_trtic"]
 [ext_resource type="Script" uid="uid://bw6xpo1rcmkxl" path="res://scripts/ui/tile_info_ui.gd" id="14_1ppb2"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kvuet"]
@@ -94,10 +93,6 @@ script = ExtResource("7_ylwj1")
 script = ExtResource("8_7vf1r")
 
 [node name="Party" type="Node2D" parent="EntityCtl"]
-
-[node name="Entity" parent="EntityCtl" node_paths=PackedStringArray("entity_ctl") instance=ExtResource("12_trtic")]
-position = Vector2(66, 38)
-entity_ctl = NodePath("..")
 
 [node name="TileInfoUi" type="CanvasLayer" parent="."]
 script = ExtResource("14_1ppb2")

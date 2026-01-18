@@ -24,6 +24,8 @@ const CERAH_SCENE := preload("res://scenes/entities/cerah.tscn")
 const EIGNH_SCENE := preload("res://scenes/entities/eignh.tscn")
 const LLEWELYN_SCENE := preload("res://scenes/entities/llewelyn.tscn")
 
+const EIGNH_V2_SCENE := preload("res://scenes/entities/eignh_v2.tscn")
+
 # controllers
 # -----------
 @onready var entity_ctl: EntityCtl = $EntityCtl
@@ -44,6 +46,19 @@ func get_level_loader():
 	return level_loader
 # ------------------------------------------------------------
 
+
+
+#
+func _connect_signal_bus() -> void:
+	if Engine.is_editor_hint():
+		return
+	if not is_instance_valid(SignalBus):
+		return
+	if SignalBus.has_signal("current_player_changed"):
+		SignalBus.current_player_changed.connect(_on_current_player_changed)
+	if SignalBus.has_signal("current_player_moved"):
+		SignalBus.current_player_moved.connect(_on_current_player_moved)
+
 # This is V2 of the _ready function, most notably we are using
 # lebvel_loader which "knows" how to find the map holder
 func _ready():
@@ -60,16 +75,7 @@ func _ready():
 	_snap_camera_to_current()
 
 
-#
-func _connect_signal_bus() -> void:
-	if Engine.is_editor_hint():
-		return
-	if not is_instance_valid(SignalBus):
-		return
-	if SignalBus.has_signal("current_player_changed"):
-		SignalBus.current_player_changed.connect(_on_current_player_changed)
-	if SignalBus.has_signal("current_player_moved"):
-		SignalBus.current_player_moved.connect(_on_current_player_moved)
+
 
 func _exit_tree():
 	if Engine.is_editor_hint():
@@ -91,12 +97,12 @@ func _select_player(new_index: int) -> void:
 	var wrapped_index := posmod(new_index, entity_ctl.get_entity_count())
 	# Turn off previous only if changing index
 	if wrapped_index != _current_party_member_idx:
-		var previous_player: Entity = entity_ctl.get_entity_by_index(_current_party_member_idx)
+		var previous_player: Node2D = entity_ctl.get_entity_by_index(_current_party_member_idx)
 		if previous_player:
 			previous_player.current_player = false
 	# Turn on new
 	_current_party_member_idx = wrapped_index
-	var new_player: Entity = entity_ctl.get_entity_by_index(_current_party_member_idx)
+	var new_player: Node2D = entity_ctl.get_entity_by_index(_current_party_member_idx)
 	if new_player:
 		entity_ctl.set_current_player(new_player)
 		# Update focus follower, if present
@@ -133,6 +139,11 @@ func _spawn_party_if_missing() -> void:
 		var eignh_instance = EIGNH_SCENE.instantiate()
 		eignh_instance.name = "Eignh"
 		entity_ctl.add_child(eignh_instance)
+
+	if entity_ctl.get_entity_by_name("Eignh_v2") == null:
+		var eignh_v2_instance = EIGNH_V2_SCENE.instantiate()
+		eignh_v2_instance.name = "Eignh_v2"
+		entity_ctl.add_child(eignh_v2_instance)
 
 	if entity_ctl.get_entity_by_name("Llewelyn") == null:
 		var llewelyn_instance = LLEWELYN_SCENE.instantiate()

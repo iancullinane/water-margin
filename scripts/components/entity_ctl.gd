@@ -11,7 +11,7 @@ class_name EntityCtl
 
 
 
-var entities: Array[Entity] = []
+var entities: Array[Node2D] = []
 
 func _ready():
 	load_entity_children()
@@ -19,22 +19,22 @@ func _ready():
 func load_entity_children():
 	entities.clear()
 	for child in get_children():
-		if child is Entity:
+		if child is Entity or child is Entity_V2:
 			entities.append(child)
 	print("Loaded %d entities" % [entities.size()])
 
-func get_entities() -> Array[Entity]:
+func get_entities() -> Array[Node2D]:
 	return entities
 
 func get_entity_count() -> int:
 	return entities.size()
 
-func get_entity_by_index(index: int) -> Entity:
+func get_entity_by_index(index: int) -> Node2D:
 	if index >= 0 and index < entities.size():
 		return entities[index]
 	return null
 
-func get_entity_by_name(entity_name: String) -> Entity:
+func get_entity_by_name(entity_name: String) -> Node2D:
 	for entity in entities:
 		if entity.stats and entity.stats.name == entity_name:
 			return entity
@@ -43,7 +43,7 @@ func get_entity_by_name(entity_name: String) -> Entity:
 	return null
 
 # Control methods
-func set_current_player(entity: Entity):
+func set_current_player(entity: Node2D):
 	if entity and entity in entities:
 		# Disable all others first
 		for e in entities:
@@ -63,7 +63,7 @@ func set_current_player_by_name(entity_name: String):
 	if entity:
 		set_current_player(entity)
 
-func get_current_player() -> Entity:
+func get_current_player() -> Node2D:
 	for entity in entities:
 		if entity.current_player:
 			return entity

@@ -12,6 +12,8 @@ var CELL_SIZE = GameConstants.CELL_SIZE
 @onready var name_label = $NameLabel
 @onready var animation_player = $AnimationPlayer
 
+var current_player: bool = false
+
 
 func _ready() -> void:
 	if entity_ctl == null:

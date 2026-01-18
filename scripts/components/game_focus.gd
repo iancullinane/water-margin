@@ -3,7 +3,7 @@ extends Node2D
 
 @export var use_mouse_focus: bool = true
 @export var attach_to_player: bool = false
-@export var player: Entity
+@export var player: Node2D
 
 var game_node: Node2D
 var last_hovered_coords: Vector2i = Vector2i(-999, -999)
@@ -16,7 +16,7 @@ func _process(_delta:float) -> void:
 		# Runtime behavior based on export variables
 		if use_mouse_focus:
 			handle_hover_data(get_global_mouse_position())
-		
+
 		if attach_to_player:
 			handle_hover_data(player.position)
 
@@ -27,7 +27,7 @@ func handle_hover_data(focus: Vector2):
 	if parent_node != null and parent_node.has_method("local_to_map") and parent_node.has_method("to_local"):
 		print("using local_to_map")
 
-	# Here we are using the base Node2D methods 
+	# Here we are using the base Node2D methods
 	if parent_node != null and parent_node.has_method("local_to_map") and parent_node.has_method("to_local"):
 		var local_pos: Vector2 = parent_node.to_local(focus)
 		tile_coords = parent_node.local_to_map(local_pos)
