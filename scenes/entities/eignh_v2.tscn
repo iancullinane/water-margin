@@ -1,12 +1,14 @@
-[gd_scene load_steps=20 format=3 uid="uid://dhgpwfrgakd3g"]
+[gd_scene load_steps=19 format=3 uid="uid://tlvrdn23vnkm"]
 
-[ext_resource type="Script" uid="uid://bhxcbwl21g0jh" path="res://scripts/entities/entity_v2.gd" id="1_gpy3h"]
-[ext_resource type="FontFile" uid="uid://bdhd2oo2h2dl2" path="res://assets/fonts/RedAlert.ttf" id="2_b11w7"]
-[ext_resource type="Resource" uid="uid://c1m7jrkgxy1t5" path="res://data/entities/BaseEntity.tres" id="2_uhh82"]
-[ext_resource type="Texture2D" uid="uid://d3xb1rouqdqrr" path="res://assets/cute_fantasy/Swordman.png" id="4_gpy3h"]
+[ext_resource type="Script" uid="uid://bhxcbwl21g0jh" path="res://scripts/entities/entity_v2.gd" id="1_28h0q"]
+[ext_resource type="Resource" uid="uid://c1m7jrkgxy1t5" path="res://data/entities/BaseEntity.tres" id="2_8qpkr"]
+[ext_resource type="Texture2D" uid="uid://d3xb1rouqdqrr" path="res://assets/cute_fantasy/Swordman.png" id="3_cpyq2"]
+[ext_resource type="FontFile" uid="uid://bdhd2oo2h2dl2" path="res://assets/fonts/RedAlert.ttf" id="4_1e5ww"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_uhh82"]
-atlas = ExtResource("4_gpy3h")
+atlas = ExtResource("3_cpyq2")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_28h0q"]
 
 [sub_resource type="Animation" id="Animation_uhh82"]
 length = 0.001
@@ -199,27 +201,31 @@ _data = {
 &"walk_up": SubResource("Animation_to0pd")
 }
 
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_gpy3h"]
-
-[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_uhh82"]
-nodes/output/position = Vector2(560, 110)
-nodes/MoveStateMachine/node = SubResource("AnimationNodeStateMachine_gpy3h")
-nodes/MoveStateMachine/position = Vector2(240, 70)
-node_connections = [&"output", 0, &"MoveStateMachine"]
-
 [sub_resource type="LabelSettings" id="LabelSettings_k0aba"]
-font = ExtResource("2_b11w7")
+font = ExtResource("4_1e5ww")
 font_size = 14
 outline_size = 4
 outline_color = Color(0.0943044, 0.0943044, 0.0943044, 1)
 
 [node name="Entity" type="Node2D"]
-script = ExtResource("1_gpy3h")
-stats = ExtResource("2_uhh82")
+script = ExtResource("1_28h0q")
+stats = ExtResource("2_8qpkr")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(7, 8)
+animation = &""
+autoplay = "down_idle"
 
 [node name="KnightArmor" type="Sprite2D" parent="."]
 position = Vector2(8, 8)
 texture = SubResource("AtlasTexture_uhh82")
+hframes = 6
+vframes = 13
+
+[node name="OtherArmor" type="Sprite2D" parent="."]
+position = Vector2(8, 8)
+texture = SubResource("AtlasTexture_28h0q")
 hframes = 6
 vframes = 13
 
@@ -228,16 +234,12 @@ libraries = {
 &"": SubResource("AnimationLibrary_uhh82")
 }
 
-[node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource("AnimationNodeBlendTree_uhh82")
-anim_player = NodePath("../AnimationPlayer")
-
 [node name="NameLabel" type="Label" parent="."]
 offset_left = -23.0
 offset_top = 28.0
 offset_right = 39.0
 offset_bottom = 43.0
-text = "Cerah"
+text = "Eignh"
 label_settings = SubResource("LabelSettings_k0aba")
 horizontal_alignment = 1
 vertical_alignment = 1
