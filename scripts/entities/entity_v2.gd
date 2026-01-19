@@ -8,7 +8,7 @@ class_name Entity_V2
 
 var CELL_SIZE = GameConstants.CELL_SIZE
 
-@onready var sprite = $AnimatedSprite2D
+
 @onready var name_label = $NameLabel
 @onready var animation_player = $AnimationPlayer
 
@@ -50,14 +50,14 @@ func _move(dir: String) -> void:
 	# if not _can_move_to(target_pos):
 	# 	return
 
-	if dir == "up":
-		sprite.animation = "up_idle"
-	elif dir == "down":
-		sprite.animation = "down_idle"
-	elif dir == "left":
-		sprite.animation = "left_idle"
-	elif dir == "right":
-		sprite.animation = "right_idle"
+	# if dir == "up":
+	# 	sprite.animation = "up_idle"
+	# elif dir == "down":
+	# 	sprite.animation = "down_idle"
+	# elif dir == "left":
+	# 	sprite.animation = "left_idle"
+	# elif dir == "right":
+	# 	sprite.animation = "right_idle"
 
 	position = target_pos
 

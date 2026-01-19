@@ -51,6 +51,7 @@ func set_current_player(entity: Node2D):
 		# Enable the selected one
 		entity.current_player = true
 		# Emit signal for camera tracking
+		# TODO make entity_v2 and entity comparable
 		SignalBus.current_player_changed.emit(entity)
 
 func set_current_player_by_index(index: int):
