@@ -11,6 +11,7 @@ func is_entity():
 @onready var animation_player = $AnimationPlayer
 
 var CELL_SIZE = GameConstants.CELL_SIZE
+const DIRECTIONS = ["up", "down", "left", "right"]
 
 # Player movement variables
 # ========================
@@ -31,6 +32,11 @@ var _move_state := {
 	"right": {"held": false, "time": -1.0, "next_emit": 0.0}
 }
 
+# Smooth movement variables
+var target_position: Vector2 = Vector2.ZERO
+var is_moving: bool = false
+var move_speed: float = 150.0  # Pixels per second
+
 # ===========================================
 
 
@@ -42,10 +48,12 @@ func _ready() -> void:
 	if entity_ctl == null:
 		entity_ctl = get_parent()
 	animation_player.play("idle_down")
+	target_position = position  # Initialize to current position
 
 func _physics_process(_delta: float) -> void:
 	get_input()
 	_process_held_movement(_delta)
+	_process_smooth_movement(_delta)
 
 
 func set_controllable(value: bool) -> void:
@@ -60,43 +68,33 @@ func get_input():
 		return
 
 	# Manage press/release transitions
-	# TODO this can probably be simpler, they are already
-	# facing the correct direction
-	if Input.is_action_just_pressed("world_up"):
-		_on_press_dir("up")
-	if Input.is_action_just_released("world_up"):
-		_on_release_dir("up")
-
-	if Input.is_action_just_pressed("world_down"):
-		_on_press_dir("down")
-	if Input.is_action_just_released("world_down"):
-		_on_release_dir("down")
-
-	if Input.is_action_just_pressed("world_left"):
-		_on_press_dir("left")
-	if Input.is_action_just_released("world_left"):
-		_on_release_dir("left")
-
-	if Input.is_action_just_pressed("world_right"):
-		_on_press_dir("right")
-	if Input.is_action_just_released("world_right"):
-		_on_release_dir("right")
+	for dir in DIRECTIONS:
+		var action = "world_" + dir
+		if Input.is_action_just_pressed(action):
+			_on_press_dir(dir)
+		elif Input.is_action_just_released(action):
+			_on_release_dir(dir)
 
 
 
 func _move(dir: String) -> void:
-	var target_pos := position
-	match dir:
-		"up": target_pos.y -= CELL_SIZE
-		"down": target_pos.y += CELL_SIZE
-		"left": target_pos.x -= CELL_SIZE
-		"right": target_pos.x += CELL_SIZE
-
-	if not _can_move_to(target_pos):
+	# Don't start new move if already moving
+	if is_moving:
 		return
 
-	# Actually move!
-	position = target_pos
+	var new_target := position
+	match dir:
+		"up": new_target.y -= CELL_SIZE
+		"down": new_target.y += CELL_SIZE
+		"left": new_target.x -= CELL_SIZE
+		"right": new_target.x += CELL_SIZE
+
+	if not _can_move_to(new_target):
+		return
+
+	# Set target and start moving
+	target_position = new_target
+	is_moving = true
 
 	if current_player:
 		SignalBus.current_player_moved.emit(self)
@@ -124,6 +122,15 @@ func _process_held_movement(delta: float) -> void:
 			if state["time"] >= state["next_emit"]:
 				_move(dir)
 				state["next_emit"] = state["time"] + repeat_interval
+
+func _process_smooth_movement(delta: float) -> void:
+	if not is_moving:
+		return
+
+	position = position.move_toward(target_position, move_speed * delta)
+	if position.distance_to(target_position) < 0.5:
+		position = target_position
+		is_moving = false
 
 func _can_move_to(target_pos: Vector2) -> bool:
 	var game_map := _get_current_map()
