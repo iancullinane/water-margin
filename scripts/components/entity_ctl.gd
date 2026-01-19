@@ -19,7 +19,8 @@ func _ready():
 func load_entity_children():
 	entities.clear()
 	for child in get_children():
-		if child is Entity or child is Entity_V2:
+		# TODO When they are all one class remove this
+		if child is Entity or child is Entity_V2 or child is IEntity:
 			entities.append(child)
 	print("Loaded %d entities" % [entities.size()])
 

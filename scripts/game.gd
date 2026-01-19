@@ -116,11 +116,11 @@ func _select_player(new_index: int) -> void:
 
 
 # Signal handlers for camera movement
-func _on_current_player_changed(entity: Entity):
+func _on_current_player_changed(entity: Node2D):
 	if entity:
 		camera_ctl.position = entity.position
 
-func _on_current_player_moved(entity: Entity):
+func _on_current_player_moved(entity: Node2D):
 	if entity:
 		camera_ctl.position = entity.position
 
@@ -158,7 +158,7 @@ func _spawn_party_if_missing() -> void:
 func _snap_camera_to_current() -> void:
 	if camera_ctl == null:
 		return
-	var current: Entity = entity_ctl.get_current_player()
+	var current: Node2D = entity_ctl.get_current_player()
 	if current:
 		camera_ctl.position_smoothing_enabled = false
 		camera_ctl.position = current.position

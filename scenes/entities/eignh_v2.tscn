@@ -2,9 +2,16 @@
 
 [ext_resource type="PackedScene" uid="uid://dhgpwfrgakd3g" path="res://scenes/entities/entity_2.tscn" id="1_vge8s"]
 
-[node name="Eignh_v2" instance=ExtResource("1_vge8s")]
+[node name="Eignh_v2" groups=["entities"] instance=ExtResource("1_vge8s")]
+
+[node name="KnightArmor" parent="." index="0"]
+position = Vector2(9, -2)
 
 [node name="NameLabel" parent="." index="3"]
+offset_left = -21.0
+offset_top = 15.0
+offset_right = 41.0
+offset_bottom = 66.0
 text = "Eignh
 
 "

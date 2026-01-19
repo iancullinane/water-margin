@@ -1,8 +1,7 @@
-[gd_scene load_steps=20 format=3 uid="uid://dhgpwfrgakd3g"]
+[gd_scene load_steps=19 format=3 uid="uid://dhgpwfrgakd3g"]
 
-[ext_resource type="Script" uid="uid://bhxcbwl21g0jh" path="res://scripts/entities/entity_v2.gd" id="1_gpy3h"]
+[ext_resource type="Script" uid="uid://b516obwi3v45s" path="res://scripts/entities/entity_interface.gd" id="1_b11w7"]
 [ext_resource type="FontFile" uid="uid://bdhd2oo2h2dl2" path="res://assets/fonts/RedAlert.ttf" id="2_b11w7"]
-[ext_resource type="Resource" uid="uid://c1m7jrkgxy1t5" path="res://data/entities/BaseEntity.tres" id="2_uhh82"]
 [ext_resource type="Texture2D" uid="uid://d3xb1rouqdqrr" path="res://assets/cute_fantasy/Swordman.png" id="4_gpy3h"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_uhh82"]
@@ -214,8 +213,7 @@ outline_size = 4
 outline_color = Color(0.0943044, 0.0943044, 0.0943044, 1)
 
 [node name="Entity" type="Node2D"]
-script = ExtResource("1_gpy3h")
-stats = ExtResource("2_uhh82")
+script = ExtResource("1_b11w7")
 
 [node name="KnightArmor" type="Sprite2D" parent="."]
 position = Vector2(8, 8)
