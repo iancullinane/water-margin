@@ -24,9 +24,12 @@ var repeat_initial_delay: float = 0.20 # this is how long to wait before repeati
 var repeat_interval: float = 0.33 # this adjusts speed when holding down a direction
 
 # Internal held-state tracking
-var _held := {"up": false, "down": false, "left": false, "right": false}
-var _held_time := {"up": -1.0, "down": -1.0, "left": -1.0, "right": -1.0}
-var _next_emit_at := {"up": 0.0, "down": 0.0, "left": 0.0, "right": 0.0}
+var _move_state := {
+	"up": {"held": false, "time": -1.0, "next_emit": 0.0},
+	"down": {"held": false, "time": -1.0, "next_emit": 0.0},
+	"left": {"held": false, "time": -1.0, "next_emit": 0.0},
+	"right": {"held": false, "time": -1.0, "next_emit": 0.0}
+}
 
 # ===========================================
 
@@ -42,6 +45,7 @@ func _ready() -> void:
 
 func _physics_process(_delta: float) -> void:
 	get_input()
+	_process_held_movement(_delta)
 
 
 func set_controllable(value: bool) -> void:
@@ -82,32 +86,44 @@ func get_input():
 
 func _move(dir: String) -> void:
 	var target_pos := position
-
-	if dir == "up":
-		target_pos.y -= CELL_SIZE
-	elif dir == "down":
-		target_pos.y += CELL_SIZE
-	elif dir == "left":
-		target_pos.x -= CELL_SIZE
-	elif dir == "right":
-		target_pos.x += CELL_SIZE
+	match dir:
+		"up": target_pos.y -= CELL_SIZE
+		"down": target_pos.y += CELL_SIZE
+		"left": target_pos.x -= CELL_SIZE
+		"right": target_pos.x += CELL_SIZE
 
 	if not _can_move_to(target_pos):
 		return
 
+	# Actually move!
 	position = target_pos
+
+	if current_player:
+		SignalBus.current_player_moved.emit(self)
 
 
 func _on_press_dir(dir: String) -> void:
-	_held[dir] = true
-	_held_time[dir] = 0.0
+	_move_state[dir]["held"] = true
+	_move_state[dir]["time"] = 0.0
 	_move(dir) # immediate first step
-	_next_emit_at[dir] = repeat_initial_delay
+	_move_state[dir]["next_emit"] = repeat_initial_delay
 
 func _on_release_dir(dir: String) -> void:
-	_held[dir] = false
-	_held_time[dir] = -1.0
-	_next_emit_at[dir] = 0.0
+	_move_state[dir]["held"] = false
+	_move_state[dir]["time"] = -1.0
+	_move_state[dir]["next_emit"] = 0.0
+
+func _process_held_movement(delta: float) -> void:
+	if not current_player:
+		return
+
+	for dir in ["up", "down", "left", "right"]:
+		var state = _move_state[dir]
+		if state["held"] and state["time"] >= 0:
+			state["time"] += delta
+			if state["time"] >= state["next_emit"]:
+				_move(dir)
+				state["next_emit"] = state["time"] + repeat_interval
 
 func _can_move_to(target_pos: Vector2) -> bool:
 	var game_map := _get_current_map()
