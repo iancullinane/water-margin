@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=10 format=3 uid="uid://dyxa0fbg0s5eo"]
+[gd_resource type="SpriteFrames" format=3 uid="uid://dyxa0fbg0s5eo"]
 
 [ext_resource type="Texture2D" uid="uid://jbsyakmxrno" path="res://assets/16x16/Animals/Chick.png" id="1_jig80"]
 

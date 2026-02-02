@@ -40,6 +40,7 @@ var move_speed: float = 150.0  # Pixels per second
 # ===========================================
 
 
+
 func _ready() -> void:
 	add_to_group("entities")
 	print("Entity ready:", name, stats)
@@ -54,6 +55,12 @@ func _physics_process(_delta: float) -> void:
 	get_input()
 	_process_held_movement(_delta)
 	_process_smooth_movement(_delta)
+	set_animation()
+
+func set_animation():
+	$AnimationTree.set("parameters/MoveStateMachine/idle/blend_position", direction)
+
+# ===========================================
 
 
 func set_controllable(value: bool) -> void:
@@ -63,7 +70,7 @@ func set_controllable(value: bool) -> void:
 
 
 func get_input():
-	direction = Input.get_vector("left", "right", "up","down")
+	direction = Input.get_vector("world_left", "world_right", "wolrd_up","world_down")
 	if !current_player:
 		return
 

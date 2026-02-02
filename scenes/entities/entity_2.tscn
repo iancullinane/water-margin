@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://dhgpwfrgakd3g"]
+[gd_scene format=3 uid="uid://dhgpwfrgakd3g"]
 
 [ext_resource type="Script" uid="uid://b516obwi3v45s" path="res://scripts/entities/entity_interface.gd" id="1_b11w7"]
 [ext_resource type="FontFile" uid="uid://bdhd2oo2h2dl2" path="res://assets/fonts/RedAlert.ttf" id="2_b11w7"]
@@ -94,6 +94,42 @@ tracks/0/keys = {
 "values": [0, 1, 2, 3, 4, 5]
 }
 
+[sub_resource type="Animation" id="Animation_b11w7"]
+resource_name = "idle_left"
+length = 1.2
+loop_mode = 1
+step = 24.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("KnightArmor:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.20000005, 0.39999998, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [6, 7, 8, 9, 10, 11]
+}
+
+[sub_resource type="Animation" id="Animation_xdhv6"]
+resource_name = "idle_right"
+length = 1.2
+loop_mode = 1
+step = 24.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("KnightArmor:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.20000005, 0.39999998, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [6, 7, 8, 9, 10, 11]
+}
+
 [sub_resource type="Animation" id="Animation_21wfu"]
 resource_name = "side_idle_knight"
 length = 1.2
@@ -148,6 +184,42 @@ tracks/0/keys = {
 "values": [18, 19, 20, 21, 22, 23]
 }
 
+[sub_resource type="Animation" id="Animation_xbu3c"]
+resource_name = "walk_left"
+length = 1.2
+loop_mode = 1
+step = 24.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("KnightArmor:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.20000005, 0.39999998, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [24, 25, 26, 27, 28, 29]
+}
+
+[sub_resource type="Animation" id="Animation_lpb5c"]
+resource_name = "walk_right"
+length = 1.2
+loop_mode = 1
+step = 24.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("KnightArmor:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.20000005, 0.39999998, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [24, 25, 26, 27, 28, 29]
+}
+
 [sub_resource type="Animation" id="Animation_fefel"]
 resource_name = "walk_side"
 length = 1.2
@@ -191,14 +263,48 @@ _data = {
 &"attack_side": SubResource("Animation_o2056"),
 &"attack_up": SubResource("Animation_4jkqd"),
 &"idle_down": SubResource("Animation_gpy3h"),
+&"idle_left": SubResource("Animation_b11w7"),
+&"idle_right": SubResource("Animation_xdhv6"),
 &"idle_side": SubResource("Animation_21wfu"),
 &"idle_up": SubResource("Animation_1e50j"),
 &"walk_down": SubResource("Animation_skupm"),
+&"walk_left": SubResource("Animation_xbu3c"),
+&"walk_right": SubResource("Animation_lpb5c"),
 &"walk_side": SubResource("Animation_fefel"),
 &"walk_up": SubResource("Animation_to0pd")
 }
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_b11w7"]
+animation = &"idle_down"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_gpy3h"]
+animation = &"idle_right"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_uhh82"]
+animation = &"idle_up"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_21wfu"]
+animation = &"idle_left"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_gpy3h"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_b11w7")
+blend_point_0/pos = Vector2(0, 1)
+blend_point_1/node = SubResource("AnimationNodeAnimation_gpy3h")
+blend_point_1/pos = Vector2(1, 0)
+blend_point_2/node = SubResource("AnimationNodeAnimation_uhh82")
+blend_point_2/pos = Vector2(0, -1)
+blend_point_3/node = SubResource("AnimationNodeAnimation_21wfu")
+blend_point_3/pos = Vector2(-1, 0)
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_b11w7"]
+advance_mode = 2
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_gpy3h"]
+states/Start/position = Vector2(281, 100)
+states/idle/node = SubResource("AnimationNodeBlendSpace2D_gpy3h")
+states/idle/position = Vector2(486.5, 94.5)
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_b11w7")]
+graph_offset = Vector2(173, -38)
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_uhh82"]
 nodes/output/position = Vector2(560, 110)
@@ -212,25 +318,24 @@ font_size = 14
 outline_size = 4
 outline_color = Color(0.0943044, 0.0943044, 0.0943044, 1)
 
-[node name="Entity" type="Node2D"]
+[node name="Entity" type="Node2D" unique_id=223740179]
 script = ExtResource("1_b11w7")
 
-[node name="KnightArmor" type="Sprite2D" parent="."]
+[node name="KnightArmor" type="Sprite2D" parent="." unique_id=170365915]
 position = Vector2(8, 8)
 texture = SubResource("AtlasTexture_uhh82")
 hframes = 6
 vframes = 13
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_uhh82")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=366401781]
+libraries/ = SubResource("AnimationLibrary_uhh82")
 
-[node name="AnimationTree" type="AnimationTree" parent="."]
+[node name="AnimationTree" type="AnimationTree" parent="." unique_id=696091041]
 tree_root = SubResource("AnimationNodeBlendTree_uhh82")
 anim_player = NodePath("../AnimationPlayer")
+parameters/MoveStateMachine/idle/blend_position = Vector2(-0.005410254, 0.98428285)
 
-[node name="NameLabel" type="Label" parent="."]
+[node name="NameLabel" type="Label" parent="." unique_id=715073483]
 offset_left = -23.0
 offset_top = 28.0
 offset_right = 39.0
