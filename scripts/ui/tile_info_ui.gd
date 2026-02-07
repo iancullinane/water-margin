@@ -23,7 +23,7 @@ func processUI(event_data: UiEventData):
 		hovered_pos.text = "X: %s, Y: %s" % [event_data.coordinates.x, event_data.coordinates.y]
 		if event_data.tile_data:
 			hovered_pos.text += "\nTile Data: %s" % [event_data.tile_data.description]
-		
+
 		var game_map := _get_current_map()
 		if game_map:
 			var tile_data := game_map.get_tile_data_at(event_data.coordinates)
@@ -33,7 +33,7 @@ func processUI(event_data: UiEventData):
 			else:
 				tile_flavor.visible = false
 
-func _on_current_player_moved(entity: Entity) -> void:
+func _on_current_player_moved(entity: IEntity) -> void:
 	if entity:
 		current_player_position = entity.position
 		_update_player_position_display()

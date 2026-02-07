@@ -9,11 +9,13 @@ enum EntityType {
 
 var current_player: IEntity
 
-#
-# Map helpers
+# The three kinds of entities are stored as children
+# of parent nodes
 @onready var party: Node2D = $Party
 @onready var enemies: Node2D = $Enemies
 @onready var npcs: Node2D = $NPCs
+
+
 
 func add_entity(type: EntityType, entity: IEntity) -> void:
 	var container := _get_container(type)
@@ -21,12 +23,8 @@ func add_entity(type: EntityType, entity: IEntity) -> void:
 		container.add_child(entity)
 
 func add_party_member(entity: IEntity) -> void:
-
 	var party_container = _get_container(EntityType.PARTY)
-
-	logging.log("player party add %s" % entity.name)
 	if party_container.get_child_count() == 0:
-		logging.log("player party empty")
 		current_player = entity
 		entity.current_player = true
 
@@ -51,29 +49,15 @@ func _get_container(type: EntityType) -> Node2D:
 			return npcs
 	return null
 
-# -------
-
-
-
-
-var entities: Array[Node2D] = []
-
-# func _ready():
-# 	load_entity_children()
-
-# func load_entity_children():
-# 	entities.clear()
-# 	for child in get_children():
-# 		# TODO When they are all one class remove this
-# 		if child is Entity or child is Entity_V2 or child is IEntity:
-# 			entities.append(child)
-# 	print("Loaded %d entities" % [entities.size()])
-
-func get_entities() -> Array[Node2D]:
-	return entities
-
-func get_entity_count() -> int:
-	return entities.size()
+func get_all_entities() -> Array[Node2D]:
+	var result: Array[Node2D] = []
+	for entity in get_entity_group(EntityType.PARTY):
+		result.append(entity)
+	for entity in get_entity_group(EntityType.ENEMY):
+		result.append(entity)
+	for entity in get_entity_group(EntityType.NPC):
+		result.append(entity)
+	return result
 
 func get_entity_by_index(type: EntityType, index: int) -> IEntity:
 	var group := get_entity_group(type)
@@ -82,7 +66,7 @@ func get_entity_by_index(type: EntityType, index: int) -> IEntity:
 	return null
 
 func get_entity_by_name(entity_name: String) -> Node2D:
-	for entity in entities:
+	for entity in get_entity_group(EntityType.PARTY):
 		if entity.stats and entity.stats.name == entity_name:
 			return entity
 		elif entity.name == entity_name:
