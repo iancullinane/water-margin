@@ -20,17 +20,14 @@ const STATE_PATH := "user://party_state.tres"
 
 # These are raw character scenes, this is annoying to hardcode
 # but it means they can be edited in the editor which is ideal
-const CERAH_SCENE := preload("res://scenes/entities/cerah.tscn")
-const EIGNH_SCENE := preload("res://scenes/entities/eignh.tscn")
-const LLEWELYN_SCENE := preload("res://scenes/entities/llewelyn.tscn")
-
 const EIGNH_V2_SCENE := preload("res://scenes/entities/eignh_v2.tscn")
+const LLEW_V2_SCENE := preload("res://scenes/entities/llew_v2.tscn")
 
 # controllers
 # -----------
 @onready var entity_ctl: EntityCtl = $EntityCtl
 @onready var map_ctl: MapCtl = $MapCtl
-@onready var camera_ctl: Camera2D = $CameraCtl
+@onready var camera: Camera2D = $Camera
 @onready var level_loader = $LevelLoader
 
 
@@ -42,7 +39,7 @@ func get_map_ctl() -> MapCtl:
 	return map_ctl
 
 func get_camera_ctl() -> Camera2D:
-	return camera_ctl
+	return camera
 
 func get_level_loader():
 	return level_loader
@@ -121,56 +118,41 @@ func _select_player(new_index: int):
 # Signal handlers for camera movement
 func _on_current_player_changed(entity: Node2D):
 	if entity:
-		camera_ctl.position = entity.position
+		camera.position = entity.position
 
 func _on_current_player_moved(entity: Node2D):
 	if entity:
-		camera_ctl.position = entity.position
+		camera.position = entity.position
 
 
 func _spawn_party_if_missing() -> void:
 	if entity_ctl == null:
 		return
 
-	# # Avoid duplicates across editor/runtime reloads
-	# if entity_ctl.get_entity_by_name("Cerah") == null:
-	# 	var cerah_instance = CERAH_SCENE.instantiate()
-	# 	cerah_instance.name = "Cerah"
-	# 	entity_ctl.add_child(cerah_instance)
 
-	# if entity_ctl.get_entity_by_name("Eignh") == null:
-	# 	var eignh_instance = EIGNH_SCENE.instantiate()
-	# 	eignh_instance.name = "Eignh"
-	# 	entity_ctl.add_child(eignh_instance)
-
-	# if entity_ctl.get_entity_by_name("Llewelyn") == null:
-	# 	var llewelyn_instance = LLEWELYN_SCENE.instantiate()
-	# 	llewelyn_instance.name = "Llewelyn"
-	# 	entity_ctl.add_child(llewelyn_instance)
 
 	if entity_ctl.get_entity_by_name("Eignh_v2") == null:
 		var eignh_v2_instance = EIGNH_V2_SCENE.instantiate()
 		eignh_v2_instance.name = "Eignh_v2"
 		entity_ctl.add_party_member(eignh_v2_instance)
 		entity_ctl.get_current_player()
-		# entity_ctl.add_child(eignh_v2_instance)
 
+	if entity_ctl.get_entity_by_name("Llew_v2") == null:
+		var llew_v2_instance = LLEW_V2_SCENE.instantiate()
+		llew_v2_instance.name = "Llew_v2"
+		entity_ctl.add_party_member(llew_v2_instance)
+		entity_ctl.get_current_player()
 
-	# Refresh entity list and set initial player
-	# entity_ctl.load_entity_children()
-	# if entity_ctl.get_entity_count() > 0:
-	# 	# set initial player
-	# 	entity_ctl.set_current_player_by_index(0)
 
 func _snap_camera_to_current() -> void:
-	if camera_ctl == null:
+	if camera == null:
 		return
 	var current: Node2D = entity_ctl.current_player
 	if current:
-		camera_ctl.position_smoothing_enabled = false
-		camera_ctl.position = current.position
-		camera_ctl.reset_smoothing()
-		camera_ctl.position_smoothing_enabled = true
+		camera.position_smoothing_enabled = false
+		camera.position = current.position
+		camera.reset_smoothing()
+		camera.position_smoothing_enabled = true
 
 
 func _load_party_state() -> void:
@@ -186,7 +168,7 @@ func _load_party_state() -> void:
 
 func _save_party_state() -> void:
 	var state := PartyState.new()
-	for e in entity_ctl.get_entities():
+	for e in entity_ctl.get_all_entities():
 		var m := PartyMemberState.new()
 		m.name = e.name
 		m.position = e.position

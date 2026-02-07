@@ -11,7 +11,7 @@ func set_entity_name(value: String):
 		name = value
 
 
-@export var animation_resource: SpriteFrames
+# @export var animation_resource: SpriteFrames
 @export var entity_type_resource: EntityTypeResource
 
 @export var strength: int = 10

@@ -15,7 +15,8 @@ var current_player: IEntity
 @onready var enemies: Node2D = $Enemies
 @onready var npcs: Node2D = $NPCs
 
-
+func get_current_player() -> IEntity:
+	return current_player
 
 func add_entity(type: EntityType, entity: IEntity) -> void:
 	var container := _get_container(type)
@@ -94,13 +95,6 @@ func set_current_player_by_index(index: int):
 # 	var entity = get_entity_by_name(entity_name)
 # 	if entity:
 # 		set_current_player(entity)
-
-func get_current_player() -> IEntity:
-	for entity in get_entity_group(EntityType.PARTY):
-		if entity.current_player:
-			return entity
-	return null
-
 
 
 

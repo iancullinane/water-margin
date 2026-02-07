@@ -71,10 +71,10 @@ func set_animation():
 	# Flip sprite when facing left
 	if anim_direction.x < 0:
 		facing_left = true
-		$KnightArmor.flip_h = true
+		$Sprite.flip_h = true
 	elif anim_direction.x > 0:
 		facing_left = false
-		$KnightArmor.flip_h = false
+		$Sprite.flip_h = false
 
 # ===========================================
 
@@ -86,13 +86,13 @@ func set_controllable(value: bool) -> void:
 
 
 func get_input():
-	direction = Input.get_vector("world_left", "world_right", "world_up","world_down")
+	direction = Input.get_vector("player_left", "player_right", "player_up","player_down")
 	if !current_player:
 		return
 
 	# Manage press/release transitions
 	for dir in DIRECTIONS:
-		var action = "world_" + dir
+		var action = "player_" + dir
 		if Input.is_action_just_pressed(action):
 			_on_press_dir(dir)
 

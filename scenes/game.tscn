@@ -9,11 +9,13 @@
 [ext_resource type="Script" uid="uid://d32hlclfr5hjr" path="res://scripts/objects/map_ctl.gd" id="5_ir15t"]
 [ext_resource type="Shader" uid="uid://86ous1s4fi33" path="res://assets/textures/shaders/rain.gdshader" id="5_kvuet"]
 [ext_resource type="PackedScene" uid="uid://uj5dstsb7niu" path="res://scenes/ui/table.tscn" id="6_r35vq"]
-[ext_resource type="Script" uid="uid://caojuxly3lla5" path="res://scripts/components/game_focus.gd" id="7_ylwj1"]
 [ext_resource type="Script" uid="uid://bv0d5tqp24dt1" path="res://scripts/components/entity_ctl.gd" id="8_7vf1r"]
+[ext_resource type="Texture2D" uid="uid://d3pkx2v63eny3" path="res://assets/textures/portraits/portrait4-4x.png" id="11_ca42v"]
 [ext_resource type="Theme" uid="uid://bk7x7vskffp0" path="res://resources/ui/main_theme.tres" id="11_kvpfn"]
 [ext_resource type="Script" uid="uid://cef3mierxqp5m" path="res://scenes/color_rect.gd" id="11_kvuet"]
+[ext_resource type="Script" uid="uid://bnodwmmbhkusp" path="res://scripts/components/hover_focus.gd" id="13_ir15t"]
 [ext_resource type="Script" uid="uid://bw6xpo1rcmkxl" path="res://scripts/ui/tile_info_ui.gd" id="14_1ppb2"]
+[ext_resource type="Script" uid="uid://c2jmd2hji74r5" path="res://scripts/components/input_ctl.gd" id="15_ir15t"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kvuet"]
 shader = ExtResource("5_kvuet")
@@ -46,49 +48,6 @@ map_data = ExtResource("4_trtic")
 [node name="MapCtl" type="Node2D" parent="." unique_id=1077499357]
 script = ExtResource("5_ir15t")
 
-[node name="Rain" type="ColorRect" parent="." unique_id=1712973031]
-modulate = Color(0.031565506, 0.12029398, 0.29539987, 0.47058824)
-material = SubResource("ShaderMaterial_kvuet")
-offset_left = -222.0
-offset_top = -141.0
-offset_right = 684.0
-offset_bottom = 629.0
-script = ExtResource("11_kvuet")
-
-[node name="CameraCtl" type="Camera2D" parent="." unique_id=2131179913]
-position = Vector2(192, 128)
-zoom = Vector2(4, 4)
-position_smoothing_enabled = true
-position_smoothing_speed = 2.0
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=638450498]
-stream = ExtResource("4_p3qcy")
-autoplay = true
-playback_type = 1
-
-[node name="DataInputController" type="Node2D" parent="." unique_id=1044847763]
-visible = false
-
-[node name="Control" parent="DataInputController" unique_id=1881395952 instance=ExtResource("5_dglt5")]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 445.0
-offset_top = -656.0
-offset_right = 1492.0
-offset_bottom = -378.0
-
-[node name="Control2" parent="DataInputController" unique_id=370090543 instance=ExtResource("6_r35vq")]
-offset_left = 544.0
-offset_top = -337.0
-offset_right = 1605.0
-offset_bottom = -66.0
-
-[node name="GameFocus" type="Node2D" parent="." unique_id=1255349716]
-script = ExtResource("7_ylwj1")
-
 [node name="EntityCtl" type="Node2D" parent="." unique_id=584335629]
 script = ExtResource("8_7vf1r")
 
@@ -97,6 +56,15 @@ script = ExtResource("8_7vf1r")
 [node name="Enemies" type="Node2D" parent="EntityCtl" unique_id=1623671633]
 
 [node name="NPCs" type="Node2D" parent="EntityCtl" unique_id=1208671556]
+
+[node name="Rain" type="ColorRect" parent="." unique_id=1712973031]
+modulate = Color(0.031565506, 0.12029398, 0.29539987, 0.47058824)
+material = SubResource("ShaderMaterial_kvuet")
+offset_left = -222.0
+offset_top = -141.0
+offset_right = 684.0
+offset_bottom = 629.0
+script = ExtResource("11_kvuet")
 
 [node name="TileInfoUi" type="CanvasLayer" parent="." unique_id=2054535385]
 script = ExtResource("14_1ppb2")
@@ -170,3 +138,69 @@ theme_override_constants/margin_bottom = 20
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 48
 text = "This is a description"
+
+[node name="Panel" type="Panel" parent="TileInfoUi" unique_id=162861369]
+offset_left = 6.0
+offset_top = 7.0
+offset_right = 88.0
+offset_bottom = 131.57692
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TileInfoUi/Panel" unique_id=1932032863]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="TileInfoUi/Panel/VBoxContainer" unique_id=2019956372]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.5
+
+[node name="TextureRect" type="TextureRect" parent="TileInfoUi/Panel/VBoxContainer/MarginContainer" unique_id=1065611473]
+layout_mode = 2
+texture = ExtResource("11_ca42v")
+expand_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="TileInfoUi/Panel/VBoxContainer" unique_id=474940688]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Camera" type="Camera2D" parent="." unique_id=2131179913]
+position = Vector2(192, 128)
+zoom = Vector2(2, 2)
+position_smoothing_enabled = true
+position_smoothing_speed = 2.0
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=638450498]
+stream = ExtResource("4_p3qcy")
+autoplay = true
+playback_type = 1
+
+[node name="DataInputController" type="Node2D" parent="." unique_id=1044847763]
+visible = false
+
+[node name="Control" parent="DataInputController" unique_id=1881395952 instance=ExtResource("5_dglt5")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 445.0
+offset_top = -656.0
+offset_right = 1492.0
+offset_bottom = -378.0
+
+[node name="Control2" parent="DataInputController" unique_id=370090543 instance=ExtResource("6_r35vq")]
+offset_left = 544.0
+offset_top = -337.0
+offset_right = 1605.0
+offset_bottom = -66.0
+
+[node name="HoverFocus" type="Node2D" parent="." unique_id=1255349716]
+script = ExtResource("13_ir15t")
+
+[node name="InputCtl" type="Node2D" parent="." unique_id=286666129]
+script = ExtResource("15_ir15t")
+pan_speed = 1600.0
