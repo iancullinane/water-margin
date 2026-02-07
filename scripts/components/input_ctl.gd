@@ -15,7 +15,7 @@ var _last_mouse_pos: Vector2 = Vector2.ZERO
 func _input(event: InputEvent) -> void:
 	# Middle mouse button drag to pan
 	if event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_MIDDLE:
+		if event.button_index == MOUSE_BUTTON_RIGHT:
 			if event.pressed:
 				_is_dragging = true
 				_last_mouse_pos = event.position

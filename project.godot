@@ -37,8 +37,8 @@ gdscript/warnings/unused_signal=0
 
 [display]
 
-window/size/viewport_width=3000
-window/size/viewport_height=2500
+window/size/viewport_width=1200
+window/size/viewport_height=800
 window/stretch/mode="viewport"
 window/stretch/aspect="expand"
 window/handheld/orientation=1
@@ -66,6 +66,15 @@ folder_colors={
 [global_group]
 
 entities=""
+
+[importer_defaults]
+
+texture_atlas={
+"atlas_file": "",
+"crop_to_region": false,
+"import_mode": 0,
+"trim_alpha_border_from_region": true
+}
 
 [input]
 

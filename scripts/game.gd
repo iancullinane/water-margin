@@ -22,6 +22,7 @@ const STATE_PATH := "user://party_state.tres"
 # but it means they can be edited in the editor which is ideal
 const EIGNH_V2_SCENE := preload("res://scenes/entities/eignh_v2.tscn")
 const LLEW_V2_SCENE := preload("res://scenes/entities/llew_v2.tscn")
+const ELLIETTE_V2_SCENE := preload("res://scenes/entities/elliette_v2.tscn")
 
 # controllers
 # -----------
@@ -130,6 +131,12 @@ func _spawn_party_if_missing() -> void:
 		return
 
 
+
+	if entity_ctl.get_entity_by_name("Elliette_v2") == null:
+		var elliette_v2_instance = ELLIETTE_V2_SCENE.instantiate()
+		elliette_v2_instance.name = "Elliette_v2"
+		entity_ctl.add_party_member(elliette_v2_instance)
+		entity_ctl.get_current_player()
 
 	if entity_ctl.get_entity_by_name("Eignh_v2") == null:
 		var eignh_v2_instance = EIGNH_V2_SCENE.instantiate()
