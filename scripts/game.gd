@@ -33,8 +33,10 @@ const EIGNH_V2_SCENE := preload("res://scenes/entities/eignh_v2.tscn")
 @onready var camera_ctl: Camera2D = $CameraCtl
 @onready var level_loader = $LevelLoader
 
-func get_entity_ctl() -> EntityCtl:
-	return entity_ctl
+
+# -----------------------------------------------------------
+
+const EntityType = EntityCtl.EntityType
 
 func get_map_ctl() -> MapCtl:
 	return map_ctl
@@ -83,7 +85,7 @@ func _exit_tree():
 	_save_party_state()
 
 func _unhandled_input(_event):
-	if entity_ctl.get_entity_count() == 0:
+	if entity_ctl.get_entity_group(EntityType.PARTY).size() == 0:
 		return
 	# Prioritize previous when both fire (e.g., Shift+Tab)
 	if Input.is_action_just_pressed("previous_character"):
@@ -91,18 +93,19 @@ func _unhandled_input(_event):
 	elif Input.is_action_just_pressed("next_character"):
 		_select_player(_current_party_member_idx + 1)
 
-func _select_player(new_index: int) -> void:
-	if entity_ctl.get_entity_count() == 0:
+func _select_player(new_index: int):
+	var player_group = entity_ctl.get_entity_group(EntityType.PARTY)
+	if player_group.size() == 0:
 		return
-	var wrapped_index := posmod(new_index, entity_ctl.get_entity_count())
+	var wrapped_index := posmod(new_index, player_group.size())
 	# Turn off previous only if changing index
 	if wrapped_index != _current_party_member_idx:
-		var previous_player: Node2D = entity_ctl.get_entity_by_index(_current_party_member_idx)
+		var previous_player: IEntity = entity_ctl.get_entity_by_index(EntityType.PARTY, _current_party_member_idx)
 		if previous_player:
 			previous_player.current_player = false
 	# Turn on new
 	_current_party_member_idx = wrapped_index
-	var new_player: Node2D = entity_ctl.get_entity_by_index(_current_party_member_idx)
+	var new_player: IEntity = entity_ctl.get_entity_by_index(EntityType.PARTY, _current_party_member_idx)
 	if new_player:
 		entity_ctl.set_current_player(new_player)
 		# Update focus follower, if present
@@ -129,41 +132,46 @@ func _spawn_party_if_missing() -> void:
 	if entity_ctl == null:
 		return
 
-	# Avoid duplicates across editor/runtime reloads
-	if entity_ctl.get_entity_by_name("Cerah") == null:
-		var cerah_instance = CERAH_SCENE.instantiate()
-		cerah_instance.name = "Cerah"
-		entity_ctl.add_child(cerah_instance)
+	# # Avoid duplicates across editor/runtime reloads
+	# if entity_ctl.get_entity_by_name("Cerah") == null:
+	# 	var cerah_instance = CERAH_SCENE.instantiate()
+	# 	cerah_instance.name = "Cerah"
+	# 	entity_ctl.add_child(cerah_instance)
 
-	if entity_ctl.get_entity_by_name("Eignh") == null:
-		var eignh_instance = EIGNH_SCENE.instantiate()
-		eignh_instance.name = "Eignh"
-		entity_ctl.add_child(eignh_instance)
+	# if entity_ctl.get_entity_by_name("Eignh") == null:
+	# 	var eignh_instance = EIGNH_SCENE.instantiate()
+	# 	eignh_instance.name = "Eignh"
+	# 	entity_ctl.add_child(eignh_instance)
+
+	# if entity_ctl.get_entity_by_name("Llewelyn") == null:
+	# 	var llewelyn_instance = LLEWELYN_SCENE.instantiate()
+	# 	llewelyn_instance.name = "Llewelyn"
+	# 	entity_ctl.add_child(llewelyn_instance)
 
 	if entity_ctl.get_entity_by_name("Eignh_v2") == null:
 		var eignh_v2_instance = EIGNH_V2_SCENE.instantiate()
 		eignh_v2_instance.name = "Eignh_v2"
-		entity_ctl.add_child(eignh_v2_instance)
+		entity_ctl.add_party_member(eignh_v2_instance)
+		entity_ctl.get_current_player()
+		# entity_ctl.add_child(eignh_v2_instance)
 
-	if entity_ctl.get_entity_by_name("Llewelyn") == null:
-		var llewelyn_instance = LLEWELYN_SCENE.instantiate()
-		llewelyn_instance.name = "Llewelyn"
-		entity_ctl.add_child(llewelyn_instance)
 
 	# Refresh entity list and set initial player
-	entity_ctl.load_entity_children()
-	if entity_ctl.get_entity_count() > 0:
-		entity_ctl.set_current_player_by_index(0)
+	# entity_ctl.load_entity_children()
+	# if entity_ctl.get_entity_count() > 0:
+	# 	# set initial player
+	# 	entity_ctl.set_current_player_by_index(0)
 
 func _snap_camera_to_current() -> void:
 	if camera_ctl == null:
 		return
-	var current: Node2D = entity_ctl.get_current_player()
+	var current: Node2D = entity_ctl.current_player
 	if current:
 		camera_ctl.position_smoothing_enabled = false
 		camera_ctl.position = current.position
 		camera_ctl.reset_smoothing()
 		camera_ctl.position_smoothing_enabled = true
+
 
 func _load_party_state() -> void:
 	if not ResourceLoader.exists(STATE_PATH):

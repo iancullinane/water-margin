@@ -6,7 +6,6 @@ func is_entity():
 
 
 @export var stats:EntityData
-@export var entity_ctl:EntityCtl
 @onready var name_label = $NameLabel
 @onready var animation_player = $AnimationPlayer
 
@@ -17,6 +16,7 @@ const DIRECTIONS = ["up", "down", "left", "right"]
 # ========================
 var current_player: bool = false
 var direction: Vector2
+var last_non_zero_direction: Vector2 = Vector2.DOWN  # Store last direction for persistence
 
 # Repeat configuration for held movement
 # Entities move only "square-by-square" so we keep track of this stuff
@@ -36,6 +36,7 @@ var _move_state := {
 var target_position: Vector2 = Vector2.ZERO
 var is_moving: bool = false
 var move_speed: float = 150.0  # Pixels per second
+var facing_left: bool = false  # Track if character is facing left for sprite flipping
 
 # ===========================================
 
@@ -46,19 +47,34 @@ func _ready() -> void:
 	print("Entity ready:", name, stats)
 	# if the EntityCtl was not set in editor
 	# it will expect the parent to be EntityCtl
-	if entity_ctl == null:
-		entity_ctl = get_parent()
-	animation_player.play("idle_down")
+	# animation_player.play("idle_down")
 	target_position = position  # Initialize to current position
 
 func _physics_process(_delta: float) -> void:
+
 	get_input()
 	_process_held_movement(_delta)
 	_process_smooth_movement(_delta)
 	set_animation()
 
 func set_animation():
-	$AnimationTree.set("parameters/MoveStateMachine/idle/blend_position", direction)
+	# Store last non-zero direction when moving
+	if direction.length() > 0:
+		last_non_zero_direction = direction
+
+	# Use last direction when not moving
+	var anim_direction = direction if direction.length() > 0 else last_non_zero_direction
+
+	# Set the blend position based on direction
+	$AnimationTree.set("parameters/MoveStateMachine/idle/blend_position", anim_direction)
+
+	# Flip sprite when facing left
+	if anim_direction.x < 0:
+		facing_left = true
+		$KnightArmor.flip_h = true
+	elif anim_direction.x > 0:
+		facing_left = false
+		$KnightArmor.flip_h = false
 
 # ===========================================
 
@@ -70,7 +86,7 @@ func set_controllable(value: bool) -> void:
 
 
 func get_input():
-	direction = Input.get_vector("world_left", "world_right", "wolrd_up","world_down")
+	direction = Input.get_vector("world_left", "world_right", "world_up","world_down")
 	if !current_player:
 		return
 
@@ -79,6 +95,14 @@ func get_input():
 		var action = "world_" + dir
 		if Input.is_action_just_pressed(action):
 			_on_press_dir(dir)
+
+			# Update last direction on key press
+			match dir:
+				"up": last_non_zero_direction = Vector2(0, -1)
+				"down": last_non_zero_direction = Vector2(0, 1)
+				"left": last_non_zero_direction = Vector2(-1, 0)
+				"right": last_non_zero_direction = Vector2(1, 0)
+
 		elif Input.is_action_just_released(action):
 			_on_release_dir(dir)
 
@@ -86,6 +110,7 @@ func get_input():
 
 func _move(dir: String) -> void:
 	# Don't start new move if already moving
+
 	if is_moving:
 		return
 

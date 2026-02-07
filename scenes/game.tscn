@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://cxckng8abu3t4"]
+[gd_scene format=3 uid="uid://cxckng8abu3t4"]
 
 [ext_resource type="Script" uid="uid://csb7w3cilijva" path="res://scripts/game.gd" id="1_dinhu"]
 [ext_resource type="Script" uid="uid://dgybabpokdv3q" path="res://scripts/utils/level_loader.gd" id="2_so0bb"]
@@ -35,18 +35,18 @@ shader_parameter/ripple_density_multiplier = 0.010000000475
 shader_parameter/ripple_spawn_chance_min = 0.0150000007125
 shader_parameter/ripple_spawn_chance_max = 0.7
 
-[node name="Game" type="Node2D"]
+[node name="Game" type="Node2D" unique_id=168804213]
 script = ExtResource("1_dinhu")
 
-[node name="LevelLoader" type="Node2D" parent="."]
+[node name="LevelLoader" type="Node2D" parent="." unique_id=706577614]
 script = ExtResource("2_so0bb")
 selected_map_scene = ExtResource("3_kvuet")
 map_data = ExtResource("4_trtic")
 
-[node name="MapCtl" type="Node2D" parent="."]
+[node name="MapCtl" type="Node2D" parent="." unique_id=1077499357]
 script = ExtResource("5_ir15t")
 
-[node name="Rain" type="ColorRect" parent="."]
+[node name="Rain" type="ColorRect" parent="." unique_id=1712973031]
 modulate = Color(0.031565506, 0.12029398, 0.29539987, 0.47058824)
 material = SubResource("ShaderMaterial_kvuet")
 offset_left = -222.0
@@ -55,21 +55,21 @@ offset_right = 684.0
 offset_bottom = 629.0
 script = ExtResource("11_kvuet")
 
-[node name="CameraCtl" type="Camera2D" parent="."]
+[node name="CameraCtl" type="Camera2D" parent="." unique_id=2131179913]
 position = Vector2(192, 128)
 zoom = Vector2(4, 4)
 position_smoothing_enabled = true
 position_smoothing_speed = 2.0
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=638450498]
 stream = ExtResource("4_p3qcy")
 autoplay = true
 playback_type = 1
 
-[node name="DataInputController" type="Node2D" parent="."]
+[node name="DataInputController" type="Node2D" parent="." unique_id=1044847763]
 visible = false
 
-[node name="Control" parent="DataInputController" instance=ExtResource("5_dglt5")]
+[node name="Control" parent="DataInputController" unique_id=1881395952 instance=ExtResource("5_dglt5")]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -80,24 +80,28 @@ offset_top = -656.0
 offset_right = 1492.0
 offset_bottom = -378.0
 
-[node name="Control2" parent="DataInputController" instance=ExtResource("6_r35vq")]
+[node name="Control2" parent="DataInputController" unique_id=370090543 instance=ExtResource("6_r35vq")]
 offset_left = 544.0
 offset_top = -337.0
 offset_right = 1605.0
 offset_bottom = -66.0
 
-[node name="GameFocus" type="Node2D" parent="."]
+[node name="GameFocus" type="Node2D" parent="." unique_id=1255349716]
 script = ExtResource("7_ylwj1")
 
-[node name="EntityCtl" type="Node2D" parent="."]
+[node name="EntityCtl" type="Node2D" parent="." unique_id=584335629]
 script = ExtResource("8_7vf1r")
 
-[node name="Party" type="Node2D" parent="EntityCtl"]
+[node name="Party" type="Node2D" parent="EntityCtl" unique_id=1429990695]
 
-[node name="TileInfoUi" type="CanvasLayer" parent="."]
+[node name="Enemies" type="Node2D" parent="EntityCtl" unique_id=1623671633]
+
+[node name="NPCs" type="Node2D" parent="EntityCtl" unique_id=1208671556]
+
+[node name="TileInfoUi" type="CanvasLayer" parent="." unique_id=2054535385]
 script = ExtResource("14_1ppb2")
 
-[node name="TileData" type="Panel" parent="TileInfoUi"]
+[node name="TileData" type="Panel" parent="TileInfoUi" unique_id=325218532]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -108,7 +112,7 @@ offset_bottom = 150.0
 grow_horizontal = 0
 theme = ExtResource("11_kvpfn")
 
-[node name="PanelContainer" type="MarginContainer" parent="TileInfoUi/TileData"]
+[node name="PanelContainer" type="MarginContainer" parent="TileInfoUi/TileData" unique_id=393200403]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -120,22 +124,22 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="TileInfoUi/TileData/PanelContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="TileInfoUi/TileData/PanelContainer" unique_id=1405669024]
 layout_mode = 2
 
-[node name="HoveredPos" type="Label" parent="TileInfoUi/TileData/PanelContainer/VBoxContainer"]
+[node name="HoveredPos" type="Label" parent="TileInfoUi/TileData/PanelContainer/VBoxContainer" unique_id=491836916]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "X: 0, Y: 0"
 
-[node name="SelectedPlayerPos" type="Label" parent="TileInfoUi/TileData/PanelContainer/VBoxContainer"]
+[node name="SelectedPlayerPos" type="Label" parent="TileInfoUi/TileData/PanelContainer/VBoxContainer" unique_id=2018648420]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Player: (0,0)"
 
-[node name="TileFlavor" type="Panel" parent="TileInfoUi"]
+[node name="TileFlavor" type="Panel" parent="TileInfoUi" unique_id=1272854256]
 custom_minimum_size = Vector2(800, 200)
 anchors_preset = 7
 anchor_left = 0.5
@@ -150,7 +154,7 @@ grow_horizontal = 2
 grow_vertical = 0
 theme = ExtResource("11_kvpfn")
 
-[node name="Margin" type="MarginContainer" parent="TileInfoUi/TileFlavor"]
+[node name="Margin" type="MarginContainer" parent="TileInfoUi/TileFlavor" unique_id=1877086118]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -162,7 +166,7 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="Description" type="RichTextLabel" parent="TileInfoUi/TileFlavor/Margin"]
+[node name="Description" type="RichTextLabel" parent="TileInfoUi/TileFlavor/Margin" unique_id=1406124147]
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 48
 text = "This is a description"

@@ -1,28 +1,73 @@
 extends Node
 class_name EntityCtl
 
+enum EntityType {
+	PARTY,
+	ENEMY,
+	NPC
+}
+
+var current_player: IEntity
 
 #
 # Map helpers
+@onready var party: Node2D = $Party
+@onready var enemies: Node2D = $Enemies
+@onready var npcs: Node2D = $NPCs
 
+func add_entity(type: EntityType, entity: IEntity) -> void:
+	var container := _get_container(type)
+	if container:
+		container.add_child(entity)
 
+func add_party_member(entity: IEntity) -> void:
+
+	var party_container = _get_container(EntityType.PARTY)
+
+	logging.log("player party add %s" % entity.name)
+	if party_container.get_child_count() == 0:
+		logging.log("player party empty")
+		current_player = entity
+		entity.current_player = true
+
+	party_container.add_child(entity)
+
+func get_entity_group(type: EntityType) -> Array[IEntity]:
+	var result: Array[IEntity] = []
+	var container := _get_container(type)
+	if container:
+		for child in container.get_children():
+			if child is IEntity:
+				result.append(child)
+	return result
+
+func _get_container(type: EntityType) -> Node2D:
+	match type:
+		EntityType.PARTY:
+			return party
+		EntityType.ENEMY:
+			return enemies
+		EntityType.NPC:
+			return npcs
+	return null
 
 # -------
 
 
 
+
 var entities: Array[Node2D] = []
 
-func _ready():
-	load_entity_children()
+# func _ready():
+# 	load_entity_children()
 
-func load_entity_children():
-	entities.clear()
-	for child in get_children():
-		# TODO When they are all one class remove this
-		if child is Entity or child is Entity_V2 or child is IEntity:
-			entities.append(child)
-	print("Loaded %d entities" % [entities.size()])
+# func load_entity_children():
+# 	entities.clear()
+# 	for child in get_children():
+# 		# TODO When they are all one class remove this
+# 		if child is Entity or child is Entity_V2 or child is IEntity:
+# 			entities.append(child)
+# 	print("Loaded %d entities" % [entities.size()])
 
 func get_entities() -> Array[Node2D]:
 	return entities
@@ -30,9 +75,10 @@ func get_entities() -> Array[Node2D]:
 func get_entity_count() -> int:
 	return entities.size()
 
-func get_entity_by_index(index: int) -> Node2D:
-	if index >= 0 and index < entities.size():
-		return entities[index]
+func get_entity_by_index(type: EntityType, index: int) -> IEntity:
+	var group := get_entity_group(type)
+	if index >= 0 and index < group.size():
+		return group[index]
 	return null
 
 func get_entity_by_name(entity_name: String) -> Node2D:
@@ -44,29 +90,29 @@ func get_entity_by_name(entity_name: String) -> Node2D:
 	return null
 
 # Control methods
-func set_current_player(entity: Node2D):
-	if entity and entity in entities:
+func set_current_player(entity: IEntity):
+	var group := get_entity_group(EntityType.PARTY)
+	if entity and entity in group:
 		# Disable all others first
-		for e in entities:
+		for e in group:
 			e.current_player = false
 		# Enable the selected one
 		entity.current_player = true
 		# Emit signal for camera tracking
-		# TODO make entity_v2 and entity comparable
 		SignalBus.current_player_changed.emit(entity)
 
 func set_current_player_by_index(index: int):
-	var entity = get_entity_by_index(index)
+	var entity = get_entity_by_index(EntityType.PARTY, index)
 	if entity:
 		set_current_player(entity)
 
-func set_current_player_by_name(entity_name: String):
-	var entity = get_entity_by_name(entity_name)
-	if entity:
-		set_current_player(entity)
+# func set_current_player_by_name(entity_name: String):
+# 	var entity = get_entity_by_name(entity_name)
+# 	if entity:
+# 		set_current_player(entity)
 
-func get_current_player() -> Node2D:
-	for entity in entities:
+func get_current_player() -> IEntity:
+	for entity in get_entity_group(EntityType.PARTY):
 		if entity.current_player:
 			return entity
 	return null
