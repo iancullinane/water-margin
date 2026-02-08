@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://b516obwi3v45s" path="res://scripts/entities/entity_interface.gd" id="1_b11w7"]
 [ext_resource type="FontFile" uid="uid://bdhd2oo2h2dl2" path="res://assets/fonts/RedAlert.ttf" id="2_b11w7"]
 [ext_resource type="Texture2D" uid="uid://cnn7ydrxvtibn" path="res://assets/textures/atlases/knight_armor_atlas.tres" id="2_gpy3h"]
+[ext_resource type="Script" uid="uid://cpkvyt0fth36j" path="res://scripts/entities/mover.gd" id="4_gpy3h"]
+[ext_resource type="Script" uid="uid://cmuemnj6jwb2b" path="res://scenes/entities/animator.gd" id="5_uhh82"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_uhh82"]
 atlas = ExtResource("2_gpy3h")
@@ -322,7 +324,7 @@ outline_color = Color(0.0943044, 0.0943044, 0.0943044, 1)
 script = ExtResource("1_b11w7")
 
 [node name="Sprite" type="Sprite2D" parent="." unique_id=170365915]
-position = Vector2(8, 8)
+position = Vector2(9, -3)
 texture = SubResource("AtlasTexture_uhh82")
 hframes = 6
 vframes = 13
@@ -365,3 +367,9 @@ text = "Cerah"
 label_settings = SubResource("LabelSettings_k0aba")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Mover" type="Node2D" parent="." unique_id=385065748]
+script = ExtResource("4_gpy3h")
+
+[node name="Animator" type="Node2D" parent="." unique_id=1688570446]
+script = ExtResource("5_uhh82")
