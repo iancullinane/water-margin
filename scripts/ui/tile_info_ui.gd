@@ -11,12 +11,15 @@ var current_player_position: Vector2 = Vector2.ZERO
 @onready var tile_flavor: Panel = $TileFlavor
 @onready var tile_description: RichTextLabel = $TileFlavor/Margin/Description
 
+@onready var player_name: Label = %CurrentPlayer
 
 func _ready() -> void:
 	if not Engine.is_editor_hint():
 		tile_flavor.visible = false
 	SignalBus.connect("hovered", processUI)
 	SignalBus.connect("current_player_moved", _on_current_player_moved)
+	# if SignalBus.has_signal("current_player_changed"):
+	SignalBus.current_player_changed.connect(_on_current_player_changed)
 
 func processUI(event_data: UiEventData):
 	if event_data:
@@ -32,6 +35,9 @@ func processUI(event_data: UiEventData):
 				tile_description.text = tile_data.description
 			else:
 				tile_flavor.visible = false
+
+func _on_current_player_changed(entity: IEntity):
+	player_name.text = entity.name
 
 func _on_current_player_moved(entity: IEntity) -> void:
 	if entity:

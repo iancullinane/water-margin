@@ -18,12 +18,6 @@ const PartyMemberStateRsc = preload("res://data/saves/PartyMemberState.gd")
 # player is persistently from game to game
 const STATE_PATH := "user://party_state.tres"
 
-# These are raw character scenes, this is annoying to hardcode
-# but it means they can be edited in the editor which is ideal
-const EIGNH_V2_SCENE := preload("res://scenes/entities/eignh_v2.tscn")
-const LLEW_V2_SCENE := preload("res://scenes/entities/llew_v2.tscn")
-const ELLIETTE_V2_SCENE := preload("res://scenes/entities/elliette_v2.tscn")
-
 # controllers
 # -----------
 @onready var entity_ctl: EntityCtl = $EntityCtl
@@ -46,9 +40,6 @@ func get_level_loader():
 	return level_loader
 # ------------------------------------------------------------
 
-
-
-#
 func _connect_signal_bus() -> void:
 	if Engine.is_editor_hint():
 		return
@@ -87,33 +78,33 @@ func _unhandled_input(_event):
 		return
 	# Prioritize previous when both fire (e.g., Shift+Tab)
 	if Input.is_action_just_pressed("previous_character"):
-		_select_player(_current_party_member_idx - 1)
+		entity_ctl.previous_player()
 	elif Input.is_action_just_pressed("next_character"):
-		_select_player(_current_party_member_idx + 1)
+		entity_ctl.next_player()
 
-func _select_player(new_index: int):
-	var player_group = entity_ctl.get_entity_group(EntityType.PARTY)
-	if player_group.size() == 0:
-		return
-	var wrapped_index := posmod(new_index, player_group.size())
-	# Turn off previous only if changing index
-	if wrapped_index != _current_party_member_idx:
-		var previous_player: IEntity = entity_ctl.get_entity_by_index(EntityType.PARTY, _current_party_member_idx)
-		if previous_player:
-			previous_player.current_player = false
-	# Turn on new
-	_current_party_member_idx = wrapped_index
-	var new_player: IEntity = entity_ctl.get_entity_by_index(EntityType.PARTY, _current_party_member_idx)
-	if new_player:
-		entity_ctl.set_current_player(new_player)
-		# Update focus follower, if present
-		var focus_node = get_node_or_null("GameFocus")
-		if focus_node:
-			focus_node.player = new_player
+# func _select_player(new_index: int):
+# 	var player_group = entity_ctl.get_entity_group(EntityType.PARTY)
+# 	if player_group.size() == 0:
+# 		return
+# 	var wrapped_index := posmod(new_index, player_group.size())
+# 	# Turn off previous only if changing index
+# 	if wrapped_index != _current_party_member_idx:
+# 		var previous_player: IEntity = entity_ctl.get_entity_by_index(EntityType.PARTY, _current_party_member_idx)
+# 		if previous_player:
+# 			previous_player.current_player = false
+# 	# Turn on new
+# 	_current_party_member_idx = wrapped_index
+# 	var new_player: IEntity = entity_ctl.get_entity_by_index(EntityType.PARTY, _current_party_member_idx)
+# 	if new_player:
+# 		entity_ctl.set_current_player(new_player)
+# 		# Update focus follower, if present
+# 		var focus_node = get_node_or_null("GameFocus")
+# 		if focus_node:
+# 			focus_node.player = new_player
 
-		print("Current player is %s" % new_player.name)
+# 		print("Current player is %s" % new_player.name)
 
-
+# 	self.get_children()
 
 
 # Signal handlers for camera movement
@@ -129,26 +120,8 @@ func _on_current_player_moved(entity: Node2D):
 func _spawn_party_if_missing() -> void:
 	if entity_ctl == null:
 		return
+	entity_ctl.spawn_party_if_missing()
 
-
-
-	if entity_ctl.get_entity_by_name("Elliette_v2") == null:
-		var elliette_v2_instance = ELLIETTE_V2_SCENE.instantiate()
-		elliette_v2_instance.name = "Elliette_v2"
-		entity_ctl.add_party_member(elliette_v2_instance)
-		entity_ctl.get_current_player()
-
-	if entity_ctl.get_entity_by_name("Eignh_v2") == null:
-		var eignh_v2_instance = EIGNH_V2_SCENE.instantiate()
-		eignh_v2_instance.name = "Eignh_v2"
-		entity_ctl.add_party_member(eignh_v2_instance)
-		entity_ctl.get_current_player()
-
-	if entity_ctl.get_entity_by_name("Llew_v2") == null:
-		var llew_v2_instance = LLEW_V2_SCENE.instantiate()
-		llew_v2_instance.name = "Llew_v2"
-		entity_ctl.add_party_member(llew_v2_instance)
-		entity_ctl.get_current_player()
 
 
 func _snap_camera_to_current() -> void:

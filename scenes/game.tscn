@@ -107,16 +107,21 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Player: (0,0)"
 
+[node name="CurrentPlayer" type="Label" parent="TileInfoUi/TileData/PanelContainer/VBoxContainer" unique_id=330672290]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+
 [node name="TileFlavor" type="Panel" parent="TileInfoUi" unique_id=1272854256]
-custom_minimum_size = Vector2(800, 200)
+custom_minimum_size = Vector2(600, 200)
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -20.0
-offset_top = -40.0
-offset_right = 20.0
+offset_left = -300.0
+offset_top = -250.0
+offset_right = 300.0
 offset_bottom = -50.0
 grow_horizontal = 2
 grow_vertical = 0
@@ -136,16 +141,16 @@ theme_override_constants/margin_bottom = 20
 
 [node name="Description" type="RichTextLabel" parent="TileInfoUi/TileFlavor/Margin" unique_id=1406124147]
 layout_mode = 2
-theme_override_font_sizes/normal_font_size = 48
+theme_override_font_sizes/normal_font_size = 32
 text = "This is a description"
 
-[node name="Panel" type="Panel" parent="TileInfoUi" unique_id=162861369]
+[node name="PlayerInfo" type="Panel" parent="TileInfoUi" unique_id=162861369]
 offset_left = 6.0
 offset_top = 7.0
 offset_right = 88.0
 offset_bottom = 131.57692
 
-[node name="VBoxContainer" type="VBoxContainer" parent="TileInfoUi/Panel" unique_id=1932032863]
+[node name="PlayerInfoV" type="VBoxContainer" parent="TileInfoUi/PlayerInfo" unique_id=1932032863]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -153,17 +158,17 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="TileInfoUi/Panel/VBoxContainer" unique_id=2019956372]
+[node name="PortraitMargin" type="MarginContainer" parent="TileInfoUi/PlayerInfo/PlayerInfoV" unique_id=2019956372]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 2.5
 
-[node name="TextureRect" type="TextureRect" parent="TileInfoUi/Panel/VBoxContainer/MarginContainer" unique_id=1065611473]
+[node name="Portrait" type="TextureRect" parent="TileInfoUi/PlayerInfo/PlayerInfoV/PortraitMargin" unique_id=1065611473]
 layout_mode = 2
 texture = ExtResource("11_ca42v")
 expand_mode = 2
 
-[node name="MarginContainer2" type="MarginContainer" parent="TileInfoUi/Panel/VBoxContainer" unique_id=474940688]
+[node name="Info" type="MarginContainer" parent="TileInfoUi/PlayerInfo/PlayerInfoV" unique_id=474940688]
 layout_mode = 2
 size_flags_vertical = 3
 

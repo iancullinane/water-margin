@@ -1,6 +1,6 @@
 extends Node2D
 
-
+var CELL_SIZE = GameConstants.CELL_SIZE
 # func _physics_process(_delta: float) -> void:
 # position = position.snapped(Vector2.ONE * tile_size)
 
@@ -14,25 +14,25 @@ var facing_left: bool = false  # Track if character is facing left for sprite fl
 func _ready() -> void:
 	target_position = position  # Initialize to current position
 
-func _move(dir: String) -> void:
+func move(dir: Vector2) -> void:
+	entity.position += dir * CELL_SIZE
 	# Don't start new move if already moving
-
-	if is_moving:
-		return
-
-	var new_target := position
-	match dir:
-		"up": new_target.y -= GameConstants.CELL_SIZE
-		"down": new_target.y += GameConstants.CELL_SIZE
-		"left": new_target.x -= GameConstants.CELL_SIZE
-		"right": new_target.x += GameConstants.CELL_SIZE
-
-	# if not _can_move_to(new_target):
+	# if is_moving:
 	# 	return
 
-	# Set target and start moving
-	target_position = new_target
-	is_moving = true
+	# var new_target := position
+	# match dir:
+	# 	"up": new_target.y -= GameConstants.CELL_SIZE
+	# 	"down": new_target.y += GameConstants.CELL_SIZE
+	# 	"left": new_target.x -= GameConstants.CELL_SIZE
+	# 	"right": new_target.x += GameConstants.CELL_SIZE
 
+	# # if not _can_move_to(new_target):
+	# # 	return
+
+	# # Set target and start moving
+	# target_position = new_target
+	# is_moving = true
+	# entity.position = entity.position.snapped(Vector2(1,0) * CELL_SIZE)
 	# if current_player:
 	# 	SignalBus.current_player_moved.emit(self)

@@ -8,6 +8,14 @@ enum EntityType {
 }
 
 var current_player: IEntity
+@export var _current_party_member_idx: int = 0
+
+# Character scene dictionary
+var character_scenes := {
+	"Llew_v2": preload("res://scenes/entities/llew_v2.tscn"),
+	"Elliette_v2": preload("res://scenes/entities/elliette_v2.tscn"),
+	"Eignh_v2": preload("res://scenes/entities/eignh_v2.tscn")
+}
 
 # The three kinds of entities are stored as children
 # of parent nodes
@@ -74,6 +82,28 @@ func get_entity_by_name(entity_name: String) -> Node2D:
 			return entity
 	return null
 
+
+func next_player():
+	var player_group := get_entity_group(EntityType.PARTY)
+	if player_group.size() == 0:
+		return
+
+	_current_party_member_idx = posmod(_current_party_member_idx + 1, player_group.size())
+	current_player = get_entity_by_index(EntityType.PARTY, _current_party_member_idx)
+	if current_player:
+		SignalBus.current_player_changed.emit(current_player)
+
+func previous_player():
+	var player_group := get_entity_group(EntityType.PARTY)
+	if player_group.size() == 0:
+		return
+
+	_current_party_member_idx = posmod(_current_party_member_idx - 1, player_group.size())
+	current_player = get_entity_by_index(EntityType.PARTY, _current_party_member_idx)
+	if current_player:
+		SignalBus.current_player_changed.emit(current_player)
+
+
 # Control methods
 func set_current_player(entity: IEntity):
 	var group := get_entity_group(EntityType.PARTY)
@@ -90,6 +120,27 @@ func set_current_player_by_index(index: int):
 	var entity = get_entity_by_index(EntityType.PARTY, index)
 	if entity:
 		set_current_player(entity)
+
+func move_current_player(dir: Vector2):
+	current_player.move(dir)
+
+func spawn_party_if_missing() -> void:
+	if get_entity_by_name("Llew_v2") == null:
+		var llew_v2_instance = character_scenes["Llew_v2"].instantiate()
+		llew_v2_instance.name = "Llew_v2"
+		add_party_member(llew_v2_instance)
+		SignalBus.current_player_changed.emit(llew_v2_instance)
+
+	if get_entity_by_name("Elliette_v2") == null:
+		var elliette_v2_instance = character_scenes["Elliette_v2"].instantiate()
+		elliette_v2_instance.name = "Elliette_v2"
+		add_party_member(elliette_v2_instance)
+
+	if get_entity_by_name("Eignh_v2") == null:
+		var eignh_v2_instance = character_scenes["Eignh_v2"].instantiate()
+		eignh_v2_instance.name = "Eignh_v2"
+		add_party_member(eignh_v2_instance)
+
 
 # func set_current_player_by_name(entity_name: String):
 # 	var entity = get_entity_by_name(entity_name)

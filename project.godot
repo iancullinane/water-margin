@@ -26,8 +26,6 @@ config/icon="res://carboardbox-stack-80x80.svg"
 
 StaticData="*res://globals/static_data.gd"
 GameData="*res://globals/database.gd"
-DetectTouch="*res://globals/detect_touch.gd"
-DetectKeyboard="*res://globals/detect_keyboard.gd"
 GameConstants="*res://globals/constants.gd"
 SignalBus="*res://globals/signal_bus.gd"
 
@@ -37,10 +35,12 @@ gdscript/warnings/unused_signal=0
 
 [display]
 
-window/size/viewport_width=1200
-window/size/viewport_height=800
+window/size/viewport_width=2000
+window/size/viewport_height=1400
 window/stretch/mode="viewport"
 window/stretch/aspect="expand"
+window/stretch/scale=2.0
+window/stretch/scale_mode="integer"
 window/handheld/orientation=1
 
 [dotnet]

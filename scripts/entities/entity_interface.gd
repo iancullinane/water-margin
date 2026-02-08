@@ -11,7 +11,7 @@ func is_entity():
 @onready var mover = $Mover
 
 var CELL_SIZE = GameConstants.CELL_SIZE
-const DIRECTIONS = ["up", "down", "left", "right"]
+
 
 # Player movement variables
 # ========================
@@ -50,13 +50,13 @@ func _ready() -> void:
 	# animation_player.play("idle_down")
 	target_position = position  # Initialize to current position
 
-func _physics_process(_delta: float) -> void:
-	_process_held_movement(_delta)
+# func _physics_process(_delta: float) -> void:
+# 	_process_held_movement(_delta)
 	# _process_smooth_movement(_delta)
 	# set_animation()
 
-	if current_player:
-		get_input()
+	# if current_player:
+	# 	get_input()
 
 # func set_animation():
 
@@ -87,16 +87,16 @@ func set_controllable(value: bool) -> void:
 	current_player = value
 
 
-func get_input():
-	direction = Input.get_vector("player_left", "player_right", "player_up","player_down")
-	if !current_player:
-		return
+# func get_input():
+# 	direction = Input.get_vector("player_left", "player_right", "player_up","player_down")
+# 	if !current_player:
+# 		return
 
-	# Manage press/release transitions
-	for dir in DIRECTIONS:
-		var action = "player_" + dir
-		if Input.is_action_just_pressed(action):
-			mover._move(dir)
+# 	# Manage press/release transitions
+# 	for dir in DIRECTIONS:
+# 		var action = "player_" + dir
+# 		if Input.is_action_just_pressed(action):
+# 			mover._move(dir)
 		# 	_on_press_dir(dir)
 
 		# 	# # Update last direction on key press
@@ -110,6 +110,8 @@ func get_input():
 		# 	_on_release_dir(dir)
 
 
+func move(dir: Vector2):
+	mover.move(dir)
 
 # func _move(dir: String) -> void:
 # 	# Don't start new move if already moving

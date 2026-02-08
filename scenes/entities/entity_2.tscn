@@ -324,7 +324,7 @@ outline_color = Color(0.0943044, 0.0943044, 0.0943044, 1)
 script = ExtResource("1_b11w7")
 
 [node name="Sprite" type="Sprite2D" parent="." unique_id=170365915]
-position = Vector2(8, 8)
+position = Vector2(9, -3)
 texture = SubResource("AtlasTexture_uhh82")
 hframes = 6
 vframes = 13
