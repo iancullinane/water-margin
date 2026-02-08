@@ -14,10 +14,22 @@ var current_player: bool = false:
 	set(value):
 		if current_player == value:
 			return
+
+		if value == true:
+			# Connect touch signals when becoming the current player
+			if !DetectTouch.moved.is_connected(_on_swipe):
+				DetectTouch.moved.connect(_on_swipe)
+		else:
+			# Disconnect touch signals when no longer the current player
+			if DetectTouch.moved.is_connected(_on_swipe):
+				DetectTouch.moved.disconnect(_on_swipe)
+
 		current_player = value
 
 
+
 func _ready():
+	add_to_group("entities")
 	print("Entity ready:", name, stats)
 	if stats and stats.animation_resource == null:
 		stats.animation_resource = preload("res://assets/animations/chick_anim.tres")
@@ -68,35 +80,88 @@ func _physics_process(delta: float) -> void:
 		if _held[dir]:
 			_held_time[dir] += delta
 			if _held_time[dir] >= _next_emit_at[dir]:
-				_step_dir(dir)
+				_move(dir)
 				_next_emit_at[dir] += repeat_interval
 
-func _step_dir(dir: String) -> void:
+func _move(dir: String) -> void:
+	var target_pos := position
+
+	if dir == "up":
+		target_pos.y -= CELL_SIZE
+	elif dir == "down":
+		target_pos.y += CELL_SIZE
+	elif dir == "left":
+		target_pos.x -= CELL_SIZE
+	elif dir == "right":
+		target_pos.x += CELL_SIZE
+
+	if not _can_move_to(target_pos):
+		return
+
 	if dir == "up":
 		sprite.animation = "up_idle"
-		position.y -= CELL_SIZE
 	elif dir == "down":
 		sprite.animation = "down_idle"
-		position.y += CELL_SIZE
 	elif dir == "left":
 		sprite.animation = "left_idle"
-		position.x -= CELL_SIZE
 	elif dir == "right":
 		sprite.animation = "right_idle"
-		position.x += CELL_SIZE
+
+	position = target_pos
+
 	if current_player:
 		SignalBus.current_player_moved.emit(self)
 
 func _on_press_dir(dir: String) -> void:
 	_held[dir] = true
 	_held_time[dir] = 0.0
-	_step_dir(dir) # immediate first step
+	_move(dir) # immediate first step
 	_next_emit_at[dir] = repeat_initial_delay
 
 func _on_release_dir(dir: String) -> void:
 	_held[dir] = false
 	_held_time[dir] = -1.0
 	_next_emit_at[dir] = 0.0
+
+func _can_move_to(target_pos: Vector2) -> bool:
+	var game_map := _get_current_map()
+	if game_map == null:
+		return true
+
+	var tile_coords := game_map.get_tile_from_global(target_pos)
+
+	if _is_tile_blocked(game_map, tile_coords):
+		return false
+
+	if _is_entity_at_position(target_pos):
+		return false
+
+	return true
+
+func _get_current_map() -> GameMap:
+	var level_loader = get_tree().root.find_child("LevelLoader", true, false)
+	if level_loader and level_loader.has_method("get_current_map"):
+		return level_loader.get_current_map()
+	return null
+
+func _is_tile_blocked(game_map: GameMap, tile_coords: Vector2i) -> bool:
+	var terrain_layer := game_map.get_terrain_layer()
+	if terrain_layer == null:
+		return false
+
+	var tile_data := terrain_layer.get_cell_tile_data(tile_coords)
+	if tile_data == null:
+		return false
+
+	var movement_value = tile_data.get_custom_data("movement")
+	return movement_value == 1
+
+func _is_entity_at_position(target_pos: Vector2) -> bool:
+	var entities := get_tree().get_nodes_in_group("entities")
+	for entity in entities:
+		if entity != self and entity.position.distance_to(target_pos) < 1.0:
+			return true
+	return false
 
 func _process(_delta):
 	if Engine.is_editor_hint():
@@ -112,6 +177,10 @@ func set_controllable(value: bool) -> void:
 		return
 	current_player = value
 
+	# Connect touch controls when setting controllable
+	if current_player and !DetectTouch.moved.is_connected(_on_swipe):
+		DetectTouch.moved.connect(_on_swipe)
+
 func zoom_in():
 	var cam = get_node_or_null("Camera2D")
 	if cam:
@@ -122,47 +191,20 @@ func zoom_out():
 	if cam:
 		cam.zoom = cam.zoom * 0.9
 
+# Actual movement
+
 func _on_move(direction):
-	if direction == "up":
-		sprite.animation = "up_idle"
-		position.y -= CELL_SIZE
-	elif direction == "down":
-		sprite.animation = "down_idle"
-		position.y += CELL_SIZE
-	elif direction == "right":
-		sprite.animation = "right_idle"
-		position.x += CELL_SIZE
-	elif direction == "left":
-		sprite.animation = "left_idle"
-		position.x -= CELL_SIZE
-	
-	# Emit signal if this is the current player
-	if current_player:
-		SignalBus.current_player_moved.emit(self)
+	_move(direction)
+
+func _on_swipe(direction):
+	_move(direction)
+
 
 func _on_zoom(direction):
 	if direction == "in":
 		zoom_in()
 	elif direction == "out":
 		zoom_out()
-
-func _on_swipe(direction):
-	if direction == "up":
-		sprite.animation = "up_idle"
-		position.y -= CELL_SIZE
-	elif direction == "down":
-		sprite.animation = "down_idle"
-		position.y += CELL_SIZE
-	elif direction == "right":
-		sprite.animation = "right_idle"
-		position.x += CELL_SIZE
-	elif direction == "left":
-		sprite.animation = "left_idle"
-		position.x -= CELL_SIZE
-	
-	# Emit signal if this is the current player
-	if current_player:
-		SignalBus.current_player_moved.emit(self)
 
 
 func _input(event):

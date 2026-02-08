@@ -15,10 +15,17 @@ var _selected_map_scene: PackedScene
 			ensure_map_loaded()
 
 # @export var selected_map_scene: PackedScene
+@export var map_data: GameMapData
 @export var auto_load_in_editor: bool = true
 @export var reload_on_change_in_editor: bool = true
 @export var clear_previous_on_load: bool = true
 
+
+
+func _ready():
+	if Engine.is_editor_hint():
+		ensure_map_loaded()
+	ensure_map_loaded()
 
 func ensure_map_loaded() -> void:
 	print("ensure_map_loaded")
@@ -47,6 +54,11 @@ func ensure_map_loaded() -> void:
 	if not (inst is GameMap):
 		push_error("Selected scene root is not GameMap")
 		return
+
+	# Add the map data resource to the scene
+	if map_data != null:
+		inst.game_map_data = map_data
+
 	target.add_child(inst)
 	inst.owner = target
 	_current_map_instance = inst
@@ -68,5 +80,8 @@ func _get_map_mount_node() -> Node:
 		return null
 
 	var target_node = parent_node.get_node_or_null("MapCtl")
-		
+
 	return target_node
+
+func get_current_map() -> GameMap:
+	return _current_map_instance

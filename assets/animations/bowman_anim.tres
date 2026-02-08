@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=10 format=3 uid="uid://dlxdjfwwsmta6"]
+[gd_resource type="SpriteFrames" format=3 uid="uid://dlxdjfwwsmta6"]
 
 [ext_resource type="Texture2D" uid="uid://cealt0a6egtbe" path="res://assets/16x16/Characters/Soldiers/Ranged/BowmanTemplate.png" id="1_vuqts"]
 

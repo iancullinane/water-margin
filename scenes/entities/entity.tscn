@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://b06a6eh8oyhrs"]
+[gd_scene load_steps=7 format=3 uid="uid://b06a6eh8oyhrs"]
 
 [ext_resource type="Script" uid="uid://b7tyfikkp0003" path="res://scripts/entities/entity.gd" id="1_aa4sr"]
 [ext_resource type="SpriteFrames" uid="uid://ccbua3q0nwkgg" path="res://assets/animations/kanji_anim.tres" id="3_o2q07"]
@@ -10,6 +10,14 @@ font_size = 14
 outline_size = 4
 outline_color = Color(0.0943044, 0.0943044, 0.0943044, 1)
 
+[sub_resource type="Animation" id="Animation_7agfi"]
+resource_name = "idle_down"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7sg2j"]
+_data = {
+&"idle_down": SubResource("Animation_7agfi")
+}
+
 [node name="Entity" type="Node2D"]
 script = ExtResource("1_aa4sr")
 
@@ -18,7 +26,7 @@ position = Vector2(8, 8)
 sprite_frames = ExtResource("3_o2q07")
 animation = &"down_idle"
 autoplay = "down_idle"
-frame_progress = 0.39539814
+frame_progress = 0.10447196
 
 [node name="NameLabel" type="Label" parent="."]
 offset_left = -23.0
@@ -29,3 +37,9 @@ text = "Cerah"
 label_settings = SubResource("LabelSettings_k0aba")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_7sg2j")
+}
+autoplay = &"idle_down"

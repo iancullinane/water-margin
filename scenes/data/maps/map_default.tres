@@ -1,0 +1,39 @@
+[gd_resource type="Resource" script_class="GameMapData" format=3 uid="uid://cvnmtg0xnmfl3"]
+
+[ext_resource type="Script" uid="uid://dr1va401g07an" path="res://data/map/map_data.gd" id="1_2ul5u"]
+[ext_resource type="Script" uid="uid://cxmdi8r88sywi" path="res://scripts/objects/game_tile.gd" id="2_4uy0x"]
+
+[sub_resource type="Resource" id="Resource_kvuet"]
+script = ExtResource("2_4uy0x")
+position = Vector2i(6, 6)
+description = "This is the test tile"
+metadata/_custom_type_script = "uid://cxmdi8r88sywi"
+
+[sub_resource type="Resource" id="Resource_surdv"]
+script = ExtResource("2_4uy0x")
+position = Vector2i(8, 4)
+description = "This is the home of Steve. He is a shifty asshole and you gotta watch out for him."
+metadata/_custom_type_script = "uid://cxmdi8r88sywi"
+
+[sub_resource type="Resource" id="Resource_21hhc"]
+script = ExtResource("2_4uy0x")
+position = Vector2i(12, 3)
+description = "Cerah's House"
+metadata/_custom_type_script = "uid://cxmdi8r88sywi"
+
+[sub_resource type="Resource" id="Resource_gdk3e"]
+script = ExtResource("2_4uy0x")
+position = Vector2i(18, 12)
+description = "Jerry's house. He's got cameras alllllll over these woods."
+metadata/_custom_type_script = "uid://cxmdi8r88sywi"
+
+[sub_resource type="Resource" id="Resource_bxu4c"]
+script = ExtResource("2_4uy0x")
+position = Vector2i(17, 20)
+description = "Llewelyn's house. Filled with monkeys that eat her hot dogs."
+metadata/_custom_type_script = "uid://cxmdi8r88sywi"
+
+[resource]
+script = ExtResource("1_2ul5u")
+tile_data = Array[ExtResource("2_4uy0x")]([SubResource("Resource_kvuet"), SubResource("Resource_surdv"), SubResource("Resource_21hhc"), SubResource("Resource_gdk3e"), SubResource("Resource_bxu4c")])
+metadata/_custom_type_script = "uid://dr1va401g07an"

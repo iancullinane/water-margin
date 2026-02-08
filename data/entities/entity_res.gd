@@ -2,8 +2,17 @@ extends Resource
 class_name EntityData
 
 
-@export var name := ""
-@export var animation_resource: SpriteFrames
+@export var name := "Unnamed" : set = set_entity_name
+
+func set_entity_name(value: String):
+	if value == "":
+		name = "Unnamed"
+	else:
+		name = value
+
+
+# @export var animation_resource: SpriteFrames
+@export var entity_type_resource: EntityTypeResource
 
 @export var strength: int = 10
 @export var intelligence: int = 10

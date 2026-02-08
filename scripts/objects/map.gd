@@ -20,7 +20,9 @@ func get_terrain_layer()->TileMapLayer:
 func get_building_layer()->TileMapLayer:
 	return $Buildings
 
+	
 
+	
 func get_map_name() -> String:
 	return map_name
 

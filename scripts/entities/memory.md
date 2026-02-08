@@ -17,4 +17,3 @@ Recent changes summary
 
 - Notes:
   - Movement helpers in `entity_ctl.gd` are optional; selection is handled via the controller and signals.
-

@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=10 format=3 uid="uid://ccbua3q0nwkgg"]
+[gd_resource type="SpriteFrames" format=3 uid="uid://ccbua3q0nwkgg"]
 
 [ext_resource type="Texture2D" uid="uid://rur3id56njrh" path="res://assets/16x16/Characters/Champions/Kanji.png" id="1_4n5h8"]
 
@@ -57,6 +57,11 @@ animations = [{
 }],
 "loop": true,
 "name": &"left_idle",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"new_animation",
 "speed": 5.0
 }, {
 "frames": [{

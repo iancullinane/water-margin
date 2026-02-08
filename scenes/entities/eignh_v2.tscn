@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://tlvrdn23vnkm"]
+
+[ext_resource type="PackedScene" uid="uid://dhgpwfrgakd3g" path="res://scenes/entities/entity_2.tscn" id="1_vge8s"]
+[ext_resource type="Resource" uid="uid://bohgkkxmikmmp" path="res://data/entities/Eignh.tres" id="2_6hppf"]
+
+[node name="Eignh_v2" unique_id=877221106 groups=["entities"] instance=ExtResource("1_vge8s")]
+stats = ExtResource("2_6hppf")
+
+[node name="Sprite" parent="." index="0" unique_id=170365915]
+position = Vector2(9, -2)
+
+[node name="NameLabel" parent="." index="3" unique_id=715073483]
+offset_left = -21.0
+offset_top = 15.0
+offset_right = 41.0
+offset_bottom = 66.0
+text = "Eignh
+
+"
