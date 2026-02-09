@@ -14,6 +14,16 @@ var _last_mouse_pos: Vector2 = Vector2.ZERO
 
 const DIRECTIONS = ["up", "down", "left", "right"]
 
+func _ready() -> void:
+	if Engine.is_editor_hint():
+		return
+	if not is_instance_valid(SignalBus):
+		return
+	if SignalBus.has_signal("current_player_changed"):
+		SignalBus.current_player_changed.connect(_on_current_player_changed)
+	if SignalBus.has_signal("current_player_moved"):
+		SignalBus.current_player_moved.connect(_on_current_player_moved)
+
 func _process(delta: float) -> void:
 	handle_pan_and_zoom(delta)
 
@@ -40,6 +50,23 @@ func _input(event: InputEvent) -> void:
 		entity_ctl.move_current_player(move_dir)
 
 
+func _unhandled_input(_event):
+	if entity_ctl.get_entity_group(EntityCtl.EntityType.PARTY).size() == 0:
+		return
+	if Input.is_action_just_pressed("previous_character"):
+		entity_ctl.previous_player()
+	elif Input.is_action_just_pressed("next_character"):
+		entity_ctl.next_player()
+
+
+func _on_current_player_changed(entity: Node2D):
+	if entity:
+		camera.position = entity.position
+
+
+func _on_current_player_moved(entity: Node2D):
+	if entity:
+		camera.position = entity.position
 
 
 func handle_pan_and_zoom(delta: float) -> void:
