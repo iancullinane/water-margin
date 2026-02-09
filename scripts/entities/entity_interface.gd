@@ -148,7 +148,7 @@ func move(dir: Vector2):
 # 	_move_state[dir]["time"] = -1.0
 # 	_move_state[dir]["next_emit"] = 0.0
 
-func _process_held_movement(delta: float) -> void:
+func _process_held_movement(_delta: float) -> void:
 	if not current_player:
 		return
 

@@ -1,8 +1,8 @@
 @tool
 extends Node2D
 
-
-const DEFAULT_MAP_SCENE_PATH := "res://scenes/map/map_001.tscn"
+# TODO actually load a default map
+# const DEFAULT_MAP_SCENE_PATH := "res://scenes/map/map_001.tscn"
 
 var _current_map_instance: GameMap
 
@@ -14,43 +14,27 @@ var _selected_map_scene: PackedScene
 		if Engine.is_editor_hint() and reload_on_change_in_editor:
 			ensure_map_loaded()
 
-# @export var selected_map_scene: PackedScene
 @export var map_data: GameMapData
-@export var auto_load_in_editor: bool = true
 @export var reload_on_change_in_editor: bool = true
 @export var clear_previous_on_load: bool = true
 
-
-
-func _ready():
-	if Engine.is_editor_hint():
-		ensure_map_loaded()
-	ensure_map_loaded()
-
 func ensure_map_loaded() -> void:
-	print("ensure_map_loaded")
+	logging.log("attempt scene load")
 	if selected_map_scene == null:
 		return
 	var target := _get_map_mount_node()
 	if target == null:
 		return
-	# Handle existing map instances before adding a new one
-	var existing_found: GameMap = null
-	for child in target.get_children():
-		if child is GameMap:
-			existing_found = child
-			break
-	if existing_found != null:
-		if clear_previous_on_load:
-			# Remove all existing GameMap instances to prevent duplicates
-			for child in target.get_children():
-				if child is GameMap:
-					child.queue_free()
-		else:
-			_current_map_instance = existing_found
+	var existing := _find_existing_maps(target)
+	if not existing.is_empty():
+		if not clear_previous_on_load:
+			_current_map_instance = existing[0]
 			return
+		for map in existing:
+			map.queue_free()
 
 	var inst := selected_map_scene.instantiate()
+	logging.log("instantiate %s" % inst.map_name)
 	if not (inst is GameMap):
 		push_error("Selected scene root is not GameMap")
 		return
@@ -62,23 +46,22 @@ func ensure_map_loaded() -> void:
 	target.add_child(inst)
 	inst.owner = target
 	_current_map_instance = inst
+	logging.log("map loaded")
 
-func _load_map() -> void:
-	print("Load map")
-	var map_instance: GameMap = selected_map_scene.instantiate() as GameMap
-	map_instance.name = map_instance.get_map_name()
-	_get_map_mount_node().add_child(map_instance)
-	map_instance.owner = _get_map_mount_node()
 
-	_current_map_instance = map_instance
-	print("Map Loaded")
-	return
+func _find_existing_maps(parent: Node) -> Array[GameMap]:
+	var result: Array[GameMap] = []
+	for child in parent.get_children():
+		if child is GameMap:
+			result.append(child)
+	return result
 
 func _get_map_mount_node() -> Node:
 	var parent_node := get_parent()
 	if parent_node == null:
 		return null
 
+	# TODO find by duck typing once there is more logic in MapCtl
 	var target_node = parent_node.get_node_or_null("MapCtl")
 
 	return target_node

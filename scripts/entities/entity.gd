@@ -30,7 +30,6 @@ var current_player: bool = false:
 
 func _ready():
 	add_to_group("entities")
-	print("Entity ready:", name, stats)
 	if stats and stats.animation_resource == null:
 		stats.animation_resource = preload("res://assets/animations/chick_anim.tres")
 	if not Engine.is_editor_hint():

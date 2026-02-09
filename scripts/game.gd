@@ -4,8 +4,6 @@ extends Node2D
 @export var height: int;
 @export var width: int;
 
-@export var _current_party_member_idx: int = 0
-
 @export_group("Debug flags")
 # -------------------------------
 

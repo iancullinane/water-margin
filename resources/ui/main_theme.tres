@@ -1,18 +1,74 @@
-[gd_resource type="Theme" load_steps=3 format=3 uid="uid://bk7x7vskffp0"]
+[gd_resource type="Theme" format=3 uid="uid://bk7x7vskffp0"]
 
-[ext_resource type="FontFile" uid="uid://3rosl1kdqqlb" path="res://assets/fonts/AmericanTypewriter.ttc" id="1_bhey1"]
-[ext_resource type="FontFile" uid="uid://bdhd2oo2h2dl2" path="res://assets/fonts/RedAlert.ttf" id="2_ktsff"]
+[ext_resource type="FontFile" uid="uid://b7a105hjlhyb7" path="res://assets/fonts/us-army/USArmy-Regular.ttf" id="1_4kj51"]
+[ext_resource type="FontFile" uid="uid://b3t1ha3ywcclo" path="res://assets/fonts/us-army/USArmy-Bold.ttf" id="1_bhey1"]
 
 [resource]
 default_base_scale = 1.0
-default_font = ExtResource("2_ktsff")
-Button/font_sizes/font_size = 50
+Button/font_sizes/font_size = 16
+Button/fonts/font = null
+CheckBox/font_sizes/font_size = 16
+CheckBox/fonts/font = null
+CheckButton/font_sizes/font_size = 16
+CheckButton/fonts/font = null
+CodeEdit/font_sizes/font_size = 16
+CodeEdit/fonts/font = null
+ColorPickerButton/font_sizes/font_size = 16
+ColorPickerButton/fonts/font = null
+FoldableContainer/font_sizes/font_size = 16
+FoldableContainer/fonts/font = null
+GraphFrameTitleLabel/font_sizes/font_size = 16
+GraphNodeTitleLabel/font_sizes/font_size = 16
+GraphNodeTitleLabel/fonts/font = null
+HeaderLarge/font_sizes/font_size = 16
+HeaderMedium/font_sizes/font_size = 16
+HeaderSmall/font_sizes/font_size = 16
+ItemList/font_sizes/font_size = 16
+ItemList/fonts/font = null
 Label/colors/font_color = Color(1, 1, 1, 1)
-Label/font_sizes/font_size = 50
-Label/fonts/font = ExtResource("1_bhey1")
+Label/font_sizes/font_size = 16
+Label/fonts/font = null
+LineEdit/font_sizes/font_size = 16
+LineEdit/fonts/font = null
+LinkButton/font_sizes/font_size = 16
+LinkButton/fonts/font = null
 MarginContainer/constants/margin_bottom = 10
 MarginContainer/constants/margin_left = 10
 MarginContainer/constants/margin_right = 10
 MarginContainer/constants/margin_top = 10
-TextEdit/font_sizes/font_size = 30
-TextEdit/fonts/font = ExtResource("1_bhey1")
+MenuBar/font_sizes/font_size = 16
+MenuBar/fonts/font = null
+MenuButton/font_sizes/font_size = 16
+MenuButton/fonts/font = null
+OptionButton/font_sizes/font_size = 16
+OptionButton/fonts/font = null
+PopupMenu/font_sizes/font_separator_size = 16
+PopupMenu/font_sizes/font_size = 16
+PopupMenu/fonts/font = null
+PopupMenu/fonts/font_separator = null
+ProgressBar/font_sizes/font_size = 16
+ProgressBar/fonts/font = null
+RichTextLabel/font_sizes/bold_font_size = 16
+RichTextLabel/font_sizes/bold_italics_font_size = 16
+RichTextLabel/font_sizes/italics_font_size = 16
+RichTextLabel/font_sizes/mono_font_size = 16
+RichTextLabel/font_sizes/normal_font_size = 16
+RichTextLabel/fonts/bold_font = null
+RichTextLabel/fonts/bold_italics_font = null
+RichTextLabel/fonts/italics_font = null
+RichTextLabel/fonts/mono_font = null
+RichTextLabel/fonts/normal_font = null
+TabBar/font_sizes/font_size = 16
+TabBar/fonts/font = null
+TabContainer/font_sizes/font_size = 16
+TabContainer/fonts/font = ExtResource("1_bhey1")
+TextEdit/font_sizes/font_size = 16
+TextEdit/fonts/font = null
+TooltipLabel/font_sizes/font_size = 16
+TooltipLabel/fonts/font = null
+Tree/font_sizes/font_size = 16
+Tree/font_sizes/title_button_font_size = 16
+Tree/fonts/font = ExtResource("1_4kj51")
+Tree/fonts/title_button_font = ExtResource("1_4kj51")
+Window/font_sizes/title_font_size = 16
+Window/fonts/title_font = null
