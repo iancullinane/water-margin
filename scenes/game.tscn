@@ -98,19 +98,16 @@ layout_mode = 2
 [node name="HoveredPos" type="Label" parent="TileInfoUi/TileData/PanelContainer/VBoxContainer" unique_id=491836916]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_font_sizes/font_size = 24
 text = "X: 0, Y: 0"
 
 [node name="SelectedPlayerPos" type="Label" parent="TileInfoUi/TileData/PanelContainer/VBoxContainer" unique_id=2018648420]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_font_sizes/font_size = 24
 text = "Player: (0,0)"
 
 [node name="CurrentPlayer" type="Label" parent="TileInfoUi/TileData/PanelContainer/VBoxContainer" unique_id=330672290]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_font_sizes/font_size = 32
 
 [node name="TileFlavor" type="Panel" parent="TileInfoUi" unique_id=1272854256]
 custom_minimum_size = Vector2(600, 200)

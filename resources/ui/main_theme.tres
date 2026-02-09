@@ -2,11 +2,22 @@
 
 [ext_resource type="FontFile" uid="uid://b7a105hjlhyb7" path="res://assets/fonts/us-army/USArmy-Regular.ttf" id="1_4kj51"]
 [ext_resource type="FontFile" uid="uid://b3t1ha3ywcclo" path="res://assets/fonts/us-army/USArmy-Bold.ttf" id="1_bhey1"]
+[ext_resource type="StyleBox" uid="uid://di80qib48air" path="res://assets/custom_ui/base_panel_style.tres" id="2_p3v3s"]
+[ext_resource type="StyleBox" uid="uid://kpoyppkw54ww" path="res://assets/custom_ui/button_normal_flat.tres" id="3_p7xcw"]
+[ext_resource type="StyleBox" uid="uid://cobymw6c84jj2" path="res://assets/custom_ui/base_button_toggled.tres" id="4_jjtn0"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ktsff"]
+bg_color = Color(0.32750148, 0.6928889, 0.3804668, 1)
 
 [resource]
 default_base_scale = 1.0
-Button/font_sizes/font_size = 16
-Button/fonts/font = null
+Button/colors/font_color = Color(0.99901026, 0.97288483, 0.9545229, 1)
+Button/font_sizes/font_size = 20
+Button/fonts/font = ExtResource("1_4kj51")
+Button/styles/disabled = ExtResource("2_p3v3s")
+Button/styles/focus = SubResource("StyleBoxFlat_ktsff")
+Button/styles/normal = ExtResource("3_p7xcw")
+Button/styles/pressed = ExtResource("4_jjtn0")
 CheckBox/font_sizes/font_size = 16
 CheckBox/fonts/font = null
 CheckButton/font_sizes/font_size = 16
@@ -25,9 +36,10 @@ HeaderMedium/font_sizes/font_size = 16
 HeaderSmall/font_sizes/font_size = 16
 ItemList/font_sizes/font_size = 16
 ItemList/fonts/font = null
-Label/colors/font_color = Color(1, 1, 1, 1)
-Label/font_sizes/font_size = 16
-Label/fonts/font = null
+Label/colors/font_color = Color(0.15420714, 0.06692231, 0.0032877454, 1)
+Label/colors/font_shadow_color = Color(0.34117648, 0.34117648, 0.34117648, 0.4509804)
+Label/font_sizes/font_size = 25
+Label/fonts/font = ExtResource("1_4kj51")
 LineEdit/font_sizes/font_size = 16
 LineEdit/fonts/font = null
 LinkButton/font_sizes/font_size = 16
@@ -42,12 +54,14 @@ MenuButton/font_sizes/font_size = 16
 MenuButton/fonts/font = null
 OptionButton/font_sizes/font_size = 16
 OptionButton/fonts/font = null
+Panel/styles/panel = ExtResource("2_p3v3s")
 PopupMenu/font_sizes/font_separator_size = 16
 PopupMenu/font_sizes/font_size = 16
 PopupMenu/fonts/font = null
 PopupMenu/fonts/font_separator = null
 ProgressBar/font_sizes/font_size = 16
 ProgressBar/fonts/font = null
+RichTextLabel/colors/default_color = Color(0.15294118, 0.06666667, 0.003921569, 1)
 RichTextLabel/font_sizes/bold_font_size = 16
 RichTextLabel/font_sizes/bold_italics_font_size = 16
 RichTextLabel/font_sizes/italics_font_size = 16
@@ -64,6 +78,7 @@ TabContainer/font_sizes/font_size = 16
 TabContainer/fonts/font = ExtResource("1_bhey1")
 TextEdit/font_sizes/font_size = 16
 TextEdit/fonts/font = null
+TextEdit/styles/normal = ExtResource("3_p7xcw")
 TooltipLabel/font_sizes/font_size = 16
 TooltipLabel/fonts/font = null
 Tree/font_sizes/font_size = 16
