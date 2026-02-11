@@ -146,6 +146,7 @@ offset_left = 6.0
 offset_top = 7.0
 offset_right = 88.0
 offset_bottom = 131.57692
+theme = ExtResource("11_kvpfn")
 
 [node name="PlayerInfoV" type="VBoxContainer" parent="TileInfoUi/PlayerInfo" unique_id=1932032863]
 layout_mode = 1

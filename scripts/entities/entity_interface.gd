@@ -111,6 +111,7 @@ func set_controllable(value: bool) -> void:
 
 
 func move(dir: Vector2):
+	direction = dir
 	mover.move(dir)
 
 # func _move(dir: String) -> void:
