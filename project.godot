@@ -35,11 +35,9 @@ gdscript/warnings/unused_signal=0
 
 [display]
 
-window/size/viewport_width=2000
-window/size/viewport_height=1400
-window/stretch/mode="viewport"
-window/stretch/aspect="expand"
-window/stretch/scale=2.0
+window/stretch/mode="canvas_items"
+window/stretch/aspect="keep_width"
+window/stretch/scale=1.65
 window/stretch/scale_mode="integer"
 window/handheld/orientation=1
 

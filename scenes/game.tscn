@@ -6,16 +6,16 @@
 [ext_resource type="AudioStream" uid="uid://rkxyqgqxk5kp" path="res://assets/audio/env/light-rain.wav" id="4_p3qcy"]
 [ext_resource type="Resource" uid="uid://cvnmtg0xnmfl3" path="res://scenes/data/maps/map_default.tres" id="4_trtic"]
 [ext_resource type="PackedScene" uid="uid://cx1txo3cxj3yi" path="res://scenes/pallette/control.tscn" id="5_dglt5"]
-[ext_resource type="Script" uid="uid://d32hlclfr5hjr" path="res://scripts/objects/map_ctl.gd" id="5_ir15t"]
+[ext_resource type="Script" uid="uid://d32hlclfr5hjr" path="res://scripts/components/ctl/map_ctl.gd" id="5_ir15t"]
 [ext_resource type="Shader" uid="uid://86ous1s4fi33" path="res://assets/textures/shaders/rain.gdshader" id="5_kvuet"]
 [ext_resource type="PackedScene" uid="uid://uj5dstsb7niu" path="res://scenes/ui/table.tscn" id="6_r35vq"]
-[ext_resource type="Script" uid="uid://bv0d5tqp24dt1" path="res://scripts/components/entity_ctl.gd" id="8_7vf1r"]
+[ext_resource type="Script" uid="uid://bv0d5tqp24dt1" path="res://scripts/components/ctl/entity_ctl.gd" id="8_7vf1r"]
 [ext_resource type="Texture2D" uid="uid://d3pkx2v63eny3" path="res://assets/textures/portraits/portrait4-4x.png" id="11_ca42v"]
 [ext_resource type="Theme" uid="uid://bk7x7vskffp0" path="res://resources/ui/main_theme.tres" id="11_kvpfn"]
 [ext_resource type="Script" uid="uid://cef3mierxqp5m" path="res://scenes/color_rect.gd" id="11_kvuet"]
-[ext_resource type="Script" uid="uid://bnodwmmbhkusp" path="res://scripts/components/hover_focus.gd" id="13_ir15t"]
+[ext_resource type="Script" uid="uid://bnodwmmbhkusp" path="res://scripts/components/ux/hover_focus.gd" id="13_ir15t"]
 [ext_resource type="Script" uid="uid://bw6xpo1rcmkxl" path="res://scripts/ui/tile_info_ui.gd" id="14_1ppb2"]
-[ext_resource type="Script" uid="uid://c2jmd2hji74r5" path="res://scripts/components/input_ctl.gd" id="15_ir15t"]
+[ext_resource type="Script" uid="uid://c2jmd2hji74r5" path="res://scripts/components/ctl/input_ctl.gd" id="15_ir15t"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kvuet"]
 shader = ExtResource("5_kvuet")
@@ -70,13 +70,13 @@ script = ExtResource("11_kvuet")
 script = ExtResource("14_1ppb2")
 
 [node name="TileData" type="Panel" parent="TileInfoUi" unique_id=325218532]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -250.0
-offset_top = 10.0
-offset_right = -10.0
-offset_bottom = 150.0
+anchors_preset = -1
+anchor_left = 0.963
+anchor_top = 0.035
+anchor_right = 0.963
+anchor_bottom = 0.035
+offset_left = -240.0
+offset_bottom = 140.0
 grow_horizontal = 0
 theme = ExtResource("11_kvpfn")
 
@@ -98,27 +98,24 @@ layout_mode = 2
 [node name="HoveredPos" type="Label" parent="TileInfoUi/TileData/PanelContainer/VBoxContainer" unique_id=491836916]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_font_sizes/font_size = 24
 text = "X: 0, Y: 0"
 
 [node name="SelectedPlayerPos" type="Label" parent="TileInfoUi/TileData/PanelContainer/VBoxContainer" unique_id=2018648420]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_font_sizes/font_size = 24
 text = "Player: (0,0)"
 
 [node name="CurrentPlayer" type="Label" parent="TileInfoUi/TileData/PanelContainer/VBoxContainer" unique_id=330672290]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_font_sizes/font_size = 32
 
 [node name="TileFlavor" type="Panel" parent="TileInfoUi" unique_id=1272854256]
 custom_minimum_size = Vector2(600, 200)
-anchors_preset = 7
+anchors_preset = -1
 anchor_left = 0.5
-anchor_top = 1.0
+anchor_top = 0.985
 anchor_right = 0.5
-anchor_bottom = 1.0
+anchor_bottom = 0.985
 offset_left = -300.0
 offset_top = -250.0
 offset_right = 300.0
@@ -149,6 +146,7 @@ offset_left = 6.0
 offset_top = 7.0
 offset_right = 88.0
 offset_bottom = 131.57692
+theme = ExtResource("11_kvpfn")
 
 [node name="PlayerInfoV" type="VBoxContainer" parent="TileInfoUi/PlayerInfo" unique_id=1932032863]
 layout_mode = 1

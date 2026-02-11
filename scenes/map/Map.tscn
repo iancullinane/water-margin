@@ -1,44 +1,43 @@
-[gd_scene load_steps=7 format=3 uid="uid://du71fhytq8a53"]
+[gd_scene format=3 uid="uid://du71fhytq8a53"]
 
 [ext_resource type="Script" uid="uid://d2iim0f2od1dc" path="res://scripts/objects/map.gd" id="1_hgphw"]
-[ext_resource type="Script" uid="uid://dew6o3430dgsk" path="res://scripts/components/debug_square.gd" id="1_nuen2"]
+[ext_resource type="Script" uid="uid://dew6o3430dgsk" path="res://scripts/components/ux/debug_square.gd" id="1_nuen2"]
 [ext_resource type="TileSet" uid="uid://bguacdt7p6x11" path="res://assets/maps/base_map.tres" id="2_nuen2"]
-[ext_resource type="Resource" uid="uid://jhodqs1t5g07" path="res://scenes/data/maps/map_001.tres" id="2_yajg5"]
-[ext_resource type="Script" uid="uid://bhqwyq0u2ap3o" path="res://scripts/components/outline_highlighter.gd" id="3_hgphw"]
-[ext_resource type="Script" uid="uid://ue8on5mpbew6" path="res://scripts/components/tile_debug.gd" id="7_vyhe5"]
+[ext_resource type="Script" uid="uid://bhqwyq0u2ap3o" path="res://scripts/components/ux/outline_highlighter.gd" id="3_hgphw"]
+[ext_resource type="Script" uid="uid://ue8on5mpbew6" path="res://scripts/components/ux/tile_debug.gd" id="7_vyhe5"]
 
-[node name="Map" type="TileMapLayer"]
+[node name="Map" type="TileMapLayer" unique_id=1976695097]
 tile_set = ExtResource("2_nuen2")
 script = ExtResource("1_hgphw")
-game_map_data = ExtResource("2_yajg5")
 metadata/_edit_horizontal_guides_ = [-1608.0, 1608.0]
 metadata/_edit_vertical_guides_ = [-1608.0, 1608.0]
 
-[node name="Ground" type="TileMapLayer" parent="."]
+[node name="Ground" type="TileMapLayer" parent="." unique_id=1985818849]
 z_index = -10
 tile_set = ExtResource("2_nuen2")
 
-[node name="Highlight" type="TileMapLayer" parent="Ground"]
+[node name="Highlight" type="TileMapLayer" parent="Ground" unique_id=1883723371]
+tile_map_data = PackedByteArray(0, 0, 8, 0, 13, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 tile_set = ExtResource("2_nuen2")
 
-[node name="OutlineHighlighter" type="Node" parent="Ground"]
+[node name="OutlineHighlighter" type="Node" parent="Ground" unique_id=378168024]
 script = ExtResource("3_hgphw")
 tile = Vector2i(0, 0)
 
-[node name="Terrain" type="TileMapLayer" parent="."]
+[node name="Terrain" type="TileMapLayer" parent="." unique_id=2084251073]
 tile_set = ExtResource("2_nuen2")
 
-[node name="Buildings" type="TileMapLayer" parent="."]
+[node name="Buildings" type="TileMapLayer" parent="." unique_id=247100018]
 tile_set = ExtResource("2_nuen2")
 
-[node name="Debuggers" type="Node" parent="."]
+[node name="Debuggers" type="Node" parent="." unique_id=36611310]
 
-[node name="TileDebugger" type="Node2D" parent="Debuggers"]
+[node name="TileDebugger" type="Node2D" parent="Debuggers" unique_id=968575026]
 script = ExtResource("7_vyhe5")
 show_in_game = true
 static_tile = Vector2i(6, 6)
 
-[node name="DebugHighlighter" type="Node2D" parent="Debuggers"]
+[node name="DebugHighlighter" type="Node2D" parent="Debuggers" unique_id=1729858567]
 script = ExtResource("1_nuen2")
 show_in_game = true
 height = 30

@@ -124,6 +124,8 @@ func set_current_player_by_index(index: int):
 func move_current_player(dir: Vector2):
 	current_player.move(dir)
 
+## spawn_party_if_missing is a method to load a hardcoded set
+## of player party member.
 func spawn_party_if_missing() -> void:
 	if get_entity_by_name("Llew_v2") == null:
 		var llew_v2_instance = character_scenes["Llew_v2"].instantiate()

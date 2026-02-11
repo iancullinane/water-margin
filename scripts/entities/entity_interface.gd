@@ -111,6 +111,7 @@ func set_controllable(value: bool) -> void:
 
 
 func move(dir: Vector2):
+	direction = dir
 	mover.move(dir)
 
 # func _move(dir: String) -> void:
@@ -148,7 +149,7 @@ func move(dir: Vector2):
 # 	_move_state[dir]["time"] = -1.0
 # 	_move_state[dir]["next_emit"] = 0.0
 
-func _process_held_movement(delta: float) -> void:
+func _process_held_movement(_delta: float) -> void:
 	if not current_player:
 		return
 
