@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://du71fhytq8a53"]
 
 [ext_resource type="Script" uid="uid://d2iim0f2od1dc" path="res://scripts/objects/map.gd" id="1_hgphw"]
-[ext_resource type="Script" uid="uid://dew6o3430dgsk" path="res://scripts/components/debug_square.gd" id="1_nuen2"]
+[ext_resource type="Script" uid="uid://dew6o3430dgsk" path="res://scripts/components/ux/debug_square.gd" id="1_nuen2"]
 [ext_resource type="TileSet" uid="uid://bguacdt7p6x11" path="res://assets/maps/base_map.tres" id="2_nuen2"]
-[ext_resource type="Script" uid="uid://bhqwyq0u2ap3o" path="res://scripts/components/outline_highlighter.gd" id="3_hgphw"]
-[ext_resource type="Script" uid="uid://ue8on5mpbew6" path="res://scripts/components/tile_debug.gd" id="7_vyhe5"]
+[ext_resource type="Script" uid="uid://bhqwyq0u2ap3o" path="res://scripts/components/ux/outline_highlighter.gd" id="3_hgphw"]
+[ext_resource type="Script" uid="uid://ue8on5mpbew6" path="res://scripts/components/ux/tile_debug.gd" id="7_vyhe5"]
 
 [node name="Map" type="TileMapLayer" unique_id=1976695097]
 tile_set = ExtResource("2_nuen2")

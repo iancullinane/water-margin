@@ -4,7 +4,7 @@
 [ext_resource type="FontFile" uid="uid://bdhd2oo2h2dl2" path="res://assets/fonts/RedAlert.ttf" id="2_b11w7"]
 [ext_resource type="Texture2D" uid="uid://cnn7ydrxvtibn" path="res://assets/textures/atlases/knight_armor_atlas.tres" id="2_gpy3h"]
 [ext_resource type="Script" uid="uid://cpkvyt0fth36j" path="res://scripts/entities/mover.gd" id="4_gpy3h"]
-[ext_resource type="Script" uid="uid://cmuemnj6jwb2b" path="res://scenes/entities/animator.gd" id="5_uhh82"]
+[ext_resource type="Script" uid="uid://cmuemnj6jwb2b" path="res://scripts/entities/animator.gd" id="5_uhh82"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_uhh82"]
 atlas = ExtResource("2_gpy3h")

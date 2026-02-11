@@ -31,6 +31,10 @@ func _process(delta: float) -> void:
 func _input(event: InputEvent) -> void:
 	# Middle mouse button drag to pan
 	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+			var grid_pos := GameConstants.world_to_grid(get_global_mouse_position())
+			print("[InputCtl] Left click at grid position: ", grid_pos)
+			SignalBus.left_clicked.emit(grid_pos)
 		if event.button_index == MOUSE_BUTTON_RIGHT:
 			if event.pressed:
 				_is_dragging = true

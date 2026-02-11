@@ -1,8 +1,8 @@
-[gd_scene load_steps=4 format=4 uid="uid://5wokgupq5y7x"]
+[gd_scene format=4 uid="uid://5wokgupq5y7x"]
 
 [ext_resource type="PackedScene" uid="uid://du71fhytq8a53" path="res://scenes/map/Map.tscn" id="1_lxhxh"]
 [ext_resource type="TileSet" uid="uid://bguacdt7p6x11" path="res://assets/maps/base_map.tres" id="2_q37kf"]
-[ext_resource type="Script" uid="uid://bhqwyq0u2ap3o" path="res://scripts/components/outline_highlighter.gd" id="3_ntnrj"]
+[ext_resource type="Script" uid="uid://bhqwyq0u2ap3o" path="res://scripts/components/ux/outline_highlighter.gd" id="3_ntnrj"]
 
 [node name="Map" instance=ExtResource("1_lxhxh")]
 

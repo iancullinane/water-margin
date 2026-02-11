@@ -18,7 +18,11 @@ var _selected_map_scene: PackedScene
 @export var reload_on_change_in_editor: bool = true
 @export var clear_previous_on_load: bool = true
 
+## ensure_map_loaded looks for a sibling called
+## MapCtl and attempts to load a map to it. When loading
+## a map any other maps will be free'd.
 func ensure_map_loaded() -> void:
+	"""Returns the bounding rectangle of this map"""
 	logging.log("attempt scene load")
 	if selected_map_scene == null:
 		return

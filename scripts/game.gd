@@ -48,9 +48,22 @@ func _ready():
 	level_loader.ensure_map_loaded()
 	entity_ctl.spawn_party_if_missing()
 	_load_party_state()
+
+	# make sure the camera is set to something
+	# meaningful. which is the current player
 	_snap_camera_to_current_at_start()
 
-
+	# the game is now running on a particular map, see
+	# editor for Scenetree, and controllers in
+	#
+	# 	components/ctl
+	#
+	# Player party is not in idle editor, as the party
+	# is added after the party is added.
+	#
+	# Project provides the following globals:
+		# SignalBus
+		# GameConstants
 
 
 func _exit_tree():
@@ -60,6 +73,7 @@ func _exit_tree():
 
 func _spawn_party_if_missing() -> void:
 	if entity_ctl == null:
+		push_error("EntityCtl is null in _spawn_party_if_missing")
 		return
 	entity_ctl.spawn_party_if_missing()
 
@@ -75,7 +89,8 @@ func _snap_camera_to_current_at_start() -> void:
 		camera.reset_smoothing()
 		camera.position_smoothing_enabled = true
 
-
+## _load_party_state gets the user state resource from user
+## storage.
 func _load_party_state() -> void:
 	if not ResourceLoader.exists(STATE_PATH):
 		return
@@ -87,6 +102,8 @@ func _load_party_state() -> void:
 		if e:
 			e.position = m.position
 
+## _save_party_state saves the user state resource from user
+## storage.
 func _save_party_state() -> void:
 	var state := PartyState.new()
 	for e in entity_ctl.get_all_entities():
