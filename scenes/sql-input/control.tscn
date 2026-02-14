@@ -1,9 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://cx1txo3cxj3yi"]
+[gd_scene format=3 uid="uid://cx1txo3cxj3yi"]
 
-[ext_resource type="Script" uid="uid://btnw70rdr7u3r" path="res://scenes/pallette/data_ctl.gd" id="1_50oms"]
+[ext_resource type="Script" uid="uid://btnw70rdr7u3r" path="res://scenes/sql-input/data_ctl.gd" id="1_50oms"]
 [ext_resource type="Theme" uid="uid://bk7x7vskffp0" path="res://resources/ui/main_theme.tres" id="3_8hom7"]
 
-[node name="MainControls" type="Control"]
+[node name="MainControls" type="Control" unique_id=1901319783]
 custom_minimum_size = Vector2(500, 100)
 layout_mode = 3
 anchor_top = 0.861
@@ -18,7 +18,7 @@ grow_vertical = 2
 theme = ExtResource("3_8hom7")
 script = ExtResource("1_50oms")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1467661460]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -26,42 +26,42 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="NameEntry" type="HBoxContainer" parent="VBoxContainer"]
+[node name="NameEntry" type="HBoxContainer" parent="VBoxContainer" unique_id=1906172161]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Label" type="Label" parent="VBoxContainer/NameEntry"]
+[node name="Label" type="Label" parent="VBoxContainer/NameEntry" unique_id=672397783]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "Name"
 
-[node name="TextEdit" type="TextEdit" parent="VBoxContainer/NameEntry"]
+[node name="TextEdit" type="TextEdit" parent="VBoxContainer/NameEntry" unique_id=1482786429]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="StatEntry" type="HBoxContainer" parent="VBoxContainer"]
+[node name="StatEntry" type="HBoxContainer" parent="VBoxContainer" unique_id=976172179]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Label" type="Label" parent="VBoxContainer/StatEntry"]
+[node name="Label" type="Label" parent="VBoxContainer/StatEntry" unique_id=1988082889]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "Other Data"
 
-[node name="TextEdit" type="TextEdit" parent="VBoxContainer/StatEntry"]
+[node name="TextEdit" type="TextEdit" parent="VBoxContainer/StatEntry" unique_id=877648308]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Buttons" type="HBoxContainer" parent="VBoxContainer"]
+[node name="Buttons" type="HBoxContainer" parent="VBoxContainer" unique_id=1772259858]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 3.0
 
-[node name="Panel1" type="Panel" parent="VBoxContainer/Buttons"]
+[node name="Panel1" type="Panel" parent="VBoxContainer/Buttons" unique_id=624768874]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Insert" type="MenuButton" parent="VBoxContainer/Buttons/Panel1"]
+[node name="Insert" type="MenuButton" parent="VBoxContainer/Buttons/Panel1" unique_id=267186431]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -71,11 +71,11 @@ grow_vertical = 2
 theme = ExtResource("3_8hom7")
 text = "Insert"
 
-[node name="Panel2" type="Panel" parent="VBoxContainer/Buttons"]
+[node name="Panel2" type="Panel" parent="VBoxContainer/Buttons" unique_id=1092694899]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Select" type="MenuButton" parent="VBoxContainer/Buttons/Panel2"]
+[node name="Select" type="MenuButton" parent="VBoxContainer/Buttons/Panel2" unique_id=757821304]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -84,11 +84,11 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "Select"
 
-[node name="Panel3" type="Panel" parent="VBoxContainer/Buttons"]
+[node name="Panel3" type="Panel" parent="VBoxContainer/Buttons" unique_id=1293887053]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Update" type="MenuButton" parent="VBoxContainer/Buttons/Panel3"]
+[node name="Update" type="MenuButton" parent="VBoxContainer/Buttons/Panel3" unique_id=213771367]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -97,11 +97,11 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "Update"
 
-[node name="Panel4" type="Panel" parent="VBoxContainer/Buttons"]
+[node name="Panel4" type="Panel" parent="VBoxContainer/Buttons" unique_id=1813046128]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Delete" type="MenuButton" parent="VBoxContainer/Buttons/Panel4"]
+[node name="Delete" type="MenuButton" parent="VBoxContainer/Buttons/Panel4" unique_id=1211798184]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -110,11 +110,11 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "Delete"
 
-[node name="Panel5" type="Panel" parent="VBoxContainer/Buttons"]
+[node name="Panel5" type="Panel" parent="VBoxContainer/Buttons" unique_id=1134539596]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Custom" type="MenuButton" parent="VBoxContainer/Buttons/Panel5"]
+[node name="Custom" type="MenuButton" parent="VBoxContainer/Buttons/Panel5" unique_id=756729591]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -123,7 +123,7 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "Custom "
 
-[node name="Create Table" type="HBoxContainer" parent="."]
+[node name="Create Table" type="HBoxContainer" parent="." unique_id=655326890]
 layout_mode = 0
 offset_left = -5.99999
 offset_top = -95.0
@@ -131,7 +131,7 @@ offset_right = 181.0
 offset_bottom = -41.0
 metadata/_edit_group_ = true
 
-[node name="CreateTable" type="Button" parent="Create Table"]
+[node name="CreateTable" type="Button" parent="Create Table" unique_id=1929485880]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Create Table

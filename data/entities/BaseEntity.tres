@@ -1,7 +1,7 @@
-[gd_resource type="Resource" script_class="EntityData" load_steps=3 format=3 uid="uid://c1m7jrkgxy1t5"]
+[gd_resource type="Resource" script_class="EntityData" format=3 uid="uid://c1m7jrkgxy1t5"]
 
 [ext_resource type="SpriteFrames" uid="uid://dlxdjfwwsmta6" path="res://assets/animations/bowman_anim.tres" id="1_yorrf"]
-[ext_resource type="Script" uid="uid://bj6cvisr2alqv" path="res://data/entities/entity_res.gd" id="2_hji0j"]
+[ext_resource type="Script" uid="uid://bj6cvisr2alqv" path="res://data/models/entity_res.gd" id="2_hji0j"]
 
 [resource]
 script = ExtResource("2_hji0j")

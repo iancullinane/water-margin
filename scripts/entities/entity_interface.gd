@@ -64,33 +64,6 @@ func _ready() -> void:
 # 	if direction.length() > 0:
 # 		last_non_zero_direction = direction
 
-# 	# Use last direction when not moving
-# 	var anim_direction = direction if direction.length() > 0 else last_non_zero_direction
-
-# 	# Set the blend position based on direction
-# 	$AnimationTree.set("parameters/MoveStateMachine/idle/blend_position", anim_direction)
-
-# 	# Flip sprite when facing left
-# 	if anim_direction.x < 0:
-# 		facing_left = true
-# 		$Sprite.flip_h = true
-# 	elif anim_direction.x > 0:
-# 		facing_left = false
-# 		$Sprite.flip_h = false
-
-# ===========================================
-
-
-func set_controllable(value: bool) -> void:
-	if current_player == value:
-		return
-	current_player = value
-
-
-# func get_input():
-# 	direction = Input.get_vector("player_left", "player_right", "player_up","player_down")
-# 	if !current_player:
-# 		return
 
 # 	# Manage press/release transitions
 # 	for dir in DIRECTIONS:

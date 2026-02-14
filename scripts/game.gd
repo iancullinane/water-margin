@@ -1,8 +1,8 @@
 @tool
 extends Node2D
 
-@export var height: int;
-@export var width: int;
+# @export var height: int;
+# @export var width: int;
 
 @export_group("Debug flags")
 # -------------------------------

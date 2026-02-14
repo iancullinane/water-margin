@@ -1,7 +1,7 @@
-[gd_resource type="Resource" script_class="EntityData" load_steps=3 format=3 uid="uid://b40b17tf7khk8"]
+[gd_resource type="Resource" script_class="EntityData" format=3 uid="uid://b40b17tf7khk8"]
 
 [ext_resource type="SpriteFrames" uid="uid://dyxa0fbg0s5eo" path="res://assets/animations/chick_anim.tres" id="1_jn5rf"]
-[ext_resource type="Script" uid="uid://bj6cvisr2alqv" path="res://data/entities/entity_res.gd" id="2_nvmd6"]
+[ext_resource type="Script" uid="uid://bj6cvisr2alqv" path="res://data/models/entity_res.gd" id="2_nvmd6"]
 
 [resource]
 script = ExtResource("2_nvmd6")

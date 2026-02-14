@@ -12,9 +12,9 @@ var current_player: IEntity
 
 # Character scene dictionary
 var character_scenes := {
-	"Llew_v2": preload("res://scenes/entities/llew_v2.tscn"),
-	"Elliette_v2": preload("res://scenes/entities/elliette_v2.tscn"),
-	"Eignh_v2": preload("res://scenes/entities/eignh_v2.tscn")
+	"Llew_v2": preload("res://scenes/entities/players/llew_v2.tscn"),
+	"Elliette_v2": preload("res://scenes/entities/players/elliette_v2.tscn"),
+	"Eignh_v2": preload("res://scenes/entities/players/eignh_v2.tscn")
 }
 
 # The three kinds of entities are stored as children
