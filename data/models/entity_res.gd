@@ -12,15 +12,7 @@ func set_entity_name(value: String):
 
 
 # @export var animation_resource: SpriteFrames
-@export var job_data: JobData : set = set_job_data, get = get_job_data
-
-func set_job_data(value: JobData):
-	job_data = value
-
-func get_job_data() -> JobData:
-	if job_data == null:
-		return preload("res://data/jobs/default_job_data.tres")
-	return job_data
+@export var job_data: JobData = preload("res://data/jobs/default_job_data.tres")
 
 @export var strength: int = 10
 @export var intelligence: int = 10
