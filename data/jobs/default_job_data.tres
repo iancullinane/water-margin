@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="JobData" format=3 uid="uid://ha23e286ogb2"]
+
+[ext_resource type="Script" uid="uid://bqpeoxdwi8bl4" path="res://data/models/job_data.gd" id="1_i5pro"]
+
+[resource]
+script = ExtResource("1_i5pro")
+job_name = "Drifter"
+description = "The job if there is no other job."
+damage = 1
+metadata/_custom_type_script = "uid://bqpeoxdwi8bl4"

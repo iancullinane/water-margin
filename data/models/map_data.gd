@@ -1,6 +1,7 @@
 extends Resource
 class_name GameMapData
 
+
 @export var tile_data: Array[GameTile]
 @export var map_size: Vector2i = Vector2i(100, 100)  # Width x Height in tiles
 @export var map_offset: Vector2i = Vector2i.ZERO  # Top-left corner position

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="GameMapData" format=3 uid="uid://d0g5l3s4dk1ns"]
+
+[ext_resource type="Script" uid="uid://cxmdi8r88sywi" path="res://scripts/objects/game_tile.gd" id="1_r0kys"]
+[ext_resource type="Script" uid="uid://dr1va401g07an" path="res://data/models/map_data.gd" id="1_x5r5w"]
+
+[sub_resource type="Resource" id="Resource_264po"]
+script = ExtResource("1_r0kys")
+position = Vector2i(18, 12)
+description = "adadadadadadad"
+metadata/_custom_type_script = "uid://cxmdi8r88sywi"
+
+[resource]
+script = ExtResource("1_x5r5w")
+tile_data = Array[ExtResource("1_r0kys")]([SubResource("Resource_264po")])
+metadata/_custom_type_script = "uid://dr1va401g07an"
