@@ -1,6 +1,7 @@
 [gd_resource type="Resource" script_class="EntityData" format=3 uid="uid://bohgkkxmikmmp"]
 
 [ext_resource type="Script" uid="uid://bj6cvisr2alqv" path="res://data/models/entity_res.gd" id="1_mh5vm"]
+[ext_resource type="Resource" uid="uid://ha23e286ogb2" path="res://data/jobs/default_job_data.tres" id="1_se5m4"]
 
 [resource]
 script = ExtResource("1_mh5vm")

@@ -98,9 +98,10 @@ func _load_party_state() -> void:
 	if state == null:
 		return
 	for m in state.members:
-		var e: Node2D = entity_ctl.get_entity_by_name(m.name)
+		var e = entity_ctl.get_entity_by_name(m.name)
 		if e:
 			e.position = m.position
+			e.snap_to_grid()
 
 ## _save_party_state saves the user state resource from user
 ## storage.

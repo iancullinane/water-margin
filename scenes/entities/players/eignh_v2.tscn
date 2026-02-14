@@ -6,14 +6,9 @@
 [node name="Eignh_v2" unique_id=877221106 groups=["entities"] instance=ExtResource("1_vge8s")]
 stats = ExtResource("2_6hppf")
 
-[node name="Sprite" parent="." index="0" unique_id=170365915]
-position = Vector2(9, -2)
-
 [node name="NameLabel" parent="." index="3" unique_id=715073483]
-offset_left = -21.0
-offset_top = 15.0
-offset_right = 41.0
-offset_bottom = 66.0
-text = "Eignh
-
-"
+offset_left = -22.0
+offset_top = 17.0
+offset_right = 37.0
+offset_bottom = 34.0
+text = "Eignh"

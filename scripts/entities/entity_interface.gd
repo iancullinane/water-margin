@@ -44,11 +44,12 @@ var target_position: Vector2 = Vector2.ZERO
 
 func _ready() -> void:
 	add_to_group("entities")
+	snap_to_grid()
 	print("Entity ready:", name, stats)
-	# if the EntityCtl was not set in editor
-	# it will expect the parent to be EntityCtl
-	# animation_player.play("idle_down")
-	target_position = position  # Initialize to current position
+
+func snap_to_grid() -> void:
+	position = position.snapped(Vector2(CELL_SIZE, CELL_SIZE))
+	target_position = position
 
 # func _physics_process(_delta: float) -> void:
 # 	_process_held_movement(_delta)
@@ -85,6 +86,9 @@ func _ready() -> void:
 
 func move(dir: Vector2):
 	direction = dir
+	var new_target = position + dir * CELL_SIZE
+	if not _can_move_to(new_target):
+		return
 	mover.move(dir)
 
 # func _move(dir: String) -> void:

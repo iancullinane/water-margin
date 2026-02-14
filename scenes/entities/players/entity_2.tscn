@@ -324,7 +324,7 @@ outline_color = Color(0.0943044, 0.0943044, 0.0943044, 1)
 script = ExtResource("1_b11w7")
 
 [node name="Sprite" type="Sprite2D" parent="." unique_id=170365915]
-position = Vector2(9, -3)
+position = Vector2(9, -2)
 texture = SubResource("AtlasTexture_uhh82")
 hframes = 6
 vframes = 13
@@ -360,9 +360,10 @@ parameters/MoveStateMachine/idle/blend_position = Vector2(-0.005410254, 0.984282
 
 [node name="NameLabel" type="Label" parent="." unique_id=715073483]
 offset_left = -23.0
-offset_top = 28.0
+offset_top = 15.0
 offset_right = 39.0
-offset_bottom = 43.0
+offset_bottom = 30.0
+pivot_offset = Vector2(9, -12)
 text = "Cerah"
 label_settings = SubResource("LabelSettings_k0aba")
 horizontal_alignment = 1

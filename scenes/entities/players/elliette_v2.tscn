@@ -8,14 +8,12 @@
 stats = ExtResource("2_4kahs")
 
 [node name="Sprite" parent="." index="0" unique_id=170365915]
-position = Vector2(9, 6)
+position = Vector2(9, 7)
 texture = ExtResource("3_hywii")
 
 [node name="NameLabel" parent="." index="3" unique_id=715073483]
-offset_left = -21.0
-offset_top = 15.0
-offset_right = 41.0
-offset_bottom = 66.0
-text = "Elliette
-
-"
+offset_left = -19.0
+offset_top = 17.0
+offset_right = 36.0
+offset_bottom = 36.0
+text = "Elliette"
