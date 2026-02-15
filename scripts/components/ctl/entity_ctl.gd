@@ -142,35 +142,3 @@ func spawn_party_if_missing() -> void:
 		var eignh_v2_instance = character_scenes["Eignh_v2"].instantiate()
 		eignh_v2_instance.name = "Eignh_v2"
 		add_party_member(eignh_v2_instance)
-
-
-# func set_current_player_by_name(entity_name: String):
-# 	var entity = get_entity_by_name(entity_name)
-# 	if entity:
-# 		set_current_player(entity)
-
-
-
-# # Manipulation methods
-# func move_entity(entity: Entity, direction: String):
-#	 if entity and entity in entities:
-#		 entity._on_move(direction)
-
-# func move_entity_by_index(index: int, direction: String):
-#	 var entity = get_entity_by_index(index)
-#	 if entity:
-#		 move_entity(entity, direction)
-
-# func move_current_player(direction: String):
-#	 var current = get_current_player()
-#	 if current:
-#		 move_entity(current, direction)
-
-# func set_entity_position(entity: Entity, new_position: Vector2):
-#	 if entity and entity in entities:
-#		 entity.position = new_position
-
-# func set_entity_position_by_index(index: int, new_position: Vector2):
-#	 var entity = get_entity_by_index(index)
-#	 if entity:
-#		 set_entity_position(entity, new_position)

@@ -1,4 +1,4 @@
-// Rain and Snow shader by Brian Smith (steampunkdemon.itch.io)
+ // Rain and Snow shader by Brian Smith (steampunkdemon.itch.io)
 // MIT licence
 
 shader_type canvas_item;

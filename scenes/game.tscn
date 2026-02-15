@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://csb7w3cilijva" path="res://scripts/game.gd" id="1_dinhu"]
 [ext_resource type="Script" uid="uid://dgybabpokdv3q" path="res://scripts/utils/level_loader.gd" id="2_so0bb"]
 [ext_resource type="PackedScene" uid="uid://dxqxk444weoq4" path="res://scenes/map/map_001.tscn" id="3_trtic"]
-[ext_resource type="Resource" uid="uid://jhodqs1t5g07" path="res://data/map/map_001.tres" id="4_ir15t"]
+[ext_resource type="Resource" uid="uid://d0g5l3s4dk1ns" path="res://data/map/map_002.tres" id="4_ca42v"]
 [ext_resource type="AudioStream" uid="uid://rkxyqgqxk5kp" path="res://assets/audio/env/light-rain.wav" id="4_p3qcy"]
 [ext_resource type="PackedScene" uid="uid://cx1txo3cxj3yi" path="res://scenes/sql-input/control.tscn" id="5_dglt5"]
 [ext_resource type="Script" uid="uid://d32hlclfr5hjr" path="res://scripts/components/ctl/map_ctl.gd" id="5_ir15t"]
@@ -22,8 +22,8 @@ shader_parameter/near_rain_length = 0.00999999977648
 shader_parameter/far_rain_length = 0.00999999977648
 shader_parameter/near_rain_width = 0.10000000149012
 shader_parameter/far_rain_width = 0.20200000633512
-shader_parameter/near_rain_transparency = 0.91000003996512
-shader_parameter/far_rain_transparency = 0.79300003440762
+shader_parameter/near_rain_transparency = 0.66000002809012
+shader_parameter/far_rain_transparency = 0.30300001113262
 shader_parameter/rain_color = Color(0.9411765, 0.9411765, 0.9411765, 0.8980392)
 shader_parameter/base_rain_speed = 0.41700001654762
 shader_parameter/additional_rain_speed = 0.31800001184512
@@ -31,7 +31,7 @@ shader_parameter/slant = -0.00699995283249998
 shader_parameter/ripple_scale = 264.0
 shader_parameter/ripple_brightness = 0.43600002071
 shader_parameter/ripple_speed = 0.28600001032512
-shader_parameter/ripple_density_multiplier = 0.010000000475
+shader_parameter/ripple_density_multiplier = 0.1850000087875
 shader_parameter/ripple_spawn_chance_min = 0.0150000007125
 shader_parameter/ripple_spawn_chance_max = 0.7
 
@@ -41,7 +41,7 @@ script = ExtResource("1_dinhu")
 [node name="LevelLoader" type="Node2D" parent="." unique_id=706577614]
 script = ExtResource("2_so0bb")
 selected_map_scene = ExtResource("3_trtic")
-map_data = ExtResource("4_ir15t")
+map_data = ExtResource("4_ca42v")
 
 [node name="MapCtl" type="Node2D" parent="." unique_id=1077499357]
 script = ExtResource("5_ir15t")
@@ -58,10 +58,10 @@ script = ExtResource("8_7vf1r")
 [node name="Rain" type="ColorRect" parent="." unique_id=1712973031]
 modulate = Color(0.031565506, 0.12029398, 0.29539987, 0.47058824)
 material = SubResource("ShaderMaterial_kvuet")
-offset_left = -222.0
-offset_top = -141.0
-offset_right = 684.0
-offset_bottom = 629.0
+offset_left = -131.0
+offset_top = -55.0
+offset_right = 1810.918
+offset_bottom = 1652.0
 script = ExtResource("11_kvuet")
 
 [node name="TileInfoUi" parent="." unique_id=1107598726 instance=ExtResource("9_trtic")]

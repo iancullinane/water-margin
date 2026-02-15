@@ -17,7 +17,7 @@ z_index = -10
 tile_set = ExtResource("2_nuen2")
 
 [node name="Highlight" type="TileMapLayer" parent="Ground" unique_id=1883723371]
-tile_map_data = PackedByteArray(0, 0, 8, 0, 13, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+tile_map_data = PackedByteArray(0, 0, 79, 0, 35, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 tile_set = ExtResource("2_nuen2")
 
 [node name="OutlineHighlighter" type="Node" parent="Ground" unique_id=378168024]
@@ -37,9 +37,9 @@ script = ExtResource("7_vyhe5")
 show_in_game = true
 static_tile = Vector2i(6, 6)
 
-[node name="DebugHighlighter" type="Node2D" parent="Debuggers" unique_id=1729858567]
+[node name="MapBorderHighlighter" type="Node2D" parent="Debuggers" unique_id=1729858567]
 script = ExtResource("1_nuen2")
 show_in_game = true
-height = 30
-width = 30
+height = 100
+width = 100
 centered = false
