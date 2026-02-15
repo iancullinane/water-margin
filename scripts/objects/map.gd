@@ -20,9 +20,9 @@ func get_terrain_layer()->TileMapLayer:
 func get_building_layer()->TileMapLayer:
 	return $Buildings
 
-	
 
-	
+
+
 func get_map_name() -> String:
 	return map_name
 
@@ -43,3 +43,12 @@ func get_tile_data_at(tile_coords: Vector2i) -> GameTile:
 	if game_map_data == null:
 		return null
 	return game_map_data.get_tile(tile_coords)
+
+
+## Returns the pixel-space bounding rect of all used tiles across all layers.
+func get_map_pixel_rect() -> Rect2:
+	var used := get_used_rect()
+	for layer in get_tilemap_layers():
+		used = used.merge(layer.get_used_rect())
+	var cell_size := Vector2(GameConstants.CELL_SIZE, GameConstants.CELL_SIZE)
+	return Rect2(Vector2(used.position) * cell_size, Vector2(used.size) * cell_size)

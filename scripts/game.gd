@@ -46,6 +46,7 @@ func _ready():
 		return
 	# Runtime: initialize systems
 	level_loader.ensure_map_loaded()
+	_apply_camera_limits()
 	entity_ctl.spawn_party_if_missing()
 	_load_party_state()
 
@@ -77,6 +78,17 @@ func _spawn_party_if_missing() -> void:
 		return
 	entity_ctl.spawn_party_if_missing()
 
+
+
+func _apply_camera_limits() -> void:
+	var current_map: GameMap = level_loader.get_current_map()
+	if not current_map:
+		return
+	var bounds := current_map.get_map_pixel_rect()
+	camera.limit_left = int(bounds.position.x)
+	camera.limit_top = int(bounds.position.y)
+	camera.limit_right = int(bounds.end.x)
+	camera.limit_bottom = int(bounds.end.y)
 
 
 func _snap_camera_to_current_at_start() -> void:

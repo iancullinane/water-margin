@@ -17,7 +17,7 @@ uniform float additional_rain_speed : hint_range(0.1, 1.0) = 0.5;
 uniform float slant : hint_range(-1.0, 1.0) = 0.2;
 
 // Ripple effect parameters
-uniform float ripple_scale : hint_range(4.0, 264.0) = 32.0;
+uniform float ripple_scale : hint_range(4.0, 1000.0) = 32.0;
 uniform float ripple_brightness : hint_range(0.0, 1.0) = 0.2;
 uniform float ripple_speed : hint_range(0.1, 2.0) = 0.5;
 uniform float ripple_density_multiplier : hint_range(0.0, 2.0) = 1.0;
@@ -56,44 +56,44 @@ void fragment() {
 	// Normalize rain_amount (50-2000) to a 0-1 factor
 	float rain_factor = clamp((rain_amount - 50.0) / 1950.0, 0.0, 1.0);
 	float ripple_density = rain_factor * ripple_density_multiplier;
-	
+
 	vec2 ripple_uv = UV * ripple_scale;
 	vec2 grid_pos = floor(ripple_uv);
 	float ripple_intensity = 0.0;
-	
+
 	// Check nearby grid cells for ripples
 	for (int y = -1; y <= 1; y++) {
 		for (int x = -1; x <= 1; x++) {
 			vec2 cell = grid_pos + vec2(float(x), float(y));
-			
+
 			// Random offset within cell
 			float rand_x = hash(cell);
 			float rand_y = hash(cell + vec2(13.37, 42.42));
 			vec2 ripple_center = cell + vec2(rand_x, rand_y);
-			
+
 			// Stagger ripple timing - faster with more rain
 			float time_offset = hash(cell + vec2(99.99, 11.11));
 			float t = fract(time_offset + TIME * ripple_speed * (1.0 + ripple_density * 0.5));
-			
+
 			// Distance from ripple center
 			float dist = length(ripple_uv - ripple_center);
-			
+
 			// Expanding ring
 			float ring_radius = t * 2.0;
 			float ring_thickness = 0.2;
 			float ring = abs(dist - ring_radius);
-			
+
 			// Spawn chance increases with rain intensity
 			// At low rain (50), uses min spawn %, at high rain (2000), uses max spawn %
 			float spawn_probability = mix(ripple_spawn_chance_min, ripple_spawn_chance_max, ripple_density);
 			float spawn_chance = step(1.0 - spawn_probability, rand_x);
-			
+
 			// Ring intensity that fades over time
 			float ring_alpha = smoothstep(ring_thickness, 0.0, ring) * (1.0 - t) * spawn_chance;
 			ripple_intensity += ring_alpha;
 		}
 	}
-	
+
 	// Apply ripple as brightness boost
 	ripple_intensity = clamp(ripple_intensity, 0.0, 1.0);
 	COLOR.rgb += vec3(ripple_brightness * ripple_intensity);

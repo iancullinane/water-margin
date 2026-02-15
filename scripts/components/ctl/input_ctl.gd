@@ -26,6 +26,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	handle_pan_and_zoom(delta)
+	_clamp_camera_position()
 
 
 func _input(event: InputEvent) -> void:
@@ -104,13 +105,9 @@ func handle_pan_and_zoom(delta: float) -> void:
 		new_zoom = clampf(new_zoom, min_zoom, max_zoom)
 		camera.zoom = Vector2(new_zoom, new_zoom)
 
-# func get_input():
-# 	direction = Input.get_vector("player_left", "player_right", "player_up","player_down")
-# 	if !current_player:
-# 		return
 
-# 	# Manage press/release transitions
-# 	for dir in DIRECTIONS:
-# 		var action = "player_" + dir
-# 		if Input.is_action_just_pressed(action):
-# 			mover._move(dir)
+func _clamp_camera_position() -> void:
+	var vp_size := get_viewport().get_visible_rect().size / camera.zoom
+	var half_vp := vp_size * 0.5
+	camera.position.x = clampf(camera.position.x, camera.limit_left + half_vp.x, camera.limit_right - half_vp.x)
+	camera.position.y = clampf(camera.position.y, camera.limit_top + half_vp.y, camera.limit_bottom - half_vp.y)

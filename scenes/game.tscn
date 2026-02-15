@@ -28,7 +28,7 @@ shader_parameter/rain_color = Color(0.9411765, 0.9411765, 0.9411765, 0.8980392)
 shader_parameter/base_rain_speed = 0.41700001654762
 shader_parameter/additional_rain_speed = 0.31800001184512
 shader_parameter/slant = -0.00699995283249998
-shader_parameter/ripple_scale = 264.0
+shader_parameter/ripple_scale = 1000.0
 shader_parameter/ripple_brightness = 0.43600002071
 shader_parameter/ripple_speed = 0.28600001032512
 shader_parameter/ripple_density_multiplier = 0.1850000087875
@@ -70,7 +70,6 @@ script = ExtResource("11_kvuet")
 position = Vector2(192, 128)
 zoom = Vector2(2, 2)
 position_smoothing_enabled = true
-position_smoothing_speed = 2.0
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=638450498]
 stream = ExtResource("4_p3qcy")
