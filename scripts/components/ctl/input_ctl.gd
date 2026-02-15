@@ -41,6 +41,12 @@ func _input(event: InputEvent) -> void:
 				_last_mouse_pos = event.position
 			else:
 				_is_dragging = false
+		if event.button_index == MOUSE_BUTTON_WHEEL_UP and event.pressed:
+			var new_zoom = camera.zoom.x + zoom_speed
+			camera.zoom = Vector2.ONE * clampf(new_zoom, min_zoom, max_zoom)
+		if event.button_index == MOUSE_BUTTON_WHEEL_DOWN and event.pressed:
+			var new_zoom = camera.zoom.x - zoom_speed
+			camera.zoom = Vector2.ONE * clampf(new_zoom, min_zoom, max_zoom)
 
 
 	if event is InputEventMouseMotion and _is_dragging:
