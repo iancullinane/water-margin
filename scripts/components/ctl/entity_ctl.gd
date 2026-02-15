@@ -35,7 +35,6 @@ func add_party_member(entity: IEntity) -> void:
 	var party_container = _get_container(EntityType.PARTY)
 	if party_container.get_child_count() == 0:
 		current_player = entity
-		entity.current_player = true
 
 	party_container.add_child(entity)
 
@@ -123,6 +122,7 @@ func set_current_player_by_index(index: int):
 
 func move_current_player(dir: Vector2):
 	current_player.move(dir)
+	SignalBus.current_player_moved.emit(current_player)
 
 ## spawn_party_if_missing is a method to load a hardcoded set
 ## of player party member.

@@ -21,8 +21,8 @@ func _ready() -> void:
 		return
 	if SignalBus.has_signal("current_player_changed"):
 		SignalBus.current_player_changed.connect(_on_current_player_changed)
-	if SignalBus.has_signal("current_player_moved"):
-		SignalBus.current_player_moved.connect(_on_current_player_moved)
+	# if SignalBus.has_signal("current_player_moved"):
+	# 	SignalBus.current_player_moved.connect(_on_current_player_moved)
 
 func _process(delta: float) -> void:
 	handle_pan_and_zoom(delta)

@@ -15,7 +15,6 @@ var CELL_SIZE = GameConstants.CELL_SIZE
 
 # Player movement variables
 # ========================
-var current_player: bool = false
 var direction: Vector2
 # var last_non_zero_direction: Vector2 = Vector2.DOWN  # Store last direction for persistence
 
@@ -91,6 +90,8 @@ func move(dir: Vector2):
 		return
 	mover.move(dir)
 
+
+
 # func _move(dir: String) -> void:
 # 	# Don't start new move if already moving
 
@@ -127,9 +128,6 @@ func move(dir: Vector2):
 # 	_move_state[dir]["next_emit"] = 0.0
 
 func _process_held_movement(_delta: float) -> void:
-	if not current_player:
-		return
-
 	for dir in ["up", "down", "left", "right"]:
 		# var state = _move_state[dir]
 		mover._move(dir)

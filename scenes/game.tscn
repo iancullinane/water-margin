@@ -56,6 +56,7 @@ script = ExtResource("8_7vf1r")
 [node name="NPCs" type="Node2D" parent="EntityCtl" unique_id=1208671556]
 
 [node name="Rain" type="ColorRect" parent="." unique_id=1712973031]
+visible = false
 modulate = Color(0.031565506, 0.12029398, 0.29539987, 0.47058824)
 material = SubResource("ShaderMaterial_kvuet")
 offset_left = -131.0
