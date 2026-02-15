@@ -171,16 +171,7 @@ func _get_current_map() -> GameMap:
 	return null
 
 func _is_tile_blocked(game_map: GameMap, tile_coords: Vector2i) -> bool:
-	var terrain_layer := game_map.get_terrain_layer()
-	if terrain_layer == null:
-		return false
-
-	var tile_data := terrain_layer.get_cell_tile_data(tile_coords)
-	if tile_data == null:
-		return false
-
-	var movement_value = tile_data.get_custom_data("movement")
-	return movement_value == 1
+	return game_map.get_movement_cost(tile_coords) > 0
 
 
 func _is_entity_at_position(target_pos: Vector2) -> bool:

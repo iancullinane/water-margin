@@ -52,3 +52,17 @@ func get_map_pixel_rect() -> Rect2:
 		used = used.merge(layer.get_used_rect())
 	var cell_size := Vector2(GameConstants.CELL_SIZE, GameConstants.CELL_SIZE)
 	return Rect2(Vector2(used.position) * cell_size, Vector2(used.size) * cell_size)
+
+
+## Returns the movement cost at the given tile by checking all layers.
+## If any layer has movement == 1 at this position, the tile is blocked.
+func get_movement_cost(tile_coords: Vector2i) -> int:
+	# Check the root layer (GameMap itself is a TileMapLayer)
+	var root_data := get_cell_tile_data(tile_coords)
+	if root_data and root_data.get_custom_data("movement") == 1:
+		return 1
+	for layer in get_tilemap_layers():
+		var tile_data := layer.get_cell_tile_data(tile_coords)
+		if tile_data and tile_data.get_custom_data("movement") == 1:
+			return 1
+	return 0
