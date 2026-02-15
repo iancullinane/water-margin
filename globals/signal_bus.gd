@@ -2,8 +2,8 @@
 # to add the extends Node.
 extends Node
 
-signal hovered(event_data: UiEventData)
-signal left_clicked(grid_position: Vector2i)
+signal hovered(event_data: UiMainClickEvent)
+signal main_click(grid_position: Vector2i)
 
 signal current_player_changed(entity: IEntity)
 signal current_player_moved(entity: IEntity)

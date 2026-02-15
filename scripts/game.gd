@@ -46,9 +46,9 @@ func _ready():
 		return
 	# Runtime: initialize systems
 	level_loader.ensure_map_loaded()
-	_apply_camera_limits()
 	entity_ctl.spawn_party_if_missing()
 	_load_party_state()
+	_apply_camera_limits()
 
 	# make sure the camera is set to something
 	# meaningful. which is the current player
@@ -100,6 +100,7 @@ func _snap_camera_to_current_at_start() -> void:
 		camera.position = current.position
 		camera.reset_smoothing()
 		camera.position_smoothing_enabled = true
+		SignalBus.current_player_moved.emit(current)
 
 ## _load_party_state gets the user state resource from user
 ## storage.

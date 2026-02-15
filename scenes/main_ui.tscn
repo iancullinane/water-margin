@@ -46,6 +46,10 @@ text = "Player: (0,0)"
 unique_name_in_owner = true
 layout_mode = 2
 
+[node name="TileData" type="Label" parent="TileData/PanelContainer/VBoxContainer" unique_id=347207869]
+unique_name_in_owner = true
+layout_mode = 2
+
 [node name="TileFlavor" type="Panel" parent="." unique_id=1743361490]
 custom_minimum_size = Vector2(600, 200)
 anchors_preset = -1
