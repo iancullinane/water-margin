@@ -116,8 +116,27 @@ expand_mode = 4
 [node name="Info" type="MarginContainer" parent="PlayerInfoCard/MarginContainer/PlayerInfoV" unique_id=971692720]
 layout_mode = 2
 size_flags_vertical = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
 
-[node name="Dmg" type="Label" parent="PlayerInfoCard/MarginContainer/PlayerInfoV/Info" unique_id=827068983]
+[node name="NameLabel" type="Label" parent="PlayerInfoCard/MarginContainer/PlayerInfoV/Info" unique_id=827068983]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+text = "Dmg:"
+
+[node name="Info2" type="MarginContainer" parent="PlayerInfoCard/MarginContainer/PlayerInfoV" unique_id=2092724382]
+layout_mode = 2
+size_flags_vertical = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="DmgLabel" type="Label" parent="PlayerInfoCard/MarginContainer/PlayerInfoV/Info2" unique_id=295353131]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 13
 text = "Dmg:"

@@ -50,6 +50,17 @@ func snap_to_grid() -> void:
 	position = position.snapped(Vector2(CELL_SIZE, CELL_SIZE))
 	target_position = position
 
+func get_stat(stat_name: String) -> String:
+	match stat_name:
+		"damage":
+			if stats and stats.job_data:
+				return str(stats.job_data.damage)
+		"name":
+			if stats:
+				return stats.name
+	return ""
+
+
 # func _physics_process(_delta: float) -> void:
 # 	_process_held_movement(_delta)
 	# _process_smooth_movement(_delta)
