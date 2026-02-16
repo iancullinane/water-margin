@@ -83,12 +83,15 @@ func snap_to_grid() -> void:
 		# 	_on_release_dir(dir)
 
 
-func move(dir: Vector2):
+func move(dir: Vector2) -> bool:
+	if mover.is_moving:
+		return false
 	direction = dir
 	var new_target = position + dir * CELL_SIZE
 	if not _can_move_to(new_target):
-		return
+		return false
 	mover.move(dir)
+	return true
 
 
 

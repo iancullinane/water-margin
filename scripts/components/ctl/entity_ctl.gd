@@ -122,7 +122,6 @@ func set_current_player_by_index(index: int):
 
 func move_current_player(dir: Vector2):
 	current_player.move(dir)
-	SignalBus.current_player_moved.emit(current_player)
 
 ## spawn_party_if_missing is a method to load a hardcoded set
 ## of player party member.

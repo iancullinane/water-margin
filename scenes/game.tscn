@@ -3,8 +3,8 @@
 [ext_resource type="Script" uid="uid://csb7w3cilijva" path="res://scripts/game.gd" id="1_dinhu"]
 [ext_resource type="Script" uid="uid://dgybabpokdv3q" path="res://scripts/utils/level_loader.gd" id="2_so0bb"]
 [ext_resource type="PackedScene" uid="uid://dxqxk444weoq4" path="res://scenes/map/map_001.tscn" id="3_trtic"]
-[ext_resource type="Resource" uid="uid://d0g5l3s4dk1ns" path="res://data/map/map_002.tres" id="4_ca42v"]
 [ext_resource type="AudioStream" uid="uid://rkxyqgqxk5kp" path="res://assets/audio/env/light-rain.wav" id="4_p3qcy"]
+[ext_resource type="Resource" uid="uid://jhodqs1t5g07" path="res://data/map/map_001.tres" id="4_trtic"]
 [ext_resource type="PackedScene" uid="uid://cx1txo3cxj3yi" path="res://scenes/sql-input/control.tscn" id="5_dglt5"]
 [ext_resource type="Script" uid="uid://d32hlclfr5hjr" path="res://scripts/components/ctl/map_ctl.gd" id="5_ir15t"]
 [ext_resource type="Shader" uid="uid://86ous1s4fi33" path="res://assets/textures/shaders/rain.gdshader" id="5_kvuet"]
@@ -41,7 +41,7 @@ script = ExtResource("1_dinhu")
 [node name="LevelLoader" type="Node2D" parent="." unique_id=706577614]
 script = ExtResource("2_so0bb")
 selected_map_scene = ExtResource("3_trtic")
-map_data = ExtResource("4_ca42v")
+map_data = ExtResource("4_trtic")
 
 [node name="MapCtl" type="Node2D" parent="." unique_id=1077499357]
 script = ExtResource("5_ir15t")

@@ -11,6 +11,7 @@ class_name InputCtl
 
 var _is_dragging: bool = false
 var _last_mouse_pos: Vector2 = Vector2.ZERO
+var _clamp_debug_printed: bool = false
 
 const DIRECTIONS = ["up", "down", "left", "right"]
 
@@ -21,11 +22,12 @@ func _ready() -> void:
 		return
 	if SignalBus.has_signal("current_player_changed"):
 		SignalBus.current_player_changed.connect(_on_current_player_changed)
-	# if SignalBus.has_signal("current_player_moved"):
-	# 	SignalBus.current_player_moved.connect(_on_current_player_moved)
+	if SignalBus.has_signal("current_player_moved"):
+		SignalBus.current_player_moved.connect(_on_current_player_moved)
 
 func _process(delta: float) -> void:
 	handle_pan_and_zoom(delta)
+	_handle_player_movement()
 	_clamp_camera_position()
 
 
@@ -55,10 +57,8 @@ func _input(event: InputEvent) -> void:
 		_last_mouse_pos = event.position
 		# Divide by zoom so pan feels consistent at all zoom levels
 		camera.position -= delta / camera.zoom
+		_clamp_camera_position()
 
-	var move_dir = Input.get_vector("player_left", "player_right", "player_up","player_down")
-	if move_dir:
-		entity_ctl.move_current_player(move_dir)
 
 
 func _unhandled_input(_event):
@@ -73,7 +73,6 @@ func _unhandled_input(_event):
 func _on_current_player_changed(entity: Node2D):
 	if entity:
 		camera.position = entity.position
-
 
 func _on_current_player_moved(entity: Node2D):
 	if entity:
@@ -106,8 +105,44 @@ func handle_pan_and_zoom(delta: float) -> void:
 		camera.zoom = Vector2(new_zoom, new_zoom)
 
 
+func _handle_player_movement() -> void:
+	if not entity_ctl.current_player:
+		return
+
+	var dir := Vector2.ZERO
+	if Input.is_action_pressed("player_up"):
+		dir = Vector2.UP
+	elif Input.is_action_pressed("player_down"):
+		dir = Vector2.DOWN
+	elif Input.is_action_pressed("player_left"):
+		dir = Vector2.LEFT
+	elif Input.is_action_pressed("player_right"):
+		dir = Vector2.RIGHT
+
+	if dir != Vector2.ZERO:
+		entity_ctl.move_current_player(dir)
+
+
 func _clamp_camera_position() -> void:
 	var vp_size := get_viewport().get_visible_rect().size / camera.zoom
 	var half_vp := vp_size * 0.5
-	camera.position.x = clampf(camera.position.x, camera.limit_left + half_vp.x, camera.limit_right - half_vp.x)
-	camera.position.y = clampf(camera.position.y, camera.limit_top + half_vp.y, camera.limit_bottom - half_vp.y)
+
+	var min_x := camera.limit_left + half_vp.x
+	var max_x := camera.limit_right - half_vp.x
+	var min_y := camera.limit_top + half_vp.y
+	var max_y := camera.limit_bottom - half_vp.y
+
+	if not _clamp_debug_printed:
+		_clamp_debug_printed = true
+		print("[InputCtl] Clamp debug — vp_size:%s half_vp:%s limits: L:%d T:%d R:%d B:%d → clamp X:[%s, %s] Y:[%s, %s]" % [vp_size, half_vp, camera.limit_left, camera.limit_top, camera.limit_right, camera.limit_bottom, min_x, max_x, min_y, max_y])
+
+	# If the map is smaller than the viewport, center the camera
+	if min_x > max_x:
+		camera.position.x = (camera.limit_left + camera.limit_right) * 0.5
+	else:
+		camera.position.x = clampf(camera.position.x, min_x, max_x)
+
+	if min_y > max_y:
+		camera.position.y = (camera.limit_top + camera.limit_bottom) * 0.5
+	else:
+		camera.position.y = clampf(camera.position.y, min_y, max_y)

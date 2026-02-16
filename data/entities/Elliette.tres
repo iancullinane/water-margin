@@ -1,10 +1,10 @@
 [gd_resource type="Resource" script_class="EntityData" format=3 uid="uid://kklrq4hkgan8"]
 
-[ext_resource type="SpriteFrames" uid="uid://ccbua3q0nwkgg" path="res://assets/animations/kanji_anim.tres" id="1_ruwdt"]
+[ext_resource type="Resource" uid="uid://ha23e286ogb2" path="res://data/jobs/default_job_data.tres" id="1_2u88b"]
 [ext_resource type="Script" uid="uid://bj6cvisr2alqv" path="res://data/models/entity_res.gd" id="2_kcspx"]
+[ext_resource type="Texture2D" uid="uid://c2k16v7d0wnqq" path="res://assets/textures/portraits/portrait12-4x.png" id="2_pqojo"]
 
 [resource]
 script = ExtResource("2_kcspx")
 name = "Elliette"
-animation_resource = ExtResource("1_ruwdt")
-metadata/_custom_type_script = "uid://wk26rdasqab8"
+portrait = ExtResource("2_pqojo")

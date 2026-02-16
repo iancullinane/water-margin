@@ -18,6 +18,11 @@ func _ready() -> void:
 func _on_hovered(event_data: UiMainClickEvent):
 	if event_data:
 		debug_panel.update_hover(event_data)
+		if event_data.tile_data and event_data.tile_data.description != "":
+			tile_description.text = event_data.tile_data.description
+			tile_flavor.visible = true
+		else:
+			tile_flavor.visible = false
 
 func _on_current_player_changed(entity: IEntity):
 	debug_panel.update_player(entity)

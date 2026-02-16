@@ -89,6 +89,7 @@ func _apply_camera_limits() -> void:
 	camera.limit_top = int(bounds.position.y)
 	camera.limit_right = int(bounds.end.x)
 	camera.limit_bottom = int(bounds.end.y)
+	print("[Game] Camera limits set — L:%d T:%d R:%d B:%d (bounds: %s)" % [camera.limit_left, camera.limit_top, camera.limit_right, camera.limit_bottom, bounds])
 
 
 func _snap_camera_to_current_at_start() -> void:

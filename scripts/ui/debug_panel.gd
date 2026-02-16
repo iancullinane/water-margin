@@ -32,10 +32,7 @@ func set_tile_data(value: String) -> void:
 	tile_data.text = value
 
 func update_hover(event_data: UiMainClickEvent) -> void:
-	var pos_text = "X: %s, Y: %s" % [event_data.coordinates.x, event_data.coordinates.y]
-	if event_data.tile_data:
-		pos_text += "\nTile Data: %s" % [event_data.tile_data.description]
-	hovered_pos.text = pos_text
+	hovered_pos.text = "X: %s, Y: %s" % [event_data.coordinates.x, event_data.coordinates.y]
 	if event_data.map:
 		tile_data.text = "Mv: %s" % event_data.map.get_movement_cost(event_data.coordinates)
 

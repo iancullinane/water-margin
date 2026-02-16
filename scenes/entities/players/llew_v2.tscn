@@ -1,11 +1,11 @@
 [gd_scene format=3 uid="uid://5y1jdsx3ww3u"]
 
 [ext_resource type="PackedScene" uid="uid://dhgpwfrgakd3g" path="res://scenes/entities/players/entity_2.tscn" id="1_ox3eo"]
-[ext_resource type="Resource" uid="uid://bohgkkxmikmmp" path="res://data/entities/Eignh.tres" id="2_3tfvl"]
+[ext_resource type="Resource" uid="uid://b40b17tf7khk8" path="res://data/entities/Llewelyn.tres" id="2_s4s35"]
 [ext_resource type="Texture2D" uid="uid://f6xxneoyhbah" path="res://assets/cute_fantasy/Spearman.png" id="3_3tfvl"]
 
 [node name="Eignh_v2" unique_id=877221106 groups=["entities"] instance=ExtResource("1_ox3eo")]
-stats = ExtResource("2_3tfvl")
+stats = ExtResource("2_s4s35")
 
 [node name="Sprite" parent="." index="0" unique_id=170365915]
 position = Vector2(9, 7)

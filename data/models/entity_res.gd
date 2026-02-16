@@ -3,6 +3,7 @@ class_name EntityData
 
 
 @export var name := "Unnamed" : set = set_entity_name
+@export var portrait: Texture2D = preload("res://assets/textures/portraits/portrait4-4x.png")
 
 func set_entity_name(value: String):
 	if value == "":

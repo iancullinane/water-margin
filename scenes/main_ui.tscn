@@ -4,6 +4,7 @@
 [ext_resource type="Theme" uid="uid://bk7x7vskffp0" path="res://resources/ui/main_theme.tres" id="2_j6a7c"]
 [ext_resource type="Script" uid="uid://ch1luyb82kikn" path="res://scripts/ui/debug_panel.gd" id="2_scoti"]
 [ext_resource type="Texture2D" uid="uid://d3pkx2v63eny3" path="res://assets/textures/portraits/portrait4-4x.png" id="3_scoti"]
+[ext_resource type="Script" uid="uid://cwoil5hypcin3" path="res://scripts/ui/player_info_card.gd" id="4_scoti"]
 
 [node name="TileInfoCtl" type="CanvasLayer" unique_id=1107598726]
 script = ExtResource("1_j6a7c")
@@ -85,36 +86,38 @@ layout_mode = 2
 theme_override_font_sizes/normal_font_size = 32
 text = "This is a description"
 
-[node name="PlayerInfo" type="Panel" parent="." unique_id=1788169917]
+[node name="PlayerInfoCard" type="Panel" parent="." unique_id=1788169917]
+unique_name_in_owner = true
 offset_left = 6.0
 offset_top = 7.0
-offset_right = 88.0
-offset_bottom = 131.57692
+offset_right = 111.0
+offset_bottom = 150.0
 theme = ExtResource("2_j6a7c")
+script = ExtResource("4_scoti")
 
-[node name="PlayerInfoV" type="VBoxContainer" parent="PlayerInfo" unique_id=1832390577]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="MarginContainer" type="MarginContainer" parent="PlayerInfoCard" unique_id=1831881091]
+layout_mode = 0
+offset_right = 105.0
+offset_bottom = 143.0
 
-[node name="PortraitMargin" type="MarginContainer" parent="PlayerInfo/PlayerInfoV" unique_id=1435109463]
+[node name="PlayerInfoV" type="VBoxContainer" parent="PlayerInfoCard/MarginContainer" unique_id=1832390577]
+layout_mode = 2
+
+[node name="PortraitMargin" type="MarginContainer" parent="PlayerInfoCard/MarginContainer/PlayerInfoV" unique_id=1435109463]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 2.5
 
-[node name="Portrait" type="TextureRect" parent="PlayerInfo/PlayerInfoV/PortraitMargin" unique_id=1546378162]
+[node name="Portrait" type="TextureRect" parent="PlayerInfoCard/MarginContainer/PlayerInfoV/PortraitMargin" unique_id=1546378162]
 layout_mode = 2
 texture = ExtResource("3_scoti")
-expand_mode = 2
+expand_mode = 4
 
-[node name="Info" type="MarginContainer" parent="PlayerInfo/PlayerInfoV" unique_id=971692720]
+[node name="Info" type="MarginContainer" parent="PlayerInfoCard/MarginContainer/PlayerInfoV" unique_id=971692720]
 layout_mode = 2
-size_flags_vertical = 3
+size_flags_vertical = 2
 
-[node name="Dmg" type="Label" parent="PlayerInfo/PlayerInfoV/Info" unique_id=827068983]
+[node name="Dmg" type="Label" parent="PlayerInfoCard/MarginContainer/PlayerInfoV/Info" unique_id=827068983]
 layout_mode = 2
 theme_override_font_sizes/font_size = 13
 text = "Dmg:"
