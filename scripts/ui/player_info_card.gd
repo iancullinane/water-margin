@@ -1,7 +1,7 @@
 extends Panel
 class_name PlayerInfoCard
 
-@onready var portrait: TextureRect = $MarginContainer/PlayerInfoV/PortraitMargin/Portrait
+@onready var portrait: TextureRect = $MarginContainer/PlayerInfoV/PortraitMargin/Panel/MarginContainer/Portrait
 @onready var name_label: Label = $MarginContainer/PlayerInfoV/Info/NameLabel
 @onready var dmg_label: Label = $MarginContainer/PlayerInfoV/Info2/DmgLabel
 

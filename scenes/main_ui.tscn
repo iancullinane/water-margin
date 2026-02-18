@@ -4,7 +4,27 @@
 [ext_resource type="Theme" uid="uid://bk7x7vskffp0" path="res://resources/ui/main_theme.tres" id="2_j6a7c"]
 [ext_resource type="Script" uid="uid://ch1luyb82kikn" path="res://scripts/ui/debug_panel.gd" id="2_scoti"]
 [ext_resource type="Texture2D" uid="uid://d3pkx2v63eny3" path="res://assets/textures/portraits/portrait4-4x.png" id="3_scoti"]
+[ext_resource type="Texture2D" uid="uid://dmr100gb0y2u0" path="res://assets/textures/ui/panelInset_beige.png" id="4_i1gbh"]
 [ext_resource type="Script" uid="uid://cwoil5hypcin3" path="res://scripts/ui/player_info_card.gd" id="4_scoti"]
+[ext_resource type="Texture2D" uid="uid://cutopv3koqc6h" path="res://assets/textures/ui/panel_brown.png" id="5_46p8p"]
+[ext_resource type="Texture2D" uid="uid://cymyctxgiukom" path="res://assets/textures/ui/panelInset_blue.png" id="7_okuri"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_46p8p"]
+texture = ExtResource("4_i1gbh")
+texture_margin_left = 20.0
+texture_margin_top = 20.0
+texture_margin_right = 20.0
+texture_margin_bottom = 20.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_okuri"]
+texture = ExtResource("5_46p8p")
+texture_margin_left = 10.0
+texture_margin_top = 10.0
+texture_margin_right = 10.0
+texture_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_kyx1g"]
+texture = ExtResource("7_okuri")
 
 [node name="TileInfoCtl" type="CanvasLayer" unique_id=1107598726]
 script = ExtResource("1_j6a7c")
@@ -68,6 +88,7 @@ offset_bottom = -50.0
 grow_horizontal = 2
 grow_vertical = 0
 theme = ExtResource("2_j6a7c")
+theme_override_styles/panel = SubResource("StyleBoxTexture_46p8p")
 
 [node name="Margin" type="MarginContainer" parent="TileFlavor" unique_id=267900907]
 layout_mode = 1
@@ -88,11 +109,16 @@ text = "This is a description"
 
 [node name="PlayerInfoCard" type="Panel" parent="." unique_id=1788169917]
 unique_name_in_owner = true
-offset_left = 6.0
-offset_top = 7.0
-offset_right = 111.0
-offset_bottom = 150.0
+anchors_preset = -1
+anchor_left = 0.035
+anchor_top = 0.938
+anchor_right = 0.035
+anchor_bottom = 0.938
+offset_top = -143.0
+offset_right = 105.0
+grow_vertical = 0
 theme = ExtResource("2_j6a7c")
+theme_override_styles/panel = SubResource("StyleBoxTexture_okuri")
 script = ExtResource("4_scoti")
 
 [node name="MarginContainer" type="MarginContainer" parent="PlayerInfoCard" unique_id=1831881091]
@@ -106,9 +132,25 @@ layout_mode = 2
 [node name="PortraitMargin" type="MarginContainer" parent="PlayerInfoCard/MarginContainer/PlayerInfoV" unique_id=1435109463]
 layout_mode = 2
 size_flags_vertical = 3
-size_flags_stretch_ratio = 2.5
+size_flags_stretch_ratio = 5.84
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
 
-[node name="Portrait" type="TextureRect" parent="PlayerInfoCard/MarginContainer/PlayerInfoV/PortraitMargin" unique_id=1546378162]
+[node name="Panel" type="Panel" parent="PlayerInfoCard/MarginContainer/PlayerInfoV/PortraitMargin" unique_id=1962347624]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_kyx1g")
+
+[node name="MarginContainer" type="MarginContainer" parent="PlayerInfoCard/MarginContainer/PlayerInfoV/PortraitMargin/Panel" unique_id=1863433959]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Portrait" type="TextureRect" parent="PlayerInfoCard/MarginContainer/PlayerInfoV/PortraitMargin/Panel/MarginContainer" unique_id=1546378162]
 layout_mode = 2
 texture = ExtResource("3_scoti")
 expand_mode = 4

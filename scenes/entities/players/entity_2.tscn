@@ -298,6 +298,28 @@ blend_point_2/pos = Vector2(0, -1)
 blend_point_3/node = SubResource("AnimationNodeAnimation_21wfu")
 blend_point_3/pos = Vector2(-1, 0)
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_24s0g"]
+animation = &"walk_down"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_6kbe4"]
+animation = &"walk_left"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_f63go"]
+animation = &"walk_right"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_7dqw8"]
+animation = &"walk_up"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_24s0g"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_24s0g")
+blend_point_0/pos = Vector2(0, 1)
+blend_point_1/node = SubResource("AnimationNodeAnimation_6kbe4")
+blend_point_1/pos = Vector2(-1, 0)
+blend_point_2/node = SubResource("AnimationNodeAnimation_f63go")
+blend_point_2/pos = Vector2(1, 0)
+blend_point_3/node = SubResource("AnimationNodeAnimation_7dqw8")
+blend_point_3/pos = Vector2(0, -1)
+
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_b11w7"]
 advance_mode = 2
 
@@ -305,10 +327,13 @@ advance_mode = 2
 states/Start/position = Vector2(281, 100)
 states/idle/node = SubResource("AnimationNodeBlendSpace2D_gpy3h")
 states/idle/position = Vector2(486.5, 94.5)
+states/move/node = SubResource("AnimationNodeBlendSpace2D_24s0g")
+states/move/position = Vector2(634.5, 102.5)
 transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_b11w7")]
 graph_offset = Vector2(173, -38)
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_uhh82"]
+graph_offset = Vector2(0, -43)
 nodes/output/position = Vector2(560, 110)
 nodes/MoveStateMachine/node = SubResource("AnimationNodeStateMachine_gpy3h")
 nodes/MoveStateMachine/position = Vector2(240, 70)
@@ -357,6 +382,7 @@ libraries/ = SubResource("AnimationLibrary_uhh82")
 tree_root = SubResource("AnimationNodeBlendTree_uhh82")
 anim_player = NodePath("../AnimationPlayer")
 parameters/MoveStateMachine/idle/blend_position = Vector2(-0.005410254, 0.98428285)
+parameters/MoveStateMachine/move/blend_position = Vector2(0, 0)
 
 [node name="NameLabel" type="Label" parent="." unique_id=715073483]
 offset_left = -23.0
