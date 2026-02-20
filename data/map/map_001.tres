@@ -2,12 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dr1va401g07an" path="res://data/models/map_data.gd" id="1_surdv"]
 [ext_resource type="Script" uid="uid://cxmdi8r88sywi" path="res://scripts/objects/game_tile.gd" id="2_21hhc"]
-
-[sub_resource type="Resource" id="Resource_kvuet"]
-script = ExtResource("2_21hhc")
-position = Vector2i(6, 6)
-description = "This is the test tile"
-metadata/_custom_type_script = "uid://cxmdi8r88sywi"
+[ext_resource type="Resource" uid="uid://24c64jy58jpb" path="res://data/map/tiles/test_tile.tres" id="3_ww4vp"]
 
 [sub_resource type="Resource" id="Resource_surdv"]
 script = ExtResource("2_21hhc")
@@ -33,7 +28,14 @@ position = Vector2i(17, 20)
 description = "Llewelyn's house. Filled with monkeys that eat her hot dogs."
 metadata/_custom_type_script = "uid://cxmdi8r88sywi"
 
+[sub_resource type="Resource" id="Resource_tfy6h"]
+script = ExtResource("2_21hhc")
+position = Vector2i(7, 6)
+description = "This tile is for testing images"
+cell_image_name = "house_2"
+metadata/_custom_type_script = "uid://cxmdi8r88sywi"
+
 [resource]
 script = ExtResource("1_surdv")
-tile_data = Array[ExtResource("2_21hhc")]([SubResource("Resource_kvuet"), SubResource("Resource_surdv"), SubResource("Resource_21hhc"), SubResource("Resource_gdk3e"), SubResource("Resource_bxu4c")])
+tile_data = Array[ExtResource("2_21hhc")]([ExtResource("3_ww4vp"), SubResource("Resource_surdv"), SubResource("Resource_21hhc"), SubResource("Resource_gdk3e"), SubResource("Resource_bxu4c"), SubResource("Resource_tfy6h")])
 metadata/_custom_type_script = "uid://dr1va401g07an"

@@ -6,10 +6,12 @@
 [ext_resource type="Texture2D" uid="uid://d13e68e6h2sol" path="res://assets/16x16/Dev/terrain_atlas.png" id="3_03knf"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_03knf"]
+resource_name = "highlight"
 texture = ExtResource("1_bvdr4")
 0:0/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ri5sw"]
+resource_name = "ground"
 texture = ExtResource("1_0n7q1")
 0:0/0 = 0
 0:0/0/custom_data_0 = 1
@@ -99,6 +101,7 @@ texture = ExtResource("1_0n7q1")
 6:11/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jumgq"]
+resource_name = "buildings"
 texture = ExtResource("2_bvdr4")
 0:0/0 = 0
 0:0/0/custom_data_1 = "house_1"
@@ -218,6 +221,7 @@ texture = ExtResource("2_bvdr4")
 7:4/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_juuud"]
+resource_name = "nature"
 texture = ExtResource("3_03knf")
 0:0/0 = 0
 0:0/0/custom_data_0 = 1

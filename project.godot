@@ -37,8 +37,7 @@ gdscript/warnings/unused_signal=0
 
 window/size/viewport_width=1280
 window/size/viewport_height=720
-window/size/window_width_override=2580
-window/size/window_height_override=1470
+window/size/resizable=false
 window/stretch/mode="canvas_items"
 window/stretch/aspect="keep_height"
 window/stretch/scale_mode="integer"

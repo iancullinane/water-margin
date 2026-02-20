@@ -8,8 +8,6 @@ class_name GameMapData
 @export var highlighted_tile: Vector2i = Vector2i(-1, -1)  # Currently highlighted tile (-1,-1 = none)
 
 
-
-
 func get_tile(position: Vector2i) -> GameTile:
 	for tile in tile_data:
 		if tile.position == position:

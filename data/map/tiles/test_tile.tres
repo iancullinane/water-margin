@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="GameTile" format=3 uid="uid://24c64jy58jpb"]
+
+[ext_resource type="Script" uid="uid://cxmdi8r88sywi" path="res://scripts/objects/game_tile.gd" id="1_ldu45"]
+
+[resource]
+script = ExtResource("1_ldu45")
+position = Vector2i(6, 6)
+description = "This is the test tile"
+metadata/_custom_type_script = "uid://cxmdi8r88sywi"
