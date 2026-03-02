@@ -33,6 +33,7 @@ script = ExtResource("2_21hhc")
 position = Vector2i(7, 6)
 description = "This tile is for testing images"
 cell_image_name = "house_2"
+target_layer = "Landmarks"
 metadata/_custom_type_script = "uid://cxmdi8r88sywi"
 
 [resource]

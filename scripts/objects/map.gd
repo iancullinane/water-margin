@@ -9,14 +9,62 @@ class_name GameMap
 @onready var buildings_layer: TileMapLayer = $Buildings
 @onready var landmarks_layer: TileMapLayer = $Landmarks
 
+# Registry built from the root TileSet in _ready().
+# Maps tile "name" custom data value -> {source_id, coords}.
+# Populated from all atlas sources on the root Map node's TileSet.
+var _named_tiles: Dictionary = {}
 
 
-var layer_dict = {
-	"ground": $Ground,
-	"terrain": $Terrain,
-	"buildings": $Buildings,
-	"landmarks": $Landmarks
-}
+func _ready() -> void:
+	_build_named_tile_registry()
+	apply_map_data(game_map_data)
+	print(JSON.stringify(_named_tiles, "\t"))
+
+
+## Scans the root Map node's TileSet and builds a lookup of all tiles
+## that have a non-empty "name" custom data value.
+## Result: _named_tiles[name] = {source_id: int, coords: Vector2i}
+func _build_named_tile_registry() -> void:
+	_named_tiles.clear()
+	if tile_set == null:
+		return
+	if tile_set.get_custom_data_layer_by_name("name") == -1:
+		push_warning("GameMap: TileSet has no custom data layer named 'name'")
+		return
+	for i in tile_set.get_source_count():
+		var sid := tile_set.get_source_id(i)
+		var src := tile_set.get_source(sid)
+		if not src is TileSetAtlasSource:
+			continue
+		var atlas := src as TileSetAtlasSource
+		for j in atlas.get_tiles_count():
+			var coords := atlas.get_tile_id(j)
+			var td := atlas.get_tile_data(coords, 0)
+			if td == null:
+				continue
+			var tile_name: String = td.get_custom_data("name")
+			if tile_name != "":
+				_named_tiles[tile_name] = {"source_id": sid, "coords": coords}
+
+
+## Places tiles from GameMapData that have a cell_image_name onto the
+## child layer named by game_tile.target_layer.
+func apply_map_data(data: GameMapData) -> void:
+	game_map_data = data
+	for game_tile in data.tile_data:
+		if game_tile.cell_image_name == "":
+			print("no cell_image_name")
+			continue
+		var entry: Dictionary = _named_tiles.get(game_tile.cell_image_name, {})
+		if entry.is_empty():
+			push_warning("GameMap: no named tile '%s' in TileSet" % game_tile.cell_image_name)
+			continue
+		var layer := get_node_or_null(game_tile.target_layer) as TileMapLayer
+		if layer == null:
+			push_warning("GameMap: no child layer '%s'" % game_tile.target_layer)
+			continue
+		layer.set_cell(game_tile.position, entry["source_id"], entry["coords"])
+
 
 func get_tilemap_layers() -> Array[TileMapLayer]:
 	var layers: Array[TileMapLayer] = []
@@ -40,6 +88,10 @@ func get_building_layer()->TileMapLayer:
 func get_map_name() -> String:
 	return map_name
 
+# ================================================
+# Mouse position functions
+# ================================================
+
 # getting the hovered tile
 func get_tile_from_global(global: Vector2) -> Vector2i:
 	return local_to_map(to_local(global))
@@ -47,17 +99,21 @@ func get_tile_from_global(global: Vector2) -> Vector2i:
 func get_global_from_tile(tile: Vector2i) -> Vector2:
 	return to_global(map_to_local(tile))
 
+## Get the tile the mouse is currently over
 func get_hovered_tile() -> Vector2i:
 	return local_to_map(get_local_mouse_position())
 
+## Get the game map data
 func get_game_map_data() -> GameMapData:
 	return game_map_data
 
+## Get the GameTile for a particular coordinate
 func get_tile_data_at(tile_coords: Vector2i) -> GameTile:
 	if game_map_data == null:
 		return null
 	return game_map_data.get_tile(tile_coords)
 
+# ================================================
 
 ## Returns the pixel-space bounding rect of all used tiles across all layers.
 func get_map_pixel_rect() -> Rect2:
