@@ -31,3 +31,5 @@ Thumbs.db
 .import/
 *.import
 memory
+
+addons/*

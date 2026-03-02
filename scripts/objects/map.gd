@@ -4,6 +4,20 @@ class_name GameMap
 @export var map_name: String = "DEFAULT_MAP"
 @export var game_map_data: GameMapData
 
+@onready var ground_layer: TileMapLayer = $Ground
+@onready var terrain_layer: TileMapLayer = $Terrain
+@onready var buildings_layer: TileMapLayer = $Buildings
+@onready var landmarks_layer: TileMapLayer = $Landmarks
+
+
+
+var layer_dict = {
+	"ground": $Ground,
+	"terrain": $Terrain,
+	"buildings": $Buildings,
+	"landmarks": $Landmarks
+}
+
 func get_tilemap_layers() -> Array[TileMapLayer]:
 	var layers: Array[TileMapLayer] = []
 	for child in get_children():
