@@ -54,6 +54,8 @@ func _build_named_tile_registry() -> void:
 ## Places tiles from GameMapData that have a cell_image_name onto the
 ## child layer named by game_tile.target_layer.
 func apply_map_data(data: GameMapData) -> void:
+	if data == null:
+		return
 	game_map_data = data
 	for game_tile in data.tile_data:
 		if game_tile.cell_image_name == "":

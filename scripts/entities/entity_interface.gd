@@ -44,7 +44,6 @@ var target_position: Vector2 = Vector2.ZERO
 func _ready() -> void:
 	add_to_group("entities")
 	snap_to_grid()
-	print("Entity ready:", name, stats)
 
 func snap_to_grid() -> void:
 	position = position.snapped(Vector2(CELL_SIZE, CELL_SIZE))

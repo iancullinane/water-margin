@@ -9,7 +9,15 @@ position = Vector2i(18, 12)
 description = "adadadadadadad"
 metadata/_custom_type_script = "uid://cxmdi8r88sywi"
 
+[sub_resource type="Resource" id="Resource_x5r5w"]
+script = ExtResource("1_r0kys")
+position = Vector2i(8, 14)
+description = "Another test"
+cell_image_name = "house_1"
+target_layer = "Landmarks"
+metadata/_custom_type_script = "uid://cxmdi8r88sywi"
+
 [resource]
 script = ExtResource("1_x5r5w")
-tile_data = Array[ExtResource("1_r0kys")]([SubResource("Resource_264po")])
+tile_data = Array[ExtResource("1_r0kys")]([SubResource("Resource_264po"), SubResource("Resource_x5r5w")])
 metadata/_custom_type_script = "uid://dr1va401g07an"
