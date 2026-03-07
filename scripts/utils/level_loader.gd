@@ -16,10 +16,10 @@ var _current_map_instance: GameMap
 	set(value):
 		_selected_map_scene = value
 		update_configuration_warnings()
-		if Engine.is_editor_hint() and reload_on_change_in_editor:
+		if Engine.is_editor_hint() and reload_on_change_in_editor and is_node_ready():
 			ensure_map_loaded()
 
-@export var map_data: GameMapData
+
 @export var reload_on_change_in_editor: bool = true
 
 ## ensure_map_loaded looks for a sibling called
@@ -47,11 +47,6 @@ func ensure_map_loaded() -> void:
 
 	map_ctl.add_child(inst)
 	_current_map_instance = inst
-
-	# apply_map_data is called after add_child so _ready() has run
-	# and the named-tile registry is already built.
-	if map_data != null:
-		inst.apply_map_data(map_data)
 
 	logging.log("map loaded")
 

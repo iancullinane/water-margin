@@ -14,7 +14,8 @@ var current_player: IEntity
 var character_scenes := {
 	"Llew_v2": preload("res://scenes/entities/players/llew_v2.tscn"),
 	"Elliette_v2": preload("res://scenes/entities/players/elliette_v2.tscn"),
-	"Eignh_v2": preload("res://scenes/entities/players/eignh_v2.tscn")
+	"Eignh_v2": preload("res://scenes/entities/players/eignh_v2.tscn"),
+	"Cerah_v2": preload("res://scenes/entities/players/cerah_v2.tscn"),
 }
 
 # The three kinds of entities are stored as children
@@ -141,3 +142,8 @@ func spawn_party_if_missing() -> void:
 		var eignh_v2_instance = character_scenes["Eignh_v2"].instantiate()
 		eignh_v2_instance.name = "Eignh_v2"
 		add_party_member(eignh_v2_instance)
+
+	if get_entity_by_name("Cerah_v2") == null:
+		var cerah_v2_instance = character_scenes["Cerah_v2"].instantiate()
+		cerah_v2_instance.name = "Cerah_v2"
+		add_party_member(cerah_v2_instance)

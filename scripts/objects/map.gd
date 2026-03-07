@@ -1,3 +1,4 @@
+@tool
 extends TileMapLayer
 class_name GameMap
 
@@ -19,6 +20,9 @@ func _ready() -> void:
 	_build_named_tile_registry()
 	apply_map_data(game_map_data)
 	print(JSON.stringify(_named_tiles, "\t"))
+
+	if Engine.is_editor_hint():
+		apply_map_data(game_map_data)
 
 
 ## Scans the root Map node's TileSet and builds a lookup of all tiles

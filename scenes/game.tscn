@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://csb7w3cilijva" path="res://scripts/game.gd" id="1_dinhu"]
 [ext_resource type="Script" uid="uid://dgybabpokdv3q" path="res://scripts/utils/level_loader.gd" id="2_so0bb"]
-[ext_resource type="PackedScene" uid="uid://dxqxk444weoq4" path="res://scenes/map/map_001.tscn" id="3_kvuet"]
+[ext_resource type="PackedScene" uid="uid://76c26pgasfgt" path="res://scenes/map/map_002.tscn" id="3_kvuet"]
 [ext_resource type="AudioStream" uid="uid://rkxyqgqxk5kp" path="res://assets/audio/env/light-rain.wav" id="4_p3qcy"]
 [ext_resource type="PackedScene" uid="uid://cx1txo3cxj3yi" path="res://scenes/sql-input/control.tscn" id="5_dglt5"]
 [ext_resource type="Script" uid="uid://d32hlclfr5hjr" path="res://scripts/components/ctl/map_ctl.gd" id="5_ir15t"]

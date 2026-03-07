@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://c1ry13n624smk"]
+
+[ext_resource type="PackedScene" uid="uid://dhgpwfrgakd3g" path="res://scenes/entities/players/entity_2.tscn" id="1_qnvwy"]
+[ext_resource type="Resource" uid="uid://dsndb6n4h8u2r" path="res://data/entities/Cerah.tres" id="2_qnvwy"]
+[ext_resource type="Texture2D" uid="uid://sd26nanjwdi0" path="res://assets/cute_fantasy/Templar.png" id="3_qnvwy"]
+
+[node name="Eignh_v2" unique_id=877221106 groups=["entities"] instance=ExtResource("1_qnvwy")]
+stats = ExtResource("2_qnvwy")
+
+[node name="Sprite" parent="." index="0" unique_id=170365915]
+position = Vector2(9, 7)
+texture = ExtResource("3_qnvwy")
+
+[node name="NameLabel" parent="." index="3" unique_id=715073483]
+offset_top = 16.0
+offset_bottom = 33.0
