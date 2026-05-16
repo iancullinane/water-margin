@@ -37,6 +37,7 @@ gdscript/warnings/unused_signal=0
 
 window/size/viewport_width=1280
 window/size/viewport_height=720
+window/size/mode=3
 window/size/resizable=false
 window/stretch/mode="canvas_items"
 window/stretch/aspect="keep_height"
@@ -49,7 +50,7 @@ project/assembly_name="Mobile Game Template"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/AsepriteWizard/plugin.cfg", "res://addons/godot-sqlite/plugin.cfg", "res://addons/json_editor/plugin.cfg", "res://addons/nklbdev.importality/plugin.cfg", "res://addons/script-tabs/plugin.cfg")
+enabled=PackedStringArray("res://addons/AsepriteWizard/plugin.cfg", "res://addons/godot-sqlite/plugin.cfg", "res://addons/gut/plugin.cfg", "res://addons/json_editor/plugin.cfg", "res://addons/nklbdev.importality/plugin.cfg", "res://addons/script-tabs/plugin.cfg", "res://addons/script_doc_tooltip/plugin.cfg")
 
 [file_customization]
 

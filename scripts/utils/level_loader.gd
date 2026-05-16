@@ -1,5 +1,6 @@
 @tool
 extends Node2D
+class_name LevelLoader
 
 # TODO actually load a default map
 # const DEFAULT_MAP_SCENE_PATH := "res://scenes/map/map_001.tscn"
@@ -9,8 +10,13 @@ extends Node2D
 # This is a PackScene type because it is the scene
 # itself, not an instance of that the scene type.
 var _selected_map_scene: PackedScene
+# this however will be an instance of the scene type
+# which we load in ensure_map_loaded
 var _current_map_instance: GameMap
 
+# This is so we change maps in the editor, the
+# underlying value has an underscore, so think
+# of this a a getter and setter on a private variable
 @export var selected_map_scene: PackedScene:
 	get: return _selected_map_scene
 	set(value):

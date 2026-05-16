@@ -1,3 +1,5 @@
+## The main game, responsible for managing and kicking off the main game functions
+
 @tool
 extends Node2D
 
@@ -9,9 +11,9 @@ extends Node2D
 
 const map001 = preload("res://scenes/map/map_001.tscn")
 
-# These manage the state file itself
-const PartyStateRsc = preload("res://data/saves/PartyState.gd")
-const PartyMemberStateRsc = preload("res://data/saves/PartyMemberState.gd")
+# These manage the main game state itself
+# const PartyStateRsc = preload("res://data/saves/PartyState.gd")
+# const PartyMemberStateRsc = preload("res://data/saves/PartyMemberState.gd")
 # This is the file that keeps track of where the
 # player is persistently from game to game
 const STATE_PATH := "user://party_state.tres"
@@ -32,7 +34,7 @@ func get_map_ctl() -> MapCtl:
 func get_camera_ctl() -> Camera2D:
 	return camera
 
-func get_level_loader():
+func get_level_loader() -> LevelLoader:
 	return level_loader
 # ------------------------------------------------------------
 

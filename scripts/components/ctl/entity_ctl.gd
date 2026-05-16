@@ -1,4 +1,6 @@
 extends Node
+## This is the entity controller, it manages loading and manipulating entities, think of it like
+## the hands of a marionette
 class_name EntityCtl
 
 enum EntityType {

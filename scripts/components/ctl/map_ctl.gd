@@ -1,4 +1,7 @@
 extends Node2D
+
+## Thin wrapper to act as the mount point of a map
+
 class_name MapCtl
 
 func is_map_ctl():
