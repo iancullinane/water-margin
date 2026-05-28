@@ -1,3 +1,5 @@
+## LevelLoader holds the current map as a variable, and 
+## allows you to get it, or swap with a new map
 @tool
 extends Node2D
 class_name LevelLoader

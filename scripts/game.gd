@@ -3,27 +3,22 @@
 @tool
 extends Node2D
 
-# @export var height: int;
-# @export var width: int;
-
 @export_group("Debug flags")
-# -------------------------------
 
+# 
 const map001 = preload("res://scenes/map/map_001.tscn")
 
-# These manage the main game state itself
-# const PartyStateRsc = preload("res://data/saves/PartyState.gd")
-# const PartyMemberStateRsc = preload("res://data/saves/PartyMemberState.gd")
 # This is the file that keeps track of where the
-# player is persistently from game to game
+# player is persistently from game to game, keep
+# it in the user folder to persist
 const STATE_PATH := "user://party_state.tres"
 
 # controllers
 # -----------
-@onready var entity_ctl: EntityCtl = $EntityCtl
-@onready var map_ctl: MapCtl = $MapCtl
-@onready var camera: Camera2D = $Camera
 @onready var level_loader = $LevelLoader
+@onready var map_ctl: MapCtl = $MapCtl
+@onready var entity_ctl: EntityCtl = $EntityCtl
+@onready var camera: Camera2D = $Camera
 
 
 # -----------------------------------------------------------

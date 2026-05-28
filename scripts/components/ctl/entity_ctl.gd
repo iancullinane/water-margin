@@ -1,3 +1,6 @@
+## Child nodes are used as containers for entitiee,
+## also handles switching the player and loading 
+## the player party if it is missing
 extends Node
 ## This is the entity controller, it manages loading and manipulating entities, think of it like
 ## the hands of a marionette
@@ -11,6 +14,11 @@ enum EntityType {
 
 var current_player: IEntity
 @export var _current_party_member_idx: int = 0
+# The three kinds of entities are stored as children
+# of parent nodes
+@onready var party: Node2D = $Party
+@onready var enemies: Node2D = $Enemies
+@onready var npcs: Node2D = $NPCs
 
 # Character scene dictionary
 var character_scenes := {
@@ -20,11 +28,6 @@ var character_scenes := {
 	"Cerah_v2": preload("res://scenes/entities/players/cerah_v2.tscn"),
 }
 
-# The three kinds of entities are stored as children
-# of parent nodes
-@onready var party: Node2D = $Party
-@onready var enemies: Node2D = $Enemies
-@onready var npcs: Node2D = $NPCs
 
 func get_current_player() -> IEntity:
 	return current_player
@@ -129,6 +132,8 @@ func move_current_player(dir: Vector2):
 ## spawn_party_if_missing is a method to load a hardcoded set
 ## of player party member.
 func spawn_party_if_missing() -> void:
+	# TODO: Decide which party members to spawn by location on map
+	#  Spawn party is hardcoded, but we keep where a player "ends up" on the map, expand the concept to see who is on the map and then spawn them in. This will be helpful later when the player can move between maps.
 	if get_entity_by_name("Llew_v2") == null:
 		var llew_v2_instance = character_scenes["Llew_v2"].instantiate()
 		llew_v2_instance.name = "Llew_v2"
