@@ -1,3 +1,6 @@
+## The base entity from which other entities are derived
+## does not handle input, but does handle the actions of
+## an entity so that NPC's can share
 extends Node2D
 class_name IEntity
 
@@ -174,7 +177,9 @@ func _can_move_to(target_pos: Vector2) -> bool:
 
 	return true
 
-# TODO this also relies on a particular structure above it
+# TODO: _get_current_map on entity is too coupled to its parent
+#  entities have tightly coupled functions that should be cleaned up
+# Labels: Story
 func _get_current_map() -> GameMap:
 	var level_loader = get_tree().root.find_child("LevelLoader", true, false)
 	if level_loader and level_loader.has_method("get_current_map"):
