@@ -1,4 +1,4 @@
-## Child nodes are used as containers for entitiee,
+## Child nodes are used as containers for entity,
 ## also handles switching the player and loading 
 ## the player party if it is missing
 extends Node

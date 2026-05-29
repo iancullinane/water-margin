@@ -3,7 +3,7 @@ name: Run TODO to Issue
 on: [push]
 
 jobs:
-  build:
+  run-todo-to-issue:
     runs-on: ubuntu-latest
     permissions:
       issues: write
@@ -11,5 +11,3 @@ jobs:
       - uses: actions/checkout@v4
       - name: TODO to Issue
         uses: alstr/todo-to-issue-action@v5
-        with:
-          IGNORE: "^vendor/.*"

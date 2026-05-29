@@ -1,3 +1,5 @@
+## Handles the input of the game like pan and zoom, responding
+## to input for the player movement
 extends Node2D
 class_name InputCtl
 
@@ -122,7 +124,8 @@ func _handle_player_movement() -> void:
 	if dir != Vector2.ZERO:
 		entity_ctl.move_current_player(dir)
 
-
+# TODO: Move camera clamp to the camera node
+# Labels: Story
 func _clamp_camera_position() -> void:
 	var vp_size := get_viewport().get_visible_rect().size / camera.zoom
 	var half_vp := vp_size * 0.5

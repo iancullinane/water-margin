@@ -1,9 +1,13 @@
+## Represents both the debug info as well as
+## game info
 extends CanvasLayer
 class_name TileInfoCtl
 
 
+# TODO: Split the debug panel from the game panels
+#  The game panels should be on a seprate node than the debug panel
+# Labels: Story
 @onready var debug_panel: DebugPanel = %DebugPanel
-
 @onready var player_info_card: PlayerInfoCard = %PlayerInfoCard
 @onready var tile_flavor: Panel = $TileFlavor
 @onready var tile_description: RichTextLabel = $TileFlavor/Margin/Description
@@ -16,6 +20,8 @@ func _ready() -> void:
 	SignalBus.connect("current_player_moved", _on_current_player_moved)
 	SignalBus.current_player_changed.connect(_on_current_player_changed)
 
+# TODO: Rename and cleanup `_on_hoverer` in `tile_info_ctl
+#  On hovered takes an event called UiMainClickEvent which is not descriptive
 func _on_hovered(event_data: UiMainClickEvent):
 	if event_data:
 		debug_panel.update_hover(event_data)
