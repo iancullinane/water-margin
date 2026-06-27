@@ -1,3 +1,6 @@
+## Holds layers in order as children
+## also returns data at specific tiles of that map
+
 @tool
 extends TileMapLayer
 class_name GameMap

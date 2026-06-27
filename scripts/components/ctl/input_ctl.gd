@@ -22,6 +22,7 @@ func _ready() -> void:
 		return
 	if not is_instance_valid(SignalBus):
 		return
+	# PRESENT: Signal
 	if SignalBus.has_signal("current_player_changed"):
 		SignalBus.current_player_changed.connect(_on_current_player_changed)
 	if SignalBus.has_signal("current_player_moved"):

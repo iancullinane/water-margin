@@ -59,8 +59,10 @@ func ensure_map_loaded() -> void:
 	logging.log("map loaded")
 
 
+## Delegates to MapCtl, the single source of truth for the mounted map.
+## (_current_map_instance is kept only so this loader can free the old map.)
 func get_current_map() -> GameMap:
-	return _current_map_instance
+	return map_ctl.get_current_map()
 
 
 func _get_configuration_warnings() -> PackedStringArray:

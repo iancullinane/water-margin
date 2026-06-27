@@ -10,7 +10,6 @@
 [node name="Map" type="TileMapLayer" unique_id=1976695097]
 tile_set = ExtResource("2_nuen2")
 script = ExtResource("1_hgphw")
-map_name = null
 game_map_data = ExtResource("3_dqcll")
 metadata/_edit_horizontal_guides_ = [-1608.0, 1608.0]
 metadata/_edit_vertical_guides_ = [-1608.0, 1608.0]
@@ -20,7 +19,7 @@ z_index = -10
 tile_set = ExtResource("2_nuen2")
 
 [node name="Highlight" type="TileMapLayer" parent="Ground" unique_id=1883723371]
-tile_map_data = PackedByteArray(0, 0, 41, 1, 229, 255, 0, 0, 0, 0, 0, 0, 0, 0)
+tile_map_data = PackedByteArray(0, 0, 101, 0, 11, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 tile_set = ExtResource("2_nuen2")
 
 [node name="OutlineHighlighter" type="Node" parent="Ground" unique_id=378168024]

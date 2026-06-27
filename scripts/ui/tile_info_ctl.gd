@@ -1,6 +1,6 @@
 ## Represents both the debug info as well as
 ## game info
-extends CanvasLayer
+extends CanvasLayer 	
 class_name TileInfoCtl
 
 

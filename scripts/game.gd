@@ -6,7 +6,7 @@ extends Node2D
 @export_group("Debug flags")
 
 # 
-const map001 = preload("res://scenes/map/map_001.tscn")
+const MAP_001 = preload("res://scenes/map/map_001.tscn")
 
 # This is the file that keeps track of where the
 # player is persistently from game to game, keep
@@ -43,6 +43,9 @@ func _ready():
 		return
 	# Runtime: initialize systems
 	level_loader.ensure_map_loaded()
+	# Inject the map mount point so EntityCtl can validate moves without
+	# reaching across the scene tree (call down from the composition root).
+	entity_ctl.map_ctl = map_ctl
 	entity_ctl.spawn_party_if_missing()
 	_load_party_state()
 	_apply_camera_limits()
@@ -86,7 +89,8 @@ func _apply_camera_limits() -> void:
 	camera.limit_top = int(bounds.position.y)
 	camera.limit_right = int(bounds.end.x)
 	camera.limit_bottom = int(bounds.end.y)
-	print("[Game] Camera limits set — L:%d T:%d R:%d B:%d (bounds: %s)" % [camera.limit_left, camera.limit_top, camera.limit_right, camera.limit_bottom, bounds])
+	print("[Game] Camera limits set — L:%d T:%d R:%d B:%d (bounds: %s)" 
+		% [camera.limit_left, camera.limit_top, camera.limit_right, camera.limit_bottom, bounds])
 
 
 func _snap_camera_to_current_at_start() -> void:
