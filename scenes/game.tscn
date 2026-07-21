@@ -68,7 +68,7 @@ script = ExtResource("11_kvuet")
 
 [node name="Camera" type="Camera2D" parent="." unique_id=2131179913]
 position = Vector2(192, 128)
-zoom = Vector2(2, 2)
+zoom = Vector2(5, 5)
 position_smoothing_enabled = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=638450498]

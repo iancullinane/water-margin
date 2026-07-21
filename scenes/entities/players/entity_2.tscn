@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://b516obwi3v45s" path="res://scripts/entities/entity_interface.gd" id="1_b11w7"]
 [ext_resource type="FontFile" uid="uid://bdhd2oo2h2dl2" path="res://assets/fonts/RedAlert.ttf" id="2_b11w7"]
 [ext_resource type="Texture2D" uid="uid://cnn7ydrxvtibn" path="res://assets/textures/atlases/knight_armor_atlas.tres" id="2_gpy3h"]
+[ext_resource type="AnimationNodeBlendTree" uid="uid://chmjm6s6qgdse" path="res://assets/saved_resources/base_blend_tree.tres" id="3_6kbe4"]
 [ext_resource type="Script" uid="uid://cpkvyt0fth36j" path="res://scripts/entities/mover.gd" id="4_gpy3h"]
 [ext_resource type="Script" uid="uid://cmuemnj6jwb2b" path="res://scripts/entities/animator.gd" id="5_uhh82"]
 
@@ -276,69 +277,6 @@ _data = {
 &"walk_up": SubResource("Animation_to0pd")
 }
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_b11w7"]
-animation = &"idle_down"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_gpy3h"]
-animation = &"idle_right"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_uhh82"]
-animation = &"idle_up"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_21wfu"]
-animation = &"idle_left"
-
-[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_gpy3h"]
-blend_point_0/node = SubResource("AnimationNodeAnimation_b11w7")
-blend_point_0/pos = Vector2(0, 1)
-blend_point_1/node = SubResource("AnimationNodeAnimation_gpy3h")
-blend_point_1/pos = Vector2(1, 0)
-blend_point_2/node = SubResource("AnimationNodeAnimation_uhh82")
-blend_point_2/pos = Vector2(0, -1)
-blend_point_3/node = SubResource("AnimationNodeAnimation_21wfu")
-blend_point_3/pos = Vector2(-1, 0)
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_24s0g"]
-animation = &"walk_down"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_6kbe4"]
-animation = &"walk_left"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_f63go"]
-animation = &"walk_right"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_7dqw8"]
-animation = &"walk_up"
-
-[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_24s0g"]
-blend_point_0/node = SubResource("AnimationNodeAnimation_24s0g")
-blend_point_0/pos = Vector2(0, 1)
-blend_point_1/node = SubResource("AnimationNodeAnimation_6kbe4")
-blend_point_1/pos = Vector2(-1, 0)
-blend_point_2/node = SubResource("AnimationNodeAnimation_f63go")
-blend_point_2/pos = Vector2(1, 0)
-blend_point_3/node = SubResource("AnimationNodeAnimation_7dqw8")
-blend_point_3/pos = Vector2(0, -1)
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_b11w7"]
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_gpy3h"]
-states/Start/position = Vector2(281, 100)
-states/idle/node = SubResource("AnimationNodeBlendSpace2D_gpy3h")
-states/idle/position = Vector2(486.5, 94.5)
-states/move/node = SubResource("AnimationNodeBlendSpace2D_24s0g")
-states/move/position = Vector2(634.5, 102.5)
-transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_b11w7")]
-graph_offset = Vector2(173, -38)
-
-[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_uhh82"]
-graph_offset = Vector2(0, -43)
-nodes/output/position = Vector2(560, 110)
-nodes/MoveStateMachine/node = SubResource("AnimationNodeStateMachine_gpy3h")
-nodes/MoveStateMachine/position = Vector2(240, 70)
-node_connections = [&"output", 0, &"MoveStateMachine"]
-
 [sub_resource type="LabelSettings" id="LabelSettings_k0aba"]
 font = ExtResource("2_b11w7")
 font_size = 14
@@ -379,7 +317,7 @@ metadata/_aseprite_wizard_interface_config_ = {
 libraries/ = SubResource("AnimationLibrary_uhh82")
 
 [node name="AnimationTree" type="AnimationTree" parent="." unique_id=696091041]
-tree_root = SubResource("AnimationNodeBlendTree_uhh82")
+tree_root = ExtResource("3_6kbe4")
 anim_player = NodePath("../AnimationPlayer")
 parameters/MoveStateMachine/idle/blend_position = Vector2(-0.005410254, 0.98428285)
 parameters/MoveStateMachine/move/blend_position = Vector2(0, 0)
