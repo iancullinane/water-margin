@@ -12,8 +12,12 @@ class_name InputCtl
 
 @export var pan_speed: float = 200.0
 @export var zoom_speed: float = 0.1
-@export var min_zoom: float = 1.0
-@export var max_zoom: float = 10.0
+@export var min_zoom: float = 0.8
+@export var max_zoom: float = 2.0
+# How fast the camera glides toward the target zoom; higher = snappier
+@export var zoom_ease_speed: float = 8.0
+
+var _target_zoom: float = 1.0
 
 var _is_dragging: bool = false
 var _last_mouse_pos: Vector2 = Vector2.ZERO
@@ -24,6 +28,7 @@ const DIRECTIONS = ["up", "down", "left", "right"]
 func _ready() -> void:
 	if Engine.is_editor_hint():
 		return
+	_target_zoom = camera.zoom.x
 	if not is_instance_valid(SignalBus):
 		return
 	# PRESENT: Signal
@@ -52,11 +57,9 @@ func _input(event: InputEvent) -> void:
 			else:
 				_is_dragging = false
 		if event.button_index == MOUSE_BUTTON_WHEEL_UP and event.pressed:
-			var new_zoom = camera.zoom.x + zoom_speed
-			camera.zoom = Vector2.ONE * clampf(new_zoom, min_zoom, max_zoom)
+			_target_zoom = clampf(_target_zoom + zoom_speed, min_zoom, max_zoom)
 		if event.button_index == MOUSE_BUTTON_WHEEL_DOWN and event.pressed:
-			var new_zoom = camera.zoom.x - zoom_speed
-			camera.zoom = Vector2.ONE * clampf(new_zoom, min_zoom, max_zoom)
+			_target_zoom = clampf(_target_zoom - zoom_speed, min_zoom, max_zoom)
 
 
 	if event is InputEventMouseMotion and _is_dragging:
@@ -107,14 +110,18 @@ func handle_pan_and_zoom(delta: float) -> void:
 		camera.position += pan_dir.normalized() * pan_speed * delta / camera.zoom
 
 	if Input.is_action_pressed("zoom_in"):
-		var new_zoom = camera.zoom.x + zoom_speed
-		new_zoom = clampf(new_zoom, min_zoom, max_zoom)
-		camera.zoom = Vector2(new_zoom, new_zoom)
+		_target_zoom = clampf(_target_zoom + zoom_speed, min_zoom, max_zoom)
 
 	if Input.is_action_pressed("zoom_out"):
-		var new_zoom = camera.zoom.x - zoom_speed
-		new_zoom = clampf(new_zoom, min_zoom, max_zoom)
-		camera.zoom = Vector2(new_zoom, new_zoom)
+		_target_zoom = clampf(_target_zoom - zoom_speed, min_zoom, max_zoom)
+
+	# Glide the camera toward the target zoom. The exp() form is
+	# frame-rate independent, unlike a plain lerp(a, b, speed * delta).
+	if not is_equal_approx(camera.zoom.x, _target_zoom):
+		var eased := lerpf(camera.zoom.x, _target_zoom, 1.0 - exp(-zoom_ease_speed * delta))
+		if absf(eased - _target_zoom) < 0.001:
+			eased = _target_zoom
+		camera.zoom = Vector2(eased, eased)
 
 
 func _handle_player_movement() -> void:

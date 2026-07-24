@@ -1,5 +1,5 @@
 ## Child nodes are used as containers for entity,
-## also handles switching the player and loading 
+## also handles switching the player and loading
 ## the player party if it is missing
 extends Node
 ## This is the entity controller, it manages loading and manipulating entities, think of it like
@@ -24,6 +24,9 @@ var map_ctl: MapCtl
 @onready var npcs: Node2D = $NPCs
 
 # Character scene dictionary
+# TODO(!improvement): Dynamically load character scenes
+#   Player characters are currently hardcoded into the EntityCtl
+#   move them into a an object we can use to compose a party.
 var character_scenes := {
 	"Llew_v2": preload("res://scenes/entities/players/llew_v2.tscn"),
 	"Elliette_v2": preload("res://scenes/entities/players/elliette_v2.tscn"),

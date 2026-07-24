@@ -12,7 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://cutko2mo05uge" path="res://scenes/main_ui.tscn" id="9_trtic"]
 [ext_resource type="Script" uid="uid://cef3mierxqp5m" path="res://scenes/color_rect.gd" id="11_kvuet"]
 [ext_resource type="Script" uid="uid://bnodwmmbhkusp" path="res://scripts/components/ux/hover_focus.gd" id="13_ir15t"]
-[ext_resource type="PackedScene" uid="uid://dpufg4x1i4ukx" path="res://scenes/ui/in_game_menu.tscn" id="14_trtic"]
+[ext_resource type="PackedScene" path="res://scenes/ui/in_game_menu.tscn" id="14_trtic"]
 [ext_resource type="Script" uid="uid://c2jmd2hji74r5" path="res://scripts/components/ctl/input_ctl.gd" id="15_ir15t"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kvuet"]
@@ -105,3 +105,4 @@ pan_speed = 1600.0
 
 [node name="GameMenu" parent="." unique_id=1704148061 instance=ExtResource("14_trtic")]
 unique_name_in_owner = true
+visible = false

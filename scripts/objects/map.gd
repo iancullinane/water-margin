@@ -22,7 +22,7 @@ var _named_tiles: Dictionary = {}
 func _ready() -> void:
 	_build_named_tile_registry()
 	apply_map_data(game_map_data)
-	print(JSON.stringify(_named_tiles, "\t"))
+	# print(JSON.stringify(_named_tiles, "\t"))
 
 	if Engine.is_editor_hint():
 		apply_map_data(game_map_data)
