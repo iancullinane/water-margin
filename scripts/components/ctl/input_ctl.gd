@@ -3,6 +3,10 @@
 extends Node2D
 class_name InputCtl
 
+# UI Nodes
+@onready var GameMenu: InGameMenu = %GameMenu
+
+
 @onready var entity_ctl: Node2D = get_parent().get_node("EntityCtl")
 @onready var camera: Camera2D = get_parent().get_node("Camera")
 
@@ -71,6 +75,11 @@ func _unhandled_input(_event):
 		entity_ctl.previous_player()
 	elif Input.is_action_just_pressed("next_character"):
 		entity_ctl.next_player()
+
+	if Input.is_action_just_pressed("open_game_menu"):
+		logging.log("open game menu")
+		GameMenu.visible = not GameMenu.visible
+
 
 
 func _on_current_player_changed(entity: Node2D):

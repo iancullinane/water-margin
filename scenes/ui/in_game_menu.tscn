@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://dpufg4x1i4ukx"]
+
+[ext_resource type="StyleBox" uid="uid://q45dkam4i4n6" path="res://scenes/ui/styles/paper_box.tres" id="1_323nu"]
+[ext_resource type="Script" uid="uid://cfa2ancua3rjh" path="res://scripts/ui/in_game_menu.gd" id="1_x7g8s"]
+
+[node name="InGameMenu" type="CanvasLayer" unique_id=1704148061]
+script = ExtResource("1_x7g8s")
+
+[node name="Panel" type="Panel" parent="." unique_id=1287378598]
+anchors_preset = -1
+anchor_left = 0.05
+anchor_top = 0.05
+anchor_right = 0.95
+anchor_bottom = 0.95
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("1_323nu")

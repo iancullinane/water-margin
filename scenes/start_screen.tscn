@@ -23,12 +23,20 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(0.6947026, 0.6947026)
+scale = Vector2(0.3, 0.3)
 texture = ExtResource("3_hm208")
 expand_mode = 4
 stretch_mode = 3
 
-[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1507867926]
+[node name="CenterContainer" type="Control" parent="." unique_id=1176981776]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="CenterContainer" unique_id=832388076]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -37,8 +45,14 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="StartMenu" type="Panel" parent="CenterContainer" unique_id=1030758200]
-custom_minimum_size = Vector2(600, 400)
-layout_mode = 2
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.3
+anchor_top = 0.3
+anchor_right = 0.7
+anchor_bottom = 0.7
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/StartMenu" unique_id=1317071717]
 layout_mode = 1
@@ -50,6 +64,6 @@ grow_vertical = 2
 alignment = 2
 
 [node name="Button" type="Button" parent="CenterContainer/StartMenu/VBoxContainer" unique_id=1402004975]
+custom_minimum_size = Vector2(1.84, 0)
 layout_mode = 2
-theme_override_font_sizes/font_size = 59
 text = "Start Game"

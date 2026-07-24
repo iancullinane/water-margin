@@ -6,8 +6,11 @@
 [ext_resource type="Texture2D" uid="uid://d3pkx2v63eny3" path="res://assets/textures/portraits/portrait4-4x.png" id="3_scoti"]
 [ext_resource type="Texture2D" uid="uid://dmr100gb0y2u0" path="res://assets/textures/ui/panelInset_beige.png" id="4_i1gbh"]
 [ext_resource type="Script" uid="uid://cwoil5hypcin3" path="res://scripts/ui/player_info_card.gd" id="4_scoti"]
-[ext_resource type="Texture2D" uid="uid://cutopv3koqc6h" path="res://assets/textures/ui/panel_brown.png" id="5_46p8p"]
+[ext_resource type="StyleBox" uid="uid://q45dkam4i4n6" path="res://scenes/ui/styles/paper_box.tres" id="5_okuri"]
 [ext_resource type="Texture2D" uid="uid://cymyctxgiukom" path="res://assets/textures/ui/panelInset_blue.png" id="7_okuri"]
+
+[sub_resource type="Theme" id="Theme_okuri"]
+Label/font_sizes/font_size = 10
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_46p8p"]
 texture = ExtResource("4_i1gbh")
@@ -15,13 +18,6 @@ texture_margin_left = 20.0
 texture_margin_top = 20.0
 texture_margin_right = 20.0
 texture_margin_bottom = 20.0
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_okuri"]
-texture = ExtResource("5_46p8p")
-texture_margin_left = 10.0
-texture_margin_top = 10.0
-texture_margin_right = 10.0
-texture_margin_bottom = 10.0
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_kyx1g"]
 texture = ExtResource("7_okuri")
@@ -32,13 +28,14 @@ script = ExtResource("1_j6a7c")
 [node name="DebugPanel" type="Panel" parent="." unique_id=1264789967]
 unique_name_in_owner = true
 anchors_preset = -1
-anchor_left = 0.963
-anchor_top = 0.035
-anchor_right = 0.963
-anchor_bottom = 0.035
-offset_left = -240.0
-offset_bottom = 140.0
+anchor_left = 0.955
+anchor_top = 0.051
+anchor_right = 0.955
+anchor_bottom = 0.051
+offset_left = -110.0
+offset_bottom = 97.0
 grow_horizontal = 0
+theme = SubResource("Theme_okuri")
 script = ExtResource("2_scoti")
 
 [node name="PanelContainer" type="MarginContainer" parent="DebugPanel" unique_id=67009610]
@@ -75,6 +72,7 @@ unique_name_in_owner = true
 layout_mode = 2
 
 [node name="TileFlavor" type="Panel" parent="." unique_id=1743361490]
+visible = false
 custom_minimum_size = Vector2(600, 200)
 anchors_preset = -1
 anchor_left = 0.5
@@ -114,17 +112,20 @@ anchor_left = 0.058
 anchor_top = 0.938
 anchor_right = 0.058
 anchor_bottom = 0.938
-offset_top = -178.68188
-offset_right = 131.2
+offset_top = -136.0
+offset_right = 100.0
 grow_vertical = 0
 theme = ExtResource("2_j6a7c")
-theme_override_styles/panel = SubResource("StyleBoxTexture_okuri")
+theme_override_styles/panel = ExtResource("5_okuri")
 script = ExtResource("4_scoti")
 
 [node name="MarginContainer" type="MarginContainer" parent="PlayerInfoCard" unique_id=1831881091]
-layout_mode = 0
-offset_right = 130.2
-offset_bottom = 177.31999
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="PlayerInfoV" type="VBoxContainer" parent="PlayerInfoCard/MarginContainer" unique_id=1832390577]
 layout_mode = 2
