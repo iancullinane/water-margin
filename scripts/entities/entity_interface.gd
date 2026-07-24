@@ -45,7 +45,6 @@ var target_position: Vector2 = Vector2.ZERO
 
 
 func _ready() -> void:
-	add_to_group("entities")
 	snap_to_grid()
 
 func snap_to_grid() -> void:
@@ -96,13 +95,14 @@ func get_stat(stat_name: String) -> String:
 		# 	_on_release_dir(dir)
 
 
-func move(dir: Vector2) -> bool:
+## step performs one grid move via the Mover. The entity only knows about
+## itself — terrain and occupancy validation belong to the controller
+## (see EntityCtl.try_move), so entities stay self-contained and reusable
+## for both players and NPCs.
+func step(dir: Vector2) -> bool:
 	if mover.is_moving:
 		return false
 	direction = dir
-	var new_target = position + dir * CELL_SIZE
-	if not _can_move_to(new_target):
-		return false
 	mover.move(dir)
 	return true
 
@@ -162,37 +162,3 @@ func _process_held_movement(_delta: float) -> void:
 # 		position = target_position
 # 		is_moving = false
 
-func _can_move_to(target_pos: Vector2) -> bool:
-	var game_map := _get_current_map()
-	if game_map == null:
-		return true
-
-	var tile_coords := game_map.get_tile_from_global(target_pos)
-
-	if _is_tile_blocked(game_map, tile_coords):
-		return false
-
-	if _is_entity_at_position(target_pos):
-		return false
-
-	return true
-
-# TODO: _get_current_map on entity is too coupled to its parent
-#  entities have tightly coupled functions that should be cleaned up
-# Labels: Story
-func _get_current_map() -> GameMap:
-	var level_loader = get_tree().root.find_child("LevelLoader", true, false)
-	if level_loader and level_loader.has_method("get_current_map"):
-		return level_loader.get_current_map()
-	return null
-
-func _is_tile_blocked(game_map: GameMap, tile_coords: Vector2i) -> bool:
-	return game_map.get_movement_cost(tile_coords) > 0
-
-
-func _is_entity_at_position(target_pos: Vector2) -> bool:
-	var entities := get_tree().get_nodes_in_group("entities")
-	for entity in entities:
-		if entity != self and entity.position.distance_to(target_pos) < 1.0:
-			return true
-	return false

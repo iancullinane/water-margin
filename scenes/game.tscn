@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://cutko2mo05uge" path="res://scenes/main_ui.tscn" id="9_trtic"]
 [ext_resource type="Script" uid="uid://cef3mierxqp5m" path="res://scenes/color_rect.gd" id="11_kvuet"]
 [ext_resource type="Script" uid="uid://bnodwmmbhkusp" path="res://scripts/components/ux/hover_focus.gd" id="13_ir15t"]
+[ext_resource type="PackedScene" uid="uid://dpufg4x1i4ukx" path="res://scenes/ui/in_game_menu.tscn" id="14_trtic"]
 [ext_resource type="Script" uid="uid://c2jmd2hji74r5" path="res://scripts/components/ctl/input_ctl.gd" id="15_ir15t"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kvuet"]
@@ -67,8 +68,6 @@ script = ExtResource("11_kvuet")
 [node name="TileInfoUi" parent="." unique_id=1107598726 instance=ExtResource("9_trtic")]
 
 [node name="Camera" type="Camera2D" parent="." unique_id=2131179913]
-position = Vector2(192, 128)
-zoom = Vector2(2, 2)
 position_smoothing_enabled = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=638450498]
@@ -103,3 +102,6 @@ script = ExtResource("13_ir15t")
 [node name="InputCtl" type="Node2D" parent="." unique_id=286666129]
 script = ExtResource("15_ir15t")
 pan_speed = 1600.0
+
+[node name="GameMenu" parent="." unique_id=1704148061 instance=ExtResource("14_trtic")]
+unique_name_in_owner = true

@@ -1,3 +1,6 @@
+## Holds layers in order as children
+## also returns data at specific tiles of that map
+
 @tool
 extends TileMapLayer
 class_name GameMap
@@ -59,7 +62,7 @@ func apply_map_data(data: GameMapData) -> void:
 	game_map_data = data
 	for game_tile in data.tile_data:
 		if game_tile.cell_image_name == "":
-			print("no cell_image_name")
+			logging.warn("no cell_image_name")
 			continue
 		var entry: Dictionary = _named_tiles.get(game_tile.cell_image_name, {})
 		if entry.is_empty():

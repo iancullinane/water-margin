@@ -2,7 +2,7 @@ extends Panel
 class_name PlayerInfoCard
 
 @onready var portrait: TextureRect = $MarginContainer/PlayerInfoV/PortraitMargin/Panel/MarginContainer/Portrait
-@onready var name_label: Label = $MarginContainer/PlayerInfoV/Info/NameLabel
+@onready var name_label: Label = %NameLabel
 @onready var dmg_label: Label = $MarginContainer/PlayerInfoV/Info2/DmgLabel
 
 func _ready() -> void:

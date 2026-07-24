@@ -1,3 +1,5 @@
+## The tiny orange square
+
 @tool
 extends Node2D
 class_name TileDebugger

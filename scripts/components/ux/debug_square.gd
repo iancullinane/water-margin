@@ -1,3 +1,5 @@
+## The red line around the border
+
 @tool
 extends Node2D
 

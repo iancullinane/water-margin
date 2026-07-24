@@ -14,6 +14,9 @@ enum EntityType {
 
 var current_player: IEntity
 @export var _current_party_member_idx: int = 0
+# The map mount point, injected by the composition root (game.gd) so this
+# controller can validate moves without reaching up/across the scene tree.
+var map_ctl: MapCtl
 # The three kinds of entities are stored as children
 # of parent nodes
 @onready var party: Node2D = $Party
@@ -127,7 +130,36 @@ func set_current_player_by_index(index: int):
 		set_current_player(entity)
 
 func move_current_player(dir: Vector2):
-	current_player.move(dir)
+	try_move(current_player, dir)
+
+## try_move validates a grid step for `entity` against terrain and other
+## entities, then commands the entity to step. World knowledge lives here in
+## the controller ("the hands of the marionette") so entities stay
+## self-contained. Reusable for player and NPC movement alike.
+func try_move(entity: IEntity, dir: Vector2) -> bool:
+	if entity == null:
+		return false
+	var target: Vector2 = entity.position + dir * GameConstants.CELL_SIZE
+	if _is_tile_blocked(target):
+		return false
+	if _is_cell_occupied(target, entity):
+		return false
+	return entity.step(dir)
+
+func _is_tile_blocked(target_pos: Vector2) -> bool:
+	if map_ctl == null:
+		return false
+	var game_map := map_ctl.get_current_map()
+	if game_map == null:
+		return false
+	var tile_coords := game_map.get_tile_from_global(target_pos)
+	return game_map.get_movement_cost(tile_coords) > 0
+
+func _is_cell_occupied(target_pos: Vector2, mover: IEntity) -> bool:
+	for e in get_all_entities():
+		if e != mover and e.position.distance_to(target_pos) < 1.0:
+			return true
+	return false
 
 ## spawn_party_if_missing is a method to load a hardcoded set
 ## of player party member.
