@@ -5,12 +5,13 @@ extends Node2D
 
 @export_group("Debug flags")
 
-# 
+#
 const MAP_001 = preload("res://scenes/map/map_001.tscn")
 
 # This is the file that keeps track of where the
 # player is persistently from game to game, keep
 # it in the user folder to persist
+# This will be at ~/Library/Application\ Support/Godot/app_userdata/Water\ Margin
 const STATE_PATH := "user://party_state.tres"
 
 # controllers
@@ -89,7 +90,7 @@ func _apply_camera_limits() -> void:
 	camera.limit_top = int(bounds.position.y)
 	camera.limit_right = int(bounds.end.x)
 	camera.limit_bottom = int(bounds.end.y)
-	print("[Game] Camera limits set — L:%d T:%d R:%d B:%d (bounds: %s)" 
+	print("[Game] Camera limits set — L:%d T:%d R:%d B:%d (bounds: %s)"
 		% [camera.limit_left, camera.limit_top, camera.limit_right, camera.limit_bottom, bounds])
 
 
