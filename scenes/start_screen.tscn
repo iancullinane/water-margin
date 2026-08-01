@@ -63,6 +63,44 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 2
 
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/StartMenu/VBoxContainer" unique_id=1097932917]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CenterContainer/StartMenu/VBoxContainer/MarginContainer" unique_id=2053327745]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/StartMenu/VBoxContainer/MarginContainer/ScrollContainer" unique_id=185376186]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/StartMenu/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer" unique_id=1507343347]
+layout_mode = 2
+text = "Test1"
+
+[node name="Label2" type="Label" parent="CenterContainer/StartMenu/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer" unique_id=1795481722]
+layout_mode = 2
+text = "Test1"
+
+[node name="Label3" type="Label" parent="CenterContainer/StartMenu/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer" unique_id=1049101309]
+layout_mode = 2
+text = "Test1"
+
+[node name="Label4" type="Label" parent="CenterContainer/StartMenu/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer" unique_id=955969260]
+layout_mode = 2
+text = "Test1"
+
+[node name="Label5" type="Label" parent="CenterContainer/StartMenu/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer" unique_id=1192187769]
+layout_mode = 2
+text = "Test1"
+
+[node name="Label6" type="Label" parent="CenterContainer/StartMenu/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer" unique_id=390207370]
+layout_mode = 2
+text = "Test1"
+
+[node name="Label7" type="Label" parent="CenterContainer/StartMenu/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer" unique_id=1480339160]
+layout_mode = 2
+text = "Test1"
+
 [node name="Button" type="Button" parent="CenterContainer/StartMenu/VBoxContainer" unique_id=1402004975]
 custom_minimum_size = Vector2(1.84, 0)
 layout_mode = 2
