@@ -19,6 +19,8 @@ var current_player: IEntity
 var map_ctl: MapCtl
 # The three kinds of entities are stored as children
 # of parent nodes
+# TODO: Rebuild entity management with groups
+#   Entities are currently children of a node and we use `get_children` to extract them. This likely makes more sense as one node and each set of entites should be a group.
 @onready var party: Node2D = $Party
 @onready var enemies: Node2D = $Enemies
 @onready var npcs: Node2D = $NPCs
@@ -59,6 +61,8 @@ func get_entity_group(type: EntityType) -> Array[IEntity]:
 				result.append(child)
 	return result
 
+## Depending on the type, return the node which holds
+## entities of that type
 func _get_container(type: EntityType) -> Node2D:
 	match type:
 		EntityType.PARTY:
@@ -181,30 +185,3 @@ func spawn_entities(last_player: String, entity_save: Array[SavedData]):
 	# player is never left with no one to control.
 	if current_player == null:
 		set_current_player(get_entity_by_index(EntityType.PARTY, 0))
-
-## spawn_party_if_missing is a method to load a hardcoded set
-## of player party member.
-func spawn_party_if_missing() -> void:
-	pass
-	# TODO: Decide which party members to spawn by location on map
-	#  Spawn party is hardcoded, but we keep where a player "ends up" on the map, expand the concept to see who is on the map and then spawn them in. This will be helpful later when the player can move between maps.
-	if get_entity_by_name("Llew_v2") == null:
-		var llew_v2_instance = character_scenes["Llew_v2"].instantiate()
-		llew_v2_instance.name = "Llew_v2"
-		add_party_member(llew_v2_instance)
-		SignalBus.current_player_changed.emit(llew_v2_instance)
-
-	# if get_entity_by_name("Elliette_v2") == null:
-	# 	var elliette_v2_instance = character_scenes["Elliette_v2"].instantiate()
-	# 	elliette_v2_instance.name = "Elliette_v2"
-	# 	add_party_member(elliette_v2_instance)
-
-	# if get_entity_by_name("Eignh_v2") == null:
-	# 	var eignh_v2_instance = character_scenes["Eignh_v2"].instantiate()
-	# 	eignh_v2_instance.name = "Eignh_v2"
-	# 	add_party_member(eignh_v2_instance)
-
-	# if get_entity_by_name("Cerah_v2") == null:
-	# 	var cerah_v2_instance = character_scenes["Cerah_v2"].instantiate()
-	# 	cerah_v2_instance.name = "Cerah_v2"
-	# 	add_party_member(cerah_v2_instance)

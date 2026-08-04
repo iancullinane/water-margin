@@ -28,6 +28,7 @@ StaticData="*res://globals/static_data.gd"
 GameData="*res://globals/database.gd"
 GameConstants="*res://globals/constants.gd"
 SignalBus="*res://globals/signal_bus.gd"
+SaveCtl="*res://globals/save_ctl.gd"
 
 [debug]
 
@@ -64,10 +65,6 @@ folder_colors={
 "res://scratch/": "gray",
 "res://scripts/": "pink"
 }
-
-[global_group]
-
-entities=""
 
 [importer_defaults]
 
