@@ -16,6 +16,11 @@ var current_slot_path := ""
 
 const _SLOT_PREFIX := "savegame_"
 
+## The world as it should exist when a player starts a new game, authored as a
+## normal SavedGame resource. Living in res:// keeps it out of reach of every
+## write path, which only ever targets a slot under save_dir.
+const NEW_GAME_TEMPLATE := "res://data/saves/new_game.tres"
+
 
 ## list_slots returns every save slot, newest first, as dictionaries of
 ## {path, modified, display_name}. Slots are listed from directory metadata

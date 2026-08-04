@@ -50,12 +50,9 @@ func _ready():
 	# Inject the map mount point so EntityCtl can validate moves without
 	# reaching across the scene tree (call down from the composition root).
 	entity_ctl.map_ctl = map_ctl
-	# No slot to load means a new game — spawn the starting party instead of
-	# restoring one.
-	if saved_game == null:
-		entity_ctl.spawn_party_if_missing()
-	else:
-		entity_ctl.spawn_entities(saved_game.last_selected_player, saved_game.saved_data)
+	# A new game is the base save game loaded through the same path as any
+	# other, so there is nothing to branch on here.
+	entity_ctl.spawn_entities(saved_game.last_selected_player, saved_game.saved_data)
 	_apply_camera_limits()
 
 	# SignalBus.save_game.connect(_on_save_game)

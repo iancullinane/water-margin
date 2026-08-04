@@ -36,11 +36,13 @@ func save_game():
 	ResourceSaver.save(saved_game, slot_path)
 
 
-## load_game reads the active slot. Returns null when there is no slot to
-## read — a new game — so callers must handle that before touching the result.
+## load_game reads the active slot, falling back to the base save game when
+## there is nothing to read — a new game is just the template world loaded
+## through the ordinary path, so callers never special-case it.
 func load_game() -> SavedGame:
 	var slot_path := SaveCtl.get_active_slot()
 	if slot_path == "" or not FileAccess.file_exists(slot_path):
-		return null
+		logging.log("No save slot to read, starting from the base save game")
+		return load(SaveCtl.NEW_GAME_TEMPLATE) as SavedGame
 
 	return load(slot_path) as SavedGame

@@ -25,17 +25,6 @@ var map_ctl: MapCtl
 @onready var enemies: Node2D = $Enemies
 @onready var npcs: Node2D = $NPCs
 
-# Character scene dictionary
-# TODO(!improvement): Dynamically load character scenes
-#   Player characters are currently hardcoded into the EntityCtl
-#   move them into a an object we can use to compose a party.
-var character_scenes := {
-	"Llew_v2": preload("res://scenes/entities/players/llew_v2.tscn"),
-	"Elliette_v2": preload("res://scenes/entities/players/elliette_v2.tscn"),
-	# "Eignh_v2": preload("res://scenes/entities/players/eignh_v2.tscn"),
-	"Cerah_v2": preload("res://scenes/entities/players/cerah_v2.tscn"),
-}
-
 
 func get_current_player() -> IEntity:
 	return current_player
