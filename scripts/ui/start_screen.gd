@@ -30,8 +30,9 @@ func _ready():
 	if not Engine.is_editor_hint():
 		_populate_saved_games()
 
-	# Nothing is selected on entry, so there is nothing to load yet.
+	# Nothing is selected on entry, so neither action has a target yet.
 	load_button.disabled = true
+	new_game_button.disabled = true
 
 
 func _populate_saved_games() -> void:
@@ -53,20 +54,29 @@ func _populate_saved_games() -> void:
 		row.toggle_mode = true
 		row.button_group = _slot_group
 		row.add_theme_font_size_override("font_size", slot_font_size)
-		# The path rides along with the row so selection needs no index
-		# bookkeeping against the list.
-		row.set_meta("slot_path", slot.path)
+		# Slot number and occupancy ride along with the row, so selection needs
+		# no index bookkeeping against the list.
+		row.set_meta("slot_index", slot.index)
+		row.set_meta("slot_occupied", slot.exists)
 		saved_games_list.add_child(row)
 
 
-func _on_slot_selected(_button: BaseButton) -> void:
-	load_button.disabled = false
+## An empty slot is somewhere to start a new game; an occupied one is something
+## to load. Only ever one of the two, so a new game can't land on a save.
+func _on_slot_selected(button: BaseButton) -> void:
+	var occupied: bool = button.get_meta("slot_occupied")
+	load_button.disabled = not occupied
+	new_game_button.disabled = occupied
 
 
-## New Game always mints a fresh slot, so it never overwrites an existing save.
 func _on_new_game_pressed() -> void:
-	logging.log("new game pressed")
-	SaveCtl.new_slot()
+	var selected := _slot_group.get_pressed_button()
+	if selected == null:
+		return
+
+	var slot_index: int = selected.get_meta("slot_index")
+	logging.log("new game in slot %d" % slot_index)
+	SaveCtl.select_slot(slot_index)
 	get_tree().change_scene_to_file(GAME_SCENE)
 
 
@@ -75,7 +85,7 @@ func _on_load_pressed() -> void:
 	if selected == null:
 		return
 
-	var slot_path: String = selected.get_meta("slot_path")
-	logging.log("loading slot %s" % slot_path)
-	SaveCtl.select_slot(slot_path)
+	var slot_index: int = selected.get_meta("slot_index")
+	logging.log("loading slot %d" % slot_index)
+	SaveCtl.select_slot(slot_index)
 	get_tree().change_scene_to_file(GAME_SCENE)

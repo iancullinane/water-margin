@@ -27,10 +27,15 @@ func save_game():
 
 	# Save back to the slot we loaded from, so a session keeps overwriting its
 	# own file rather than scattering new ones. A game started without going
-	# through the start screen has no slot yet, so mint one on first save.
+	# through the start screen has no slot yet, so claim the first free one.
 	var slot_path := SaveCtl.get_active_slot()
 	if slot_path == "":
-		slot_path = SaveCtl.new_slot()
+		var free_slot := SaveCtl.first_free_slot()
+		if free_slot == -1:
+			logging.warn("All %d save slots are full, nothing saved" % SaveCtl.SLOT_COUNT)
+			return
+		SaveCtl.select_slot(free_slot)
+		slot_path = SaveCtl.get_active_slot()
 
 	SaveCtl.ensure_save_dir()
 	ResourceSaver.save(saved_game, slot_path)

@@ -79,17 +79,17 @@ func test_load_game_falls_back_to_the_template_for_a_new_game() -> void:
 
 
 func test_load_game_falls_back_when_the_slot_file_is_missing() -> void:
-	# Slot minted but never saved — the path exists, the file does not.
-	SaveCtl.new_slot()
+	# An empty slot picked for a new game — the path exists, the file does not.
+	SaveCtl.select_slot(3)
 	var loaded := saver_loader.load_game()
-	assert_not_null(loaded, "a minted-but-unsaved slot should fall back to the template")
+	assert_not_null(loaded, "an empty slot should fall back to the template")
 
 
 func test_load_game_reads_the_active_slot_when_it_exists() -> void:
-	var slot_path: String = SaveCtl.new_slot()
+	SaveCtl.select_slot(3)
 	var stored := SavedGame.new()
 	stored.name = "a_real_save"
-	ResourceSaver.save(stored, slot_path)
+	ResourceSaver.save(stored, SaveCtl.get_active_slot())
 
 	var loaded := saver_loader.load_game()
 	assert_eq(loaded.name, "a_real_save",
@@ -107,6 +107,8 @@ func test_template_lives_outside_the_writable_save_dir() -> void:
 		"slots must live in user data, not the project")
 
 
-func test_minted_slots_never_point_at_the_template() -> void:
-	assert_ne(SaveCtl.new_slot(), SaveCtl.NEW_GAME_TEMPLATE,
-		"a new game must mint its own slot, not reuse the template path")
+func test_selected_slots_never_point_at_the_template() -> void:
+	for index in range(1, SaveCtl.SLOT_COUNT + 1):
+		SaveCtl.select_slot(index)
+		assert_ne(SaveCtl.get_active_slot(), SaveCtl.NEW_GAME_TEMPLATE,
+			"no slot may resolve to the template path")

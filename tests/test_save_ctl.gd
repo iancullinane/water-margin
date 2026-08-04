@@ -1,9 +1,9 @@
 extends GutTest
 
-## Unit tests for SaveCtl — slot discovery, minting and selection.
-## SaveCtl is an autoload at runtime, but we instantiate the script directly
-## here and point save_dir at a scratch directory so tests never touch the
-## player's real savegames.
+## Unit tests for SaveCtl — ten numbered save slots, their listing and
+## selection. SaveCtl is an autoload at runtime, but we instantiate the script
+## directly here and point save_dir at a scratch directory so tests never touch
+## the player's real savegames.
 
 const SaveCtlScript = preload("res://globals/save_ctl.gd")
 
@@ -33,10 +33,10 @@ func _clear_test_dir() -> void:
 	DirAccess.remove_absolute(TEST_DIR)
 
 
-# Writes a real file so DirAccess and get_modified_time see it. Contents are
-# irrelevant — SaveCtl lists slots without deserializing them.
-func _touch(file_name: String) -> String:
-	var path := TEST_DIR + file_name
+# Occupies a slot by writing a real file, so DirAccess and get_modified_time
+# see it. Contents are irrelevant — slots are listed from directory metadata.
+func _occupy(index: int) -> String:
+	var path: String = TEST_DIR + "savegame_%02d.tres" % index
 	var f := FileAccess.open(path, FileAccess.WRITE)
 	f.store_string("stub")
 	f.close()
@@ -45,111 +45,131 @@ func _touch(file_name: String) -> String:
 
 # --- list_slots -------------------------------------------------------------
 
-func test_list_slots_missing_dir_returns_empty() -> void:
+func test_list_slots_always_returns_every_slot() -> void:
+	assert_eq(save_ctl.list_slots().size(), save_ctl.SLOT_COUNT,
+		"the menu shows a fixed set of slots, empty or not")
+
+
+func test_list_slots_returns_every_slot_when_the_dir_is_missing() -> void:
 	save_ctl.save_dir = "user://no_such_dir/"
-	assert_eq(save_ctl.list_slots(), [], "a missing save dir should list no slots")
+	assert_eq(save_ctl.list_slots().size(), save_ctl.SLOT_COUNT,
+		"a missing save dir still lists ten empty slots")
 
 
-func test_list_slots_empty_dir_returns_empty() -> void:
-	assert_eq(save_ctl.list_slots(), [], "an empty save dir should list no slots")
-
-
-func test_list_slots_ignores_non_tres_files() -> void:
-	_touch("savegame_100.tres")
-	_touch("notes.txt")
-	_touch("savegame_200.png")
-
+func test_list_slots_is_ordered_by_index() -> void:
 	var slots = save_ctl.list_slots()
-	assert_eq(slots.size(), 1, "only .tres files are slots")
-	assert_true(slots[0].path.ends_with("savegame_100.tres"))
+	for i in slots.size():
+		assert_eq(slots[i].index, i + 1, "slots run 1..N in order")
 
 
-func test_list_slots_returns_every_tres_file() -> void:
-	_touch("savegame_100.tres")
-	_touch("savegame_200.tres")
-	_touch("savegame.tres")
-
-	assert_eq(save_ctl.list_slots().size(), 3, "all .tres files should be listed")
-
-
-func test_list_slots_orders_newest_first() -> void:
-	# Files created within the same test share a modified time (filesystem
-	# granularity is one second), so this pins the name-descending tiebreak
-	# that makes ordering deterministic for same-second slots.
-	_touch("savegame_100.tres")
-	_touch("savegame_300.tres")
-	_touch("savegame_200.tres")
-
+func test_list_slots_order_is_stable_regardless_of_write_order() -> void:
+	# The bug this replaces: ordering by modified time meant saving reshuffled
+	# the menu. Occupy slots out of order and the listing must not care.
+	_occupy(5)
+	_occupy(2)
 	var slots = save_ctl.list_slots()
-	assert_true(slots[0].path.ends_with("savegame_300.tres"), "newest slot first")
-	assert_true(slots[1].path.ends_with("savegame_200.tres"))
-	assert_true(slots[2].path.ends_with("savegame_100.tres"), "oldest slot last")
+	assert_eq(slots[1].index, 2)
+	assert_eq(slots[4].index, 5)
+	assert_true(slots[1].exists, "slot 2 was written")
+	assert_true(slots[4].exists, "slot 5 was written")
 
 
-func test_list_slots_entries_have_a_display_name() -> void:
-	_touch("savegame_100.tres")
-	var slot = save_ctl.list_slots()[0]
-	assert_ne(slot.display_name, "", "every slot needs a label for the start screen")
+func test_list_slots_marks_unwritten_slots_as_empty() -> void:
+	_occupy(3)
+	var slots = save_ctl.list_slots()
+	assert_true(slots[2].exists, "slot 3 was written")
+	assert_false(slots[0].exists, "slot 1 was never written")
 
 
-# --- new_slot ---------------------------------------------------------------
-
-func test_new_slot_sets_current_slot_path() -> void:
-	var path: String = save_ctl.new_slot()
-	assert_eq(save_ctl.current_slot_path, path, "minting a slot selects it")
-
-
-func test_new_slot_path_is_in_save_dir_and_is_tres() -> void:
-	var path: String = save_ctl.new_slot()
-	assert_true(path.begins_with(TEST_DIR), "slot should live in the save dir")
-	assert_true(path.ends_with(".tres"), "slot should be a .tres resource")
+func test_list_slots_labels_every_slot() -> void:
+	_occupy(1)
+	var slots = save_ctl.list_slots()
+	assert_ne(slots[0].display_name, "", "occupied slots need a label")
+	assert_ne(slots[1].display_name, "", "empty slots need a label too")
+	assert_ne(slots[0].display_name, slots[1].display_name,
+		"an occupied slot should not read the same as an empty one")
 
 
-func test_new_slot_does_not_write_a_file() -> void:
-	save_ctl.new_slot()
-	assert_eq(save_ctl.list_slots().size(), 0,
-		"a minted slot reserves a path only — the file appears on first save")
-
-
-func test_new_slot_does_not_collide_with_an_existing_slot() -> void:
-	var path: String = save_ctl.new_slot()
-	_touch(path.get_file())
-	assert_ne(save_ctl.new_slot(), path, "minting twice must not reuse an occupied path")
+func test_list_slots_paths_are_zero_padded_in_the_save_dir() -> void:
+	var slots = save_ctl.list_slots()
+	assert_eq(slots[0].path, TEST_DIR + "savegame_01.tres")
+	assert_eq(slots[9].path, TEST_DIR + "savegame_10.tres")
 
 
 # --- select_slot ------------------------------------------------------------
 
 func test_select_slot_sets_current_slot_path() -> void:
-	save_ctl.select_slot(TEST_DIR + "savegame_100.tres")
-	assert_eq(save_ctl.current_slot_path, TEST_DIR + "savegame_100.tres")
+	save_ctl.select_slot(3)
+	assert_eq(save_ctl.current_slot_path, TEST_DIR + "savegame_03.tres")
+
+
+func test_select_slot_ignores_an_out_of_range_index() -> void:
+	save_ctl.select_slot(4)
+	save_ctl.select_slot(0)
+	save_ctl.select_slot(save_ctl.SLOT_COUNT + 1)
+	assert_eq(save_ctl.current_slot_path, TEST_DIR + "savegame_04.tres",
+		"a bad index must not clobber the current selection")
+
+
+# --- first_free_slot --------------------------------------------------------
+
+func test_first_free_slot_is_one_when_nothing_is_saved() -> void:
+	assert_eq(save_ctl.first_free_slot(), 1)
+
+
+func test_first_free_slot_skips_occupied_slots() -> void:
+	_occupy(1)
+	_occupy(2)
+	assert_eq(save_ctl.first_free_slot(), 3)
+
+
+func test_first_free_slot_finds_a_gap() -> void:
+	_occupy(1)
+	_occupy(3)
+	assert_eq(save_ctl.first_free_slot(), 2, "a freed slot should be reused")
+
+
+func test_first_free_slot_is_negative_when_full() -> void:
+	for i in range(1, save_ctl.SLOT_COUNT + 1):
+		_occupy(i)
+	assert_eq(save_ctl.first_free_slot(), -1,
+		"a full slot list must report no room rather than overwriting")
 
 
 # --- get_active_slot (lazy fallback) ---------------------------------------
 
 func test_get_active_slot_returns_explicit_selection() -> void:
-	_touch("savegame_100.tres")
-	_touch("savegame_300.tres")
-	save_ctl.select_slot(TEST_DIR + "savegame_100.tres")
-	assert_true(save_ctl.get_active_slot().ends_with("savegame_100.tres"),
+	_occupy(1)
+	_occupy(2)
+	save_ctl.select_slot(2)
+	assert_eq(save_ctl.get_active_slot(), TEST_DIR + "savegame_02.tres",
 		"an explicit selection wins over the fallback")
 
 
-func test_get_active_slot_falls_back_to_newest_when_unset() -> void:
+func test_get_active_slot_falls_back_to_the_most_recent_save() -> void:
 	# This is the F5 path: straight into game.tscn, no start screen, nothing
-	# selected. Should resume the most recent slot rather than start fresh.
-	_touch("savegame_100.tres")
-	_touch("savegame_300.tres")
-	assert_true(save_ctl.get_active_slot().ends_with("savegame_300.tres"),
-		"with no selection, fall back to the newest slot")
+	# selected. Modified time no longer drives display order, but it is still
+	# the right answer for "where was I".
+	_occupy(4)
+	assert_eq(save_ctl.get_active_slot(), TEST_DIR + "savegame_04.tres",
+		"with no selection, resume the most recently saved slot")
 
 
-func test_get_active_slot_is_empty_when_no_slots_exist() -> void:
+func test_get_active_slot_breaks_modified_time_ties_by_lowest_index() -> void:
+	# Slots written in the same second share a modified time (filesystem
+	# granularity), so the tiebreak keeps the fallback deterministic.
+	_occupy(7)
+	_occupy(3)
+	assert_eq(save_ctl.get_active_slot(), TEST_DIR + "savegame_03.tres")
+
+
+func test_get_active_slot_is_empty_when_nothing_is_saved() -> void:
 	assert_eq(save_ctl.get_active_slot(), "",
-		"no selection and no slots means a new game")
+		"no selection and no saves means a new game")
 
 
 func test_get_active_slot_caches_the_fallback() -> void:
-	_touch("savegame_300.tres")
+	_occupy(6)
 	var resolved: String = save_ctl.get_active_slot()
 	assert_eq(save_ctl.current_slot_path, resolved,
 		"resolving the fallback should stick, so later saves target that slot")
