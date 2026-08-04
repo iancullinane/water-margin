@@ -1,4 +1,8 @@
 class_name SavedGame
 extends Resource
 
-@export var player_list: Array[String]
+# @export var player_list: Array[String]
+@export var name: String = "test_save_game"
+
+@export var last_selected_player: String
+@export var saved_data:Array[SavedData] = []

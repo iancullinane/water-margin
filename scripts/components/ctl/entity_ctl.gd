@@ -30,7 +30,7 @@ var map_ctl: MapCtl
 var character_scenes := {
 	"Llew_v2": preload("res://scenes/entities/players/llew_v2.tscn"),
 	"Elliette_v2": preload("res://scenes/entities/players/elliette_v2.tscn"),
-	"Eignh_v2": preload("res://scenes/entities/players/eignh_v2.tscn"),
+	# "Eignh_v2": preload("res://scenes/entities/players/eignh_v2.tscn"),
 	"Cerah_v2": preload("res://scenes/entities/players/cerah_v2.tscn"),
 }
 
@@ -69,8 +69,8 @@ func _get_container(type: EntityType) -> Node2D:
 			return npcs
 	return null
 
-func get_all_entities() -> Array[Node2D]:
-	var result: Array[Node2D] = []
+func get_all_entities() -> Array[IEntity]:
+	var result: Array[IEntity] = []
 	for entity in get_entity_group(EntityType.PARTY):
 		result.append(entity)
 	for entity in get_entity_group(EntityType.ENEMY):
@@ -119,11 +119,11 @@ func previous_player():
 func set_current_player(entity: IEntity):
 	var group := get_entity_group(EntityType.PARTY)
 	if entity and entity in group:
-		# Disable all others first
-		for e in group:
-			e.current_player = false
-		# Enable the selected one
-		entity.current_player = true
+		# The controller owns "who is selected" — entities stay self-contained
+		# and learn about it via the signal.
+		current_player = entity
+		# Keep Tab/Shift+Tab cycling from the newly selected member
+		_current_party_member_idx = group.find(entity)
 		# Emit signal for camera tracking
 		SignalBus.current_player_changed.emit(entity)
 
@@ -163,6 +163,24 @@ func _is_cell_occupied(target_pos: Vector2, mover: IEntity) -> bool:
 		if e != mover and e.position.distance_to(target_pos) < 1.0:
 			return true
 	return false
+
+
+
+func spawn_entities(last_player: String, entity_save: Array[SavedData]):
+	for e in entity_save:
+		var scene = load(e.scene_path) as PackedScene
+		var restored_node = scene.instantiate()
+
+		party.add_child(restored_node)
+		restored_node.on_load_game(e)
+		if last_player == restored_node.name:
+			set_current_player(restored_node)
+
+	# Saves written before last_selected_player existed (or a roster change)
+	# leave nothing selected — fall back to the first party member so the
+	# player is never left with no one to control.
+	if current_player == null:
+		set_current_player(get_entity_by_index(EntityType.PARTY, 0))
 
 ## spawn_party_if_missing is a method to load a hardcoded set
 ## of player party member.

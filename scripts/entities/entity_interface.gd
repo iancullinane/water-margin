@@ -54,3 +54,14 @@ func step(dir: Vector2) -> bool:
 
 
 # func on_save_game(saved_game:Array[SavedData])
+
+func on_save_game(saved_data:Array[SavedData]):
+	logging.log("Save %s" % stats.name)
+	var my_data = SavedData.new()
+	my_data.position = position
+	my_data.scene_path = scene_file_path
+
+	saved_data.append(my_data)
+
+func on_load_game(saved_data: SavedData):
+	position = saved_data.position

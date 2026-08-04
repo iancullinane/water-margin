@@ -2,6 +2,7 @@
 
 @tool
 extends Node2D
+class_name Game
 
 @export_group("Debug flags")
 
@@ -16,10 +17,11 @@ const STATE_PATH := "user://party_state.tres"
 
 # controllers
 # -----------
-@onready var level_loader = $LevelLoader
+@onready var saver_loader: SaverLoader = $Utils/SaverLoader
 @onready var map_ctl: MapCtl = $MapCtl
 @onready var entity_ctl: EntityCtl = $EntityCtl
 @onready var camera: Camera2D = $Camera
+@onready var level_loader = $LevelLoader
 
 
 # -----------------------------------------------------------
@@ -37,6 +39,7 @@ func get_level_loader() -> LevelLoader:
 # This is V2 of the _ready function, most notably we are using
 # lebvel_loader which "knows" how to find the map holder
 func _ready():
+	var saved_game = saver_loader.load_game()
 
 	# In editor, only ensure the map is visible; skip runtime wiring
 	if Engine.is_editor_hint():
@@ -47,11 +50,12 @@ func _ready():
 	# Inject the map mount point so EntityCtl can validate moves without
 	# reaching across the scene tree (call down from the composition root).
 	entity_ctl.map_ctl = map_ctl
-	entity_ctl.spawn_party_if_missing()
-	_load_party_state()
+	# entity_ctl.spawn_party_if_missing()
+	entity_ctl.spawn_entities(saved_game.last_selected_player ,saved_game.saved_data)
+	# _load_party_state()
 	_apply_camera_limits()
 
-	SignalBus.save_game.connect(_on_save_game)
+	# SignalBus.save_game.connect(_on_save_game)
 
 	# make sure the camera is set to something
 	# meaningful. which is the current player
@@ -70,10 +74,12 @@ func _ready():
 		# GameConstants
 
 
-func _exit_tree():
-	if Engine.is_editor_hint():
-		return
-	_save_party_state()
+# func _exit_tree():
+# 	if Engine.is_editor_hint():
+# 		return
+# 	_save_party_state()
+
+
 
 func _spawn_party_if_missing() -> void:
 	if entity_ctl == null:
@@ -109,28 +115,30 @@ func _snap_camera_to_current_at_start() -> void:
 
 ## _load_party_state gets the user state resource from user
 ## storage.
-func _load_party_state() -> void:
-	if not ResourceLoader.exists(STATE_PATH):
-		return
-	var state := ResourceLoader.load(STATE_PATH) as PartyState
-	if state == null:
-		return
-	for m in state.members:
-		var e = entity_ctl.get_entity_by_name(m.name)
-		if e:
-			e.position = m.position
-			e.snap_to_grid()
+# func _load_party_state() -> void:
+# 	if not ResourceLoader.exists(STATE_PATH):
+# 		return
+# 	var state := ResourceLoader.load(STATE_PATH) as PartyState
+# 	if state == null:
+# 		return
+# 	for m in state.members:
+# 		var e = entity_ctl.get_entity_by_name(m.name)
+# 		if e:
+# 			e.position = m.position
+# 			e.snap_to_grid()
 
 ## _save_party_state saves the user state resource from user
 ## storage.
-func _save_party_state() -> void:
-	var state := PartyState.new()
-	for e in entity_ctl.get_all_entities():
-		var m := PartyMemberState.new()
-		m.name = e.name
-		m.position = e.position
-		state.members.append(m)
-	ResourceSaver.save(state, STATE_PATH)
+# func _save_party_state() -> void:
+# 	var state := PartyState.new()
+# 	for e in entity_ctl.get_all_entities():
+# 		var m := PartyMemberState.new()
+# 		m.name = e.name
+# 		m.position = e.position
+# 		state.members.append(m)
+# 	ResourceSaver.save(state, STATE_PATH)
 
-func _on_save_game() -> void:
-	$Utils/SaverLoader.save_game()
+# func _on_save_game() -> void:
+# 	$Utils/SaverLoader.save_game()
+# 	for e in entity_ctl.get_all_entities():
+# 		e.on_save_game()
