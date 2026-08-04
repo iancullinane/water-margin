@@ -1,5 +1,5 @@
 ## Child nodes are used as containers for entity,
-## also handles switching the player and loading 
+## also handles switching the player and loading
 ## the player party if it is missing
 extends Node
 ## This is the entity controller, it manages loading and manipulating entities, think of it like
@@ -19,17 +19,11 @@ var current_player: IEntity
 var map_ctl: MapCtl
 # The three kinds of entities are stored as children
 # of parent nodes
+# TODO: Rebuild entity management with groups
+#   Entities are currently children of a node and we use `get_children` to extract them. This likely makes more sense as one node and each set of entites should be a group.
 @onready var party: Node2D = $Party
 @onready var enemies: Node2D = $Enemies
 @onready var npcs: Node2D = $NPCs
-
-# Character scene dictionary
-var character_scenes := {
-	"Llew_v2": preload("res://scenes/entities/players/llew_v2.tscn"),
-	"Elliette_v2": preload("res://scenes/entities/players/elliette_v2.tscn"),
-	"Eignh_v2": preload("res://scenes/entities/players/eignh_v2.tscn"),
-	"Cerah_v2": preload("res://scenes/entities/players/cerah_v2.tscn"),
-}
 
 
 func get_current_player() -> IEntity:
@@ -56,6 +50,8 @@ func get_entity_group(type: EntityType) -> Array[IEntity]:
 				result.append(child)
 	return result
 
+## Depending on the type, return the node which holds
+## entities of that type
 func _get_container(type: EntityType) -> Node2D:
 	match type:
 		EntityType.PARTY:
@@ -66,8 +62,8 @@ func _get_container(type: EntityType) -> Node2D:
 			return npcs
 	return null
 
-func get_all_entities() -> Array[Node2D]:
-	var result: Array[Node2D] = []
+func get_all_entities() -> Array[IEntity]:
+	var result: Array[IEntity] = []
 	for entity in get_entity_group(EntityType.PARTY):
 		result.append(entity)
 	for entity in get_entity_group(EntityType.ENEMY):
@@ -116,11 +112,11 @@ func previous_player():
 func set_current_player(entity: IEntity):
 	var group := get_entity_group(EntityType.PARTY)
 	if entity and entity in group:
-		# Disable all others first
-		for e in group:
-			e.current_player = false
-		# Enable the selected one
-		entity.current_player = true
+		# The controller owns "who is selected" — entities stay self-contained
+		# and learn about it via the signal.
+		current_player = entity
+		# Keep Tab/Shift+Tab cycling from the newly selected member
+		_current_party_member_idx = group.find(entity)
 		# Emit signal for camera tracking
 		SignalBus.current_player_changed.emit(entity)
 
@@ -161,28 +157,20 @@ func _is_cell_occupied(target_pos: Vector2, mover: IEntity) -> bool:
 			return true
 	return false
 
-## spawn_party_if_missing is a method to load a hardcoded set
-## of player party member.
-func spawn_party_if_missing() -> void:
-	# TODO: Decide which party members to spawn by location on map
-	#  Spawn party is hardcoded, but we keep where a player "ends up" on the map, expand the concept to see who is on the map and then spawn them in. This will be helpful later when the player can move between maps.
-	if get_entity_by_name("Llew_v2") == null:
-		var llew_v2_instance = character_scenes["Llew_v2"].instantiate()
-		llew_v2_instance.name = "Llew_v2"
-		add_party_member(llew_v2_instance)
-		SignalBus.current_player_changed.emit(llew_v2_instance)
 
-	if get_entity_by_name("Elliette_v2") == null:
-		var elliette_v2_instance = character_scenes["Elliette_v2"].instantiate()
-		elliette_v2_instance.name = "Elliette_v2"
-		add_party_member(elliette_v2_instance)
 
-	if get_entity_by_name("Eignh_v2") == null:
-		var eignh_v2_instance = character_scenes["Eignh_v2"].instantiate()
-		eignh_v2_instance.name = "Eignh_v2"
-		add_party_member(eignh_v2_instance)
+func spawn_entities(last_player: String, entity_save: Array[SavedData]):
+	for e in entity_save:
+		var scene = load(e.scene_path) as PackedScene
+		var restored_node = scene.instantiate()
 
-	if get_entity_by_name("Cerah_v2") == null:
-		var cerah_v2_instance = character_scenes["Cerah_v2"].instantiate()
-		cerah_v2_instance.name = "Cerah_v2"
-		add_party_member(cerah_v2_instance)
+		party.add_child(restored_node)
+		restored_node.on_load_game(e)
+		if last_player == restored_node.name:
+			set_current_player(restored_node)
+
+	# Saves written before last_selected_player existed (or a roster change)
+	# leave nothing selected — fall back to the first party member so the
+	# player is never left with no one to control.
+	if current_player == null:
+		set_current_player(get_entity_by_index(EntityType.PARTY, 0))

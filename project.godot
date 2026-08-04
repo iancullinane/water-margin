@@ -17,7 +17,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 config/name="Water Margin"
 config/tags=PackedStringArray("2d", "main_game", "tilemap", "topdown", "turnbased")
 run/main_scene="uid://citi0d1sjiav2"
-config/features=PackedStringArray("4.6", "Mobile")
+config/features=PackedStringArray("4.7", "Mobile")
 boot_splash/bg_color=Color(0.497474, 0.497474, 0.497474, 1)
 boot_splash/image="res://assets/jon_snow.png"
 config/icon="res://carboardbox-stack-80x80.svg"
@@ -28,6 +28,7 @@ StaticData="*res://globals/static_data.gd"
 GameData="*res://globals/database.gd"
 GameConstants="*res://globals/constants.gd"
 SignalBus="*res://globals/signal_bus.gd"
+SaveCtl="*res://globals/save_ctl.gd"
 
 [debug]
 
@@ -51,7 +52,7 @@ project/assembly_name="Mobile Game Template"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/AsepriteWizard/plugin.cfg", "res://addons/godot-sqlite/plugin.cfg", "res://addons/gut/plugin.cfg", "res://addons/json_editor/plugin.cfg", "res://addons/nklbdev.importality/plugin.cfg", "res://addons/script-tabs/plugin.cfg", "res://addons/script_doc_tooltip/plugin.cfg")
+enabled=PackedStringArray("res://addons/AsepriteWizard/plugin.cfg", "res://addons/godot-sqlite/plugin.cfg", "res://addons/gut/plugin.cfg", "res://addons/json_editor/plugin.cfg", "res://addons/nklbdev.importality/plugin.cfg")
 
 [file_customization]
 
@@ -64,10 +65,6 @@ folder_colors={
 "res://scratch/": "gray",
 "res://scripts/": "pink"
 }
-
-[global_group]
-
-entities=""
 
 [importer_defaults]
 

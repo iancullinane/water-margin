@@ -1,9 +1,13 @@
 extends CanvasLayer
 class_name InGameMenu
 
+@onready var save_btn: Button = %SaveButton
+@onready var load_btn: Button= %LoadButton
 
-# func _input(event: InputEvent) -> void:
-# 	if event.is_action_pressed("ui_cancel"):
-# 		# Your logic here (e.g., toggle pause menu or quit game)
-# 		print("Escape key pressed via ui_cancel!")
-# 		get_tree().change_scene_to_file("res://scenes/game.tscn")
+
+func _ready() -> void:
+	save_btn.pressed.connect(_on_save_pressed)
+
+
+func _on_save_pressed() -> void:
+	SignalBus.save_game.emit()

@@ -14,6 +14,7 @@
 [ext_resource type="Script" uid="uid://bnodwmmbhkusp" path="res://scripts/components/ux/hover_focus.gd" id="13_ir15t"]
 [ext_resource type="PackedScene" uid="uid://dpufg4x1i4ukx" path="res://scenes/ui/in_game_menu.tscn" id="14_trtic"]
 [ext_resource type="Script" uid="uid://c2jmd2hji74r5" path="res://scripts/components/ctl/input_ctl.gd" id="15_ir15t"]
+[ext_resource type="Script" uid="uid://bhkdc74wpspll" path="res://scripts/utils/saved_game/saver_loader.gd" id="16_ca42v"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kvuet"]
 shader = ExtResource("5_kvuet")
@@ -105,3 +106,9 @@ pan_speed = 1600.0
 
 [node name="GameMenu" parent="." unique_id=1704148061 instance=ExtResource("14_trtic")]
 unique_name_in_owner = true
+visible = false
+
+[node name="Utils" type="Node" parent="." unique_id=1817727256]
+
+[node name="SaverLoader" type="Node" parent="Utils" unique_id=1577626974]
+script = ExtResource("16_ca42v")

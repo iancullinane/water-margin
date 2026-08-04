@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="SavedGame" load_steps=4 format=3]
+
+[ext_resource type="Script" uid="uid://b7btx5jd1h3cg" path="res://scripts/utils/saved_game/saved_data.gd" id="1_saved_data"]
+[ext_resource type="Script" uid="uid://pej4najrvhij" path="res://scripts/utils/saved_game/saved_game.gd" id="2_saved_game"]
+
+[sub_resource type="Resource" id="Resource_llew"]
+script = ExtResource("1_saved_data")
+position = Vector2(192, 176)
+scene_path = "res://scenes/entities/players/llew_v2.tscn"
+
+[resource]
+script = ExtResource("2_saved_game")
+name = "new_game"
+last_selected_player = "Llew_v2"
+saved_data = Array[ExtResource("1_saved_data")]([SubResource("Resource_llew")])
