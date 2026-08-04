@@ -48,7 +48,7 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 			var grid_pos := GameConstants.world_to_grid(get_global_mouse_position())
-			print("[InputCtl] Left click at grid position: ", grid_pos)
+			logging.warn("[InputCtl] Left click at grid position: %s" % grid_pos)
 			SignalBus.main_click.emit(grid_pos)
 		if event.button_index == MOUSE_BUTTON_RIGHT:
 			if event.pressed:

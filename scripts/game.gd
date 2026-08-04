@@ -51,6 +51,8 @@ func _ready():
 	_load_party_state()
 	_apply_camera_limits()
 
+	SignalBus.save_game.connect(_on_save_game)
+
 	# make sure the camera is set to something
 	# meaningful. which is the current player
 	_snap_camera_to_current_at_start()
@@ -129,3 +131,6 @@ func _save_party_state() -> void:
 		m.position = e.position
 		state.members.append(m)
 	ResourceSaver.save(state, STATE_PATH)
+
+func _on_save_game() -> void:
+	$Utils/SaverLoader.save_game()

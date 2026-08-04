@@ -167,6 +167,7 @@ func _is_cell_occupied(target_pos: Vector2, mover: IEntity) -> bool:
 ## spawn_party_if_missing is a method to load a hardcoded set
 ## of player party member.
 func spawn_party_if_missing() -> void:
+	pass
 	# TODO: Decide which party members to spawn by location on map
 	#  Spawn party is hardcoded, but we keep where a player "ends up" on the map, expand the concept to see who is on the map and then spawn them in. This will be helpful later when the player can move between maps.
 	if get_entity_by_name("Llew_v2") == null:
@@ -175,17 +176,17 @@ func spawn_party_if_missing() -> void:
 		add_party_member(llew_v2_instance)
 		SignalBus.current_player_changed.emit(llew_v2_instance)
 
-	if get_entity_by_name("Elliette_v2") == null:
-		var elliette_v2_instance = character_scenes["Elliette_v2"].instantiate()
-		elliette_v2_instance.name = "Elliette_v2"
-		add_party_member(elliette_v2_instance)
+	# if get_entity_by_name("Elliette_v2") == null:
+	# 	var elliette_v2_instance = character_scenes["Elliette_v2"].instantiate()
+	# 	elliette_v2_instance.name = "Elliette_v2"
+	# 	add_party_member(elliette_v2_instance)
 
-	if get_entity_by_name("Eignh_v2") == null:
-		var eignh_v2_instance = character_scenes["Eignh_v2"].instantiate()
-		eignh_v2_instance.name = "Eignh_v2"
-		add_party_member(eignh_v2_instance)
+	# if get_entity_by_name("Eignh_v2") == null:
+	# 	var eignh_v2_instance = character_scenes["Eignh_v2"].instantiate()
+	# 	eignh_v2_instance.name = "Eignh_v2"
+	# 	add_party_member(eignh_v2_instance)
 
-	if get_entity_by_name("Cerah_v2") == null:
-		var cerah_v2_instance = character_scenes["Cerah_v2"].instantiate()
-		cerah_v2_instance.name = "Cerah_v2"
-		add_party_member(cerah_v2_instance)
+	# if get_entity_by_name("Cerah_v2") == null:
+	# 	var cerah_v2_instance = character_scenes["Cerah_v2"].instantiate()
+	# 	cerah_v2_instance.name = "Cerah_v2"
+	# 	add_party_member(cerah_v2_instance)

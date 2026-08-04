@@ -20,3 +20,6 @@ signal current_player_changed(entity: IEntity)
 	# game
 	# tile_info_ctl
 signal current_player_moved(entity: IEntity)
+
+
+signal save_game()

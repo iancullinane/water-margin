@@ -7,7 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://cx1txo3cxj3yi" path="res://scenes/sql-input/control.tscn" id="5_dglt5"]
 [ext_resource type="Script" uid="uid://d32hlclfr5hjr" path="res://scripts/components/ctl/map_ctl.gd" id="5_ir15t"]
 [ext_resource type="Shader" uid="uid://86ous1s4fi33" path="res://assets/textures/shaders/rain.gdshader" id="5_kvuet"]
-[ext_resource type="PackedScene" uid="uid://tlvrdn23vnkm" path="res://scenes/entities/players/eignh_v2.tscn" id="6_ir15t"]
 [ext_resource type="PackedScene" uid="uid://uj5dstsb7niu" path="res://scenes/ui/archive/table.tscn" id="6_r35vq"]
 [ext_resource type="Script" uid="uid://bv0d5tqp24dt1" path="res://scripts/components/ctl/entity_ctl.gd" id="8_7vf1r"]
 [ext_resource type="PackedScene" uid="uid://cutko2mo05uge" path="res://scenes/main_ui.tscn" id="9_trtic"]
@@ -15,7 +14,7 @@
 [ext_resource type="Script" uid="uid://bnodwmmbhkusp" path="res://scripts/components/ux/hover_focus.gd" id="13_ir15t"]
 [ext_resource type="PackedScene" uid="uid://dpufg4x1i4ukx" path="res://scenes/ui/in_game_menu.tscn" id="14_trtic"]
 [ext_resource type="Script" uid="uid://c2jmd2hji74r5" path="res://scripts/components/ctl/input_ctl.gd" id="15_ir15t"]
-[ext_resource type="Script" uid="uid://u70l7o85ymg3" path="res://scripts/utils/saver_loader.gd" id="16_ca42v"]
+[ext_resource type="Script" uid="uid://bhkdc74wpspll" path="res://scripts/utils/saved_game/saver_loader.gd" id="16_ca42v"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kvuet"]
 shader = ExtResource("5_kvuet")
@@ -52,9 +51,6 @@ script = ExtResource("5_ir15t")
 script = ExtResource("8_7vf1r")
 
 [node name="Party" type="Node2D" parent="EntityCtl" unique_id=1429990695]
-
-[node name="Eignh_v2" parent="EntityCtl/Party" unique_id=877221106 instance=ExtResource("6_ir15t")]
-position = Vector2(225, 96)
 
 [node name="Enemies" type="Node2D" parent="EntityCtl" unique_id=1623671633]
 
@@ -112,7 +108,7 @@ pan_speed = 1600.0
 unique_name_in_owner = true
 visible = false
 
-[node name="Node" type="Node" parent="." unique_id=1817727256]
+[node name="Utils" type="Node" parent="." unique_id=1817727256]
 
-[node name="SaverLoader" type="Node" parent="Node" unique_id=1577626974]
+[node name="SaverLoader" type="Node" parent="Utils" unique_id=1577626974]
 script = ExtResource("16_ca42v")

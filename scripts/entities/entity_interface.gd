@@ -51,3 +51,6 @@ func step(dir: Vector2) -> bool:
 	direction = dir
 	mover.move(dir)
 	return true
+
+
+# func on_save_game(saved_game:Array[SavedData])
