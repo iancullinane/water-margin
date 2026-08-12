@@ -283,8 +283,15 @@ font_size = 14
 outline_size = 4
 outline_color = Color(0.0943044, 0.0943044, 0.0943044, 1)
 
-[node name="Entity" type="Node2D" unique_id=223740179]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_body"]
+size = Vector2(14, 14)
+
+[node name="Entity" type="CharacterBody2D" unique_id=1209045289]
 script = ExtResource("1_b11w7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(8, 8)
+shape = SubResource("RectangleShape2D_body")
 
 [node name="Sprite" type="Sprite2D" parent="." unique_id=170365915]
 position = Vector2(9, -2)

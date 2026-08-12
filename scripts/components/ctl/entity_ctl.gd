@@ -1,6 +1,5 @@
-## Child nodes are used as containers for entity,
-## also handles switching the player and loading
-## the player party if it is missing
+## Child nodes are used as containers for entity, also handles switching
+## the player and loading the player party if it is missing
 extends Node
 ## This is the entity controller, it manages loading and manipulating entities, think of it like
 ## the hands of a marionette
@@ -29,17 +28,17 @@ var map_ctl: MapCtl
 func get_current_player() -> IEntity:
 	return current_player
 
-func add_entity(type: EntityType, entity: IEntity) -> void:
-	var container := _get_container(type)
-	if container:
-		container.add_child(entity)
+# func add_entity(type: EntityType, entity: IEntity) -> void:
+# 	var container := _get_container(type)
+# 	if container:
+# 		container.add_child(entity)
 
-func add_party_member(entity: IEntity) -> void:
-	var party_container = _get_container(EntityType.PARTY)
-	if party_container.get_child_count() == 0:
-		current_player = entity
+# func _add_party_member(entity: IEntity) -> void:
+# 	var party_container = _get_container(EntityType.PARTY)
+# 	if party_container.get_child_count() == 0:
+# 		current_player = entity
 
-	party_container.add_child(entity)
+# 	party_container.add_child(entity)
 
 func get_entity_group(type: EntityType) -> Array[IEntity]:
 	var result: Array[IEntity] = []
@@ -78,13 +77,13 @@ func get_entity_by_index(type: EntityType, index: int) -> IEntity:
 		return group[index]
 	return null
 
-func get_entity_by_name(entity_name: String) -> Node2D:
-	for entity in get_entity_group(EntityType.PARTY):
-		if entity.stats and entity.stats.name == entity_name:
-			return entity
-		elif entity.name == entity_name:
-			return entity
-	return null
+# func get_entity_by_name(entity_name: String) -> Node2D:
+# 	for entity in get_entity_group(EntityType.PARTY):
+# 		if entity.stats and entity.stats.name == entity_name:
+# 			return entity
+# 		elif entity.name == entity_name:
+# 			return entity
+# 	return null
 
 
 func next_player():
@@ -159,14 +158,14 @@ func _is_cell_occupied(target_pos: Vector2, mover: IEntity) -> bool:
 
 
 
-func spawn_entities(last_player: String, entity_save: Array[SavedData]):
+func spawn_entities(last_selected_player: String, entity_save: Array[SavedData]):
 	for e in entity_save:
 		var scene = load(e.scene_path) as PackedScene
 		var restored_node = scene.instantiate()
 
 		party.add_child(restored_node)
 		restored_node.on_load_game(e)
-		if last_player == restored_node.name:
+		if last_selected_player == restored_node.name:
 			set_current_player(restored_node)
 
 	# Saves written before last_selected_player existed (or a roster change)
