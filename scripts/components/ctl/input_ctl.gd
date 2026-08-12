@@ -39,7 +39,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	handle_pan_and_zoom(delta)
-	_handle_player_movement()
+	_handle_player_movement(delta)
 	_clamp_camera_position()
 
 
@@ -124,7 +124,7 @@ func handle_pan_and_zoom(delta: float) -> void:
 		camera.zoom = Vector2(eased, eased)
 
 
-func _handle_player_movement() -> void:
+func _handle_player_movement(delta: float) -> void:
 	if not entity_ctl.current_player:
 		return
 
@@ -138,10 +138,8 @@ func _handle_player_movement() -> void:
 	elif Input.is_action_pressed("player_right"):
 		dir = Vector2.RIGHT
 
-	# The controller consumes this on arrival to chain steps while held.
-	entity_ctl.held_direction = dir
-	if dir != Vector2.ZERO:
-		entity_ctl.move_current_player(dir)
+	# The controller decides tap-vs-hold and consumes this on arrival.
+	entity_ctl.update_move_intent(dir, delta)
 
 # TODO: Move camera clamp to the camera node
 # Labels: Story

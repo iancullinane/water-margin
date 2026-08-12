@@ -132,6 +132,71 @@ class AnimatorProbe extends Node:
 		samples.append(mover.is_moving)
 
 
+# ---- Tap vs hold ----
+#
+# A cell takes CELL / move_speed seconds to cross — shorter than a natural key
+# tap — so "still pressed at arrival" cannot tell a tap from a hold. Instead a
+# fresh press steps once immediately, and only holding past hold_to_walk_delay
+# enables continuous walking (held_direction).
+
+const FRAME := 1.0 / 60.0
+
+
+func test_fresh_press_steps_once_but_does_not_walk() -> void:
+	var e := _make_entity(Vector2.ZERO)
+	ctl.set_current_player(e)
+	ctl.update_move_intent(Vector2.RIGHT, FRAME)
+	assert_eq(e.stepped_dir, Vector2.RIGHT, "a fresh press should step immediately")
+	assert_eq(ctl.held_direction, Vector2.ZERO, "a fresh press alone should not enable walking")
+
+
+func test_short_tap_does_not_chain_at_arrival() -> void:
+	var e := _make_entity(Vector2.ZERO)
+	ctl.set_current_player(e)
+	ctl.hold_to_walk_delay = 0.1
+	# Tap: pressed for 5 frames (~83ms), released before the delay elapses.
+	for i in range(5):
+		ctl.update_move_intent(Vector2.RIGHT, FRAME)
+	ctl.update_move_intent(Vector2.ZERO, FRAME)
+	e.stepped_dir = null
+	SignalBus.current_player_moved.emit(e)
+	assert_null(e.stepped_dir, "a tap shorter than the walk delay must move exactly one cell")
+
+
+func test_holding_past_delay_enables_walking() -> void:
+	var e := _make_entity(Vector2.ZERO)
+	ctl.set_current_player(e)
+	ctl.hold_to_walk_delay = 0.1
+	for i in range(8):
+		ctl.update_move_intent(Vector2.RIGHT, FRAME)
+	assert_eq(ctl.held_direction, Vector2.RIGHT, "holding past the delay should enable walking")
+	e.stepped_dir = null
+	SignalBus.current_player_moved.emit(e)
+	assert_eq(e.stepped_dir, Vector2.RIGHT, "arrival while walking should chain the next step")
+
+
+func test_release_disables_walking() -> void:
+	var e := _make_entity(Vector2.ZERO)
+	ctl.set_current_player(e)
+	ctl.hold_to_walk_delay = 0.1
+	for i in range(8):
+		ctl.update_move_intent(Vector2.RIGHT, FRAME)
+	ctl.update_move_intent(Vector2.ZERO, FRAME)
+	assert_eq(ctl.held_direction, Vector2.ZERO, "releasing the key should stop continuous walking")
+
+
+func test_direction_change_steps_immediately() -> void:
+	var e := _make_entity(Vector2.ZERO)
+	ctl.set_current_player(e)
+	ctl.hold_to_walk_delay = 0.1
+	for i in range(8):
+		ctl.update_move_intent(Vector2.RIGHT, FRAME)
+	e.stepped_dir = null
+	ctl.update_move_intent(Vector2.UP, FRAME)
+	assert_eq(e.stepped_dir, Vector2.UP, "a changed direction is a fresh press and should step at once")
+	assert_eq(ctl.held_direction, Vector2.ZERO, "hold time should restart on a direction change")
+
+
 func test_arrival_with_held_direction_chains_next_step() -> void:
 	var e := _make_entity(Vector2.ZERO)
 	ctl.set_current_player(e)
