@@ -6,7 +6,7 @@ var CELL_SIZE = GameConstants.CELL_SIZE
 
 var is_moving: bool = false
 var target_position: Vector2
-var move_speed: float = 150.0  # Pixels per second
+@export var move_speed: float = 100.0  # Pixels per second
 
 func _ready() -> void:
 	target_position = entity.position

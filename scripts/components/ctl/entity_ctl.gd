@@ -13,11 +13,19 @@ enum EntityType {
 
 var current_player: IEntity
 @export var _current_party_member_idx: int = 0
-## Movement intent while a direction key is held — set by InputCtl each frame.
-## Consumed on arrival so a held key chains cell-to-cell inside the Mover's
-## physics tick; the Animator (which samples mover.is_moving right after the
-## Mover) then never sees an idle gap that would restart the walk animation.
+## Movement intent while a direction key is held. Consumed on arrival so a
+## held key chains cell-to-cell inside the Mover's physics tick; the Animator
+## (which samples mover.is_moving right after the Mover) then never sees an
+## idle gap that would restart the walk animation.
 var held_direction: Vector2 = Vector2.ZERO
+## Seconds a direction must stay pressed before a tap becomes continuous
+## walking. A cell takes CELL_SIZE / move_speed seconds — shorter than a
+## natural tap — so keep this just under the traversal time: taps stay
+## single-step and a real hold starts chaining before the first cell ends.
+@export var hold_to_walk_delay: float = 0.14
+
+var _intent_dir: Vector2 = Vector2.ZERO
+var _intent_held_time: float = 0.0
 # The map mount point, injected by the composition root (game.gd) so this
 # controller can validate moves without reaching up/across the scene tree.
 var map_ctl: MapCtl
@@ -32,6 +40,24 @@ var map_ctl: MapCtl
 
 func _ready() -> void:
 	SignalBus.current_player_moved.connect(_on_current_player_moved)
+
+## Called by InputCtl every frame with the currently pressed direction (ZERO
+## when none). A fresh press or direction change steps once immediately;
+## holding past hold_to_walk_delay walks continuously via arrival chaining.
+func update_move_intent(dir: Vector2, delta: float) -> void:
+	var fresh := dir != _intent_dir
+	_intent_dir = dir
+	_intent_held_time = 0.0 if fresh else _intent_held_time + delta
+
+	var walking := not fresh and dir != Vector2.ZERO \
+			and _intent_held_time >= hold_to_walk_delay
+	held_direction = dir if walking else Vector2.ZERO
+
+	# `walking` retries every frame as a fallback in case an arrival chain was
+	# rejected (e.g. a wall) and the path later clears; rejected while a move
+	# is already in flight, so it never double-steps.
+	if dir != Vector2.ZERO and (fresh or walking):
+		try_move(current_player, dir)
 
 ## Fires synchronously from the Mover on arrival — before the Animator's tick.
 func _on_current_player_moved(entity: Node2D) -> void:
