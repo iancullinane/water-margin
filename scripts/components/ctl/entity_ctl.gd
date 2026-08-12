@@ -13,6 +13,11 @@ enum EntityType {
 
 var current_player: IEntity
 @export var _current_party_member_idx: int = 0
+## Movement intent while a direction key is held — set by InputCtl each frame.
+## Consumed on arrival so a held key chains cell-to-cell inside the Mover's
+## physics tick; the Animator (which samples mover.is_moving right after the
+## Mover) then never sees an idle gap that would restart the walk animation.
+var held_direction: Vector2 = Vector2.ZERO
 # The map mount point, injected by the composition root (game.gd) so this
 # controller can validate moves without reaching up/across the scene tree.
 var map_ctl: MapCtl
@@ -23,6 +28,15 @@ var map_ctl: MapCtl
 @onready var party: Node2D = $Party
 @onready var enemies: Node2D = $Enemies
 @onready var npcs: Node2D = $NPCs
+
+
+func _ready() -> void:
+	SignalBus.current_player_moved.connect(_on_current_player_moved)
+
+## Fires synchronously from the Mover on arrival — before the Animator's tick.
+func _on_current_player_moved(entity: Node2D) -> void:
+	if entity == current_player and held_direction != Vector2.ZERO:
+		try_move(current_player, held_direction)
 
 
 func get_current_player() -> IEntity:
