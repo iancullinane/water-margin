@@ -60,7 +60,9 @@ func before_each() -> void:
 
 func _make_entity(pos: Vector2) -> FakeEntity:
 	var e := FakeEntity.new()
-	ctl.add_party_member(e)
+	# Parented straight into the party container — try_move takes its target
+	# explicitly, so these tests never need a selected player.
+	ctl.party.add_child(e)
 	e.position = pos
 	return e
 
