@@ -1,6 +1,5 @@
-## Child nodes are used as containers for entity,
-## also handles switching the player and loading
-## the player party if it is missing
+## Child nodes are used as containers for entity, also handles switching
+## the player and loading the player party if it is missing
 extends Node
 ## This is the entity controller, it manages loading and manipulating entities, think of it like
 ## the hands of a marionette
@@ -14,6 +13,11 @@ enum EntityType {
 
 var current_player: IEntity
 @export var _current_party_member_idx: int = 0
+## Movement intent while a direction key is held — set by InputCtl each frame.
+## Consumed on arrival so a held key chains cell-to-cell inside the Mover's
+## physics tick; the Animator (which samples mover.is_moving right after the
+## Mover) then never sees an idle gap that would restart the walk animation.
+var held_direction: Vector2 = Vector2.ZERO
 # The map mount point, injected by the composition root (game.gd) so this
 # controller can validate moves without reaching up/across the scene tree.
 var map_ctl: MapCtl
@@ -26,20 +30,29 @@ var map_ctl: MapCtl
 @onready var npcs: Node2D = $NPCs
 
 
+func _ready() -> void:
+	SignalBus.current_player_moved.connect(_on_current_player_moved)
+
+## Fires synchronously from the Mover on arrival — before the Animator's tick.
+func _on_current_player_moved(entity: Node2D) -> void:
+	if entity == current_player and held_direction != Vector2.ZERO:
+		try_move(current_player, held_direction)
+
+
 func get_current_player() -> IEntity:
 	return current_player
 
-func add_entity(type: EntityType, entity: IEntity) -> void:
-	var container := _get_container(type)
-	if container:
-		container.add_child(entity)
+# func add_entity(type: EntityType, entity: IEntity) -> void:
+# 	var container := _get_container(type)
+# 	if container:
+# 		container.add_child(entity)
 
-func add_party_member(entity: IEntity) -> void:
-	var party_container = _get_container(EntityType.PARTY)
-	if party_container.get_child_count() == 0:
-		current_player = entity
+# func _add_party_member(entity: IEntity) -> void:
+# 	var party_container = _get_container(EntityType.PARTY)
+# 	if party_container.get_child_count() == 0:
+# 		current_player = entity
 
-	party_container.add_child(entity)
+# 	party_container.add_child(entity)
 
 func get_entity_group(type: EntityType) -> Array[IEntity]:
 	var result: Array[IEntity] = []
@@ -78,13 +91,13 @@ func get_entity_by_index(type: EntityType, index: int) -> IEntity:
 		return group[index]
 	return null
 
-func get_entity_by_name(entity_name: String) -> Node2D:
-	for entity in get_entity_group(EntityType.PARTY):
-		if entity.stats and entity.stats.name == entity_name:
-			return entity
-		elif entity.name == entity_name:
-			return entity
-	return null
+# func get_entity_by_name(entity_name: String) -> Node2D:
+# 	for entity in get_entity_group(EntityType.PARTY):
+# 		if entity.stats and entity.stats.name == entity_name:
+# 			return entity
+# 		elif entity.name == entity_name:
+# 			return entity
+# 	return null
 
 
 func next_player():
@@ -159,14 +172,14 @@ func _is_cell_occupied(target_pos: Vector2, mover: IEntity) -> bool:
 
 
 
-func spawn_entities(last_player: String, entity_save: Array[SavedData]):
+func spawn_entities(last_selected_player: String, entity_save: Array[SavedData]):
 	for e in entity_save:
 		var scene = load(e.scene_path) as PackedScene
 		var restored_node = scene.instantiate()
 
 		party.add_child(restored_node)
 		restored_node.on_load_game(e)
-		if last_player == restored_node.name:
+		if last_selected_player == restored_node.name:
 			set_current_player(restored_node)
 
 	# Saves written before last_selected_player existed (or a roster change)

@@ -48,43 +48,63 @@ grow_vertical = 2
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.3
-anchor_top = 0.3
+anchor_top = 0.095
 anchor_right = 0.7
-anchor_bottom = 0.7
+anchor_bottom = 0.925
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/StartMenu" unique_id=1317071717]
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/StartMenu" unique_id=63584005]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/StartMenu/MarginContainer" unique_id=1317071717]
+layout_mode = 2
 alignment = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/StartMenu/VBoxContainer" unique_id=1097932917]
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/StartMenu/MarginContainer/VBoxContainer" unique_id=1097932917]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="SavedGameContainer" type="ScrollContainer" parent="CenterContainer/StartMenu/VBoxContainer/MarginContainer" unique_id=2053327745]
+[node name="SavedGameContainer" type="ScrollContainer" parent="CenterContainer/StartMenu/MarginContainer/VBoxContainer/MarginContainer" unique_id=2053327745]
 unique_name_in_owner = true
 layout_mode = 2
+vertical_scroll_mode = 3
 
-[node name="SavedGames" type="VBoxContainer" parent="CenterContainer/StartMenu/VBoxContainer/MarginContainer/SavedGameContainer" unique_id=185376186]
+[node name="SavedGames" type="VBoxContainer" parent="CenterContainer/StartMenu/MarginContainer/VBoxContainer/MarginContainer/SavedGameContainer" unique_id=185376186]
 layout_mode = 2
+size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="CenterContainer/StartMenu/VBoxContainer/MarginContainer/SavedGameContainer/SavedGames" unique_id=1507343347]
+[node name="Button" type="Button" parent="CenterContainer/StartMenu/MarginContainer/VBoxContainer/MarginContainer/SavedGameContainer/SavedGames" unique_id=1696853832]
 layout_mode = 2
-text = "savegame"
+text = "Save game"
 
-[node name="NewGameButton" type="Button" parent="CenterContainer/StartMenu/VBoxContainer" unique_id=1402004975]
+[node name="NewGameButton" type="Button" parent="CenterContainer/StartMenu/MarginContainer/VBoxContainer" unique_id=1402004975]
 custom_minimum_size = Vector2(1.84, 0)
 layout_mode = 2
+disabled = true
 text = "New Game"
 
-[node name="LoadButton" type="Button" parent="CenterContainer/StartMenu/VBoxContainer" unique_id=1402004976]
+[node name="LoadButton" type="Button" parent="CenterContainer/StartMenu/MarginContainer/VBoxContainer" unique_id=1402004976]
 custom_minimum_size = Vector2(1.84, 0)
 layout_mode = 2
 disabled = true
 text = "Load"
+
+[node name="ExitButton" type="Button" parent="." unique_id=2076724478]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.9
+anchor_top = 0.9
+anchor_right = 0.98
+anchor_bottom = 0.98
+offset_left = -60.0
+offset_top = -10.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Exit Game"

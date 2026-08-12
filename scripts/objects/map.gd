@@ -56,13 +56,13 @@ func _build_named_tile_registry() -> void:
 
 ## Places tiles from GameMapData that have a cell_image_name onto the
 ## child layer named by game_tile.target_layer.
-func apply_map_data(data: GameMapData) -> void:
-	if data == null:
+func apply_map_data(game_map_data_in: GameMapData) -> void:
+	if game_map_data_in == null:
 		return
-	game_map_data = data
-	for game_tile in data.tile_data:
+
+	for game_tile in game_map_data_in.tile_data:
 		if game_tile.cell_image_name == "":
-			logging.warn("no cell_image_name")
+			logging.warn("[map] no cell_image_name")
 			continue
 		var entry: Dictionary = _named_tiles.get(game_tile.cell_image_name, {})
 		if entry.is_empty():

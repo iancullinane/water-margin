@@ -138,6 +138,8 @@ func _handle_player_movement() -> void:
 	elif Input.is_action_pressed("player_right"):
 		dir = Vector2.RIGHT
 
+	# The controller consumes this on arrival to chain steps while held.
+	entity_ctl.held_direction = dir
 	if dir != Vector2.ZERO:
 		entity_ctl.move_current_player(dir)
 

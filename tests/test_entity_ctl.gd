@@ -60,7 +60,9 @@ func before_each() -> void:
 
 func _make_entity(pos: Vector2) -> FakeEntity:
 	var e := FakeEntity.new()
-	ctl.add_party_member(e)
+	# Parented straight into the party container — try_move takes its target
+	# explicitly, so these tests never need a selected player.
+	ctl.party.add_child(e)
 	e.position = pos
 	return e
 
@@ -97,3 +99,93 @@ func test_move_into_blocked_tile_returns_false() -> void:
 
 	map.free()
 	map_ctl.free()
+
+
+# ---- Held-direction chaining ----
+#
+# While a movement key is held, arrival at a cell must chain straight into the
+# next step *synchronously* (inside the current_player_moved emit, which fires
+# during the Mover's physics tick). Otherwise the Animator — which samples
+# mover.is_moving every physics tick — sees a one-tick idle gap at every cell
+# boundary and restarts the walk animation.
+
+const MoverScript := preload("res://scripts/entities/mover.gd")
+
+# An IEntity carrying a *real* Mover, for driving actual grid moves in-tree.
+class ChainHost extends IEntity:
+	func _init() -> void:
+		for child_name in ["NameLabel", "AnimationPlayer"]:
+			var stub := Node2D.new()
+			stub.name = child_name
+			add_child(stub)
+		var real_mover := MoverScript.new()
+		real_mover.name = "Mover"
+		add_child(real_mover)
+
+# Sits after the Mover in the entity, exactly like the Animator, and records
+# what is_moving looks like from there on every physics tick.
+class AnimatorProbe extends Node:
+	var mover: Node
+	var samples: Array[bool] = []
+
+	func _physics_process(_delta: float) -> void:
+		samples.append(mover.is_moving)
+
+
+func test_arrival_with_held_direction_chains_next_step() -> void:
+	var e := _make_entity(Vector2.ZERO)
+	ctl.set_current_player(e)
+	ctl.held_direction = Vector2.RIGHT
+	SignalBus.current_player_moved.emit(e)
+	assert_eq(e.stepped_dir, Vector2.RIGHT, "arrival should chain a step in the held direction")
+
+
+func test_arrival_without_held_direction_does_not_step() -> void:
+	var e := _make_entity(Vector2.ZERO)
+	ctl.set_current_player(e)
+	SignalBus.current_player_moved.emit(e)
+	assert_null(e.stepped_dir, "no held direction means no chained step")
+
+
+func test_arrival_of_non_current_entity_does_not_chain() -> void:
+	var e := _make_entity(Vector2.ZERO)
+	var other := _make_entity(Vector2(CELL * 3, 0))
+	ctl.set_current_player(e)
+	ctl.held_direction = Vector2.RIGHT
+	SignalBus.current_player_moved.emit(other)
+	assert_null(other.stepped_dir, "a non-current entity's arrival should not chain")
+	assert_null(e.stepped_dir, "the current player should not step off another entity's arrival")
+
+
+func test_held_direction_chains_without_idle_gap() -> void:
+	var e := ChainHost.new()
+	ctl.party.add_child(e)
+	e.position = Vector2.ZERO
+	var probe := AnimatorProbe.new()
+	e.add_child(probe)
+	probe.mover = e.mover
+	ctl.set_current_player(e)
+
+	ctl.held_direction = Vector2.RIGHT
+	ctl.move_current_player(Vector2.RIGHT)
+
+	# Walk at least two chained cells, then release the "key".
+	for i in range(60):
+		await get_tree().physics_frame
+		if e.position.x >= CELL * 2:
+			ctl.held_direction = Vector2.ZERO
+			break
+	for i in range(30):
+		if not e.mover.is_moving:
+			break
+		await get_tree().physics_frame
+
+	assert_true(e.position.x >= CELL * 2, "should have chained across at least two cells")
+	var first: int = probe.samples.find(true)
+	var last: int = probe.samples.rfind(true)
+	assert_true(first != -1, "probe should have seen the entity moving")
+	var flickered := false
+	for i in range(first, last + 1):
+		if not probe.samples[i]:
+			flickered = true
+	assert_false(flickered, "is_moving must never read false between chained steps")

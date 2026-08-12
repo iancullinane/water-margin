@@ -15,24 +15,26 @@ const SLOT_FONT_SCALE := 0.5
 
 @onready var saved_games_container = %SavedGameContainer
 @onready var saved_games_list: VBoxContainer = %SavedGameContainer/SavedGames
-@onready var new_game_button: Button = $CenterContainer/StartMenu/VBoxContainer/NewGameButton
-@onready var load_button: Button = $CenterContainer/StartMenu/VBoxContainer/LoadButton
+@onready var _new_game_button: Button = $CenterContainer/StartMenu/MarginContainer/VBoxContainer/NewGameButton
+@onready var _load_button: Button = $CenterContainer/StartMenu/MarginContainer/VBoxContainer/LoadButton
+@onready var _exit_game_button: Button = %ExitButton
 
 # Shared by every slot row so exactly one can be selected at a time.
 var _slot_group := ButtonGroup.new()
 
 
 func _ready():
-	new_game_button.pressed.connect(_on_new_game_pressed)
-	load_button.pressed.connect(_on_load_pressed)
+	_new_game_button.pressed.connect(_on_new_game_pressed)
+	_load_button.pressed.connect(_on_load_pressed)
 	_slot_group.pressed.connect(_on_slot_selected)
+	_exit_game_button.pressed.connect(_on_exit_game_button_pressed)
 
 	if not Engine.is_editor_hint():
 		_populate_saved_games()
 
 	# Nothing is selected on entry, so neither action has a target yet.
-	load_button.disabled = true
-	new_game_button.disabled = true
+	_load_button.disabled = true
+	_new_game_button.disabled = true
 
 
 func _populate_saved_games() -> void:
@@ -65,8 +67,8 @@ func _populate_saved_games() -> void:
 ## to load. Only ever one of the two, so a new game can't land on a save.
 func _on_slot_selected(button: BaseButton) -> void:
 	var occupied: bool = button.get_meta("slot_occupied")
-	load_button.disabled = not occupied
-	new_game_button.disabled = occupied
+	_load_button.disabled = not occupied
+	_new_game_button.disabled = occupied
 
 
 func _on_new_game_pressed() -> void:
@@ -89,3 +91,6 @@ func _on_load_pressed() -> void:
 	logging.log("loading slot %d" % slot_index)
 	SaveCtl.select_slot(slot_index)
 	get_tree().change_scene_to_file(GAME_SCENE)
+
+func _on_exit_game_button_pressed() -> void:
+	get_tree().quit()
