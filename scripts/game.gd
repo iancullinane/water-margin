@@ -52,7 +52,9 @@ func _ready():
 	entity_ctl.map_ctl = map_ctl
 	# A new game is the base save game loaded through the same path as any
 	# other, so there is nothing to branch on here.
-	entity_ctl.spawn_entities(saved_game.last_selected_player, saved_game.saved_data)
+	entity_ctl.spawn_party(saved_game.last_selected_player, saved_game.party_data)
+	print("Length of saved_game.enemy_data: ", len(saved_game.enemy_data))
+	entity_ctl.spawn_enemies(saved_game.enemy_data)
 	_apply_camera_limits()
 
 	# SignalBus.save_game.connect(_on_save_game)

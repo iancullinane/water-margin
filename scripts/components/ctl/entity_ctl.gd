@@ -45,8 +45,9 @@ func _ready() -> void:
 ## when none). A fresh press or direction change steps once immediately;
 ## holding past hold_to_walk_delay walks continuously via arrival chaining.
 func update_move_intent(dir: Vector2, delta: float) -> void:
-	var fresh := dir != _intent_dir
+	var previous_dir := _intent_dir
 	_intent_dir = dir
+	var fresh := dir != previous_dir
 	_intent_held_time = 0.0 if fresh else _intent_held_time + delta
 
 	var walking := not fresh and dir != Vector2.ZERO \
@@ -198,7 +199,7 @@ func _is_cell_occupied(target_pos: Vector2, mover: IEntity) -> bool:
 
 
 
-func spawn_entities(last_selected_player: String, entity_save: Array[SavedData]):
+func spawn_party(last_selected_player: String, entity_save: Array[SavedData]):
 	for e in entity_save:
 		var scene = load(e.scene_path) as PackedScene
 		var restored_node = scene.instantiate()
@@ -213,3 +214,11 @@ func spawn_entities(last_selected_player: String, entity_save: Array[SavedData])
 	# player is never left with no one to control.
 	if current_player == null:
 		set_current_player(get_entity_by_index(EntityType.PARTY, 0))
+
+func spawn_enemies(entity_save: Array[SavedData]):
+	for e in entity_save:
+		var scene = load(e.scene_path) as PackedScene
+		var restored_node = scene.instantiate()
+
+		enemies.add_child(restored_node)
+		restored_node.on_load_game(e)

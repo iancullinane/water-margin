@@ -1,5 +1,6 @@
 extends Node
-##  Save and Load game data generically.
+##  Save and Load game data generically. It skips to the root "Game" node
+## basically as a convenience, even though its an anti-pattern
 class_name SaverLoader
 
 
@@ -8,6 +9,7 @@ class_name SaverLoader
 
 
 # ls -la ~/Library/Application\ Support/Godot/app_userdata/Water\ Margin/savegames
+# zed ~/Library/Application\ Support/Godot/app_userdata/Water\ Margin/savegames/savegame_01.tres
 
 func _ready():
 	SignalBus.save_game.connect(save_game)
@@ -19,11 +21,17 @@ func save_game():
 	if current:
 		saved_game.last_selected_player = current.name
 
-	var saved_data:Array[SavedData] = []
-	for e in game.entity_ctl.get_all_entities():
-		e.on_save_game(saved_data)
+	var party_data:Array[SavedData] = []
+	for e in game.entity_ctl.get_entity_group(EntityCtl.EntityType.PARTY):
+		e.on_save_game(party_data)
 
-	saved_game.saved_data = saved_data
+	saved_game.party_data = party_data
+
+	var enemy_data:Array[SavedData] = []
+	for e in game.entity_ctl.get_entity_group(EntityCtl.EntityType.ENEMY):
+		e.on_save_game(enemy_data)
+
+	saved_game.enemy_data = enemy_data
 
 	# Save back to the slot we loaded from, so a session keeps overwriting its
 	# own file rather than scattering new ones. A game started without going
