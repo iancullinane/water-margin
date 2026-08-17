@@ -1,6 +1,6 @@
 ## Represents both the debug info as well as
 ## game info
-extends CanvasLayer 	
+extends CanvasLayer
 class_name TileInfoCtl
 
 
@@ -19,6 +19,7 @@ func _ready() -> void:
 	SignalBus.connect("hovered", _on_hovered)
 	SignalBus.connect("current_player_moved", _on_current_player_moved)
 	SignalBus.current_player_changed.connect(_on_current_player_changed)
+	SignalBus.mode_changed.connect(_on_mode_changed)
 
 # TODO: Rename and cleanup `_on_hoverer` in `tile_info_ctl
 #  On hovered takes an event called UiMainClickEvent which is not descriptive
@@ -45,3 +46,6 @@ func _update_player_info(entity: IEntity) -> void:
 		return
 	player_info_card.set_name_label(entity.get_stat("name"))
 	player_info_card.set_dmg_label(entity.get_stat("damage"))
+
+func _on_mode_changed(m) -> void:
+	debug_panel.set_mode(GameMode.mode_name(m))

@@ -22,4 +22,10 @@ signal current_player_changed(entity: IEntity)
 signal current_player_moved(entity: IEntity)
 
 
+
+# Emitted by the GameMode autoload; carries the new GameMode.Mode value.
+signal mode_changed(mode)
+
+
+
 signal save_game()

@@ -6,6 +6,7 @@ class_name DebugPanel
 @onready var selected_player_pos: Label = %SelectedPlayerPos
 @onready var player_name: Label = %CurrentPlayer
 @onready var tile_data: Label = %TileData
+@onready var mode: Label = %Mode
 
 func get_hovered_pos() -> String:
 	return hovered_pos.text
@@ -40,3 +41,6 @@ func update_player(entity: IEntity) -> void:
 	player_name.text = entity.name
 	var grid_pos = GameConstants.world_to_grid(entity.position)
 	selected_player_pos.text = "Player: (%d, %d)" % [grid_pos.x, grid_pos.y]
+
+func set_mode(value: String) -> void:
+	mode.text = value
