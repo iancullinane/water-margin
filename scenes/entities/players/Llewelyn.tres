@@ -1,10 +1,11 @@
 [gd_resource type="Resource" script_class="EntityData" format=3 uid="uid://b40b17tf7khk8"]
 
 [ext_resource type="Resource" uid="uid://ha23e286ogb2" path="res://data/jobs/default_job_data.tres" id="1_va7ro"]
-[ext_resource type="Script" uid="uid://bj6cvisr2alqv" path="res://data/models/entity_res.gd" id="2_nvmd6"]
+[ext_resource type="Script" uid="uid://bqwx1qhrdioi0" path="res://data/models/entity_data.gd" id="2_nvmd6"]
 [ext_resource type="Texture2D" uid="uid://rewtny4opon4" path="res://assets/textures/portraits/ugaaaaah-4x.png" id="2_qll86"]
 
 [resource]
 script = ExtResource("2_nvmd6")
 name = "Llewelyn"
 portrait = ExtResource("2_qll86")
+agility = 5

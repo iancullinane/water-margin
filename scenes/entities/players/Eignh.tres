@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="EntityData" format=3 uid="uid://bohgkkxmikmmp"]
 
-[ext_resource type="Script" uid="uid://bj6cvisr2alqv" path="res://data/models/entity_res.gd" id="1_mh5vm"]
+[ext_resource type="Script" uid="uid://bqwx1qhrdioi0" path="res://data/models/entity_data.gd" id="1_mh5vm"]
 [ext_resource type="Resource" uid="uid://ha23e286ogb2" path="res://data/jobs/default_job_data.tres" id="1_se5m4"]
 [ext_resource type="Texture2D" uid="uid://d3pkx2v63eny3" path="res://assets/textures/portraits/portrait4-4x.png" id="2_wypig"]
 

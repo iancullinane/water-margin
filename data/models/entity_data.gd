@@ -25,3 +25,6 @@ func set_entity_name(value: String):
 @export var hp: int = 10
 @export var mp: int = 10
 @export var sp: int = 10
+
+func movement_range() -> int:
+	return maxi(1, ceili(agility / 2.0))

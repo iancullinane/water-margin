@@ -1,15 +1,36 @@
-[gd_resource type="Resource" script_class="SavedGame" load_steps=4 format=3]
+[gd_resource type="Resource" script_class="SavedGame" format=3 uid="uid://n4yiouuuht2b"]
 
-[ext_resource type="Script" uid="uid://b7btx5jd1h3cg" path="res://scripts/utils/saved_game/saved_data.gd" id="1_saved_data"]
+[ext_resource type="Script" uid="uid://b7btx5jd1h3cg" path="res://scripts/utils/saved_game/object_data.gd" id="1_object_data"]
 [ext_resource type="Script" uid="uid://pej4najrvhij" path="res://scripts/utils/saved_game/saved_game.gd" id="2_saved_game"]
 
+[sub_resource type="Resource" id="Resource_enemy_one"]
+script = ExtResource("1_object_data")
+position = Vector2(272, 176)
+scene_path = "res://scenes/entities/enemies/enemy_one_v2.tscn"
+
 [sub_resource type="Resource" id="Resource_llew"]
-script = ExtResource("1_saved_data")
+script = ExtResource("1_object_data")
 position = Vector2(192, 176)
 scene_path = "res://scenes/entities/players/llew_v2.tscn"
+
+[sub_resource type="Resource" id="Resource_cerah"]
+script = ExtResource("1_object_data")
+position = Vector2(208, 176)
+scene_path = "res://scenes/entities/players/cerah_v2.tscn"
+
+[sub_resource type="Resource" id="Resource_eignh"]
+script = ExtResource("1_object_data")
+position = Vector2(192, 192)
+scene_path = "res://scenes/entities/players/eignh_v2.tscn"
+
+[sub_resource type="Resource" id="Resource_elliette"]
+script = ExtResource("1_object_data")
+position = Vector2(208, 192)
+scene_path = "res://scenes/entities/players/elliette_v2.tscn"
 
 [resource]
 script = ExtResource("2_saved_game")
 name = "new_game"
 last_selected_player = "Llew_v2"
-saved_data = Array[ExtResource("1_saved_data")]([SubResource("Resource_llew")])
+party_data = Array[ExtResource("1_object_data")]([SubResource("Resource_llew"), SubResource("Resource_cerah"), SubResource("Resource_eignh"), SubResource("Resource_elliette")])
+enemy_data = Array[ExtResource("1_object_data")]([SubResource("Resource_enemy_one")])
