@@ -51,14 +51,14 @@ func test_new_game_template_exists() -> void:
 func test_new_game_template_defines_a_party() -> void:
 	var template := load(SaveCtl.NEW_GAME_TEMPLATE) as SavedGame
 	assert_not_null(template, "template should load as a SavedGame")
-	assert_gt(template.saved_data.size(), 0,
+	assert_gt(template.party_data.size(), 0,
 		"a new game must start with at least one party member")
 
 
 func test_new_game_template_entity_scenes_resolve() -> void:
 	# A typo'd scene_path would only surface as a crash on New Game, so pin it.
 	var template := load(SaveCtl.NEW_GAME_TEMPLATE) as SavedGame
-	for entry in template.saved_data:
+	for entry in template.party_data + template.enemy_data:
 		assert_true(ResourceLoader.exists(entry.scene_path),
 			"template references a missing scene: %s" % entry.scene_path)
 
@@ -75,7 +75,7 @@ func test_load_game_falls_back_to_the_template_for_a_new_game() -> void:
 	# No slot selected and none on disk: this is New Game.
 	var loaded := saver_loader.load_game()
 	assert_not_null(loaded, "a new game must still produce a world to spawn")
-	assert_gt(loaded.saved_data.size(), 0, "new game should spawn the base party")
+	assert_gt(loaded.party_data.size(), 0, "new game should spawn the base party")
 
 
 func test_load_game_falls_back_when_the_slot_file_is_missing() -> void:
