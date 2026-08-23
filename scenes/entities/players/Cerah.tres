@@ -2,9 +2,10 @@
 
 [ext_resource type="Resource" uid="uid://ha23e286ogb2" path="res://data/jobs/default_job_data.tres" id="1_u86ta"]
 [ext_resource type="Texture2D" uid="uid://b00lu0v55i1xw" path="res://assets/textures/portraits/portrait11-4x.png" id="2_schhi"]
-[ext_resource type="Script" uid="uid://bj6cvisr2alqv" path="res://data/models/entity_res.gd" id="3_qrg8v"]
+[ext_resource type="Script" uid="uid://bqwx1qhrdioi0" path="res://data/models/entity_data.gd" id="3_qrg8v"]
 
 [resource]
 script = ExtResource("3_qrg8v")
 name = "Cerah"
 portrait = ExtResource("2_schhi")
+agility = 8

@@ -199,7 +199,7 @@ func _is_cell_occupied(target_pos: Vector2, mover: IEntity) -> bool:
 
 
 
-func spawn_party(last_selected_player: String, entity_save: Array[SavedData]):
+func spawn_party(last_selected_player: String, entity_save: Array[ObjectData]):
 	for e in entity_save:
 		var scene = load(e.scene_path) as PackedScene
 		var restored_node = scene.instantiate()
@@ -215,7 +215,7 @@ func spawn_party(last_selected_player: String, entity_save: Array[SavedData]):
 	if current_player == null:
 		set_current_player(get_entity_by_index(EntityType.PARTY, 0))
 
-func spawn_enemies(entity_save: Array[SavedData]):
+func spawn_enemies(entity_save: Array[ObjectData]):
 	for e in entity_save:
 		var scene = load(e.scene_path) as PackedScene
 		var restored_node = scene.instantiate()

@@ -1,5 +1,5 @@
 extends Resource
-class_name SavedData
+class_name ObjectData
 # https://youtu.be/43BZsLZheA4
 
 # func save_game():

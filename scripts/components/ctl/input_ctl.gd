@@ -83,6 +83,9 @@ func _unhandled_input(_event):
 		logging.log("open game menu")
 		GameMenu.visible = not GameMenu.visible
 
+	if Input.is_action_just_pressed("toggle_mode"):
+		GameMode.toggle()
+
 
 
 func _on_current_player_changed(entity: Node2D):

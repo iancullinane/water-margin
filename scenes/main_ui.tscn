@@ -66,10 +66,17 @@ text = "Player: (0,0)"
 [node name="CurrentPlayer" type="Label" parent="DebugPanel/PanelContainer/VBoxContainer" unique_id=1832355715]
 unique_name_in_owner = true
 layout_mode = 2
+text = "Current player"
 
 [node name="TileData" type="Label" parent="DebugPanel/PanelContainer/VBoxContainer" unique_id=347207869]
 unique_name_in_owner = true
 layout_mode = 2
+text = "TileData"
+
+[node name="Mode" type="Label" parent="DebugPanel/PanelContainer/VBoxContainer" unique_id=890559091]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Real-Time"
 
 [node name="TileFlavor" type="Panel" parent="." unique_id=1743361490]
 anchors_preset = -1

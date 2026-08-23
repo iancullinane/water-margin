@@ -1,10 +1,11 @@
 extends Node
-##  Save and Load game data generically. It skips to the root "Game" node
-## basically as a convenience, even though its an anti-pattern
+##  Utilize SaveCtl for file operations, while global save_game signal
 class_name SaverLoader
 
 
 # Nested under Game/Utils, so use owner (the scene root) rather than get_parent()
+# TODO: saver_loader should not be tightly coupled to Game
+#   Find a way to have savr_loader connect to all the relevant things that need saving without having to go looking for it from Game
 @onready var game: Game = owner as Game
 
 
@@ -21,13 +22,13 @@ func save_game():
 	if current:
 		saved_game.last_selected_player = current.name
 
-	var party_data:Array[SavedData] = []
+	var party_data:Array[ObjectData] = []
 	for e in game.entity_ctl.get_entity_group(EntityCtl.EntityType.PARTY):
 		e.on_save_game(party_data)
 
 	saved_game.party_data = party_data
 
-	var enemy_data:Array[SavedData] = []
+	var enemy_data:Array[ObjectData] = []
 	for e in game.entity_ctl.get_entity_group(EntityCtl.EntityType.ENEMY):
 		e.on_save_game(enemy_data)
 
