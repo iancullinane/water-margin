@@ -39,27 +39,29 @@ func get_level_loader() -> LevelLoader:
 # This is V2 of the _ready function, most notably we are using
 # lebvel_loader which "knows" how to find the map holder
 func _ready():
+
 	# In editor, only ensure the map is visible; skip runtime wiring
 	if Engine.is_editor_hint():
 		level_loader.ensure_map_loaded()
 		return
+
 	# Runtime: initialize systems. Loading happens below the editor guard —
 	# SaveCtl is a runtime autoload and isn't available to @tool scripts.
 	var saved_game = saver_loader.load_game()
 	level_loader.ensure_map_loaded()
+
 	# Inject the map mount point so EntityCtl can validate moves without
 	# reaching across the scene tree (call down from the composition root).
 	entity_ctl.map_ctl = map_ctl
+
 	# A new game is the base save game loaded through the same path as any
 	# other, so there is nothing to branch on here.
 	entity_ctl.spawn_party(saved_game.last_selected_player, saved_game.party_data)
 	entity_ctl.spawn_enemies(saved_game.enemy_data)
 	_apply_camera_limits()
 
-	# SignalBus.save_game.connect(_on_save_game)
-
 	# make sure the camera is set to something
-	# meaningful. which is the current player
+	# meaningful, which is the current player
 	_snap_camera_to_current_at_start()
 
 	# the game is now running on a particular map, see

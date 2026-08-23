@@ -63,15 +63,15 @@ func step(dir: Vector2) -> bool:
 	mover.move(dir)
 	return true
 
-func on_save_game(saved_data:Array[SavedData]):
+func on_save_game(object_data:Array[ObjectData]):
 	logging.log("Save %s" % stats.name)
-	var my_data = SavedData.new()
+	var my_data = ObjectData.new()
 	my_data.position = position
 	my_data.scene_path = scene_file_path
 	my_data.direction = direction
 
-	saved_data.append(my_data)
+	object_data.append(my_data)
 
-func on_load_game(saved_data: SavedData):
-	position = saved_data.position
-	direction = saved_data.direction
+func on_load_game(object_data: ObjectData):
+	position = object_data.position
+	direction = object_data.direction
